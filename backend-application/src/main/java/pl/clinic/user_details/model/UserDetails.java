@@ -17,7 +17,7 @@ public class UserDetails implements Serializable {
     @NotBlank
     @Size(max = 20)
     @Column(name = "city", nullable = false)
-    protected String firstName;
+    protected String city;
 
     @NotBlank
     @Size(max = 20)
@@ -53,12 +53,10 @@ public class UserDetails implements Serializable {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
-    }
+    public String getCity() { return city; }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setCity(String firstName) {
+        this.city = city;
     }
 
     public String getStreetAddress1() {
