@@ -1,0 +1,30 @@
+<div class="container">
+  <div class="row">
+    <div class="col">
+      {{helloResponse.helloMessage}}
+      <button class="btn btn-primary">Hello</button>
+    </div>
+    <div class="col">
+      <button class="btn btn-danger">Paduch</button>
+    </div>
+    <div class="col">
+      <button class="btn btn-warning">Nie zaliczysz</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <button class="btn btn-primary">Hello</button>
+    </div>
+  </div>
+
+  <div class="row" *ngFor="let element of someArray">
+    <div class="col">{{"to jest element " + element }}</div>
+  </div>
+
+  <div *ngIf="true">
+    Duszek Paduszek <3
+    <p>{{someVariable['name']}}</p>
+  </div>
+
+</div>
+
