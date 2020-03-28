@@ -1,5 +1,6 @@
 package pl.clinic.physical_examination.model;
 
+import pl.clinic.examination_dictionary.model.ExaminationDictionary;
 import pl.clinic.examination_dictionary.model.ExaminationType;
 import pl.clinic.user_details.model.UserDetails;
 import pl.clinic.visit.model.Visit;
@@ -18,11 +19,11 @@ public class PhysicalExamination {
     @Column(name = "id", nullable = false)
     protected Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "examination_id", referencedColumnName = "code")
-    private ExaminationType examination;
+    @ManyToOne
+    @JoinColumn(name = "examination_code_id", referencedColumnName = "code")
+    private ExaminationDictionary examinationCode;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "visit_id", referencedColumnName = "id", nullable = false)
     private Visit visit;
 
@@ -37,14 +38,6 @@ public class PhysicalExamination {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public ExaminationType getExamination() {
-        return examination;
-    }
-
-    public void setExamination(ExaminationType examination) {
-        this.examination = examination;
     }
 
     public Visit getVisit() {
@@ -62,4 +55,8 @@ public class PhysicalExamination {
     public void setResult(String result) {
         this.result = result;
     }
+
+    public ExaminationDictionary getExaminationCode() { return examinationCode; }
+
+    public void setExaminationCode(ExaminationDictionary examinationCode) { this.examinationCode = examinationCode; }
 }

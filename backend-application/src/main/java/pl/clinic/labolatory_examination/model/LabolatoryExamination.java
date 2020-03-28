@@ -1,15 +1,11 @@
 package pl.clinic.labolatory_examination.model;
 
-import pl.clinic.doctor.model.Doctor;
-import pl.clinic.examination_dictionary.model.ExaminationType;
+import pl.clinic.examination_dictionary.model.ExaminationDictionary;
 import pl.clinic.lab_supervisor.model.LabSupervisor;
 import pl.clinic.lab_worker.model.LabWorker;
-import pl.clinic.user_details.model.UserDetails;
 import pl.clinic.visit.model.Visit;
-import pl.clinic.visit.model.VisitState;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -22,11 +18,11 @@ public class LabolatoryExamination {
     @Column(name = "id", nullable = false)
     protected Long id;
 
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "examination_id", referencedColumnName = "code")
-    private ExaminationType examination;
+    @ManyToOne
+    @JoinColumn(name = "examination_code_id", referencedColumnName = "code")
+    private ExaminationDictionary examinationCode;
 
-    @OneToMany
+    @ManyToOne
     @JoinColumn(name = "visit_id", referencedColumnName = "id", nullable = false)
     private Visit visit;
 
@@ -66,14 +62,6 @@ public class LabolatoryExamination {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public ExaminationType getExamination() {
-        return examination;
-    }
-
-    public void setExamination(ExaminationType examination) {
-        this.examination = examination;
     }
 
     public Visit getVisit() {
@@ -135,6 +123,10 @@ public class LabolatoryExamination {
     public Date getExecutionCancellationDate() {
         return executionCancellationDate;
     }
+
+    public ExaminationDictionary getExaminationCode() { return examinationCode; }
+
+    public void setExamination(ExaminationDictionary examinationCode) { this.examinationCode = examinationCode; }
 
     public void setExecutionCancellationDate(Date executionCancellationDate) {
         this.executionCancellationDate = executionCancellationDate;
