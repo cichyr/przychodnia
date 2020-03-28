@@ -1,7 +1,5 @@
 package pl.clinic.examination_dictionary.model;
 
-import pl.clinic.user_details.model.UserDetails;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;

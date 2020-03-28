@@ -1,10 +1,12 @@
 package pl.clinic.doctor.model;
 
 import pl.clinic.user_details.model.UserDetails;
+import pl.clinic.visit.model.Visit;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.Set;
 
 @Entity
 @Table(name = "doctor")
@@ -33,6 +35,9 @@ public class Doctor {
     @Size(max = 20)
     @Column(name = "license_code", nullable = false)
     protected String licenseCode;
+
+    @OneToMany(mappedBy = "doctor_id")
+    private Set<Visit> visits;
 
     public Long getId() {
         return id;
@@ -72,5 +77,13 @@ public class Doctor {
 
     public void setLicenseCode(String licenseCode) {
         this.licenseCode = licenseCode;
+    }
+
+    public Set<Visit> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(Set<Visit> visits) {
+        this.visits = visits;
     }
 }

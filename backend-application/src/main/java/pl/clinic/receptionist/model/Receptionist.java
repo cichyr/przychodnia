@@ -1,11 +1,13 @@
 package pl.clinic.receptionist.model;
 
 import pl.clinic.user_details.model.UserDetails;
+import pl.clinic.visit.model.Visit;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 @Table(name = "receptionist")
@@ -34,6 +36,9 @@ public class Receptionist  implements Serializable {
     @Size(max = 20)
     @Column(name = "license_code", nullable = false)
     protected String licenseCode;
+
+    @OneToMany(mappedBy = "receptionist_id")
+    private Set<Visit> visits;
 
     public Long getId() {
         return id;
@@ -73,5 +78,13 @@ public class Receptionist  implements Serializable {
 
     public void setLicenseCode(String licenseCode) {
         this.licenseCode = licenseCode;
+    }
+
+    public Set<Visit> getVisits() {
+        return visits;
+    }
+
+    public void setVisits(Set<Visit> visits) {
+        this.visits = visits;
     }
 }

@@ -44,7 +44,6 @@ public class UserDetails implements Serializable {
     @Column(name = "contact_number", nullable = false)
     protected String contactNumber;
 
-    // == Getters & Setters == //
     public Long getId() {
         return id;
     }

@@ -1,10 +1,7 @@
 package pl.clinic.physical_examination.model;
 
 import pl.clinic.examination_dictionary.model.ExaminationDictionary;
-import pl.clinic.examination_dictionary.model.ExaminationType;
-import pl.clinic.user_details.model.UserDetails;
 import pl.clinic.visit.model.Visit;
-import pl.clinic.visit.model.VisitState;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
