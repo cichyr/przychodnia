@@ -20,23 +20,23 @@ public class LabolatoryExamination {
 
     @ManyToOne
     @JoinColumn(name = "examination_code_id", referencedColumnName = "code")
-    private ExaminationDictionary examinationCode;
+    protected ExaminationDictionary examinationCode;
 
     @ManyToOne
     @JoinColumn(name = "visit_id", referencedColumnName = "id", nullable = false)
-    private Visit visit;
+    protected Visit visit;
 
     @ManyToOne
     @JoinColumn(name = "state_id", referencedColumnName = "id", nullable = false)
-    private ExaminationState state;
+    protected ExaminationState state;
 
     @ManyToOne
     @JoinColumn(name = "lab_worker_id", referencedColumnName = "id", nullable = true)
-    private LabWorker labWorker;
+    protected LabWorker labWorker;
 
     @ManyToOne
     @JoinColumn(name = "lab_supervisor_id", referencedColumnName = "id", nullable = true)
-    private LabSupervisor labSupervisor;
+    protected LabSupervisor labSupervisor;
 
     @Size(max = 1024)
     @Column(name = "result", nullable = true)
@@ -51,10 +51,10 @@ public class LabolatoryExamination {
     protected String supervisorNote;
 
     @Column(name = "execution_cancellation_date", nullable = false)
-    private Date executionCancellationDate;
+    protected Date executionCancellationDate;
 
     @Column(name = "approval_cancellation_date", nullable = true)
-    private Date approvalCancellationDate;
+    protected Date approvalCancellationDate;
 
     public Long getId() {
         return id;

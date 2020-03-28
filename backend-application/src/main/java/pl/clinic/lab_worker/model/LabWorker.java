@@ -17,7 +17,7 @@ public class LabWorker {
 
     @OneToOne(optional = false)
     @JoinColumn(name = "user_details_id", referencedColumnName = "id")
-    private UserDetails userDetails;
+    protected UserDetails userDetails;
 
     @NotBlank
     @Size(max = 20)

@@ -19,7 +19,7 @@ public class Doctor {
 
     @OneToOne(optional = false)
     @JoinColumn(name = "user_details_id", referencedColumnName = "id")
-    private UserDetails userDetails;
+    protected UserDetails userDetails;
 
     @NotBlank
     @Size(max = 20)
@@ -36,8 +36,8 @@ public class Doctor {
     @Column(name = "license_code", nullable = false)
     protected String licenseCode;
 
-    @OneToMany(mappedBy = "doctor_id")
-    private Set<Visit> visits;
+    @OneToMany(mappedBy = "doctor")
+    protected Set<Visit> visits;
 
     public Long getId() {
         return id;

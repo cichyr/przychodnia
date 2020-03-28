@@ -19,7 +19,7 @@ public class Patient {
 
     @OneToOne(optional = false)
     @JoinColumn(name = "user_details_id", referencedColumnName = "id")
-    private UserDetails userDetails;
+    protected UserDetails userDetails;
 
     @NotBlank
     @Size(max = 20)
@@ -36,8 +36,8 @@ public class Patient {
     @Column(name = "pesel_number", nullable = false)
     protected String peselNumber;
 
-    @OneToMany(mappedBy = "patient_id")
-    private Set<Visit> visits;
+    @OneToMany(mappedBy = "patient")
+    protected Set<Visit> visits;
 
     public Long getId() {
         return id;

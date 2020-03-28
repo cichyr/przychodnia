@@ -21,7 +21,7 @@ public class ExaminationDictionary {
     @NotNull
     @Column(name = "examination_type", nullable = false)
     @Enumerated(value = EnumType.ORDINAL)
-    private ExaminationType type;
+    protected ExaminationType type;
 
     public Long getCode() {
         return code;

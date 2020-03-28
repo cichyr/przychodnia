@@ -17,7 +17,7 @@ public class LabSupervisor {
 
     @OneToOne
     @JoinColumn(name = "user_details_id", referencedColumnName = "id", nullable = false)
-    private UserDetails userDetails;
+    protected UserDetails userDetails;
 
     @NotBlank
     @Size(max = 20)
@@ -34,7 +34,6 @@ public class LabSupervisor {
     @Column(name = "license_code", nullable = false)
     protected String licenseCode;
 
-    // == Getters & Setters == //
     public Long getId() {
         return id;
     }

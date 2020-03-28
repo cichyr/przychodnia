@@ -23,19 +23,19 @@ public class Visit {
 
     @ManyToOne
     @JoinColumn(name = "receptionist_id", referencedColumnName = "id", nullable = true)
-    private Receptionist receptionist;
+    protected Receptionist receptionist;
 
     @ManyToOne
     @JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = true)
-    private Doctor doctor;
+    protected Doctor doctor;
 
     @ManyToOne
     @JoinColumn(name = "patient_id", referencedColumnName = "id", nullable = true)
-    private Patient patient;
+    protected Patient patient;
 
     @ManyToOne
     @JoinColumn(name = "state_id", referencedColumnName = "id", nullable = false)
-    private VisitState state;
+    protected VisitState state;
 
     @Size(max = 1024)
     @Column(name = "description", nullable = true)
@@ -47,16 +47,16 @@ public class Visit {
 
     @NotBlank
     @Column(name = "registration_date", nullable = false)
-    private Date registrationDate;
+    protected Date registrationDate;
 
     @Column(name = "finalization_cancellation_date", nullable = true)
-    private Date finalizationCancellationDate;
+    protected Date finalizationCancellationDate;
 
     @OneToMany(mappedBy = "id")
-    private Set<LabolatoryExamination> labolatoryExaminations;
+    protected Set<LabolatoryExamination> labolatoryExaminations;
 
     @OneToMany(mappedBy = "id")
-    private Set<PhysicalExamination> physicalExaminations;
+    protected Set<PhysicalExamination> physicalExaminations;
 
     public Long getId() {
         return id;
