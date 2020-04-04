@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LaboratoryExamination } from '../../data/examination/laboratory-examination'
 // Mock imports
-import { laboratories, pat } from '../../data/LabExamMock'
+import { LaboratoryExaminationService } from '../../service/laboratory-examination.service'
 
 
 @Component({
@@ -11,15 +11,16 @@ import { laboratories, pat } from '../../data/LabExamMock'
 })
 export class LabExamListComponent implements OnInit {
 
-  laboratoryList: LaboratoryExamination[] = laboratories
-
+  laboratoryList: LaboratoryExamination[]
+  
   someArray = ['qwe', 'abc', 'xyz']
 
-  patient = pat
+  
 
-  constructor() { }
+  constructor(private laboratoryService: LaboratoryExaminationService) { }
 
   ngOnInit(): void {
+    this.laboratoryList = this.laboratoryService.getAllLaboratoryExams()
   }
 
 }

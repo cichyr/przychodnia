@@ -1,15 +1,46 @@
-<div class="container">
-    <div class="row">
-        <div class="col" *ngFor="let lab of laboratoryList">
-            <span>{{ lab.id }}</span>
+<div class="container-fluid">
+
+    <h1 class="container text-center mt-4">
+        <b>Lista badań laboratoryjnych</b>
+    </h1>
+
+    <div class="container border rounded-lg mt-4" *ngFor="let lab of laboratoryList">
+        <div class="row justify-content-md-center rounded-top" style="background-color: #cce4ff">
+            <div class="col align-self-center text-center"><b>{{lab.id}}</b></div>
+            <div class="col-6 align-self-center text-center"><b>{{lab.doctorNote}}</b></div>
+            <div class="col-4 text-center" *ngIf="lab.stateId.name=='ZLE'"><b>Zlecone</b></div>
+            <div class="col-4 text-center text-warning" *ngIf="lab.stateId.name=='WYK'"><b>Wykonane</b></div>
+            <div class="col-4 text-center text-danger" *ngIf="lab.stateId.name=='ANUL_LAB'"><b>Anulowane przez laboranta</b></div>
+            <div class="col-4 text-center text-success" *ngIf="lab.stateId.name=='ZATW'"><b>Zatwierdzone</b></div>
+            <div class="col-4 text-center text-danger" *ngIf="lab.stateId.name=='ANUL_KLAB'"><b>Anulowane przez kierownika</b></div>
+        </div>
+        <div class="row border-top">
+            <div class="col-8 align-self-center my-1">
+                <div class="row">
+                    <div class="col">Data zlecenia:</div>
+                    <div class="col-8">{{lab.visitId.finalizationCancellationDate}}</div>
+                </div>
+                <div class="row" *ngIf="lab.stateId.name=='ANUL_LAB' || lab.stateId.name=='ANUL_KLAB'">
+                    <div class="col">Data anulowania:</div>
+                    <div class="col-8">{{lab.executionCancellationDate}}</div>
+                </div>
+                <div class="row" *ngIf="lab.stateId.name=='WYK' || lab.stateId.name=='ZATW'">
+                    <div class="col">Data wykonania:</div>
+                    <div class="col-8">{{lab.executionCancellationDate}}</div>
+                </div>
+                <div class="row" *ngIf="lab.stateId.name=='ZATW'">
+                    <div class="col">Data zatwierdzenia:</div>
+                    <div class="col-8">{{lab.approvalCancellationDate}}</div>
+                </div>
+                <div class="row" *ngIf="lab.stateId.name=='ANUL_KLAB'">
+                    <div class="col">Data odrzucenia:</div>
+                    <div class="col-8">{{lab.approvalCancellationDate}}</div>
+                </div>
+            </div>
+            <div class="col-4 align-self-center text-center my-2">
+                <button class="btn btn-primary">Szczegóły</button>
+            </div>
         </div>
     </div>
 
-    <div class="row" *ngFor="let element of someArray">
-        <div class="col">{{"to jest element " + element }}</div>
-    </div>
-    
-    <div class="row">
-        {{patient.firstName}}
-    </div>
 </div>
