@@ -6,6 +6,7 @@ import {AppComponent} from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import {PanelMainComponent} from './my-panel/panel-main/panel-main.component';
 import {MyPanelModule} from './my-panel/my-panel.module';
+import {LabExamModule} from './lab-exam/lab-exam.module'
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import {MyPanelModule} from './my-panel/my-panel.module';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    MyPanelModule
+    MyPanelModule,
+    LabExamModule
   ],
   providers: [],
   bootstrap: [AppComponent]
