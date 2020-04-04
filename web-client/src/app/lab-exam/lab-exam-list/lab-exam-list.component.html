@@ -1,0 +1,15 @@
+<div class="container">
+    <div class="row">
+        <div class="col" *ngFor="let lab of laboratoryList">
+            <span>{{ lab.id }}</span>
+        </div>
+    </div>
+
+    <div class="row" *ngFor="let element of someArray">
+        <div class="col">{{"to jest element " + element }}</div>
+    </div>
+    
+    <div class="row">
+        {{patient.firstName}}
+    </div>
+</div>
