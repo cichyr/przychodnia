@@ -11,7 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "patient")
-@JsonIgnoreProperties(value = {"visits"})
+@JsonIgnoreProperties(value = {"userDetails"})
 public class Patient {
 
     @Id
@@ -37,9 +37,6 @@ public class Patient {
     @Size(max = 20)
     @Column(name = "pesel_number", nullable = false)
     protected String peselNumber;
-
-    @OneToMany(mappedBy = "patient")
-    protected Set<Visit> visits;
 
     public Long getId() {
         return id;
@@ -79,13 +76,5 @@ public class Patient {
 
     public void setPeselNumber(String peselNumber) {
         this.peselNumber = peselNumber;
-    }
-
-    public Set<Visit> getVisits() {
-        return visits;
-    }
-
-    public void setVisits(Set<Visit> visits) {
-        this.visits = visits;
     }
 }
