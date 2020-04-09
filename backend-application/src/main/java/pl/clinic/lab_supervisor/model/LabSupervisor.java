@@ -16,22 +16,22 @@ public class LabSupervisor {
     protected Long id;
 
     @OneToOne
-    @JoinColumn(name = "user_details_id", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "userDetailsId", referencedColumnName = "id", nullable = false)
     protected UserDetails userDetails;
 
     @NotBlank
     @Size(max = 20)
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "firstName", nullable = false)
     protected String firstName;
 
     @NotBlank
     @Size(max = 20)
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "lastName", nullable = false)
     protected String lastName;
 
     @NotBlank
     @Size(max = 20)
-    @Column(name = "license_code", nullable = false)
+    @Column(name = "licenseCode", nullable = false)
     protected String licenseCode;
 
     public Long getId() {

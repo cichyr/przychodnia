@@ -19,22 +19,22 @@ public class Receptionist  implements Serializable {
     protected Long id;
 
     @OneToOne(optional = false)
-    @JoinColumn(name = "user_details_id", referencedColumnName = "id")
+    @JoinColumn(name = "userDetailsId", referencedColumnName = "id")
     protected UserDetails userDetails;
 
     @NotBlank
     @Size(max = 20)
-    @Column(name = "first_name", nullable = false)
+    @Column(name = "firstName", nullable = false)
     protected String firstName;
 
     @NotBlank
     @Size(max = 20)
-    @Column(name = "last_name", nullable = false)
+    @Column(name = "lastName", nullable = false)
     protected String lastName;
 
     @NotBlank
     @Size(max = 20)
-    @Column(name = "license_code", nullable = false)
+    @Column(name = "licenseCode", nullable = false)
     protected String licenseCode;
 
     @OneToMany(mappedBy = "receptionist")
