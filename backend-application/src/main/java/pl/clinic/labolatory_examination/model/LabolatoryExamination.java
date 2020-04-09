@@ -19,23 +19,23 @@ public class LabolatoryExamination {
     protected Long id;
 
     @ManyToOne
-    @JoinColumn(name = "examinationCodeId", referencedColumnName = "code")
+    @JoinColumn(name = "examination_code_id", referencedColumnName = "code")
     protected ExaminationDictionary examinationCode;
 
     @ManyToOne
-    @JoinColumn(name = "visitId", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "visit_id", referencedColumnName = "id", nullable = false)
     protected Visit visit;
 
     @ManyToOne
-    @JoinColumn(name = "stateId", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "state_id", referencedColumnName = "id", nullable = false)
     protected ExaminationState state;
 
     @ManyToOne
-    @JoinColumn(name = "labWorkerId", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "lab_worker_id", referencedColumnName = "id", nullable = true)
     protected LabWorker labWorker;
 
     @ManyToOne
-    @JoinColumn(name = "labSupervisorId", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "lab_supervisor_id", referencedColumnName = "id", nullable = true)
     protected LabSupervisor labSupervisor;
 
     @Size(max = 1024)
@@ -43,17 +43,17 @@ public class LabolatoryExamination {
     protected String result;
 
     @Size(max = 1024)
-    @Column(name = "doctorNote", nullable = true)
+    @Column(name = "doctor_note", nullable = true)
     protected String doctorNote;
 
     @Size(max = 1024)
-    @Column(name = "supervisorNote", nullable = true)
+    @Column(name = "supervisor_note", nullable = true)
     protected String supervisorNote;
 
-    @Column(name = "executionCancellationDate", nullable = false)
+    @Column(name = "execution_cancellation_date", nullable = false)
     protected Date executionCancellationDate;
 
-    @Column(name = "approvalCancellationDate", nullable = true)
+    @Column(name = "approval_cancellation_date", nullable = true)
     protected Date approvalCancellationDate;
 
     public Long getId() {

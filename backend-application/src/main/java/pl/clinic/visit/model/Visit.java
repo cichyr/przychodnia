@@ -22,19 +22,19 @@ public class Visit {
     protected Long id;
 
     @ManyToOne
-    @JoinColumn(name = "receptionistId", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "receptionist_id", referencedColumnName = "id", nullable = true)
     protected Receptionist receptionist;
 
     @ManyToOne
-    @JoinColumn(name = "doctorId", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = true)
     protected Doctor doctor;
 
     @ManyToOne
-    @JoinColumn(name = "patientId", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "patient_id", referencedColumnName = "id", nullable = true)
     protected Patient patient;
 
     @ManyToOne
-    @JoinColumn(name = "stateId", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "state_id", referencedColumnName = "id", nullable = false)
     protected VisitState state;
 
     @Size(max = 1024)
@@ -46,10 +46,10 @@ public class Visit {
     protected String diagnose;
 
     @NotBlank
-    @Column(name = "registrationDate", nullable = false)
+    @Column(name = "registration_date", nullable = false)
     protected Date registrationDate;
 
-    @Column(name = "finalizationCancellationDate", nullable = true)
+    @Column(name = "finalization_cancellation_date", nullable = true)
     protected Date finalizationCancellationDate;
 
     @OneToMany(mappedBy = "id")

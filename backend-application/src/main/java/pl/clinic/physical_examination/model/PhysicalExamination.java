@@ -17,11 +17,11 @@ public class PhysicalExamination {
     protected Long id;
 
     @ManyToOne
-    @JoinColumn(name = "examinationCodeId", referencedColumnName = "code")
+    @JoinColumn(name = "examination_code_id", referencedColumnName = "code")
     protected ExaminationDictionary examinationCode;
 
     @ManyToOne
-    @JoinColumn(name = "visitId", referencedColumnName = "id", nullable = false)
+    @JoinColumn(name = "visit_id", referencedColumnName = "id", nullable = false)
     protected Visit visit;
 
     @NotBlank

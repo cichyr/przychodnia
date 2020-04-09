@@ -19,7 +19,7 @@ public class ExaminationDictionary {
     protected String name;
 
     @NotNull
-    @Column(name = "examinationType", nullable = false)
+    @Column(name = "examination_type", nullable = false)
     @Enumerated(value = EnumType.ORDINAL)
     protected ExaminationType type;
 

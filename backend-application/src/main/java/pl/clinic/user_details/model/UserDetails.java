@@ -21,17 +21,17 @@ public class UserDetails implements Serializable {
 
     @NotBlank
     @Size(max = 20)
-    @Column(name = "streetAddress1", nullable = false)
+    @Column(name = "street_address_1", nullable = false)
     protected String streetAddress1;
 
     @NotBlank
     @Size(max = 20)
-    @Column(name = "streetAddress2", nullable = false)
+    @Column(name = "street_address_2", nullable = false)
     protected String streetAddress2;
 
     @NotBlank
     @Size(max = 20)
-    @Column(name = "zipCode", nullable = false)
+    @Column(name = "zip_code", nullable = false)
     protected String zipCode;
 
     @NotBlank
@@ -41,7 +41,7 @@ public class UserDetails implements Serializable {
 
     @NotBlank
     @Size(max = 20)
-    @Column(name = "contactNumber", nullable = false)
+    @Column(name = "contact_number", nullable = false)
     protected String contactNumber;
 
     public Long getId() {

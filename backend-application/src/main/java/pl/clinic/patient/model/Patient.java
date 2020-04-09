@@ -18,22 +18,22 @@ public class Patient {
     protected Long id;
 
     @OneToOne(optional = false)
-    @JoinColumn(name = "userDetailsId", referencedColumnName = "id")
+    @JoinColumn(name = "user_details_id", referencedColumnName = "id")
     protected UserDetails userDetails;
 
     @NotBlank
     @Size(max = 20)
-    @Column(name = "firstName", nullable = false)
+    @Column(name = "first_name", nullable = false)
     protected String firstName;
 
     @NotBlank
     @Size(max = 20)
-    @Column(name = "lastName", nullable = false)
+    @Column(name = "last_name", nullable = false)
     protected String lastName;
 
     @NotBlank
     @Size(max = 20)
-    @Column(name = "peselNumber", nullable = false)
+    @Column(name = "pesel_number", nullable = false)
     protected String peselNumber;
 
     @OneToMany(mappedBy = "patient")
