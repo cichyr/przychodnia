@@ -1,5 +1,6 @@
 package pl.clinic.doctor.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import pl.clinic.user_details.model.UserDetails;
 import pl.clinic.visit.model.Visit;
 
@@ -10,6 +11,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "doctor")
+@JsonIgnoreProperties(value = {"userDetails", "visits"})
 public class Doctor {
 
     @Id
