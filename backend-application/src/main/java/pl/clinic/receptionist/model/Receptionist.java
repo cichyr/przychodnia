@@ -1,5 +1,6 @@
 package pl.clinic.receptionist.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import pl.clinic.user_details.model.UserDetails;
 import pl.clinic.visit.model.Visit;
 

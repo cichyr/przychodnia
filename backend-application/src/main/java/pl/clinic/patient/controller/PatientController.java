@@ -34,13 +34,13 @@ public class PatientController {
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    List<Patient> getPatients(
+    List<Patient> getPatientsFiltered(
             @RequestParam(value = "first_name", required = false) String firstName,
             @RequestParam(value = "last_name", required = false) String lastName) {
-        long count = patientRepository.count();
 
+        long count = patientRepository.count();
         if (count == 0)
-            return new ArrayList<>();
+            return null;
 
         Page<Patient> users = patientRepository.findAll(PageRequest.of(0, (int) count));
         List<Patient> patients = users.getContent();
