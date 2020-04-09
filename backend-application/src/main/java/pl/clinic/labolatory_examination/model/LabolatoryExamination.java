@@ -10,7 +10,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
-@Table(name = "labolatory_examination")
+@Table(name = "laboratory_examination")
 public class LabolatoryExamination {
 
     @Id
@@ -19,7 +19,7 @@ public class LabolatoryExamination {
     protected Long id;
 
     @ManyToOne
-    @JoinColumn(name = "examination_code_id", referencedColumnName = "code")
+    @JoinColumn(name = "examination_id", referencedColumnName = "code")
     protected ExaminationDictionary examinationCode;
 
     @ManyToOne

@@ -7,7 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "lab_worker")
+@Table(name = "lab_supervisor")
 public class LabSupervisor {
 
     @Id

@@ -14,12 +14,12 @@ public class ExaminationDictionary {
     protected Long code;
 
     @NotBlank
-    @Size(max = 20)
+    @Size(max = 128)
     @Column(name = "name", nullable = false)
     protected String name;
 
     @NotNull
-    @Column(name = "examination_type", nullable = false)
+    @Column(name = "type", nullable = false)
     @Enumerated(value = EnumType.ORDINAL)
     protected ExaminationType type;
 

@@ -20,13 +20,12 @@ public class UserDetails implements Serializable {
     protected String city;
 
     @NotBlank
-    @Size(max = 20)
-    @Column(name = "street_address_1", nullable = false)
+    @Size(max = 64)
+    @Column(name = "street_address1", nullable = false)
     protected String streetAddress1;
 
-    @NotBlank
-    @Size(max = 20)
-    @Column(name = "street_address_2", nullable = false)
+    @Size(max = 64)
+    @Column(name = "street_address2")
     protected String streetAddress2;
 
     @NotBlank

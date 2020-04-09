@@ -17,7 +17,7 @@ public class PhysicalExamination {
     protected Long id;
 
     @ManyToOne
-    @JoinColumn(name = "examination_code_id", referencedColumnName = "code")
+    @JoinColumn(name = "examination_id", referencedColumnName = "code")
     protected ExaminationDictionary examinationCode;
 
     @ManyToOne
