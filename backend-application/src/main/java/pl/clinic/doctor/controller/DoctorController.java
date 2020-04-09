@@ -6,7 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import pl.clinic.common_services.FilteringService;
-import pl.clinic.doctor.controller.DTO.VisitsDto;
+import pl.clinic.doctor.controller.DTO.VisitDto;
 import pl.clinic.doctor.model.Doctor;
 import pl.clinic.doctor.model.DoctorRepository;
 import pl.clinic.visit.model.Visit;
@@ -25,17 +25,17 @@ public class DoctorController {
 
     @GetMapping(value = "/{doctor_id}/visits", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    Set<VisitsDto> getDoctorsVisits(@PathVariable Long doctor_id) {
+    Set<VisitDto> getDoctorsVisits(@PathVariable Long doctor_id) {
         Optional<Doctor> doctor = doctorRepository.findById(doctor_id);
 
         if (!doctor.isPresent())
             return null;
 
         Set<Visit> visits = doctor.get().getVisits();
-        Set<VisitsDto> visitsDto = new HashSet<>();
+        Set<VisitDto> visitsDto = new HashSet<>();
 
         for (Visit vi : visits)
-            visitsDto.add(new VisitsDto(vi));
+            visitsDto.add(new VisitDto(vi));
 
         return visitsDto;
     }

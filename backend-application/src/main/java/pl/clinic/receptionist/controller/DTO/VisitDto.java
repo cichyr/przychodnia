@@ -1,26 +1,26 @@
-package pl.clinic.doctor.controller.DTO;
+package pl.clinic.receptionist.controller.DTO;
 
 import pl.clinic.visit.model.Visit;
 import pl.clinic.visit.model.VisitState;
 
 import java.util.Date;
-
-public class VisitsDto {
+// id wizyty, imię i nazwisko pacjenta, imię i nazwisko lekarza, status, datę rejestracji.
+public class VisitDto {
     // patient
     protected String patientFirstName;
     protected String patientLastName;
-    // receptionist
-    protected String receptionistFirstName;
-    protected String receptionistLastName;
+    // doctor
+    protected String doctorFirstName;
+    protected String doctorLastName;
     // visit
     protected VisitState state;
     protected Date registrationDate;
 
-    public VisitsDto(Visit visit) {
+    public VisitDto(Visit visit) {
         this.patientFirstName = visit.getPatient().getFirstName();
         this.patientLastName = visit.getPatient().getLastName();
-        this.receptionistFirstName = visit.getReceptionist().getFirstName();
-        this.receptionistLastName = visit.getReceptionist().getLastName();
+        this.doctorFirstName = visit.getDoctor().getFirstName();
+        this.doctorLastName = visit.getDoctor().getLastName();
         this.state = visit.getState();
         this.registrationDate = visit.getRegistrationDate();
     }
@@ -33,12 +33,12 @@ public class VisitsDto {
         return patientLastName;
     }
 
-    public String getReceptionistFirstName() {
-        return receptionistFirstName;
+    public String getDoctorFirstName() {
+        return doctorFirstName;
     }
 
-    public String getReceptionistLastName() {
-        return receptionistLastName;
+    public String getDoctorLastName() {
+        return doctorLastName;
     }
 
     public VisitState getState() {
