@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Visit } from '../../data/visit/visit';
+// Mock imports
+import { DoctorVisitListService } from '../../service/doctor-visit-list.service'
 
 @Component({
   selector: 'app-doctor-visit-list',
