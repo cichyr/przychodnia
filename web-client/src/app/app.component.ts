@@ -16,5 +16,10 @@ export class AppComponent {
     this.router.navigate(['main-panel']);
   }
 
+  navigateToDoctorVisitList(){
+    this.router.navigate(['doctor-visit-list']);
+  }
+
+
 
 }
