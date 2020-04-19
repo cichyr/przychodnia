@@ -1,4 +1,4 @@
-enum examinationType {
+export enum examinationType {
     Laboratory,
     Physical
 }
