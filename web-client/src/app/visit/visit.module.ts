@@ -8,6 +8,9 @@ import { DoctorVisitListComponent } from './doctor-visit-list/doctor-visit-list.
   declarations: [DoctorVisitListComponent],
   imports: [
     CommonModule
+  ],
+  exports: [
+    DoctorVisitListComponent
   ]
 })
 export class VisitModule { }

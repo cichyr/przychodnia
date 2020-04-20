@@ -10,9 +10,11 @@ import { DoctorVisitListService } from '../../service/doctor-visit-list.service'
 })
 export class DoctorVisitListComponent implements OnInit {
 
-  constructor() { }
+  visitList:  Visit[]
+  constructor(private visitService: DoctorVisitListService) { }
 
   ngOnInit(): void {
+    this.visitList = this.visitService.getAllVisitsForDoctor();
   }
 
 }
