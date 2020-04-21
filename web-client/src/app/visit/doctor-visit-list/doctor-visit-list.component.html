@@ -1,8 +1,13 @@
 <div class="container-fluid">
 
-  <h1 class="container text-center mt-4">
-    <b>Wizyty przypisane do Ciebie</b>
+  <div class="col text-left mt-2">
+    <button class="btn btn-primary btn-lg">Wróć</button>
+  </div>
+  <div class="col align-content-center">
+    <h1 class="container text-center">
+      <b>Wizyty przypisane do Ciebie</b>
   </h1>
+  </div>
 
   <div class="container border rounded-lg mt-4"  *ngFor="let visit of visitList"> <!--ramka do okola z zaokraglonymi brzegami + odstepy 4 linii -->
     <div class="row justify-content-md-center rounded-top" style="background-color: #cce4ff">
