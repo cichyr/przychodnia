@@ -16,6 +16,7 @@ import { LaboratoryExamination } from '../data/examination/laboratory-examinatio
 @Injectable({
   providedIn: 'root'
 })
+
 export class DoctorVisitListService {
 
   constructor(private http: HttpClient) { }
@@ -36,7 +37,7 @@ export class DoctorVisitListService {
       id: 0,
       userDetailsId: this.uDet,
       firstName: "Jurek",
-      lastName: "Doktor",
+      lastName: "Doktorek",
       licenseCode: "License for doctor"
     }
 
@@ -44,7 +45,7 @@ export class DoctorVisitListService {
       {
         id: 0,
         userDetailsId: this.uDet,
-        firstName: "Michal",
+        firstName: "Michał",
         lastName: "Grzdyl",
         peselNumber: "12345678910"
       },
@@ -53,21 +54,21 @@ export class DoctorVisitListService {
         userDetailsId: this.uDet,
         firstName: "Jan",
         lastName: "Fryk",
-        peselNumber: "Pesel"
+        peselNumber: "09876543211"
       },
       {
         id: 2,
         userDetailsId: this.uDet,
         firstName: "Joanna",
-        lastName: "Kalamarz",
-        peselNumber: "Pesel"
+        lastName: "Kałamarz",
+        peselNumber: "13456789025"
       },
       {
         id: 3,
         userDetailsId: this.uDet,
-        firstName: "Joanna",
-        lastName: "Kalamarz",
-        peselNumber: "Pesel"
+        firstName: "Anna",
+        lastName: "Rabiej",
+        peselNumber: "01928374655"
       }
     ]
 
@@ -75,15 +76,15 @@ export class DoctorVisitListService {
       {
         id: 0,
         userDetailsId: this.uDet,
-        firstName: "First",
-        lastName: " Receptionist",
+        firstName: "Mirosława",
+        lastName: "Wicek",
         licenseCode: "License1"
       },
       {
         id: 1,
         userDetailsId: this.uDet,
-        firstName: "Second",
-        lastName: "Receptionist",
+        firstName: "Dorota",
+        lastName: "Gruzek",
         licenseCode: "License2"
       }
     ]
@@ -112,8 +113,8 @@ export class DoctorVisitListService {
       stateId: this.visStat[2],
       description: "Description for first visit",
       diagnose: "Diagnose for first visit",
-      registrationDate: "registration date for first visit",
-      finalizationCancellationDate: "date for cancellation"
+      registrationDate: "01.01.2020",
+      finalizationCancellationDate: "05.01.2020"
     },
     {
       id: 1,
@@ -123,8 +124,8 @@ export class DoctorVisitListService {
       stateId: this.visStat[1],
       description: "Description for first visit",
       diagnose: "Diagnose for second visit",
-      registrationDate: "registration date for second visit",
-      finalizationCancellationDate: "date for cancellation"
+      registrationDate: "09.09.2019",
+      finalizationCancellationDate: "11.09.2019"
     },
     {
       id: 2,
@@ -134,8 +135,8 @@ export class DoctorVisitListService {
       stateId: this.visStat[2],
       description: "Description for third visit",
       diagnose: "Diagnose for third visit",
-      registrationDate: "registration date for third visit",
-      finalizationCancellationDate: "date for cancellation"
+      registrationDate: "12.05.2020",
+      finalizationCancellationDate: "10.06.2020"
     },
     {
       id: 3,
@@ -145,8 +146,8 @@ export class DoctorVisitListService {
       stateId: this.visStat[1],
       description: "Description for visit",
       diagnose: "Diagnose for visit",
-      registrationDate: "registration date for visit",
-      finalizationCancellationDate: "date for cancellation"
+      registrationDate: "25.08.2020",
+      finalizationCancellationDate: "18.09.2020"
     },
     {
       id: 4,
@@ -156,7 +157,7 @@ export class DoctorVisitListService {
       stateId: this.visStat[0],
       description: "Description for visit",
       diagnose: "Diagnose for visit",
-      registrationDate: "registration date for visit",
+      registrationDate: "09.07.2020",
       finalizationCancellationDate: "date for cancellation"
     }
   ]
