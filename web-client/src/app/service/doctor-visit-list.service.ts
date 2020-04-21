@@ -12,6 +12,7 @@ import { LabWorker } from '../data/labWorker/lab-worker';
 import { ExaminationDictionary, examinationType } from '../data/examination/examination-dictionary';
 import { ExaminationState } from '../data/examination/examination-state';
 import { LaboratoryExamination } from '../data/examination/laboratory-examination';
+import {formatDate} from "@angular/common";
 
 @Injectable({
   providedIn: 'root'
@@ -113,8 +114,9 @@ export class DoctorVisitListService {
       stateId: this.visStat[2],
       description: "Description for first visit",
       diagnose: "Diagnose for first visit",
-      registrationDate: "01.01.2020",
-      finalizationCancellationDate: "05.01.2020"
+      registrationDate: new Date('2020-01-01'),
+      finalizationCancellationDate: new Date('2020-01-05')
+
     },
     {
       id: 1,
@@ -124,8 +126,8 @@ export class DoctorVisitListService {
       stateId: this.visStat[1],
       description: "Description for first visit",
       diagnose: "Diagnose for second visit",
-      registrationDate: "09.09.2019",
-      finalizationCancellationDate: "11.09.2019"
+      registrationDate:  new Date('2019-09-09'),
+      finalizationCancellationDate:  new Date('2019-09-11')
     },
     {
       id: 2,
@@ -135,8 +137,8 @@ export class DoctorVisitListService {
       stateId: this.visStat[2],
       description: "Description for third visit",
       diagnose: "Diagnose for third visit",
-      registrationDate: "12.05.2020",
-      finalizationCancellationDate: "10.06.2020"
+      registrationDate: new Date('2020-05-21'),
+      finalizationCancellationDate: new Date('2020-06-10')
     },
     {
       id: 3,
@@ -146,8 +148,8 @@ export class DoctorVisitListService {
       stateId: this.visStat[1],
       description: "Description for visit",
       diagnose: "Diagnose for visit",
-      registrationDate: "25.08.2020",
-      finalizationCancellationDate: "18.09.2020"
+      registrationDate: new Date('2020-08-25'),
+      finalizationCancellationDate: new Date('2020-09-18')
     },
     {
       id: 4,
@@ -157,8 +159,19 @@ export class DoctorVisitListService {
       stateId: this.visStat[0],
       description: "Description for visit",
       diagnose: "Diagnose for visit",
-      registrationDate: "09.07.2020",
-      finalizationCancellationDate: "date for cancellation"
+      registrationDate: new Date('2020-07-09'),
+      finalizationCancellationDate: new Date("0000-00-00")
+    },
+    {
+      id: 5,
+      receptionistId: this.recep[1],
+      doctorId: this.doctor,
+      patientId: this.patients[3],
+      stateId: this.visStat[0],
+      description: "Description for visit",
+      diagnose: "Diagnose for visit",
+      registrationDate: new Date('2020-07-08'),
+      finalizationCancellationDate: new Date("0000-00-00")
     }
   ]
 
