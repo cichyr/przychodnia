@@ -1,7 +1,6 @@
-package pl.clinic.patient.controller.DTO;
+package pl.clinic.patient.controller.dto;
 
 import pl.clinic.patient.model.Patient;
-import pl.clinic.user_details.model.UserDetails;
 
 public class PatientAndDetailsDto {
     // from patient
