@@ -1,4 +1,4 @@
-package pl.clinic.app_user.model;
+package pl.clinic.account.model;
 
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;

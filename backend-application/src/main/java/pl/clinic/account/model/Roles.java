@@ -1,4 +1,4 @@
-package pl.clinic.app_user.model;
+package pl.clinic.account.model;
 
 public class Roles {
 

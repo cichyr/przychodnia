@@ -6,9 +6,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.clinic.app_user.model.Account;
-import pl.clinic.app_user.model.AccountDetails;
-import pl.clinic.app_user.model.AccountRepository;
+import pl.clinic.account.model.Account;
+import pl.clinic.account.model.AccountDetails;
+import pl.clinic.account.model.AccountRepository;
 
 import java.util.logging.Logger;
 

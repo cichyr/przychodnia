@@ -1,4 +1,4 @@
-package pl.clinic.app_user.controller;
+package pl.clinic.account.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -8,9 +8,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
-import pl.clinic.app_user.controller.dto.AccountDetailsDto;
-import pl.clinic.app_user.model.AccountDetails;
-import pl.clinic.app_user.model.AccountId;
+import pl.clinic.account.controller.dto.AccountDetailsDto;
+import pl.clinic.account.model.AccountDetails;
+import pl.clinic.account.model.AccountId;
 import pl.clinic.common_services.UserService;
 import pl.clinic.user.model.User;
 

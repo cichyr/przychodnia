@@ -1,6 +1,6 @@
-package pl.clinic.app_user.controller.dto;
+package pl.clinic.account.controller.dto;
 
-import pl.clinic.app_user.model.AccountDetails;
+import pl.clinic.account.model.AccountDetails;
 
 public class AccountDetailsDto {
 

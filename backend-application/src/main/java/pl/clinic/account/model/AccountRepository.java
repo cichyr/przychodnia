@@ -1,4 +1,4 @@
-package pl.clinic.app_user.model;
+package pl.clinic.account.model;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
