@@ -6,7 +6,7 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "app_user")
+@Table(name = "account")
 @IdClass(AccountId.class)
 public class Account implements Serializable {
     @Id
