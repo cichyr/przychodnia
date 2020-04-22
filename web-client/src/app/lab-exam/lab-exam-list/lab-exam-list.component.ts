@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { LaboratoryExamination } from '../../data/examination/laboratory-examination'
 // Mock imports
 import { LaboratoryExaminationService } from '../../service/laboratory-examination.service'
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class LabExamListComponent implements OnInit {
   
   filters = {'ZLE': true, 'WYK': true, 'ANUL_LAB': true, 'ZATW': true, 'ANUL_KLAB': true}
 
-  constructor(private laboratoryService: LaboratoryExaminationService) { }
+  constructor(private laboratoryService: LaboratoryExaminationService, private router: Router) { }
 
   ngOnInit(): void {
     this.__laboratoryList = this.laboratoryService.getAllLaboratoryExams()
@@ -29,11 +30,9 @@ export class LabExamListComponent implements OnInit {
           if(l1.visitId.finalizationCancellationDate < l2.visitId.finalizationCancellationDate) {
             return 1
           }
-
           if(l1.visitId.finalizationCancellationDate > l2.visitId.finalizationCancellationDate) {
             return -1
           }
-
           return 0
         })
         break
@@ -81,6 +80,10 @@ export class LabExamListComponent implements OnInit {
       case 5:   // id highest first
         this.laboratoryList = this.__laboratoryList.sort((l1,l2) => l2.id - l1.id)
         break
+
+      case 6:   // default
+        this.laboratoryList = this.__laboratoryList
+        break
     }
   }
 
@@ -97,6 +100,10 @@ export class LabExamListComponent implements OnInit {
         day = '0' + day;
 
     return [year, month, day].join('-');
+  }
+
+  navigateToDetails(id: number) {
+    this.router.navigate(['/exam-list/'+id])
   }
 
 }
