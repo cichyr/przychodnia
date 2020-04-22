@@ -1,4 +1,4 @@
-package pl.clinic.app_user.model;
+package pl.clinic.account.model;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -2,8 +2,8 @@ package pl.clinic.common_services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pl.clinic.app_user.model.AccountId;
-import pl.clinic.app_user.model.Roles;
+import pl.clinic.account.model.AccountId;
+import pl.clinic.account.model.Roles;
 import pl.clinic.doctor.model.DoctorRepository;
 import pl.clinic.lab_supervisor.model.LabSupervisorRepository;
 import pl.clinic.lab_worker.model.LabWorkerRepository;
