@@ -91,7 +91,7 @@ public class AccountDetailsDto {
 
         public Builder(AccountDetails accountDetails) {
             this.userId = accountDetails.getId();
-            this.role = accountDetails.getRole().toString();
+            this.role = accountDetails.getRole().getName();
             this.username = accountDetails.getUsername();
         }
 
