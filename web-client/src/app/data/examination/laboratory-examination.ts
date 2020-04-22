@@ -15,6 +15,6 @@ export class LaboratoryExamination {
     result: String
     doctorNote: String
     supervisorNote: String
-    executionCancellationDate: String   // Dates are passed through HTML as Strings, change if You use different type
-    approvalCancellationDate: String    // Dates are passed through HTML as Strings, change if You use different type
+    executionCancellationDate: Date   // Dates are passed through HTML as Strings, change if You use different type
+    approvalCancellationDate: Date    // Dates are passed through HTML as Strings, change if You use different type
 }

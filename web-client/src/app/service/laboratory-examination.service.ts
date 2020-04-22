@@ -19,7 +19,14 @@ import { LaboratoryExamination } from '../data/examination/laboratory-examinatio
 })
 export class LaboratoryExaminationService {
 
+  d1: Date = new Date("1995-12-15")
+  d2: Date = new Date("2020-02-19")
+  d3: Date = new Date("2019-06-20")
+  d4: Date = new Date("2019-06-21")
+  d5: Date = new Date("2020-03-16")
   constructor(private http: HttpClient) { }
+
+  private static readonly HOSTNAME = 'http://localhost:8080';
 
   // Dummy mock objects, used until there is no backend
   //    TODO: Remove when backend is created
@@ -131,8 +138,8 @@ export class LaboratoryExaminationService {
       result: "result",
       doctorNote: "Rentgen oka",
       supervisorNote: "supervisor note",
-      executionCancellationDate: "exec date",
-      approvalCancellationDate: "app date"
+      executionCancellationDate: this.d1,
+      approvalCancellationDate: this.d1
     },
     {
       id: 1,
@@ -144,8 +151,8 @@ export class LaboratoryExaminationService {
       result: "result",
       doctorNote: "Badanie moczu",
       supervisorNote: "supervisor note",
-      executionCancellationDate: "exec 2 date",
-      approvalCancellationDate: "app 2 date"
+      executionCancellationDate: this.d2,
+      approvalCancellationDate: this.d2
     },
     {
       id: 2,
@@ -157,8 +164,8 @@ export class LaboratoryExaminationService {
       result: "result",
       doctorNote: "Badanie krwi pod kątem SARS-CoV-2",
       supervisorNote: "supervisor note",
-      executionCancellationDate: "exec 3 date",
-      approvalCancellationDate: "app 3 date"
+      executionCancellationDate: this.d3,
+      approvalCancellationDate: this.d3
     },
     {
       id: 345345,
@@ -170,8 +177,8 @@ export class LaboratoryExaminationService {
       result: "result",
       doctorNote: "Rentgen czaszki",
       supervisorNote: "supervisor note",
-      executionCancellationDate: "exec 3 date",
-      approvalCancellationDate: "app 3 date"
+      executionCancellationDate: this.d4,
+      approvalCancellationDate: this.d4
     },
     {
       id: 465465465,
@@ -183,8 +190,8 @@ export class LaboratoryExaminationService {
       result: "result",
       doctorNote: "doctor note 3",
       supervisorNote: "supervisor note",
-      executionCancellationDate: "exec 3 date",
-      approvalCancellationDate: "app 3 date"
+      executionCancellationDate: this.d5,
+      approvalCancellationDate: this.d5
     }
   ]
 
@@ -192,5 +199,6 @@ export class LaboratoryExaminationService {
   //    TODO: Remake to db connections when backend is ready
   getAllLaboratoryExams(): LaboratoryExamination[] {
     return this.laboratories
+    //return this.http.get(LaboratoryExaminationService.HOSTNAME + '/api/laboratory_examinations')
   }
 }
