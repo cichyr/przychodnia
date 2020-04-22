@@ -2,14 +2,14 @@ package pl.clinic.app_user.model;
 
 import java.io.Serializable;
 
-public class AppUserId implements Serializable {
+public class AccountId implements Serializable {
 
     protected Long employeeId;
     protected Role role;
 
-    public AppUserId() { }
+    public AccountId() { }
 
-    public AppUserId(Long employeeId, Role role) {
+    public AccountId(Long employeeId, Role role) {
         this.employeeId = employeeId;
         this.role = role;
     }

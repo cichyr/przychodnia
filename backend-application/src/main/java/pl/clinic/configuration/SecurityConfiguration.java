@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-import pl.clinic.app_user.model.AppUserRepository;
 import pl.clinic.common_services.AppUserDetailsService;
 import pl.clinic.util.FakePasswordEncoder;
 

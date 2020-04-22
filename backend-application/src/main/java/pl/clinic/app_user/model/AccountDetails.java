@@ -7,11 +7,11 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-public class AppUserDetails implements UserDetails {
+public class AccountDetails implements UserDetails {
 
-    private AppUser user;
+    private Account user;
 
-    public AppUserDetails(AppUser user) {
+    public AccountDetails(Account user) {
         this.user = user;
     }
 
@@ -54,5 +54,9 @@ public class AppUserDetails implements UserDetails {
 
     public Role getRole() {
         return user.getRole();
+    }
+
+    public Long getId(){
+        return user.getEmployeeId();
     }
 }

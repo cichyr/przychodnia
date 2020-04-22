@@ -7,8 +7,8 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "app_user")
-@IdClass(AppUserId.class)
-public class AppUser implements Serializable {
+@IdClass(AccountId.class)
+public class Account implements Serializable {
     @Id
     @NotNull
     @Column(name = "employee_id", nullable = false)
