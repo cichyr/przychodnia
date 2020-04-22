@@ -8,6 +8,8 @@ import {PanelMainComponent} from './my-panel/panel-main/panel-main.component';
 import {MyPanelModule} from './my-panel/my-panel.module';
 import {LabExamModule} from './lab-exam/lab-exam.module'
 
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
+
 @NgModule({
   declarations: [
     AppComponent
@@ -16,6 +18,7 @@ import {LabExamModule} from './lab-exam/lab-exam.module'
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    NgbModule,
     MyPanelModule,
     LabExamModule
   ],
