@@ -1,4 +1,4 @@
-package pl.clinic.user_details.model;
+package pl.clinic.user.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -6,8 +6,8 @@ import javax.validation.constraints.Size;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "user_details")
-public class UserDetails implements Serializable {
+@Table(name = "person_details")
+public class PersonDetails implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

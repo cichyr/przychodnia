@@ -3,11 +3,12 @@ package pl.clinic.app_user.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
-@Table(name = "app_user")
-@IdClass(AppUserId.class)
-public class AppUser {
+@Table(name = "account")
+@IdClass(AccountId.class)
+public class Account implements Serializable {
     @Id
     @NotNull
     @Column(name = "employee_id", nullable = false)
@@ -20,11 +21,11 @@ public class AppUser {
 
     @Size(max = 20)
     @Column(name = "user_name", nullable = false)
-    protected String firstName;
+    protected String username;
 
     @Size(max = 1024)
     @Column(name = "user_hash", nullable = false)
-    protected String userHash;
+    protected String hash;
 
     public Long getEmployeeId() {
         return employeeId;
@@ -42,19 +43,19 @@ public class AppUser {
         this.role = role;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setUsername(String firstName) {
+        this.username = firstName;
     }
 
-    public String getUserHash() {
-        return userHash;
+    public String getHash() {
+        return hash;
     }
 
-    public void setUserHash(String userHash) {
-        this.userHash = userHash;
+    public void setHash(String userHash) {
+        this.hash = userHash;
     }
 }

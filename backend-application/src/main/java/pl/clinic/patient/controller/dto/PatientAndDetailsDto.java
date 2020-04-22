@@ -1,7 +1,6 @@
-package pl.clinic.patient.controller.DTO;
+package pl.clinic.patient.controller.dto;
 
 import pl.clinic.patient.model.Patient;
-import pl.clinic.user_details.model.UserDetails;
 
 public class PatientAndDetailsDto {
     // from patient
@@ -22,12 +21,12 @@ public class PatientAndDetailsDto {
         this.firstName = patient.getFirstName();
         this.lastName = patient.getLastName();
         this.peselNumber = patient.getPeselNumber();
-        this.city = patient.getUserDetails().getCity();
-        this.streetAddress1 = patient.getUserDetails().getStreetAddress1();
-        this.streetAddress2 = patient.getUserDetails().getStreetAddress2();
-        this.zipCode = patient.getUserDetails().getZipCode();
-        this.state = patient.getUserDetails().getState();
-        this.contactNumber = patient.getUserDetails().getContactNumber();
+        this.city = patient.getPersonDetails().getCity();
+        this.streetAddress1 = patient.getPersonDetails().getStreetAddress1();
+        this.streetAddress2 = patient.getPersonDetails().getStreetAddress2();
+        this.zipCode = patient.getPersonDetails().getZipCode();
+        this.state = patient.getPersonDetails().getState();
+        this.contactNumber = patient.getPersonDetails().getContactNumber();
     }
 
     public Long getId() {
