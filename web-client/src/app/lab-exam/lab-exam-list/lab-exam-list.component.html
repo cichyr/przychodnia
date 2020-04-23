@@ -63,23 +63,23 @@
                 <div class="col-8 align-self-center my-1">
                     <div class="row">
                         <div class="col">Data zlecenia:</div>
-                        <div class="col-8">{{lab.visitId.finalizationCancellationDate}}</div>
+                        <div class="col-8">{{lab.formatDate('visit')}}</div>
                     </div>
                     <div class="row" *ngIf="lab.stateId.name=='ANUL_LAB' || lab.stateId.name=='ANUL_KLAB'">
                         <div class="col">Data anulowania:</div>
-                        <div class="col-8">{{formatDate(lab.executionCancellationDate)}}</div>
+                        <div class="col-8">{{lab.formatDate('execution')}}</div>
                     </div>
                     <div class="row" *ngIf="lab.stateId.name=='WYK' || lab.stateId.name=='ZATW'">
                         <div class="col">Data wykonania:</div>
-                        <div class="col-8">{{formatDate(lab.executionCancellationDate)}}</div>
+                        <div class="col-8">{{lab.formatDate('execution')}}</div>
                     </div>
                     <div class="row" *ngIf="lab.stateId.name=='ZATW'">
                         <div class="col">Data zatwierdzenia:</div>
-                        <div class="col-8">{{formatDate(lab.approvalCancellationDate)}}</div>
+                        <div class="col-8">{{lab.formatDate('approval')}}</div>
                     </div>
                     <div class="row" *ngIf="lab.stateId.name=='ANUL_KLAB'">
                         <div class="col">Data odrzucenia:</div>
-                        <div class="col-8">{{formatDate(lab.approvalCancellationDate)}}</div>
+                        <div class="col-8">{{lab.formatDate('approval')}}</div>
                     </div>
                 </div>
 

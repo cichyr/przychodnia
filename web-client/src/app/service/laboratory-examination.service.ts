@@ -12,6 +12,7 @@ import { LabWorker } from '../data/labWorker/lab-worker';
 import { ExaminationDictionary, examinationType } from '../data/examination/examination-dictionary';
 import { ExaminationState } from '../data/examination/examination-state';
 import { LaboratoryExamination } from '../data/examination/laboratory-examination';
+import { Extractor } from '@angular/compiler';
 
 
 @Injectable({
@@ -19,6 +20,7 @@ import { LaboratoryExamination } from '../data/examination/laboratory-examinatio
 })
 export class LaboratoryExaminationService {
 
+  d0: Date = new Date("1998-02-19")
   d1: Date = new Date("1995-12-15")
   d2: Date = new Date("2020-02-19")
   d3: Date = new Date("2019-06-20")
@@ -77,7 +79,7 @@ export class LaboratoryExaminationService {
     description: "Desc",
     diagnose: "Diag",
     registrationDate: "registration",
-    finalizationCancellationDate: "visit date"
+    finalizationCancellationDate: this.d0
   }
 
   lw: LabWorker = {
@@ -139,7 +141,8 @@ export class LaboratoryExaminationService {
       doctorNote: "Rentgen oka",
       supervisorNote: "supervisor note",
       executionCancellationDate: this.d1,
-      approvalCancellationDate: this.d1
+      approvalCancellationDate: this.d1,
+      formatDate: LaboratoryExamination.prototype.formatDate
     },
     {
       id: 1,
@@ -152,7 +155,8 @@ export class LaboratoryExaminationService {
       doctorNote: "Badanie moczu",
       supervisorNote: "supervisor note",
       executionCancellationDate: this.d2,
-      approvalCancellationDate: this.d2
+      approvalCancellationDate: this.d2,
+      formatDate: LaboratoryExamination.prototype.formatDate
     },
     {
       id: 2,
@@ -165,7 +169,8 @@ export class LaboratoryExaminationService {
       doctorNote: "Badanie krwi pod kątem SARS-CoV-2",
       supervisorNote: "supervisor note",
       executionCancellationDate: this.d3,
-      approvalCancellationDate: this.d3
+      approvalCancellationDate: this.d3,
+      formatDate: LaboratoryExamination.prototype.formatDate
     },
     {
       id: 345345,
@@ -178,7 +183,8 @@ export class LaboratoryExaminationService {
       doctorNote: "Rentgen czaszki",
       supervisorNote: "supervisor note",
       executionCancellationDate: this.d4,
-      approvalCancellationDate: this.d4
+      approvalCancellationDate: this.d4,
+      formatDate: LaboratoryExamination.prototype.formatDate
     },
     {
       id: 465465465,
@@ -191,7 +197,8 @@ export class LaboratoryExaminationService {
       doctorNote: "doctor note 3",
       supervisorNote: "supervisor note",
       executionCancellationDate: this.d5,
-      approvalCancellationDate: this.d5
+      approvalCancellationDate: this.d5,
+      formatDate: LaboratoryExamination.prototype.formatDate
     }
   ]
 
@@ -200,5 +207,15 @@ export class LaboratoryExaminationService {
   getAllLaboratoryExams(): LaboratoryExamination[] {
     return this.laboratories
     //return this.http.get(LaboratoryExaminationService.HOSTNAME + '/api/laboratory_examinations')
+  }
+
+  getLaboratoryExam(id: number): LaboratoryExamination {
+    const labs = this.getAllLaboratoryExams()
+    for (let lab of labs) {
+      if(lab.id == id) {
+        return lab
+      }
+    }
+    //return this.http.get(LaboratoryExaminationService.HOSTNAME + '/api/laboratory_examinations/' + id)
   }
 }
