@@ -212,7 +212,7 @@ export class LaboratoryExaminationService {
   getLaboratoryExam(id: number): LaboratoryExamination {
     const labs = this.getAllLaboratoryExams()
     for (let lab of labs) {
-      if(lab.id == id) {
+      if (lab.id == id) {
         return lab
       }
     }

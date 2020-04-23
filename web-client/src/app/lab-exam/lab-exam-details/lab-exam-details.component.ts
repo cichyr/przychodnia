@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { LaboratoryExaminationService } from 'src/app/service/laboratory-examination.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { LaboratoryExamination } from 'src/app/data/examination/laboratory-examination';
 
 @Component({
   selector: 'app-lab-exam-details',
@@ -7,9 +10,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LabExamDetailsComponent implements OnInit {
 
-  constructor() { }
+  examination: LaboratoryExamination
+  exam_id: number
+
+  constructor(private laboratoryService: LaboratoryExaminationService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.exam_id = Number(this.route.snapshot.paramMap.get('id'))
+    this.examination = this.laboratoryService.getLaboratoryExam(this.exam_id)
+  }
+
+  // navigate to Examination list view
+  navigateToList() {
+    this.router.navigate(['exam-list'])
   }
 
 }

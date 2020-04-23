@@ -13,24 +13,27 @@ export class LabExamListComponent implements OnInit {
 
   __laboratoryList: LaboratoryExamination[]
   laboratoryList: LaboratoryExamination[]
-  
-  filters = {'ZLE': true, 'WYK': true, 'ANUL_LAB': true, 'ZATW': true, 'ANUL_KLAB': true}
 
+  filters = { 'ZLE': true, 'WYK': true, 'ANUL_LAB': true, 'ZATW': true, 'ANUL_KLAB': true }
+
+  // Constructor
   constructor(private laboratoryService: LaboratoryExaminationService, private router: Router) { }
 
+  // Initialize values
   ngOnInit(): void {
     this.__laboratoryList = this.laboratoryService.getAllLaboratoryExams()
     this.laboratoryList = this.laboratoryService.getAllLaboratoryExams()
   }
 
+  // Sorting function
   sort(option: number): void {
-    switch(option){
+    switch (option) {
       case 0:   // commision date newest first
-        this.laboratoryList = this.__laboratoryList.sort((l1,l2) => {
-          if(l1.visitId.finalizationCancellationDate < l2.visitId.finalizationCancellationDate) {
+        this.laboratoryList = this.__laboratoryList.sort((l1, l2) => {
+          if (l1.visitId.finalizationCancellationDate < l2.visitId.finalizationCancellationDate) {
             return 1
           }
-          if(l1.visitId.finalizationCancellationDate > l2.visitId.finalizationCancellationDate) {
+          if (l1.visitId.finalizationCancellationDate > l2.visitId.finalizationCancellationDate) {
             return -1
           }
           return 0
@@ -38,11 +41,11 @@ export class LabExamListComponent implements OnInit {
         break
 
       case 1:   // commision date oldest first
-        this.laboratoryList = this.__laboratoryList.sort((l1,l2) => {
-          if(l1.visitId.finalizationCancellationDate > l2.visitId.finalizationCancellationDate) {
+        this.laboratoryList = this.__laboratoryList.sort((l1, l2) => {
+          if (l1.visitId.finalizationCancellationDate > l2.visitId.finalizationCancellationDate) {
             return 1
           }
-          if(l1.visitId.finalizationCancellationDate < l2.visitId.finalizationCancellationDate) {
+          if (l1.visitId.finalizationCancellationDate < l2.visitId.finalizationCancellationDate) {
             return -1
           }
           return 0
@@ -50,11 +53,11 @@ export class LabExamListComponent implements OnInit {
         break
 
       case 2:   // finish date newest first
-        this.laboratoryList = this.__laboratoryList.sort((l1,l2) => {
-          if(l1.approvalCancellationDate < l2.approvalCancellationDate) {
+        this.laboratoryList = this.__laboratoryList.sort((l1, l2) => {
+          if (l1.approvalCancellationDate < l2.approvalCancellationDate) {
             return 1
           }
-          if(l1.approvalCancellationDate > l2.approvalCancellationDate) {
+          if (l1.approvalCancellationDate > l2.approvalCancellationDate) {
             return -1
           }
           return 0
@@ -62,11 +65,11 @@ export class LabExamListComponent implements OnInit {
         break
 
       case 3:   // finish date oldest first
-        this.laboratoryList = this.__laboratoryList.sort((l1,l2) => {
-          if(l1.approvalCancellationDate > l2.approvalCancellationDate) {
+        this.laboratoryList = this.__laboratoryList.sort((l1, l2) => {
+          if (l1.approvalCancellationDate > l2.approvalCancellationDate) {
             return 1
           }
-          if(l1.approvalCancellationDate < l2.approvalCancellationDate) {
+          if (l1.approvalCancellationDate < l2.approvalCancellationDate) {
             return -1
           }
           return 0
@@ -74,11 +77,11 @@ export class LabExamListComponent implements OnInit {
         break
 
       case 4:   // id lowest first
-        this.laboratoryList = this.__laboratoryList.sort((l1,l2) => l1.id - l2.id)
+        this.laboratoryList = this.__laboratoryList.sort((l1, l2) => l1.id - l2.id)
         break
 
       case 5:   // id highest first
-        this.laboratoryList = this.__laboratoryList.sort((l1,l2) => l2.id - l1.id)
+        this.laboratoryList = this.__laboratoryList.sort((l1, l2) => l2.id - l1.id)
         break
 
       case 6:   // default
@@ -87,23 +90,9 @@ export class LabExamListComponent implements OnInit {
     }
   }
 
-  // Formating function
-  formatDate(date: Date) : string {
-    var d = new Date(date),
-        month = '' + (d.getMonth() + 1),
-        day = '' + d.getDate(),
-        year = d.getFullYear();
-
-    if (month.length < 2) 
-        month = '0' + month;
-    if (day.length < 2) 
-        day = '0' + day;
-
-    return [year, month, day].join('-');
-  }
-
+  // navigate to Examination details view
   navigateToDetails(id: number) {
-    this.router.navigate(['/exam-list/'+id])
+    this.router.navigate(['/exam-list/' + id])
   }
 
 }
