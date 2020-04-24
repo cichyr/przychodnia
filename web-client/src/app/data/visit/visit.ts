@@ -13,5 +13,5 @@ export class Visit {
     description: String
     diagnose: String
     registrationDate: String                // Dates are passed through HTML as Strings, change if You use different type
-    finalizationCancellationDate: String    // Dates are passed through HTML as Strings, change if You use different type
+    finalizationCancellationDate: Date      // Dates are passed through HTML as Strings, change if You use different type
 }

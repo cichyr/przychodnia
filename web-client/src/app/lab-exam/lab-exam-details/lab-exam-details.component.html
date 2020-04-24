@@ -1,0 +1,195 @@
+<div class="">
+
+    <!-- Header title and buttons -->
+    <div class="container">
+        <div class="row mt-4 align-self-center">
+
+            <!-- Back button -->
+            <div class="col align-self-center">
+                <button class="btn btn-primary" (click)="navigateToList()">Wróć</button>
+            </div>
+
+            <!-- Title -->
+            <div class="row">
+                <h1 class="container text-center">
+                    <b>Szczegóły badania numer {{examination.id}}</b>
+                </h1>
+            </div>
+
+            <!-- Placeholder -->
+            <div class="col">
+            </div>
+        </div>
+    </div>
+
+    <!-- Basic information -->
+    <div class="container border rounded-lg mt-4">
+        <!-- Examination title bar -->
+        <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+            <h3><b>Informacje podstawowe</b></h3>
+        </div>
+
+        <!-- Examination basic info -->
+        <div class="row border-top border-bottom">
+
+            <!-- Examination code and name -->
+            <div class="col-8 text-center border-right">
+                <h5 class="mt-2"><b>{{examination.examinationId.id}}: {{examination.examinationId.name}}</b></h5>
+            </div>
+
+            <!-- Status -->
+            <div class="col-4">
+                <h5 class="mt-2 text-center" *ngIf="examination.stateId.name=='ZLE'"><b>Zlecone</b><br></h5>
+                <h5 class="mt-2 text-center text-warning" *ngIf="examination.stateId.name=='WYK'"><b>Wykonane</b><br>
+                </h5>
+                <h5 class="mt-2 text-center text-danger" *ngIf="examination.stateId.name=='ANUL_LAB'"><b>Anulowane przez
+                        laboranta</b><br></h5>
+                <h5 class="mt-2 text-center text-success" *ngIf="examination.stateId.name=='ZATW'">
+                    <b>Zatwierdzone</b><br></h5>
+                <h5 class="mt-2 text-center text-danger" *ngIf="examination.stateId.name=='ANUL_KLAB'"><b>Anulowane
+                        przez kierownika</b><br></h5>
+            </div>
+        </div>
+
+        <!-- Examination basic info -->
+        <div class="row">
+
+            <!-- Patient info -->
+            <div class="col ml-1 border-right">
+                <b>Pacjent:</b><br>
+                {{examination.visitId.patientId.firstName}}<br>
+                {{examination.visitId.patientId.lastName}}<br>
+                {{examination.visitId.patientId.peselNumber}}<br>
+            </div>
+
+            <!-- Doctor info -->
+            <div class="col my-1 ml-1 border-right">
+                <b>Lekarz:</b><br>
+                {{examination.visitId.doctorId.firstName}}<br>
+                {{examination.visitId.doctorId.lastName}}<br>
+                {{examination.visitId.doctorId.licenseCode}}<br>
+            </div>
+
+            <!-- Lab worker info -->
+            <div class="col my-1 ml-1 border-right">
+                <b>Laborant:</b><br>
+                {{examination.labWorkerId.firstName}}<br>
+                {{examination.labWorkerId.lastName}}<br>
+                {{examination.labWorkerId.licenseCode}}<br>
+            </div>
+
+            <!-- Dates and accept/cancel for supervisor -->
+            <div class="col-4 my-1">
+
+                <!-- Dates -->
+
+                <!-- Order date -->
+                <div class="row">
+                    <div class="col-sm-8">Data zlecenia:</div>
+                    <div class="col-sm-1 text-right">{{examination.formatDate('visit')}}</div>
+                </div>
+                <div class="row mt-4 justify-content-center align-middle" *ngIf="examination.stateId.name=='ZLE'">
+                    <!-- TODO check logged in user -->
+                    <button class="btn btn-success mx-2">Zakończ</button> <!-- TODO add (click) -->
+                    <button class="btn btn-danger mx-2">Anuluj</button> <!-- TODO add (click) -->
+                </div>
+
+                <!-- Worker cancel date -->
+                <div class="row" *ngIf="examination.stateId.name=='ANUL_LAB'">
+                    <div class="col-sm-8">Data anulowania</div>
+                    <div class="col-sm-1 text-right">{{examination.formatDate('execution')}}</div>
+                </div>
+
+                <!-- Execution date and buttons for supervisor -->
+                <div *ngIf="examination.stateId.name=='WYK'">
+                    <div class="row">
+                        <div class="col-sm-8">Data wykonania:</div>
+                        <div class="col-sm-1 text-right">{{examination.formatDate('execution')}}</div>
+                    </div>
+                    <div class="row mt-2 justify-content-center" *ngIf="true">
+                        <!-- TODO check logged in user -->
+                        <button class="btn btn-success mx-2">Zatwierdź</button> <!-- TODO add (click) -->
+                        <button class="btn btn-danger mx-2">Anuluj</button> <!-- TODO add (click) -->
+                    </div>
+                </div>
+
+                <!-- Execution and approval date -->
+                <div *ngIf="examination.stateId.name=='ZATW'">
+                    <div class="row">
+                        <div class="col-sm-8">Data wykonania:</div>
+                        <div class="col-sm-1 text-right">{{examination.formatDate('execution')}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">Data zatwierdzenia:</div>
+                        <div class="col-sm-1 text-right">{{examination.formatDate('approval')}}</div>
+                    </div>
+                </div>
+
+                <!-- Execution and disapproval date -->
+                <div *ngIf="examination.stateId.name=='ANUL_KLAB'">
+                    <div class="row">
+                        <div class="col-sm-8">Data wykonania:</div>
+                        <div class="col-sm-1 text-right">{{examination.formatDate('execution')}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-8">Data odrzucenia:</div>
+                        <div class="col-sm-1 text-right">{{examination.formatDate('approval')}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Doctors note -->
+    <div class="container border rounded-lg mt-4">
+        <!-- Title bar -->
+        <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+            <h3><b>Uwagi lekarza</b></h3>
+        </div>
+
+        <!-- Doctors note read-only -->
+        <div class="row border-top">
+            {{examination.doctorNote}}
+        </div>
+    </div>
+
+    <!-- Result -->
+    <div class="container border rounded-lg mt-4">
+        <!-- Title bar -->
+        <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+            <h3><b>Wynik badania</b></h3>
+        </div>
+
+        <!-- Examination result -->
+        <div class="row border-top">
+            <div class="col">
+                {{examination.result}}
+            </div>
+            <div class="col-1" *ngIf="examination.stateId.name=='ZLE'">
+                <!-- TODO check logged in user -->
+                <button class="btn btn-primary align-self-center">Edytuj</button> <!-- TODO add (click) -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Supervisor note -->
+    <div class="container border rounded-lg mt-4"
+        *ngIf="examination.stateId.name=='WYK' || examination.stateId.name=='ZATW' || examination.stateId.name=='ANUL_KLAB'">
+        <!-- Title bar -->
+        <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+            <h3><b>Uwagi kierownika</b></h3>
+        </div>
+
+        <!-- Supervisor note -->
+        <div class="row border-top">
+            <div class="col">
+                {{examination.supervisorNote}}
+            </div>
+            <div class="col-1" *ngIf="examination.stateId.name=='WYK'">
+                <!-- TODO check logged in user -->
+                <button class="btn btn-primary align-self-center">Edytuj</button> <!-- TODO add (click) -->
+            </div>
+        </div>
+    </div>
+
+</div>
