@@ -12,8 +12,9 @@ export class AppComponent {
   constructor(private router: Router) {
   }
 
-  navigateToMainPanel(){
-    this.router.navigate(['main-panel']);
+
+  navigateToHomePage(){
+    this.router.navigate(['home'])
   }
 
 

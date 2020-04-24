@@ -39,7 +39,7 @@ export class UserService {
     this.subject.next(null)
   }
 
-  getUserInfo(): Observable<User> {
+  getAuthenticationEvent(): Observable<User> {
     return this.subject.asObservable()
   }
 

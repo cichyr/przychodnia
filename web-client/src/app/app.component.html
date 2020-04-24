@@ -1,10 +1,9 @@
 <nav class="navbar navbar-expand navbar-light bg-primary">
-  <span (click)="navigateToMainPanel()"
-        class="text-black-50"><i class="fa fa-3x fa-th-large mr-2"></i></span>
+  <span class="text-black-50"><i class="fa fa-3x fa-th-large mr-2"></i></span>
   <span class="nav-item text-white text-xl-center ml-2 font-weight-bold">MÓJ PANEL</span>
 
 
-  <ul class="navbar-nav mx-auto">
+  <ul (click)="navigateToHomePage()" class="navbar-nav mx-auto">
     <li class="fa fa-3x fa-medkit mr-2 text-black-50 my-auto"></li>
     <li class="text-white my-auto ml-2 font-weight-bold">E-PRZYCHODNIA</li>
   </ul>

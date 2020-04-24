@@ -1,13 +1,13 @@
 import {BrowserModule} from '@angular/platform-browser'
 import {NgModule} from '@angular/core'
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
 
 import {AppRoutingModule} from './app-routing.module'
 import {AppComponent} from './app.component'
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 import {LabExamModule} from './lab-exam/lab-exam.module'
-
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
 import {BasicAuthHeaderInterceptor} from './interceptor/basic-auth-header-interceptor'
+import {MainModule} from './main/main.module'
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -18,7 +18,8 @@ import {BasicAuthHeaderInterceptor} from './interceptor/basic-auth-header-interc
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    LabExamModule
+    LabExamModule,
+    MainModule
   ],
   providers: [
     {
