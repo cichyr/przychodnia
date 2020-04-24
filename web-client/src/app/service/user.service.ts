@@ -10,10 +10,9 @@ import {tap} from 'rxjs/operators'
 })
 export class UserService {
 
-  private readonly subject = new Subject<any>()
-
-  private credentials: Credentials = null
   user: User = null
+  private readonly subject = new Subject<any>()
+  private credentials: Credentials = null
 
   constructor(private http: HttpClient) {
   }
@@ -49,9 +48,7 @@ export class UserService {
 
   private resolveBasicAuthToken(): string {
 
-    if (this.credentials == null) {
-      return ''
-    }
+    if (this.credentials == null) return ''
 
     return 'Basic ' + btoa(`${this.credentials.username}:${this.credentials.password}`)
   }

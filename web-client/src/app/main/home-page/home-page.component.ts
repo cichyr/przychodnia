@@ -10,20 +10,22 @@ import {User} from '../../data/user/user'
 })
 export class HomePageComponent implements OnInit, OnDestroy {
 
-  private sub: Subscription = null
-  private user: User = null
-  private userFullName: string = null
+  private userSub: Subscription
+  private user: User
+  private userFullName = ''
 
   constructor(private userService: UserService) {
   }
 
   ngOnInit(): void {
-    this.sub = this.userService.getAuthenticationEvent().subscribe(
-      next => {
-        this.user = next
-        if (this.user != null) {
+    this.userSub = this.userService.getAuthenticationEvent().subscribe(
+      user => {
+        this.user = user
+        if (this.user != null)
           this.userFullName = this.user.firstName + ' ' + this.user.lastName
-        }
+        else
+          this.userFullName = ''
+
       })
   }
 
@@ -32,7 +34,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.sub.unsubscribe()
+    if (this.userSub != null) this.userSub.unsubscribe()
   }
 
 }
