@@ -11,7 +11,6 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "patient")
-@JsonIgnoreProperties(value = {"userDetails"})
 public class Patient extends Person {
 
     @NotBlank

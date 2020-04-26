@@ -6,7 +6,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import pl.clinic.common_services.FilteringService;
-import pl.clinic.doctor.controller.DTO.VisitDto;
+import pl.clinic.doctor.controller.dto.VisitDto;
 import pl.clinic.doctor.model.Doctor;
 import pl.clinic.doctor.model.DoctorRepository;
 import pl.clinic.visit.model.Visit;

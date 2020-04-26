@@ -1,4 +1,4 @@
-package pl.clinic.doctor.controller.DTO;
+package pl.clinic.doctor.controller.dto;
 
 import pl.clinic.visit.model.Visit;
 import pl.clinic.visit.model.VisitState;

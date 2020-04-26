@@ -1,6 +1,6 @@
 package pl.clinic.labolatory_examination.model;
 
-import pl.clinic.examination_dictionary.model.ExaminationDictionary;
+import pl.clinic.examination_category.model.ExaminationCategory;
 import pl.clinic.lab_supervisor.model.LabSupervisor;
 import pl.clinic.lab_worker.model.LabWorker;
 import pl.clinic.visit.model.Visit;
@@ -19,8 +19,8 @@ public class LabolatoryExamination {
     protected Long id;
 
     @ManyToOne
-    @JoinColumn(name = "examination_id", referencedColumnName = "code")
-    protected ExaminationDictionary examinationCode;
+    @JoinColumn(name = "examination_category", referencedColumnName = "code")
+    protected ExaminationCategory category;
 
     @ManyToOne
     @JoinColumn(name = "visit_id", referencedColumnName = "id", nullable = false)
@@ -124,10 +124,6 @@ public class LabolatoryExamination {
         return executionCancellationDate;
     }
 
-    public ExaminationDictionary getExaminationCode() { return examinationCode; }
-
-    public void setExamination(ExaminationDictionary examinationCode) { this.examinationCode = examinationCode; }
-
     public void setExecutionCancellationDate(Date executionCancellationDate) {
         this.executionCancellationDate = executionCancellationDate;
     }
@@ -138,5 +134,13 @@ public class LabolatoryExamination {
 
     public void setApprovalCancellationDate(Date approvalCancellationDate) {
         this.approvalCancellationDate = approvalCancellationDate;
+    }
+
+    public ExaminationCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ExaminationCategory category) {
+        this.category = category;
     }
 }

@@ -3,7 +3,7 @@ package pl.clinic.receptionist.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import pl.clinic.receptionist.controller.DTO.VisitDto;
+import pl.clinic.receptionist.controller.dto.VisitDto;
 import pl.clinic.receptionist.model.Receptionist;
 import pl.clinic.receptionist.model.ReceptionistRepository;
 import pl.clinic.visit.model.Visit;

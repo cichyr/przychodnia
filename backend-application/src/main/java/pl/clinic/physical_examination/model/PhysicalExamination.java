@@ -1,6 +1,6 @@
 package pl.clinic.physical_examination.model;
 
-import pl.clinic.examination_dictionary.model.ExaminationDictionary;
+import pl.clinic.examination_category.model.ExaminationCategory;
 import pl.clinic.visit.model.Visit;
 
 import javax.persistence.*;
@@ -17,8 +17,8 @@ public class PhysicalExamination {
     protected Long id;
 
     @ManyToOne
-    @JoinColumn(name = "examination_id", referencedColumnName = "code")
-    protected ExaminationDictionary examinationCode;
+    @JoinColumn(name = "examination_category", referencedColumnName = "code")
+    protected ExaminationCategory category;
 
     @ManyToOne
     @JoinColumn(name = "visit_id", referencedColumnName = "id", nullable = false)
@@ -53,7 +53,11 @@ public class PhysicalExamination {
         this.result = result;
     }
 
-    public ExaminationDictionary getExaminationCode() { return examinationCode; }
+    public ExaminationCategory getCategory() {
+        return category;
+    }
 
-    public void setExaminationCode(ExaminationDictionary examinationCode) { this.examinationCode = examinationCode; }
+    public void setCategory(ExaminationCategory category) {
+        this.category = category;
+    }
 }

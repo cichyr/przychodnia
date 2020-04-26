@@ -1,4 +1,4 @@
-package pl.clinic.examination_dictionary.model;
+package pl.clinic.examination_category.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -6,8 +6,8 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "examination_dictionary")
-public class ExaminationDictionary {
+@Table(name = "examination_category")
+public class ExaminationCategory {
 
     @Id
     @Column(name = "code", nullable = false, unique = true)
