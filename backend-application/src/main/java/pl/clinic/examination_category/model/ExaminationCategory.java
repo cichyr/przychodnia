@@ -20,7 +20,7 @@ public class ExaminationCategory {
 
     @NotNull
     @Column(name = "type", nullable = false)
-    @Enumerated(value = EnumType.ORDINAL)
+    @Enumerated(value = EnumType.STRING)
     protected ExaminationType type;
 
     public Long getCode() {
