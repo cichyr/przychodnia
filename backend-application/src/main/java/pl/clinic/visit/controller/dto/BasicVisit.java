@@ -1,5 +1,6 @@
 package pl.clinic.visit.controller.dto;
 
+import pl.clinic.visit.model.Visit;
 import pl.clinic.visit.model.VisitState;
 
 import java.time.LocalDateTime;
@@ -18,15 +19,15 @@ public class BasicVisit {
     protected VisitState state;
     protected LocalDateTime registrationDate;
 
-    public BasicVisit(String patientFirstName, String patientLastName, String doctorFirstName, String doctorLastName, String receptionistFirstName, String receptionistLastName, VisitState state, LocalDateTime registrationDate) {
-        this.patientFirstName = patientFirstName;
-        this.patientLastName = patientLastName;
-        this.doctorFirstName = doctorFirstName;
-        this.doctorLastName = doctorLastName;
-        this.receptionistFirstName = receptionistFirstName;
-        this.receptionistLastName = receptionistLastName;
-        this.state = state;
-        this.registrationDate = registrationDate;
+    public BasicVisit(Visit visit) {
+        this.patientFirstName = visit.getPatient().getFirstName();
+        this.patientLastName = visit.getPatient().getLastName();
+        this.doctorFirstName = visit.getDoctor().getFirstName();
+        this.doctorLastName = visit.getDoctor().getLastName();
+        this.receptionistFirstName = visit.getReceptionist().getFirstName();
+        this.receptionistLastName = visit.getReceptionist().getLastName();
+        this.state = visit.getState();
+        this.registrationDate = visit.getRegistrationDate();
     }
 
     public String getPatientFirstName() { return patientFirstName; }

@@ -1,19 +1,17 @@
 package pl.clinic.doctor.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.clinic.common_services.FilteringService;
-import pl.clinic.doctor.controller.dto.VisitDto;
 import pl.clinic.doctor.model.Doctor;
 import pl.clinic.doctor.model.DoctorRepository;
-import pl.clinic.visit.model.Visit;
+import pl.clinic.visit.controller.dto.BasicVisit;
 
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -24,40 +22,29 @@ public class DoctorController {
     DoctorRepository doctorRepository;
 
     @GetMapping(value = "/{doctor_id}/visits", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    Set<VisitDto> getDoctorsVisits(@PathVariable Long doctor_id) {
-        Optional<Doctor> doctor = doctorRepository.findById(doctor_id);
+    public ResponseEntity<Set<BasicVisit>> getDoctorsVisits(@PathVariable Long doctor_id) {
 
-        if (!doctor.isPresent())
-            return null;
+        Set<BasicVisit> visits = new HashSet<>();
 
-        Set<Visit> visits = doctor.get().getVisits();
-        Set<VisitDto> visitsDto = new HashSet<>();
+        doctorRepository.findById(doctor_id).get().getVisits()
+                .forEach(value->visits.add(new BasicVisit(value)));
 
-        for (Visit vi : visits)
-            visitsDto.add(new VisitDto(vi));
-
-        return visitsDto;
+        return ResponseEntity.ok(visits);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody
-    List<Doctor> getDoctors(
+    public ResponseEntity<List<Doctor>> getDoctors(
             @RequestParam(value = "first_name", required = false) String firstName,
             @RequestParam(value = "last_name", required = false) String lastName) {
 
-        long count = doctorRepository.count();
-        if (count == 0)
-            return null;
+        List<Doctor> doctors = new LinkedList<>();
+        doctorRepository.findAll().forEach(doctors::add);
 
-        Page<Doctor> doctors = doctorRepository.findAll(PageRequest.of(0, (int) count));
-        List<Doctor> filteredDoctors = doctors.getContent();
-
-        filteredDoctors = new FilteringService<>(filteredDoctors)
+        doctors = new FilteringService<>(doctors)
                 .contains(firstName, Doctor::getFirstName)
                 .contains(lastName, Doctor::getLastName)
                 .getFiltered();
 
-        return filteredDoctors;
+        return ResponseEntity.ok(doctors);
     }
 }
