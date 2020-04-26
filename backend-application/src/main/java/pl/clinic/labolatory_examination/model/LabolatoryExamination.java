@@ -8,7 +8,7 @@ import pl.clinic.visit.model.Visit;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "laboratory_examination")
@@ -56,10 +56,10 @@ public class LabolatoryExamination {
     protected String supervisorNote;
 
     @Column(name = "execution_cancellation_date")
-    protected Date executionCancellationDate;
+    protected LocalDateTime executionCancellationDate;
 
     @Column(name = "approval_cancellation_date")
-    protected Date approvalCancellationDate;
+    protected LocalDateTime approvalCancellationDate;
 
     public Long getId() {
         return id;
@@ -125,17 +125,17 @@ public class LabolatoryExamination {
         this.supervisorNote = supervisorNote;
     }
 
-    public Date getExecutionCancellationDate() {
+    public LocalDateTime getExecutionCancellationDate() {
         return executionCancellationDate;
     }
 
-    public void setExecutionCancellationDate(Date executionCancellationDate) { this.executionCancellationDate = executionCancellationDate; }
+    public void setExecutionCancellationDate(LocalDateTime executionCancellationDate) { this.executionCancellationDate = executionCancellationDate; }
 
-    public Date getApprovalCancellationDate() {
+    public LocalDateTime getApprovalCancellationDate() {
         return approvalCancellationDate;
     }
 
-    public void setApprovalCancellationDate(Date approvalCancellationDate) { this.approvalCancellationDate = approvalCancellationDate; }
+    public void setApprovalCancellationDate(LocalDateTime approvalCancellationDate) { this.approvalCancellationDate = approvalCancellationDate; }
 
     public ExaminationCategory getCategory() {
         return category;

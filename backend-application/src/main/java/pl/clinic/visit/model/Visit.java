@@ -9,7 +9,7 @@ import pl.clinic.receptionist.model.Receptionist;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -52,10 +52,10 @@ public class Visit {
 
     @NotBlank
     @Column(name = "registration_date", nullable = false)
-    protected Date registrationDate;
+    protected LocalDateTime registrationDate;
 
     @Column(name = "finalization_cancellation_date")
-    protected Date finalizationCancellationDate;
+    protected LocalDateTime finalizationCancellationDate;
 
     @OneToMany(mappedBy = "id")
     protected Set<LabolatoryExamination> labolatoryExaminations;
@@ -119,19 +119,19 @@ public class Visit {
         this.diagnose = diagnose;
     }
 
-    public Date getRegistrationDate() {
+    public LocalDateTime getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Date registrationDate) {
+    public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
     }
 
-    public Date getFinalizationCancellationDate() {
+    public LocalDateTime getFinalizationCancellationDate() {
         return finalizationCancellationDate;
     }
 
-    public void setFinalizationCancellationDate(Date finalizationCancellationDate) { this.finalizationCancellationDate = finalizationCancellationDate; }
+    public void setFinalizationCancellationDate(LocalDateTime finalizationCancellationDate) { this.finalizationCancellationDate = finalizationCancellationDate; }
 
     public Set<LabolatoryExamination> getLabolatoryExaminations() {
         return labolatoryExaminations;

@@ -3,7 +3,7 @@ package pl.clinic.doctor.controller.dto;
 import pl.clinic.visit.model.Visit;
 import pl.clinic.visit.model.VisitState;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class VisitDto {
     // patient
@@ -14,7 +14,7 @@ public class VisitDto {
     protected String receptionistLastName;
     // visit
     protected VisitState state;
-    protected Date registrationDate;
+    protected LocalDateTime registrationDate;
 
     public VisitDto(Visit visit) {
         this.patientFirstName = visit.getPatient().getFirstName();
@@ -45,7 +45,7 @@ public class VisitDto {
         return state;
     }
 
-    public Date getRegistrationDate() {
+    public LocalDateTime getRegistrationDate() {
         return registrationDate;
     }
 }

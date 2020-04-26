@@ -3,8 +3,8 @@ package pl.clinic.receptionist.controller.dto;
 import pl.clinic.visit.model.Visit;
 import pl.clinic.visit.model.VisitState;
 
-import java.util.Date;
-// id wizyty, imię i nazwisko pacjenta, imię i nazwisko lekarza, status, datę rejestracji.
+import java.time.LocalDateTime;
+
 public class VisitDto {
     // patient
     protected String patientFirstName;
@@ -14,7 +14,7 @@ public class VisitDto {
     protected String doctorLastName;
     // visit
     protected VisitState state;
-    protected Date registrationDate;
+    protected LocalDateTime registrationDate;
 
     public VisitDto(Visit visit) {
         this.patientFirstName = visit.getPatient().getFirstName();
@@ -45,7 +45,7 @@ public class VisitDto {
         return state;
     }
 
-    public Date getRegistrationDate() {
+    public LocalDateTime getRegistrationDate() {
         return registrationDate;
     }
 }
