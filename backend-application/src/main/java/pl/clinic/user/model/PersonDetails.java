@@ -3,7 +3,6 @@ package pl.clinic.user.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "person_details")
@@ -89,11 +88,7 @@ public class PersonDetails {
         this.contactNumber = contactNumber;
     }
 
-    public String getRegion() {
-        return region;
-    }
+    public String getRegion() { return region; }
 
-    public void setRegion(String region) {
-        this.region = region;
-    }
+    public void setRegion(String region) { this.region = region; }
 }

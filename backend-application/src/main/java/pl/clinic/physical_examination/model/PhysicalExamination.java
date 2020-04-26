@@ -16,10 +16,12 @@ public class PhysicalExamination {
     @Column(name = "id", nullable = false)
     protected Long id;
 
+    @NotBlank
     @ManyToOne
-    @JoinColumn(name = "examination_category", referencedColumnName = "code")
+    @JoinColumn(name = "examination_category", referencedColumnName = "code", nullable = false)
     protected ExaminationCategory category;
 
+    @NotBlank
     @ManyToOne
     @JoinColumn(name = "visit_id", referencedColumnName = "id", nullable = false)
     protected Visit visit;
@@ -53,9 +55,7 @@ public class PhysicalExamination {
         this.result = result;
     }
 
-    public ExaminationCategory getCategory() {
-        return category;
-    }
+    public ExaminationCategory getCategory() { return category; }
 
     public void setCategory(ExaminationCategory category) {
         this.category = category;

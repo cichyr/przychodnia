@@ -1,28 +1,32 @@
 package pl.clinic.account.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "account")
 @IdClass(AccountId.class)
-public class Account implements Serializable {
+public class Account {
+
     @Id
     @NotNull
     @Column(name = "employee_id", nullable = false)
     protected Long employeeId;
 
     @Id
+    @NotNull
     @ManyToOne
     @JoinColumn(name = "role_id", referencedColumnName = "role", nullable = false)
     protected Role role;
 
+    @NotBlank
     @Size(max = 20)
     @Column(name = "user_name", nullable = false)
     protected String username;
 
+    @NotBlank
     @Size(max = 1024)
     @Column(name = "user_hash", nullable = false)
     protected String hash;

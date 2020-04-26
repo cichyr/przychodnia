@@ -6,6 +6,7 @@ import pl.clinic.lab_worker.model.LabWorker;
 import pl.clinic.visit.model.Visit;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.util.Date;
 
@@ -18,42 +19,46 @@ public class LabolatoryExamination {
     @Column(name = "id", nullable = false)
     protected Long id;
 
+    @NotBlank
     @ManyToOne
-    @JoinColumn(name = "examination_category", referencedColumnName = "code")
+    @JoinColumn(name = "examination_category", referencedColumnName = "code", nullable = false)
     protected ExaminationCategory category;
 
+    @NotBlank
     @ManyToOne
     @JoinColumn(name = "visit_id", referencedColumnName = "id", nullable = false)
     protected Visit visit;
 
+    @NotBlank
     @ManyToOne
     @JoinColumn(name = "state_id", referencedColumnName = "id", nullable = false)
     protected ExaminationState state;
 
     @ManyToOne
-    @JoinColumn(name = "lab_worker_id", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "lab_worker_id", referencedColumnName = "id")
     protected LabWorker labWorker;
 
     @ManyToOne
-    @JoinColumn(name = "lab_supervisor_id", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "lab_supervisor_id", referencedColumnName = "id")
     protected LabSupervisor labSupervisor;
 
     @Size(max = 1024)
-    @Column(name = "result", nullable = true)
+    @Column(name = "result")
     protected String result;
 
+    @NotBlank
     @Size(max = 1024)
-    @Column(name = "doctor_note", nullable = true)
+    @Column(name = "doctor_note", nullable = false)
     protected String doctorNote;
 
     @Size(max = 1024)
-    @Column(name = "supervisor_note", nullable = true)
+    @Column(name = "supervisor_note")
     protected String supervisorNote;
 
-    @Column(name = "execution_cancellation_date", nullable = false)
+    @Column(name = "execution_cancellation_date")
     protected Date executionCancellationDate;
 
-    @Column(name = "approval_cancellation_date", nullable = true)
+    @Column(name = "approval_cancellation_date")
     protected Date approvalCancellationDate;
 
     public Long getId() {
@@ -124,17 +129,13 @@ public class LabolatoryExamination {
         return executionCancellationDate;
     }
 
-    public void setExecutionCancellationDate(Date executionCancellationDate) {
-        this.executionCancellationDate = executionCancellationDate;
-    }
+    public void setExecutionCancellationDate(Date executionCancellationDate) { this.executionCancellationDate = executionCancellationDate; }
 
     public Date getApprovalCancellationDate() {
         return approvalCancellationDate;
     }
 
-    public void setApprovalCancellationDate(Date approvalCancellationDate) {
-        this.approvalCancellationDate = approvalCancellationDate;
-    }
+    public void setApprovalCancellationDate(Date approvalCancellationDate) { this.approvalCancellationDate = approvalCancellationDate; }
 
     public ExaminationCategory getCategory() {
         return category;
