@@ -28,7 +28,7 @@ public class PatientController {
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Patient> getPatients(
+    public ResponseEntity<List<Patient>> getPatients(
             @RequestParam(value = "first_name", required = false) String firstName,
             @RequestParam(value = "last_name", required = false) String lastName) {
 
@@ -40,6 +40,6 @@ public class PatientController {
                 .contains(lastName, Patient::getLastName)
                 .getFiltered();
 
-        return patients;
+        return ResponseEntity.ok(patients);
     }
 }

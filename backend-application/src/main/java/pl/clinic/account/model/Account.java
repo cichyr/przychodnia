@@ -4,11 +4,12 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "account")
 @IdClass(AccountId.class)
-public class Account {
+public class Account implements Serializable {
 
     @Id
     @NotNull
