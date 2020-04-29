@@ -20,9 +20,18 @@ export class LabExamDetailsComponent implements OnInit {
     this.examination = this.laboratoryService.getLaboratoryExam(this.exam_id)
   }
 
+  // change status
+  changeStatus(status: string): void {
+    this.laboratoryService.changeExaminationStatus(status, this.examination)
+  }
+
   // navigate to Examination list view
   navigateToList() {
     this.router.navigate(['exam-list'])
   }
 
+  // open modal
+  openPopup(type: string): void {
+    
+  }
 }

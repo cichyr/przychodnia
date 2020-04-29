@@ -218,4 +218,26 @@ export class LaboratoryExaminationService {
     }
     //return this.http.get(LaboratoryExaminationService.HOSTNAME + '/api/laboratory_examinations/' + id)
   }
+
+  // Changing status of examination. No backend means mockup function
+  changeExaminationStatus(status: string, examination: LaboratoryExamination): void {
+    switch(status) {
+      case 'Done':
+        examination.stateId = this.es_wyk
+        break
+
+      case 'CanWork':
+        examination.stateId = this.es_al
+        break
+
+      case 'Approve':
+        examination.stateId = this.es_zat
+        break
+
+      case 'CanSup':
+        examination.stateId = this.es_ak
+        break
+        
+    }
+  }
 }
