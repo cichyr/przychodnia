@@ -9,6 +9,7 @@ public class BasicVisit {
     // patient
     protected String patientFirstName;
     protected String patientLastName;
+    protected String peselNumber;
     // doctor
     protected String doctorFirstName;
     protected String doctorLastName;
@@ -18,16 +19,19 @@ public class BasicVisit {
     // visit
     protected VisitState state;
     protected LocalDateTime registrationDate;
+    protected LocalDateTime finalizationCancellationDate;
 
     public BasicVisit(Visit visit) {
         this.patientFirstName = visit.getPatient().getFirstName();
         this.patientLastName = visit.getPatient().getLastName();
+        this.peselNumber = visit.getPatient().getPeselNumber();
         this.doctorFirstName = visit.getDoctor().getFirstName();
         this.doctorLastName = visit.getDoctor().getLastName();
         this.receptionistFirstName = visit.getReceptionist().getFirstName();
         this.receptionistLastName = visit.getReceptionist().getLastName();
         this.state = visit.getState();
         this.registrationDate = visit.getRegistrationDate();
+        this.finalizationCancellationDate = visit.getFinalizationCancellationDate();
     }
 
     public String getPatientFirstName() { return patientFirstName; }
@@ -45,4 +49,8 @@ public class BasicVisit {
     public VisitState getState() { return state; }
 
     public LocalDateTime getRegistrationDate() { return registrationDate; }
+
+    public String getPeselNumber() { return peselNumber; }
+
+    public LocalDateTime getFinalizationCancellationDate() { return finalizationCancellationDate; }
 }

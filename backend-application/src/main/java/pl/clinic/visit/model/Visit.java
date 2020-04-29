@@ -123,13 +123,9 @@ public class Visit {
         return registrationDate;
     }
 
-    public void setRegistrationDate(LocalDateTime registrationDate) {
-        this.registrationDate = registrationDate;
-    }
+    public void setRegistrationDate(LocalDateTime registrationDate) { this.registrationDate = registrationDate; }
 
-    public LocalDateTime getFinalizationCancellationDate() {
-        return finalizationCancellationDate;
-    }
+    public LocalDateTime getFinalizationCancellationDate() { return finalizationCancellationDate; }
 
     public void setFinalizationCancellationDate(LocalDateTime finalizationCancellationDate) { this.finalizationCancellationDate = finalizationCancellationDate; }
 
