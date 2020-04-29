@@ -47,7 +47,7 @@ public class AccountController {
                 .streetAddress1(foundUser.getPersonDetails().getStreetAddress1())
                 .streetAddress2(foundUser.getPersonDetails().getStreetAddress2())
                 .city(foundUser.getPersonDetails().getCity())
-                .region(foundUser.getPersonDetails().getState())
+                .region(foundUser.getPersonDetails().getRegion())
                 .zipCode(foundUser.getPersonDetails().getZipCode())
                 .contactNumber(foundUser.getPersonDetails().getZipCode())
                 .build();
