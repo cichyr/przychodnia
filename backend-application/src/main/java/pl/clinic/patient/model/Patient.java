@@ -1,5 +1,6 @@
 package pl.clinic.patient.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import pl.clinic.user.model.Person;
 
 import javax.persistence.Column;
@@ -10,6 +11,7 @@ import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "patient")
+@JsonIgnoreProperties(value = {"personDetails"})
 public class Patient extends Person {
 
     @NotBlank
