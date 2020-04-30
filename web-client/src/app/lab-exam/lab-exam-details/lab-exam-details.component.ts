@@ -22,21 +22,44 @@ export class LabExamDetailsComponent implements OnInit {
     this.examination = this.laboratoryService.getLaboratoryExam(this.exam_id)
   }
 
-  // change status
+  // Change status
   changeStatus(status: string): void {
     this.laboratoryService.changeExaminationStatus(status, this.examination)
   }
 
-  // navigate to Examination list view
+  // Navigate to Examination list view
   navigateToList() {
     this.router.navigate(['exam-list'])
   }
 
-  // open modal
+  // Open modal
   openPopup(type: string): void {
-    // result, note
-    var output: string
-    const modalRef = this.modalService.open(TextInputComponent)
+    // Opening modal
+    const modalRef = this.modalService.open(TextInputComponent, { size: 'lg' })
+    // Retrieve text from modal
+    modalRef.result.then((result) => {
+      this.setText(type, result)
+    }, (reason) => { })
+
+    // Set Modal title & preInput
+    switch (type) {
+      case 'result':
+        modalRef.componentInstance.title = 'Edytuj wynik badania'
+        modalRef.componentInstance.preInput = this.examination.result
+        break
+
+      case 'note':
+        modalRef.componentInstance.title = 'Edytuj notatkę kierownika'
+        modalRef.componentInstance.preInput = this.examination.supervisorNote
+        break
+    }
   }
-  
+
+  // Set text retrieved from Modal
+  setText(type: string, input: string): void {
+    this.laboratoryService.changeExaminationResultNote(type, input, this.examination)
+  }
+
 }
+
+

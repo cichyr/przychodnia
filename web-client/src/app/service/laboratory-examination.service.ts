@@ -221,7 +221,7 @@ export class LaboratoryExaminationService {
 
   // Changing status of examination. No backend means mockup function
   changeExaminationStatus(status: string, examination: LaboratoryExamination): void {
-    switch(status) {
+    switch (status) {
       case 'Done':
         examination.stateId = this.es_wyk
         break
@@ -237,7 +237,22 @@ export class LaboratoryExaminationService {
       case 'CanSup':
         examination.stateId = this.es_ak
         break
-        
     }
+
+    // put to DataBase
+  }
+
+  changeExaminationResultNote(type: string, input: string, examination: LaboratoryExamination): void {
+    switch (type) {
+      case 'result':
+        examination.result = input
+        break
+
+      case 'note':
+        examination.supervisorNote = input
+        break
+    }
+
+    // put to DataBase
   }
 }

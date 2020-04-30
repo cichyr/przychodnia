@@ -63,7 +63,7 @@
             </div>
 
             <!-- Doctor info -->
-            <div class="col my-1 ml-1 border-right">
+            <div class="col ml-1 border-right">
                 <b>Lekarz:</b><br>
                 {{examination.visitId.doctorId.firstName}}<br>
                 {{examination.visitId.doctorId.lastName}}<br>
@@ -71,7 +71,7 @@
             </div>
 
             <!-- Lab worker info -->
-            <div class="col my-1 ml-1 border-right">
+            <div class="col ml-1 border-right">
                 <b>Laborant:</b><br>
                 {{examination.labWorkerId.firstName}}<br>
                 {{examination.labWorkerId.lastName}}<br>
@@ -79,7 +79,7 @@
             </div>
 
             <!-- Dates and accept/cancel for supervisor -->
-            <div class="col-4 my-1">
+            <div class="col-4">
 
                 <!-- Dates -->
 
@@ -90,8 +90,10 @@
                 </div>
                 <div class="row mt-4 justify-content-center align-middle" *ngIf="examination.stateId.name=='ZLE'">
                     <!-- TODO check logged in user -->
-                    <button class="btn btn-success mx-2" (click)="changeStatus('Done')">Wykonaj</button> <!-- TODO add (click) -->
-                    <button class="btn btn-danger mx-2" (click)="changeStatus('CanWork')">Anuluj</button> <!-- TODO add (click) -->
+                    <button class="btn btn-success mx-2" (click)="changeStatus('Done')">Wykonaj</button>
+                    <!-- TODO add (click) -->
+                    <button class="btn btn-danger mx-2" (click)="changeStatus('CanWork')">Anuluj</button>
+                    <!-- TODO add (click) -->
                 </div>
 
                 <!-- Worker cancel date -->
@@ -108,8 +110,10 @@
                     </div>
                     <div class="row mt-2 justify-content-center" *ngIf="true">
                         <!-- TODO check logged in user -->
-                        <button class="btn btn-success mx-2" (click)="changeStatus('Approve')">Zatwierdź</button> <!-- TODO add (click) -->
-                        <button class="btn btn-danger mx-2" (click)="changeStatus('CanSup')">Anuluj</button> <!-- TODO add (click) -->
+                        <button class="btn btn-success mx-2" (click)="changeStatus('Approve')">Zatwierdź</button>
+                        <!-- TODO add (click) -->
+                        <button class="btn btn-danger mx-2" (click)="changeStatus('CanSup')">Anuluj</button>
+                        <!-- TODO add (click) -->
                     </div>
                 </div>
 
@@ -149,7 +153,9 @@
 
         <!-- Doctors note read-only -->
         <div class="row border-top">
-            {{examination.doctorNote}}
+            <div class="col">
+                {{examination.doctorNote}}
+            </div>
         </div>
     </div>
 
@@ -167,7 +173,8 @@
             </div>
             <div class="col-1" *ngIf="examination.stateId.name=='ZLE'">
                 <!-- TODO check logged in user -->
-                <button class="btn btn-primary align-self-center my-2"  (click)="openPopup('result')">Edytuj</button> <!-- TODO add (click) -->
+                <button class="btn btn-primary align-self-center my-2" (click)="openPopup('result')">Edytuj</button>
+                <!-- TODO add (click) -->
             </div>
         </div>
     </div>
@@ -187,7 +194,8 @@
             </div>
             <div class="col-1" *ngIf="examination.stateId.name=='WYK'">
                 <!-- TODO check logged in user -->
-                <button class="btn btn-primary align-self-center my-2" (click)="openPopup('note')">Edytuj</button> <!-- TODO add (click) -->
+                <button class="btn btn-primary align-self-center my-2" (click)="openPopup('note')">Edytuj</button>
+                <!-- TODO add (click) -->
             </div>
         </div>
     </div>
