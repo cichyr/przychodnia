@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core'
 import {HttpClient} from '@angular/common/http'
 import {User} from '../data/user/user'
-import {Observable, Subject} from 'rxjs'
+import {Observable, ReplaySubject, Subject} from 'rxjs'
 import {Credentials} from '../data/user/credentials'
 import {tap} from 'rxjs/operators'
 
@@ -11,7 +11,7 @@ import {tap} from 'rxjs/operators'
 export class UserService {
 
   user: User = null
-  private readonly subject = new Subject<any>()
+  private readonly subject = new ReplaySubject<any>()
   private credentials: Credentials = null
 
   constructor(private http: HttpClient) {
@@ -25,7 +25,6 @@ export class UserService {
     return this.http.get<User>('http://localhost:8080/api/userinfo', {headers: {'Authorization': token}})
       .pipe(tap(user => this.user = user))
       .pipe(tap(user => this.subject.next(user)))
-
   }
 
   signOut() {

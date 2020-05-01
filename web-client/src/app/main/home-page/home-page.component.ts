@@ -13,15 +13,16 @@ import {Router} from '@angular/router'
 export class HomePageComponent implements OnInit, OnDestroy {
 
   userFullName = ''
-  private userSub: Subscription
+  private authSubscription: Subscription
   private user: User
 
   constructor(private userService: UserService, private router: Router) {
   }
 
   ngOnInit(): void {
-    this.userSub = this.userService.getAuthenticationEvent().subscribe(
+    this.authSubscription = this.userService.getAuthenticationEvent().subscribe(
       user => {
+        console.log(user)
         this.user = user
         if (this.user != null)
           this.userFullName = this.user.firstName + ' ' + this.user.lastName
@@ -40,7 +41,7 @@ export class HomePageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.userSub != null) this.userSub.unsubscribe()
+    if (this.authSubscription != null) this.authSubscription.unsubscribe()
   }
 
 

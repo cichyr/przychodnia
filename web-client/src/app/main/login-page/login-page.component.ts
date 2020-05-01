@@ -18,7 +18,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
     username: new FormControl(),
     password: new FormControl()
   })
-  private signInSub: Subscription
+  private authSubscription: Subscription
 
   constructor(private userService: UserService, private router: Router) {
   }
@@ -29,7 +29,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   signIn() {
     const credentials = new Credentials(this.credentialsForm.value.username, this.credentialsForm.value.password)
 
-    this.signInSub = this.userService.signIn(credentials).subscribe(
+    this.authSubscription = this.userService.signIn(credentials).subscribe(
       _ => {
         this.recentLoginFailed = false
         this.router.navigate(['home'])
@@ -41,7 +41,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.signInSub != null) this.signInSub.unsubscribe()
+    if (this.authSubscription != null) this.authSubscription.unsubscribe()
   }
 
 }

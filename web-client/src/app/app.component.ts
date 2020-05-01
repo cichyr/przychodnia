@@ -1,21 +1,41 @@
-import { Component } from '@angular/core';
-import {Router} from '@angular/router';
+import {Component, OnDestroy, OnInit} from '@angular/core'
+import {Router} from '@angular/router'
+import {Subscription} from 'rxjs'
+import {UserService} from './service/user.service'
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
-  title = 'web-client';
+export class AppComponent implements OnInit, OnDestroy {
 
-  constructor(private router: Router) {
+  title = 'web-client'
+  authSubscription: Subscription
+  userFullName: String
+
+  constructor(private router: Router, private userService: UserService) {
   }
 
+  ngOnInit(): void {
+    this.authSubscription = this.userService.getAuthenticationEvent().subscribe(
+      user => {
+        console.log(user)
+        if (user != null) this.userFullName = user.firstName + ' ' + user.lastName
+        else this.userFullName = null
+      })
+  }
 
-  navigateToHomePage(){
+  navigateToHomePage() {
     this.router.navigate(['home'])
   }
 
+  navigateToLoginPage(){
+    this.router.navigate(['login-page'])
+  }
+
+  ngOnDestroy(): void {
+    if (this.authSubscription != null) this.authSubscription.unsubscribe()
+  }
 
 }
