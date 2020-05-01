@@ -31,14 +31,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
       })
   }
 
-  usernamePresent() {
-    return this.user != null
-  }
-
-  navigateToLoginPage(){
-    this.router.navigate(['login-page'])
-  }
-
   ngOnDestroy(): void {
     if (this.authSubscription != null) this.authSubscription.unsubscribe()
   }

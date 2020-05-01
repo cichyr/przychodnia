@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core'
 import {HttpClient} from '@angular/common/http'
 import {User} from '../data/user/user'
-import {Observable, ReplaySubject, Subject} from 'rxjs'
+import {Observable, ReplaySubject} from 'rxjs'
 import {Credentials} from '../data/user/credentials'
 import {tap} from 'rxjs/operators'
 
@@ -45,7 +45,7 @@ export class UserService {
     return this.resolveBasicAuthToken()
   }
 
-  hasUser(){
+  hasUser() {
     return this.user != null
   }
 
@@ -55,6 +55,5 @@ export class UserService {
 
     return 'Basic ' + btoa(`${this.credentials.username}:${this.credentials.password}`)
   }
-
 
 }

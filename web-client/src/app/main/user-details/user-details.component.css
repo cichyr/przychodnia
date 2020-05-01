@@ -2,6 +2,8 @@ body {
   background-color: #f9f9fa
 }
 
+
+
 .padding {
   padding: 3rem !important
 }
@@ -13,7 +15,7 @@ body {
 .card {
   border-radius: 5px;
   -webkit-box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
-  box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+  box-shadow: 0 1px 20px 0 rgba(41, 43, 44, 0.3);
   border: none;
   margin-bottom: 30px
 }
@@ -90,11 +92,11 @@ h6 {
 }
 
 .text-muted {
-  color: #919aa3 !important
+  color: #0275d8 !important
 }
 
 .b-b-default {
-  border-bottom: 1px solid #e0e0e0
+  border-bottom: 1px solid #8b8b8b
 }
 
 .f-w-600 {
