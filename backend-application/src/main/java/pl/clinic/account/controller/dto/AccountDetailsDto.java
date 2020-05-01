@@ -4,7 +4,7 @@ import pl.clinic.account.model.AccountDetails;
 
 public class AccountDetailsDto {
 
-    private final Long userId;
+    private final Long id;
     private final String role;
     private final String username;
     private final String firstName;
@@ -17,7 +17,7 @@ public class AccountDetailsDto {
     private final String contactNumber;
 
     private AccountDetailsDto(AccountDetailsDto.Builder builder) {
-        this.userId = builder.userId;
+        this.id = builder.userId;
         this.role = builder.role;
         this.username = builder.username;
         this.firstName = builder.firstName;
@@ -30,8 +30,8 @@ public class AccountDetailsDto {
         this.contactNumber = builder.contactNumber;
     }
 
-    public Long getUserId() {
-        return userId;
+    public Long getId() {
+        return id;
     }
 
     public String getRole() {

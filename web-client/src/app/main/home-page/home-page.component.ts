@@ -22,7 +22,6 @@ export class HomePageComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.authSubscription = this.userService.getAuthenticationEvent().subscribe(
       user => {
-        console.log(user)
         this.user = user
         if (this.user != null)
           this.userFullName = this.user.firstName + ' ' + this.user.lastName
