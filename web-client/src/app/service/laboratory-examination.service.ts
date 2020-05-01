@@ -13,6 +13,8 @@ import { ExaminationDictionary, examinationType } from '../data/examination/exam
 import { ExaminationState } from '../data/examination/examination-state';
 import { LaboratoryExamination } from '../data/examination/laboratory-examination';
 import { Extractor } from '@angular/compiler';
+import {Observable} from 'rxjs'
+import {map} from 'rxjs/operators'
 
 
 @Injectable({
@@ -218,4 +220,5 @@ export class LaboratoryExaminationService {
     }
     //return this.http.get(LaboratoryExaminationService.HOSTNAME + '/api/laboratory_examinations/' + id)
   }
+
 }

@@ -1,7 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core'
-import {Subscription} from 'rxjs'
+import {Subscription} from 'rxjs/internal/Subscription'
+
 import {UserService} from '../../service/user.service'
 import {User} from '../../data/user/user'
+import {Router} from '@angular/router'
 
 @Component({
   selector: 'app-home-page',
@@ -10,11 +12,11 @@ import {User} from '../../data/user/user'
 })
 export class HomePageComponent implements OnInit, OnDestroy {
 
+  userFullName = ''
   private userSub: Subscription
   private user: User
-  private userFullName = ''
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -33,8 +35,14 @@ export class HomePageComponent implements OnInit, OnDestroy {
     return this.user != null
   }
 
+  navigateToLoginPage(){
+    this.router.navigate(['login-page'])
+  }
+
   ngOnDestroy(): void {
     if (this.userSub != null) this.userSub.unsubscribe()
   }
+
+
 
 }

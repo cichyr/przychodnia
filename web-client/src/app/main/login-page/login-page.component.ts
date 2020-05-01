@@ -1,8 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core'
-import {FormControl, FormGroup} from '@angular/forms'
-import {UserService} from '../../service/user.service'
-import {Subscription} from 'rxjs'
 import {Router} from '@angular/router'
+import {FormControl, FormGroup} from '@angular/forms'
+import {Component, OnDestroy, OnInit} from '@angular/core'
+import {Subscription} from 'rxjs'
+
+import {UserService} from '../../service/user.service'
 import {Credentials} from '../../data/user/credentials'
 
 @Component({
@@ -12,12 +13,11 @@ import {Credentials} from '../../data/user/credentials'
 })
 export class LoginPageComponent implements OnInit, OnDestroy {
 
-  private credentialsForm = new FormGroup({
+  recentLoginFailed = false
+  credentialsForm = new FormGroup({
     username: new FormControl(),
     password: new FormControl()
   })
-
-  private recentLoginFailed = false
   private signInSub: Subscription
 
   constructor(private userService: UserService, private router: Router) {
