@@ -3,11 +3,10 @@ package pl.clinic.user.model;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "person_details")
-public class PersonDetails implements Serializable {
+public class PersonDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,8 +34,8 @@ public class PersonDetails implements Serializable {
 
     @NotBlank
     @Size(max = 20)
-    @Column(name = "state", nullable = false)
-    protected String state;
+    @Column(name = "region", nullable = false)
+    protected String region;
 
     @NotBlank
     @Size(max = 20)
@@ -81,14 +80,6 @@ public class PersonDetails implements Serializable {
         this.zipCode = zipCode;
     }
 
-    public String getState() {
-        return state;
-    }
-
-    public void setState(String state) {
-        this.state = state;
-    }
-
     public String getContactNumber() {
         return contactNumber;
     }
@@ -96,4 +87,8 @@ public class PersonDetails implements Serializable {
     public void setContactNumber(String contactNumber) {
         this.contactNumber = contactNumber;
     }
+
+    public String getRegion() { return region; }
+
+    public void setRegion(String region) { this.region = region; }
 }

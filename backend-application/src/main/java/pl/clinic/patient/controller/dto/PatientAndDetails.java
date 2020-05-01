@@ -2,7 +2,7 @@ package pl.clinic.patient.controller.dto;
 
 import pl.clinic.patient.model.Patient;
 
-public class PatientAndDetailsDto {
+public class PatientAndDetails {
     // from patient
     protected Long id;
     protected String firstName;
@@ -13,10 +13,10 @@ public class PatientAndDetailsDto {
     protected String streetAddress1;
     protected String streetAddress2;
     protected String zipCode;
-    protected String state;
+    protected String region;
     protected String contactNumber;
 
-    public PatientAndDetailsDto(Patient patient) {
+    public PatientAndDetails(Patient patient) {
         this.id = patient.getId();
         this.firstName = patient.getFirstName();
         this.lastName = patient.getLastName();
@@ -25,7 +25,7 @@ public class PatientAndDetailsDto {
         this.streetAddress1 = patient.getPersonDetails().getStreetAddress1();
         this.streetAddress2 = patient.getPersonDetails().getStreetAddress2();
         this.zipCode = patient.getPersonDetails().getZipCode();
-        this.state = patient.getPersonDetails().getState();
+        this.region = patient.getPersonDetails().getRegion();
         this.contactNumber = patient.getPersonDetails().getContactNumber();
     }
 
@@ -49,20 +49,16 @@ public class PatientAndDetailsDto {
         return city;
     }
 
-    public String getStreetAddress1() {
-        return streetAddress1;
-    }
+    public String getStreetAddress1() { return streetAddress1; }
 
-    public String getStreetAddress2() {
-        return streetAddress2;
-    }
+    public String getStreetAddress2() { return streetAddress2; }
 
     public String getZipCode() {
         return zipCode;
     }
 
     public String getState() {
-        return state;
+        return region;
     }
 
     public String getContactNumber() {

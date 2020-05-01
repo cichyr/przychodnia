@@ -6,7 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pl.clinic.common_services.FilteringService;
-import pl.clinic.patient.controller.dto.PatientAndDetailsDto;
+import pl.clinic.patient.controller.dto.PatientAndDetails;
 import pl.clinic.patient.model.Patient;
 import pl.clinic.patient.model.PatientRepository;
 
@@ -20,15 +20,15 @@ public class PatientController {
     PatientRepository patientRepository;
 
     @GetMapping(value = "/{patient_id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<PatientAndDetailsDto> getPatient(@PathVariable Long patient_id) {
+    public ResponseEntity<PatientAndDetails> getPatient(@PathVariable Long patient_id) {
 
         return patientRepository.findById(patient_id)
-                .map(value -> ResponseEntity.ok(new PatientAndDetailsDto(value)))
+                .map(value -> ResponseEntity.ok(new PatientAndDetails(value)))
                 .orElseGet(() -> ResponseEntity.ok().build());
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<Patient> getPatients(
+    public ResponseEntity<List<Patient>> getPatients(
             @RequestParam(value = "first_name", required = false) String firstName,
             @RequestParam(value = "last_name", required = false) String lastName) {
 
@@ -40,6 +40,6 @@ public class PatientController {
                 .contains(lastName, Patient::getLastName)
                 .getFiltered();
 
-        return patients;
+        return ResponseEntity.ok(patients);
     }
 }

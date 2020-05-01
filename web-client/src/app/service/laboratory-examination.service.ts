@@ -13,8 +13,6 @@ import { ExaminationDictionary, examinationType } from '../data/examination/exam
 import { ExaminationState } from '../data/examination/examination-state';
 import { LaboratoryExamination } from '../data/examination/laboratory-examination';
 import { Extractor } from '@angular/compiler';
-import {Observable} from 'rxjs'
-import {map} from 'rxjs/operators'
 
 
 @Injectable({
@@ -221,4 +219,40 @@ export class LaboratoryExaminationService {
     //return this.http.get(LaboratoryExaminationService.HOSTNAME + '/api/laboratory_examinations/' + id)
   }
 
+  // Changing status of examination. No backend means mockup function
+  changeExaminationStatus(status: string, examination: LaboratoryExamination): void {
+    switch (status) {
+      case 'Done':
+        examination.stateId = this.es_wyk
+        break
+
+      case 'CanWork':
+        examination.stateId = this.es_al
+        break
+
+      case 'Approve':
+        examination.stateId = this.es_zat
+        break
+
+      case 'CanSup':
+        examination.stateId = this.es_ak
+        break
+    }
+
+    // put to DataBase
+  }
+
+  changeExaminationResultNote(type: string, input: string, examination: LaboratoryExamination): void {
+    switch (type) {
+      case 'result':
+        examination.result = input
+        break
+
+      case 'note':
+        examination.supervisorNote = input
+        break
+    }
+
+    // put to DataBase
+  }
 }
