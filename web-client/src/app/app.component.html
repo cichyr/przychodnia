@@ -11,7 +11,7 @@
     <button (click)="navigateToLoginPage()" class="btn btn-sm btn-outline-light mr-2">Logowanie</button>
   </div>
 
-  <span class="text-black-50 cursor-ptr"><i class="fa fa-3x fa-user"></i></span>
+  <span (click)="navigateToUserDetails()" class="text-black-50 cursor-ptr"><i class="fa fa-3x fa-user"></i></span>
 </nav>
 
 <ng-template #userPresent>
@@ -19,6 +19,3 @@
 </ng-template>
 
 <router-outlet></router-outlet>
-
-
-

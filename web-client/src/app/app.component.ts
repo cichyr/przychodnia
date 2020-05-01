@@ -30,8 +30,12 @@ export class AppComponent implements OnInit, OnDestroy {
     this.router.navigate(['home'])
   }
 
-  navigateToLoginPage(){
+  navigateToLoginPage() {
     this.router.navigate(['login-page'])
+  }
+
+  navigateToUserDetails() {
+    this.router.navigate(['user-details'])
   }
 
   ngOnDestroy(): void {
