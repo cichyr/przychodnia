@@ -9,10 +9,10 @@ import {UserDetailsComponent} from './main/user-details/user-details.component'
 import {AuthGuardService} from './service/auth-guard.service'
 
 const routes: Routes = [
-  {path: 'home', component: HomePageComponent},
   {path: 'login-page', component: LoginPageComponent},
   {
     path: '', canActivate: [AuthGuardService], children: [
+      {path: 'home', component: HomePageComponent},
       {path: 'user-details', component: UserDetailsComponent},
       {path: 'exam-list', component: LabExamListComponent},
       {path: 'exam-list/:id', component: LabExamDetailsComponent}
