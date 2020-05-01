@@ -45,11 +45,16 @@ export class UserService {
     return this.resolveBasicAuthToken()
   }
 
+  hasUser(){
+    return this.user != null
+  }
+
   private resolveBasicAuthToken(): string {
 
     if (this.credentials == null) return ''
 
     return 'Basic ' + btoa(`${this.credentials.username}:${this.credentials.password}`)
   }
+
 
 }

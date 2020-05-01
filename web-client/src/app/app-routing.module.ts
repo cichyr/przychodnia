@@ -6,13 +6,19 @@ import {LabExamDetailsComponent} from './lab-exam/lab-exam-details/lab-exam-deta
 import {HomePageComponent} from './main/home-page/home-page.component'
 import {LoginPageComponent} from './main/login-page/login-page.component'
 import {UserDetailsComponent} from './main/user-details/user-details.component'
+import {AuthGuardService} from './service/auth-guard.service'
 
 const routes: Routes = [
   {path: 'home', component: HomePageComponent},
-  {path: 'user-details', component: UserDetailsComponent},
   {path: 'login-page', component: LoginPageComponent},
-  {path: 'exam-list', component: LabExamListComponent},
-  {path: 'exam-list/:id', component: LabExamDetailsComponent}
+  {
+    path: '', canActivate: [AuthGuardService], children: [
+      {path: 'user-details', component: UserDetailsComponent},
+      {path: 'exam-list', component: LabExamListComponent},
+      {path: 'exam-list/:id', component: LabExamDetailsComponent}
+    ]
+  }
+
 ]
 
 @NgModule({
