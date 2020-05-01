@@ -38,6 +38,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.router.navigate(['user-details'])
   }
 
+  signOut(){
+    this.userService.signOut()
+  }
+
   ngOnDestroy(): void {
     if (this.authSubscription != null) this.authSubscription.unsubscribe()
   }

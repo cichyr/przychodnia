@@ -16,6 +16,7 @@
 
 <ng-template #userPresent>
   <div class="mr-2 text-white">{{userFullName}}</div>
+  <button (click)="signOut()" class="btn btn-sm btn-outline-light mr-2">Wyloguj</button>
 </ng-template>
 
 <router-outlet></router-outlet>
