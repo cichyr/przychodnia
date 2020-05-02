@@ -7,6 +7,7 @@ import {HomePageComponent} from './main/home-page/home-page.component'
 import {LoginPageComponent} from './main/login-page/login-page.component'
 import {UserDetailsComponent} from './main/user-details/user-details.component'
 import {AuthGuardService} from './service/auth-guard.service'
+import { MyPanelComponent } from './main/my-panel/my-panel.component'
 
 const routes: Routes = [
   {path: 'login-page', component: LoginPageComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
     path: '', canActivate: [AuthGuardService], children: [
       {path: 'home', component: HomePageComponent},
       {path: 'user-details', component: UserDetailsComponent},
+      {path: 'my-panel', component: MyPanelComponent},
       {path: 'exam-list', component: LabExamListComponent},
       {path: 'exam-list/:id', component: LabExamDetailsComponent}
     ]

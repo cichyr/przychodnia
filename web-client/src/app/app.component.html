@@ -1,6 +1,8 @@
 <nav class="navbar navbar-expand navbar-light bg-primary">
-  <span class="text-black-50 cursor-ptr"><i class="fa fa-3x fa-th-large mr-2"></i></span>
-  <span class="nav-item text-white text-xl-center ml-2 font-weight-bold cursor-ptr">MÓJ PANEL</span>
+  <ul (click)="navigateToMyPanel()" class="navbar-nav">
+    <li class="text-black-50 cursor-ptr"><i class="fa fa-3x fa-th-large mr-2"></i></li>
+    <li class="nav-item text-white text-xl-center ml-2 font-weight-bold cursor-ptr my-auto">MÓJ PANEL</li>
+  </ul>
 
   <ul (click)="navigateToHomePage()" class="navbar-nav mx-auto">
     <li class="fa fa-3x fa-medkit mr-2 text-black-50 my-auto cursor-ptr"></li>
