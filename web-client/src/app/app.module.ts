@@ -1,14 +1,13 @@
-import {BrowserModule} from '@angular/platform-browser';
-import {NgModule} from '@angular/core';
-
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {HttpClientModule} from '@angular/common/http';
-import {PanelMainComponent} from './my-panel/panel-main/panel-main.component';
-import {MyPanelModule} from './my-panel/my-panel.module';
-import {LabExamModule} from './lab-exam/lab-exam.module'
-
+import {BrowserModule} from '@angular/platform-browser'
+import {NgModule} from '@angular/core'
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
+
+import {AppRoutingModule} from './app-routing.module'
+import {AppComponent} from './app.component'
+import {LabExamModule} from './lab-exam/lab-exam.module'
+import {BasicAuthHeaderInterceptor} from './interceptor/basic-auth-header-interceptor'
+import {MainModule} from './main/main.module'
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -19,10 +18,17 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap'
     AppRoutingModule,
     HttpClientModule,
     NgbModule,
-    MyPanelModule,
-    LabExamModule
+    LabExamModule,
+    MainModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: BasicAuthHeaderInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+}
