@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {faMicroscope} from '@fortawesome/free-solid-svg-icons'
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-my-panel',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MyPanelComponent implements OnInit {
 
-  constructor() { }
+  microscope = faMicroscope
+
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  navigateToLab() {
+    this.router.navigate(['/exam-list/'])
   }
 
 }

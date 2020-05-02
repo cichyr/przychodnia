@@ -6,6 +6,7 @@ import {ReactiveFormsModule} from '@angular/forms'
 import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { MyPanelComponent } from './my-panel/my-panel.component'
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
@@ -14,7 +15,8 @@ import { MyPanelComponent } from './my-panel/my-panel.component'
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    NgbAlertModule
+    NgbAlertModule,
+    FontAwesomeModule
   ]
 })
 export class MainModule { }
