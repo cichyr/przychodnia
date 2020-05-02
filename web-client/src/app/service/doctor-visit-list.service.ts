@@ -1,18 +1,21 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
 import {Doctor} from '../data/doctor/doctor';
 import {UserDetails} from '../data/userDetails/user-details';
-import { Patient } from '../data/patient/patient';
-import { Receptionist } from '../data/receptionist/receptionist';
-import { VisitState } from '../data/visit/visit-state';
-import { Visit } from '../data/visit/visit';
-import { LabSupervisor } from '../data/labSupervisor/lab-supervisor';
-import { LabWorker } from '../data/labWorker/lab-worker';
-import { ExaminationDictionary, examinationType } from '../data/examination/examination-dictionary';
-import { ExaminationState } from '../data/examination/examination-state';
-import { LaboratoryExamination } from '../data/examination/laboratory-examination';
+import {Patient} from '../data/patient/patient';
+import {Receptionist} from '../data/receptionist/receptionist';
+import {VisitState} from '../data/visit/visit-state';
+import {Visit} from '../data/visit/visit';
+import {LabSupervisor} from '../data/labSupervisor/lab-supervisor';
+import {LabWorker} from '../data/labWorker/lab-worker';
+import {ExaminationDictionary, examinationType} from '../data/examination/examination-dictionary';
+import {ExaminationState} from '../data/examination/examination-state';
+import {LaboratoryExamination} from '../data/examination/laboratory-examination';
 import {formatDate} from "@angular/common";
+import {Observable, pipe} from "rxjs";
+import {DoctorVisit} from "../data/visit/doctor-visit";
+import {map, tap} from "rxjs/operators";
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +23,8 @@ import {formatDate} from "@angular/common";
 
 export class DoctorVisitListService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+  }
 
   //Dummy mock objects, used until there is no backend
   //TODO: Remove when backend is created
@@ -34,76 +38,76 @@ export class DoctorVisitListService {
     contactNumber: "111 222 333"
   }
 
-  doctor : Doctor = {
+  doctor: Doctor = {
+    id: 0,
+    userDetailsId: this.uDet,
+    firstName: "Jurek",
+    lastName: "Doktorek",
+    licenseCode: "License for doctor"
+  }
+
+  patients: Patient[] = [
+    {
       id: 0,
       userDetailsId: this.uDet,
-      firstName: "Jurek",
-      lastName: "Doktorek",
-      licenseCode: "License for doctor"
+      firstName: "Michał",
+      lastName: "Grzdyl",
+      peselNumber: "12345678910"
+    },
+    {
+      id: 1,
+      userDetailsId: this.uDet,
+      firstName: "Jan",
+      lastName: "Fryk",
+      peselNumber: "09876543211"
+    },
+    {
+      id: 2,
+      userDetailsId: this.uDet,
+      firstName: "Joanna",
+      lastName: "Kałamarz",
+      peselNumber: "13456789025"
+    },
+    {
+      id: 3,
+      userDetailsId: this.uDet,
+      firstName: "Anna",
+      lastName: "Rabiej",
+      peselNumber: "01928374655"
     }
+  ]
 
-    patients: Patient[] = [
-      {
-        id: 0,
-        userDetailsId: this.uDet,
-        firstName: "Michał",
-        lastName: "Grzdyl",
-        peselNumber: "12345678910"
-      },
-      {
-        id: 1,
-        userDetailsId: this.uDet,
-        firstName: "Jan",
-        lastName: "Fryk",
-        peselNumber: "09876543211"
-      },
-      {
-        id: 2,
-        userDetailsId: this.uDet,
-        firstName: "Joanna",
-        lastName: "Kałamarz",
-        peselNumber: "13456789025"
-      },
-      {
-        id: 3,
-        userDetailsId: this.uDet,
-        firstName: "Anna",
-        lastName: "Rabiej",
-        peselNumber: "01928374655"
-      }
-    ]
+  recep: Receptionist[] = [
+    {
+      id: 0,
+      userDetailsId: this.uDet,
+      firstName: "Mirosława",
+      lastName: "Wicek",
+      licenseCode: "License1"
+    },
+    {
+      id: 1,
+      userDetailsId: this.uDet,
+      firstName: "Dorota",
+      lastName: "Gruzek",
+      licenseCode: "License2"
+    }
+  ]
 
-    recep: Receptionist[] = [
-      {
-        id: 0,
-        userDetailsId: this.uDet,
-        firstName: "Mirosława",
-        lastName: "Wicek",
-        licenseCode: "License1"
-      },
-      {
-        id: 1,
-        userDetailsId: this.uDet,
-        firstName: "Dorota",
-        lastName: "Gruzek",
-        licenseCode: "License2"
-      }
-    ]
-
-    visStat: VisitState[] = [
-      {
-        id: 0,
-        name: "W_TRAKCIE"
-      },
-      {
-        id: 1,
-        name: "ANULOWANA"
-      },
-      {
-        id: 2,
-        name: "ZAKONCZONA"
-      }
-    ]
+  visStat: VisitState[] = [
+    {
+      id: 0,
+      name: "W_TRAKCIE"
+    },
+    {
+      id: 1,
+      name: "ANULOWANA"
+    },
+    {
+      id: 2,
+      name: "ZAKONCZONA"
+    }
+  ]
 
   visits: Visit[] = [
     {
@@ -126,8 +130,8 @@ export class DoctorVisitListService {
       stateId: this.visStat[1],
       description: "Description for first visit",
       diagnose: "Diagnose for second visit",
-      registrationDate:  new Date('2019-09-09'),
-      finalizationCancellationDate:  new Date('2019-09-11')
+      registrationDate: new Date('2019-09-09'),
+      finalizationCancellationDate: new Date('2019-09-11')
     },
     {
       id: 2,
@@ -180,4 +184,9 @@ export class DoctorVisitListService {
   getAllVisitsForDoctor(): Visit[] {
     return this.visits;
   }
+
+  getVisits(): Observable<DoctorVisit[]> {
+    return this.http.get<DoctorVisit[]>('http://localhost:8080/api/doctors/1/visits')
+  }
+
 }

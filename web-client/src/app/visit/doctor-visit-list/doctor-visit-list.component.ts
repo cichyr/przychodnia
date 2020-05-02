@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Visit } from '../../data/visit/visit';
 // Mock imports
 import { DoctorVisitListService } from '../../service/doctor-visit-list.service'
+import {DoctorVisit} from "../../data/visit/doctor-visit";
 
 @Component({
   selector: 'app-doctor-visit-list',
@@ -10,14 +11,14 @@ import { DoctorVisitListService } from '../../service/doctor-visit-list.service'
 })
 export class DoctorVisitListComponent implements OnInit {
 
-  visitList: Visit[]
+  visitList: DoctorVisit[]
 
   constructor(private visitService: DoctorVisitListService) {
   }
 
+
   ngOnInit(): void {
-    this.visitList = this.visitService.getAllVisitsForDoctor();
-    this.visitList.sort((a, b) =>
-        (a.stateId.id > b.stateId.id) ? 1 : (a.stateId.id === b.stateId.id) ? ((a.registrationDate.getDate() > b.registrationDate.getDate()) ? 1 : -1 ) : -1 )
+    this.visitService.getVisits().subscribe(visits => this.visitList = visits);
+    this.visitList.sort((a, b) => (a.registrationDate.getDate() > b.registrationDate.getDate() ? 1 : -1))
   }
 }
