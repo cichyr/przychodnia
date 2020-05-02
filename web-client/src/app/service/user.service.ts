@@ -10,7 +10,7 @@ import {tap} from 'rxjs/operators'
 })
 export class UserService {
 
-  user: User = null
+  private user: User = null
   private readonly subject = new ReplaySubject<any>()
   private credentials: Credentials = null
 

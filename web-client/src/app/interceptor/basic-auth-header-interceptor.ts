@@ -12,7 +12,7 @@ export class BasicAuthHeaderInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     let copiedReq
-    if (this.userService.user != null) {
+    if (this.userService.hasUser()) {
       copiedReq = request.clone({
         headers: new HttpHeaders({
           'Content-Type': 'application/json',

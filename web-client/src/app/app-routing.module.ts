@@ -18,7 +18,6 @@ const routes: Routes = [
       {path: 'exam-list/:id', component: LabExamDetailsComponent}
     ]
   }
-
 ]
 
 @NgModule({
