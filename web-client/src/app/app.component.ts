@@ -5,7 +5,7 @@ import {UserService} from './service/user.service'
 import {environment} from '../environments/environment.dev'
 import {Credentials} from './data/user/credentials'
 import {map, tap} from 'rxjs/operators'
-import {faMicroscope, faNotesMedical, faThLarge} from '@fortawesome/free-solid-svg-icons'
+import {faMicroscope, faNotesMedical, faThLarge, faUser} from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-root',
@@ -22,7 +22,7 @@ export class AppComponent implements OnInit, OnDestroy {
   microscope = faMicroscope
   visit = faNotesMedical
   menu = faThLarge
-
+  login = faUser
 
   constructor(private router: Router, private userService: UserService) {
   }
@@ -48,23 +48,6 @@ export class AppComponent implements OnInit, OnDestroy {
     this.router.navigate(['user-details'])
   }
 
-  navigateToMyPanel() {
-    this.router.navigate(['my-panel'])
-  }
-
-  signOut() {
-    this.userService.signOut()
-    this.navigateToLoginPage()
-  }
-
-  ngOnDestroy(): void {
-    if (this.authSubscription != null) this.authSubscription.unsubscribe()
-  }
-
-  getRole(): string {
-    return this.userService.getUserRole()
-  }
-
   navigateToLab() {
     if(this.getRole() == 'LABW' || this.getRole() == 'LABS') {
       this.router.navigate(['/exam-list/'])
@@ -78,6 +61,19 @@ export class AppComponent implements OnInit, OnDestroy {
     else if(this.getRole() == 'DOC') {
       this.router.navigate(['/doctor-visit-list/'])
     }    
+  }
+
+  signOut() {
+    this.userService.signOut()
+    this.navigateToLoginPage()
+  }
+
+  ngOnDestroy(): void {
+    if (this.authSubscription != null) this.authSubscription.unsubscribe()
+  }
+
+  getRole(): string {
+    return this.userService.getUserRole()
   }
 
 }

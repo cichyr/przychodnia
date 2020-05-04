@@ -5,18 +5,15 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import {ReactiveFormsModule} from '@angular/forms'
 import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import { UserDetailsComponent } from './user-details/user-details.component';
-import { MyPanelComponent } from './my-panel/my-panel.component'
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 
 
 @NgModule({
-  declarations: [HomePageComponent, LoginPageComponent, UserDetailsComponent, MyPanelComponent],
+  declarations: [HomePageComponent, LoginPageComponent, UserDetailsComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    NgbAlertModule,
-    FontAwesomeModule
+    NgbAlertModule
   ]
 })
 export class MainModule { }

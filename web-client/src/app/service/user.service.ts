@@ -57,7 +57,11 @@ export class UserService {
   }
 
   getUserRole(): string {
-    return this.user.role
+    if(this.hasUser()) {
+      return this.user.role
+    } else {
+      return "NONE"
+    }
   }
  
 }

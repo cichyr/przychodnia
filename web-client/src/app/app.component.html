@@ -14,10 +14,11 @@
           <fa-icon [icon]="visit"></fa-icon>&nbsp;&nbsp;
           Wizyty
         </a>
+        <a ngbDropdownItem *ngIf="this.getRole() == 'NONE'" class="cursor-default">
+          Zaloguj się aby móc korzystać menu
+        </a>
       </div>
     </li>
-    
-    
   </ul>
 
   <ul (click)="navigateToHomePage()" class="navbar-nav mx-auto">
