@@ -56,4 +56,8 @@ export class UserService {
     return 'Basic ' + btoa(`${this.credentials.username}:${this.credentials.password}`)
   }
 
+  getUserRole(): string {
+    return this.user.role
+  }
+ 
 }

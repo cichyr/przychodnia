@@ -1,18 +1,18 @@
-<div class="container">
+<div class="container-sm">
     <!-- Navigation panel -->
 
     <div class="row justify-content-center">
-        <button (click)="navigateToLab()" class="col-3 cursor-ptr text-black-50 text-center border rounded-lg m-4 btn-color">
+        <button (click)="navigateToLab()" *ngIf="this.getRole() == 'LABW' || this.getRole() == 'LABS'" class="col-4 cursor-ptr text-black-50 text-center border rounded-lg m-4 btn-color">
             <fa-icon [icon]="microscope" class="text-primary-50 fa-9x"></fa-icon><br>
             <div class="mb-3 text-xl-center font-weight-bold">
                 <h3><b>LABORATORIUM</b></h3>
             </div>
         </button>
-        <button class="col-3 cursor-ptr text-black-50 text-center border rounded-lg m-4 btn-color">
-            <!-- PLACEHOLDER -->
-        </button>
-        <button class="col-3 cursor-ptr text-black-50 text-center border rounded-lg m-4 btn-color">
-            <!-- PLACEHOLDER -->
+        <button (click)="navigateToVisit()" *ngIf="this.getRole() == 'DOC' || this.getRole() == 'REC'" class="col-4 cursor-ptr text-black-50 text-center border rounded-lg m-4 btn-color">
+            <fa-icon [icon]="visit" class="text-primary-50 fa-9x"></fa-icon><br>
+            <div class="mb-3 text-xl-center font-weight-bold">
+                <h3><b>WIZYTY</b></h3>
+            </div>
         </button>
     </div>
 </div>

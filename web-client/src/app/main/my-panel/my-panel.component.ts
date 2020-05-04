@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {faMicroscope, faThLarge} from '@fortawesome/free-solid-svg-icons'
+import {faMicroscope, faNotesMedical} from '@fortawesome/free-solid-svg-icons'
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-my-panel',
@@ -10,15 +11,30 @@ import { Router } from '@angular/router';
 export class MyPanelComponent implements OnInit {
 
   microscope = faMicroscope
-  thlarge = faThLarge
+  visit = faNotesMedical
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService: UserService) { }
 
   ngOnInit(): void {
   }
 
+  getRole(): string {
+    return this.userService.getUserRole()
+  }
+
   navigateToLab() {
-    this.router.navigate(['/exam-list/'])
+    if(this.getRole() == 'LABW' || this.getRole() == 'LABS') {
+      this.router.navigate(['/exam-list/'])
+    }
+  }
+
+  navigateToVisit() {
+    if(this.getRole() == 'REC') {
+      this.router.navigate(['/receptionist-visit-list/'])
+    }
+    else if(this.getRole() == 'DOC') {
+      this.router.navigate(['/doctor-visit-list/'])
+    }    
   }
 
 }
