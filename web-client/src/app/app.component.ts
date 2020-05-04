@@ -5,7 +5,7 @@ import {UserService} from './service/user.service'
 import {environment} from '../environments/environment.dev'
 import {Credentials} from './data/user/credentials'
 import {map, tap} from 'rxjs/operators'
-import {faMicroscope, faNotesMedical} from '@fortawesome/free-solid-svg-icons'
+import {faMicroscope, faNotesMedical, faThLarge} from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-root',
@@ -17,8 +17,12 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'web-client'
   authSubscription: Subscription
   userFullName: String
+
+  // icon variables
   microscope = faMicroscope
   visit = faNotesMedical
+  menu = faThLarge
+
 
   constructor(private router: Router, private userService: UserService) {
   }
@@ -62,7 +66,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   navigateToLab() {
-    if(this.getRole() == 'DOC' || this.getRole() == 'LABS') {
+    if(this.getRole() == 'LABW' || this.getRole() == 'LABS') {
       this.router.navigate(['/exam-list/'])
     }
   }

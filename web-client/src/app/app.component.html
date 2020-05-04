@@ -1,13 +1,18 @@
 <nav class="navbar navbar-expand navbar-light bg-primary">
   <ul class="navbar-nav">
-    <li class="nav-item" ngbDropdown>
-      <a class="nav-link" class="cursor-ptr text-white" ngbDropdownToggle id="menuDropdown" role="button">
-        MÓJ PANEL
+    <li class="nav-item text-xl-center font-weight-bold cursor-ptr" ngbDropdown>
+      <a class="nav-link cursor-ptr text-white" ngbDropdownToggle id="menuDropdown" role="button">
+        <span class="fa fa-3x fa-bars mr-2 text-black-50 cursor-ptr" style="vertical-align: middle;"></span>
+        <span>MENU</span>
       </a>
       <div ngbDropdownMenu aria-labelledby="menuDropdown" class="dropdown-menu">
-        <a ngbDropdownItem (click)="navigateToLab()" *ngIf="this.getRole() == 'DOC' || this.getRole() == 'LABS'" class="cursor-ptr">
+        <a ngbDropdownItem (click)="navigateToLab()" *ngIf="this.getRole() == 'LABW' || this.getRole() == 'LABS'" class="cursor-ptr">
           <fa-icon [icon]="microscope"></fa-icon>&nbsp;
-          LABORATORIUM
+          Laboratorium
+        </a>
+        <a ngbDropdownItem (click)="navigateToVisit()" *ngIf="this.getRole() == 'DOC' || this.getRole() == 'LABS'" class="cursor-ptr">
+          <fa-icon [icon]="visit"></fa-icon>&nbsp;&nbsp;
+          Wizyty
         </a>
       </div>
     </li>
