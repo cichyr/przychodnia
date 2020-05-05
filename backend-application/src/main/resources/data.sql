@@ -267,18 +267,18 @@ insert into visit (id, receptionist_id, doctor_id, patient_id, state_id, descrip
 insert into visit (id, receptionist_id, doctor_id, patient_id, state_id, description, diagnose, registration_date) values (21, 10, 20, 20, 2, 'Crohn''s disease of both small and large intestine', 'K508', '2019-05-30');
 
 
-insert into examination_category (code, name, type) values (1, 'Replacement of R Ext Carotid with Synth Sub, Open Approach', 1);
-insert into examination_category (code, name, type) values (2, 'Transfusion of Nonaut WBC into Central Vein, Perc Approach', 1);
-insert into examination_category (code, name, type) values (3, 'Destruction of Transverse Colon, Open Approach', 1);
-insert into examination_category (code, name, type) values (4, 'Drain of R Lacrimal Bone with Drain Dev, Perc Endo Approach', 0);
-insert into examination_category (code, name, type) values (5, 'Insertion of Other Device into Mediastinum, Perc Approach', 1);
-insert into examination_category (code, name, type) values (6, 'Removal of Monitoring Device from Stomach, Open Approach', 0);
-insert into examination_category (code, name, type) values (7, 'Extirpate matter from 1 Temporal Art, Bifurc, Perc Endo', 0);
-insert into examination_category (code, name, type) values (8, 'Insertion of Stimulator Lead into Up Muscle, Perc Approach', 0);
-insert into examination_category (code, name, type) values (9, 'Resection of Soft Palate, Open Approach', 0);
-insert into examination_category (code, name, type) values (10, 'Bypass Azygos Vein to Upper Vein, Perc Endo Approach', 1);
+insert into examination_category (code, name, type) values (1, 'Replacement of R Ext Carotid with Synth Sub, Open Approach', 'P');
+insert into examination_category (code, name, type) values (2, 'Transfusion of Nonaut WBC into Central Vein, Perc Approach', 'P');
+insert into examination_category (code, name, type) values (3, 'Destruction of Transverse Colon, Open Approach', 'P');
+insert into examination_category (code, name, type) values (4, 'Drain of R Lacrimal Bone with Drain Dev, Perc Endo Approach', 'L');
+insert into examination_category (code, name, type) values (5, 'Insertion of Other Device into Mediastinum, Perc Approach', 'P');
+insert into examination_category (code, name, type) values (6, 'Removal of Monitoring Device from Stomach, Open Approach', 'L');
+insert into examination_category (code, name, type) values (7, 'Extirpate matter from 1 Temporal Art, Bifurc, Perc Endo', 'L');
+insert into examination_category (code, name, type) values (8, 'Insertion of Stimulator Lead into Up Muscle, Perc Approach', 'L');
+insert into examination_category (code, name, type) values (9, 'Resection of Soft Palate, Open Approach', 'L');
+insert into examination_category (code, name, type) values (10, 'Bypass Azygos Vein to Upper Vein, Perc Endo Approach', 'P');
 
-insert into laboratory_examination (id, examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (1, 1, 1, 1, 1, 1, '37853', 'Fourth or trochlear nerve palsy', 'Replacement of any type of pacemaker device with single-chamber device, rate responsive', '2021-03-19', '2020-05-28');
+insert into laboratory_examination (id, examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (1, 1, 2, 1, 1, 1, '37853', 'Fourth or trochlear nerve palsy', 'Replacement of any type of pacemaker device with single-chamber device, rate responsive', '2021-03-19', '2020-05-28');
 insert into laboratory_examination (id, examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (2, 2, 2, 2, 2, 2, '7760', 'Hemorrhagic disease of newborn', 'Other operations on cul-de-sac', '2020-04-20', '2019-12-06');
 insert into laboratory_examination (id, examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (3, 3, 3, 3, 3, 3, '470', 'Deviated nasal septum', 'Excision of hemorrhoids', '2019-10-25', '2020-12-08');
 insert into laboratory_examination (id, examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (4, 4, 4, 4, 4, 4, 'V401', 'Mental and behavioral problems with communication [including speech]', 'Closed reduction of fracture without internal fixation, carpals and metacarpals', '2020-01-08', '2020-01-31');
@@ -288,7 +288,7 @@ insert into laboratory_examination (id, examination_category, visit_id, state_id
 insert into laboratory_examination (id, examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (8, 8, 8, 4, 8, 3, 'V775', 'Screening for gout', 'Other diagnostic procedures on external ear', '2019-05-15', '2019-11-23');
 insert into laboratory_examination (id, examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (9, 9, 9, 1, 9, 4, 'E9326', 'Parathyroid and parathyroid derivatives causing adverse effects in therapeutic use', 'Sphincterotomy of bladder', '2021-02-23', '2020-05-05');
 insert into laboratory_examination (id, examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (10, 10, 10, 2, 10, 5, '9564', 'Injury to cutaneous sensory nerve, lower limb', 'Other urethroscopy', '2021-02-05', '2019-09-16');
-insert into laboratory_examination (id, examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (11, 1, 11, 3, 11, 1, '36119', 'Other retinoschisis and retinal cysts', 'Gas contrast hysterosalpingogram', '2020-05-09', '2020-02-25');
+insert into laboratory_examination (id, examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (11, 1, 1, 3, 11, 1, '36119', 'Other retinoschisis and retinal cysts', 'Gas contrast hysterosalpingogram', '2020-05-09', '2020-02-25');
 insert into laboratory_examination (id, examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (12, 2, 12, 4, 12, 2, '9603', 'Poisoning by erythromycin and other macrolides', 'Formation of cranial bone flap', '2020-04-22', '2019-07-13');
 insert into laboratory_examination (id, examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (13, 3, 13, 1, 13, 3, '65841', 'Infection of amniotic cavity, delivered, with or without mention of antepartum condition', 'Other secondary procedures after removal of eyeball', '2019-11-30', '2021-01-23');
 insert into laboratory_examination (id, examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (14, 4, 14, 2, 14, 4, '2861', 'Congenital factor IX disorder', 'Abdominoperineal resection of the rectum, not otherwise specified', '2021-03-12', '2019-06-03');
@@ -299,7 +299,7 @@ insert into laboratory_examination (id, examination_category, visit_id, state_id
 insert into laboratory_examination (id, examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (19, 9, 19, 3, 19, 4, '1416', 'Malignant neoplasm of lingual tonsil', 'Other local excision or destruction of lesion of joint, ankle', '2020-02-04', '2019-09-23');
 insert into laboratory_examination (id, examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (20, 10, 20, 4, 20, 5, '7462', 'Ebstein''s anomaly', 'Keratoprosthesis', '2021-01-22', '2019-11-01');
 
-insert into physical_examination (id, examination_category, visit_id, result) values (1, 1, 1, 'Unspecified curvature of spine');
+insert into physical_examination (id, examination_category, visit_id, result) values (1, 1, 2, 'Unspecified curvature of spine');
 insert into physical_examination (id, examination_category, visit_id, result) values (2, 2, 2, 'Unspecified pervasive developmental disorder, current or active state');
 insert into physical_examination (id, examination_category, visit_id, result) values (3, 3, 3, 'Injury to innominate and subclavian arteries');
 insert into physical_examination (id, examination_category, visit_id, result) values (4, 4, 4, 'Neonatal infective mastitis');
@@ -310,7 +310,7 @@ insert into physical_examination (id, examination_category, visit_id, result) va
 insert into physical_examination (id, examination_category, visit_id, result) values (9, 9, 9, 'Tubal ligation status');
 insert into physical_examination (id, examination_category, visit_id, result) values (10, 1, 10, 'Other cells and casts in urine');
 insert into physical_examination (id, examination_category, visit_id, result) values (11, 1, 11, 'Malignant neoplasm of pelvic bones, sacrum, and coccyx');
-insert into physical_examination (id, examination_category, visit_id, result) values (12, 2, 12, 'Accident to powered aircraft at takeoff or landing injuring occupant of spacecraft');
+insert into physical_examination (id, examination_category, visit_id, result) values (12, 2, 1, 'Accident to powered aircraft at takeoff or landing injuring occupant of spacecraft');
 insert into physical_examination (id, examination_category, visit_id, result) values (13, 3, 13, 'Rheumatic aortic stenosis');
 insert into physical_examination (id, examination_category, visit_id, result) values (14, 4, 14, 'Diarrhea of presumed infectious origin');
 insert into physical_examination (id, examination_category, visit_id, result) values (15, 5, 15, 'Epidemic hemorrhagic conjunctivitis');

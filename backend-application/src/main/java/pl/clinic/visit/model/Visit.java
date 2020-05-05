@@ -1,7 +1,7 @@
 package pl.clinic.visit.model;
 
 import pl.clinic.doctor.model.Doctor;
-import pl.clinic.labolatory_examination.model.LabolatoryExamination;
+import pl.clinic.labolratory_examination.model.LaboratoryExamination;
 import pl.clinic.patient.model.Patient;
 import pl.clinic.physical_examination.model.PhysicalExamination;
 import pl.clinic.receptionist.model.Receptionist;
@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import java.time.LocalDateTime;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -58,7 +59,7 @@ public class Visit {
     protected LocalDateTime finalizationCancellationDate;
 
     @OneToMany(mappedBy = "id")
-    protected Set<LabolatoryExamination> labolatoryExaminations;
+    protected Set<LaboratoryExamination> laboratoryExaminations;
 
     @OneToMany(mappedBy = "id")
     protected Set<PhysicalExamination> physicalExaminations;
@@ -75,7 +76,7 @@ public class Visit {
         return receptionist;
     }
 
-    public void setReceptionist(Receptionist receptionist) {
+    public void setReceptionist(Optional<Receptionist> receptionist) {
         this.receptionist = receptionist;
     }
 
@@ -83,7 +84,7 @@ public class Visit {
         return doctor;
     }
 
-    public void setDoctor(Doctor doctor) {
+    public void setDoctor(Optional<Doctor> doctor) {
         this.doctor = doctor;
     }
 
@@ -91,7 +92,7 @@ public class Visit {
         return patient;
     }
 
-    public void setPatient(Patient patient) {
+    public void setPatient(Optional<Patient> patient) {
         this.patient = patient;
     }
 
@@ -129,11 +130,11 @@ public class Visit {
 
     public void setFinalizationCancellationDate(LocalDateTime finalizationCancellationDate) { this.finalizationCancellationDate = finalizationCancellationDate; }
 
-    public Set<LabolatoryExamination> getLabolatoryExaminations() {
-        return labolatoryExaminations;
+    public Set<LaboratoryExamination> getLabolatoryExaminations() {
+        return laboratoryExaminations;
     }
 
-    public void setLabolatoryExaminations(Set<LabolatoryExamination> labolatoryExaminations) { this.labolatoryExaminations = labolatoryExaminations; }
+    public void setLaboratoryExaminations(Set<LaboratoryExamination> laboratoryExaminations) { this.laboratoryExaminations = laboratoryExaminations; }
 
     public Set<PhysicalExamination> getPhysicalExaminations() {
         return physicalExaminations;

@@ -1,4 +1,4 @@
-package pl.clinic.labolatory_examination.model;
+package pl.clinic.labolratory_examination.model;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;

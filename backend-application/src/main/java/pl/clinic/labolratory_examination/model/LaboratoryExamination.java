@@ -1,4 +1,4 @@
-package pl.clinic.labolatory_examination.model;
+package pl.clinic.labolratory_examination.model;
 
 import pl.clinic.examination_category.model.ExaminationCategory;
 import pl.clinic.lab_supervisor.model.LabSupervisor;
@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "laboratory_examination")
-public class LabolatoryExamination {
+public class LaboratoryExamination {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
