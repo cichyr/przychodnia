@@ -1,1 +1,46 @@
+<div class="container-fluid">
 
+  <div class="col text-left mt-2">
+    <button class="btn btn-primary btn-lg">Wróć</button>
+  </div>
+  <div class="col align-content-center">
+    <h1 class="container text-center">
+      <b>Wizyty rejestrowane przez Ciebie</b>
+    </h1>
+  </div>
+
+  <div class="container border rounded-lg mt-4"  *ngFor="let visit of visitList"> <!--ramka do okola z zaokraglonymi brzegami + odstepy 4 linii -->
+    <div class="row justify-content-md-center rounded-top" style="background-color: #cce4ff">
+      <div class="col align-self-center text-left"><b>Pacjent: {{visit.patientFirstName}} {{visit.patientLastName}}</b></div>
+      <div class="col align-self-center text-center"><b>PESEL: {{visit.peselNumber}}</b></div>
+      <div class="col align-self-center text-right"><b>Data rejestracji: {{visit.registrationDate}}</b></div>
+    </div> <!-- niebieski pasek z nazwiskiem pacjenta, nr PESEL i data rejestracji-->
+
+    <div class="row border-top">
+      <div class="col align-self-start my-2"> <!-- przerwa od gory i dolu kazdej wizyty-->
+        <div class="row">
+          <div class="col">Lekarz:</div>
+          <div class="col-8">{{visit.doctorFirstName}} {{visit.doctorLastName}}</div>
+        </div>
+        <div class="row">
+          <div class="col">Status:</div>
+          <div class="col-8 text-primary" *ngIf="visit.state.name=='appointed'">Czeka na realizację</div>
+          <div class="col-8 text-danger" *ngIf="visit.state.name=='cancelled'">Anulowana</div>
+          <div class="col-8 text-success" *ngIf="visit.state.name=='finished'">Zakończona</div>
+        </div>
+        <div class="row">
+          <div class="col " *ngIf="visit.state.name=='cancelled'">Data anulowania:</div>
+          <div class="col" *ngIf="visit.state.name=='finished'">Data zakończenia:</div>
+          <div class="col-8 text-left" *ngIf="visit.state.name=='finished' || visit.state.name=='cancelled'">{{visit.finalizationCancellationDate}}</div>
+        </div>
+      </div>
+
+      <div class="col align-self-center my-2">
+        <div class="col text-right">
+          <button class="btn btn-primary btn-lg">Szczegóły</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>

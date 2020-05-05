@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {ReceptionistVisit} from "../../data/visit/receptionist-visit";
+import { ReceptionistVisitListService } from '../../service/receptionist-visit-list.service'
 
 @Component({
   selector: 'app-receptionist-visit-list',
@@ -7,9 +9,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReceptionistVisitListComponent implements OnInit {
 
-  constructor() { }
+visitList: ReceptionistVisit[]
+
+  constructor(private visitService: ReceptionistVisitListService) { }
 
   ngOnInit(): void {
+  this.visitService.getVisits().subscribe(visits => this.visitList = visits);
+
   }
+
+
 
 }

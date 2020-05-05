@@ -1,12 +1,12 @@
 import {VisitState} from "./visit-state";
 
-export class ReceptionistVisitList {
+export class ReceptionistVisit {
 
   patientFirstName: String
   patientLastName: String
   peselNumber: String
-  docotrFirstName: String
-  docotrLastname: String
+  doctorFirstName: String
+  doctorLastName: String
   receptionistFirstName: String
   receptionistLastName: String
   state: VisitState
