@@ -10,6 +10,7 @@ import {MainModule} from './main/main.module'
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
 import {CommonModule} from "@angular/common";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import {VisitModule} from "./visit/visit.module";
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
     NgbModule,
     LabExamModule,
     MainModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    VisitModule
   ],
   providers: [
     {

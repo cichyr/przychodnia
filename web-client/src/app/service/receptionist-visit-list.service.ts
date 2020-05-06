@@ -10,8 +10,8 @@ export class ReceptionistVisitListService {
 
   constructor(private http : HttpClient) { }
 
-  getVisits(): Observable<ReceptionistVisit[]> {
-    return this.http.get<ReceptionistVisit[]>('http://localhost:8080/api/receptionists/1/visits')
+  getVisits(id: number): Observable<ReceptionistVisit[]> {
+    return this.http.get<ReceptionistVisit[]>(`http://localhost:8080/api/receptionists/${id}/visits`)
   }
 
 }
