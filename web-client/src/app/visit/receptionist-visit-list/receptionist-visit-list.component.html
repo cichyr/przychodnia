@@ -3,10 +3,12 @@
   <div class="col text-left mt-2">
     <button class="btn btn-primary btn-lg">Wróć</button>
   </div>
-  <div class="col align-content-center">
+  <div class="col align-content-center mb-5">
     <h1 class="container text-center">
       <b>Wizyty rejestrowane przez Ciebie</b>
     </h1>
+  </div>
+  <div class="col">
   </div>
 
   <div class="container border rounded-lg mt-4"  *ngFor="let visit of visitList"> <!--ramka do okola z zaokraglonymi brzegami + odstepy 4 linii -->
@@ -31,10 +33,12 @@
       </div>
 
       <div class="col align-self-center my-2">
-        <div class="col text-right">
-          <button class="btn btn-danger" *ngIf="visit.state.name=='appointed'">Anuluj</button>
-        </div>
         <div class="row">
+        <div class="col"> </div>
+        <div class="col text-right">
+          <button class="btn btn-danger btn-sm" *ngIf="visit.state.name=='appointed'">Anuluj</button>
+        </div>
+
           <div class="col-8 text-right" *ngIf="visit.state.name=='cancelled'">Data anulowania:</div>
           <div class="col-8 text-right" *ngIf="visit.state.name=='finished'">Data zakończenia:</div>
           <div class="col" *ngIf="visit.state.name=='finished' || visit.state.name=='cancelled'">{{visit.finalizationCancellationDate | date:'dd.MM.yyyy'}}</div>
