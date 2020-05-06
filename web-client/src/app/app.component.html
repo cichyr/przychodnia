@@ -1,11 +1,11 @@
-<nav class="navbar navbar-expand navbar-light bg-primary">
+<nav class="navbar navbar-expand navbar-light bg-primary no-padding">
   <ul class="navbar-nav">
     <li class="nav-item text-xl-center font-weight-bold cursor-ptr" ngbDropdown>
       <a class="nav-link cursor-ptr text-white" ngbDropdownToggle id="menuDropdown" role="button">
-        <span class="fa fa-3x fa-bars mr-2 text-black-50 cursor-ptr" style="vertical-align: middle;"></span>
+        <span class="fa fa-2x fa-bars mr-2 text-black-50 cursor-ptr" style="vertical-align: middle;"></span>
         <span>MENU</span>
       </a>
-      <div ngbDropdownMenu aria-labelledby="menuDropdown" class="dropdown-menu">
+      <div ngbDropdownMenu aria-labelledby="menuDropdown" class="dropdown-menu no-border">
         <a ngbDropdownItem (click)="navigateToLab()" *ngIf="this.getRole() == 'LABW' || this.getRole() == 'LABS'" class="cursor-ptr">
           <fa-icon [icon]="microscope"></fa-icon>&nbsp;
           Laboratorium
@@ -22,7 +22,7 @@
   </ul>
 
   <ul (click)="navigateToHomePage()" class="navbar-nav mx-auto">
-    <li class="fa fa-3x fa-medkit mr-2 text-black-50 my-auto cursor-ptr"></li>
+    <li class="fa fa-2x fa-medkit mr-2 text-black-50 my-auto cursor-ptr"></li>
     <li class="text-white my-auto ml-2 font-weight-bold cursor-ptr">E-PRZYCHODNIA</li>
   </ul>
 
@@ -30,7 +30,7 @@
     <button (click)="navigateToLoginPage()" class="btn btn-sm btn-outline-light mr-2">Logowanie</button>
   </div>
 
-  <span (click)="navigateToUserDetails()" class="text-black-50 cursor-ptr"><i class="fa fa-3x fa-user"></i></span>
+  <span (click)="navigateToUserDetails()" class="text-black-50 cursor-ptr"><i class="fa fa-2x fa-user"></i></span>
 </nav>
 
 <ng-template #userPresent>
