@@ -17,6 +17,7 @@ public class BasicVisit {
     protected String receptionistFirstName;
     protected String receptionistLastName;
     // visit
+    protected Long id;
     protected VisitState state;
     protected LocalDateTime registrationDate;
     protected LocalDateTime finalizationCancellationDate;
@@ -29,6 +30,7 @@ public class BasicVisit {
         this.doctorLastName = visit.getDoctor().getLastName();
         this.receptionistFirstName = visit.getReceptionist().getFirstName();
         this.receptionistLastName = visit.getReceptionist().getLastName();
+        this.id = visit.getId();
         this.state = visit.getState();
         this.registrationDate = visit.getRegistrationDate();
         this.finalizationCancellationDate = visit.getFinalizationCancellationDate();
@@ -53,4 +55,6 @@ public class BasicVisit {
     public String getPeselNumber() { return peselNumber; }
 
     public LocalDateTime getFinalizationCancellationDate() { return finalizationCancellationDate; }
+
+    public Long getId() { return id; }
 }
