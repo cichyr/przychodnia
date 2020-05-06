@@ -7,8 +7,6 @@ export class ReceptionistVisit {
   peselNumber: String
   doctorFirstName: String
   doctorLastName: String
-  receptionistFirstName: String
-  receptionistLastName: String
   state: VisitState
   registrationDate: Date
   finalizationCancellationDate: Date
