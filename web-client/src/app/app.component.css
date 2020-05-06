@@ -8,4 +8,13 @@
 
 .no-padding {
   padding: 0;
+  padding-right: 8px;
 }
+
+.absolute-center {
+  position: absolute;
+  margin-right: 40%;
+  margin-left: 40%;
+}
+
+
