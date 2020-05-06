@@ -37,7 +37,7 @@
 
       <div class="col align-self-center my-2">
         <div class="col text-right">
-          <button class="btn btn-primary btn-lg">Szczegóły</button>
+          <button class="btn btn-danger" *ngIf="visit.state.name=='appointed'">Anuluj</button>
         </div>
       </div>
     </div>
