@@ -1,6 +1,25 @@
 <nav class="navbar navbar-expand navbar-light bg-primary">
-  <span class="text-black-50 cursor-ptr"><i class="fa fa-3x fa-th-large mr-2"></i></span>
-  <span class="nav-item text-white text-xl-center ml-2 font-weight-bold cursor-ptr">MÓJ PANEL</span>
+  <ul class="navbar-nav">
+    <li class="nav-item text-xl-center font-weight-bold cursor-ptr" ngbDropdown>
+      <a class="nav-link cursor-ptr text-white" ngbDropdownToggle id="menuDropdown" role="button">
+        <span class="fa fa-3x fa-bars mr-2 text-black-50 cursor-ptr" style="vertical-align: middle;"></span>
+        <span>MENU</span>
+      </a>
+      <div ngbDropdownMenu aria-labelledby="menuDropdown" class="dropdown-menu">
+        <a ngbDropdownItem (click)="navigateToLab()" *ngIf="this.getRole() == 'LABW' || this.getRole() == 'LABS'" class="cursor-ptr">
+          <fa-icon [icon]="microscope"></fa-icon>&nbsp;
+          Laboratorium
+        </a>
+        <a ngbDropdownItem (click)="navigateToVisit()" *ngIf="this.getRole() == 'DOC' || this.getRole() == 'LABS'" class="cursor-ptr">
+          <fa-icon [icon]="visit"></fa-icon>&nbsp;&nbsp;
+          Wizyty
+        </a>
+        <a ngbDropdownItem *ngIf="this.getRole() == 'NONE'" class="cursor-default">
+          Zaloguj się aby móc korzystać menu
+        </a>
+      </div>
+    </li>
+  </ul>
 
   <ul (click)="navigateToHomePage()" class="navbar-nav mx-auto">
     <li class="fa fa-3x fa-medkit mr-2 text-black-50 my-auto cursor-ptr"></li>

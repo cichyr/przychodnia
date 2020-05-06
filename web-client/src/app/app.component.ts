@@ -5,6 +5,7 @@ import {UserService} from './service/user.service'
 import {environment} from '../environments/environment.dev'
 import {Credentials} from './data/user/credentials'
 import {map, tap} from 'rxjs/operators'
+import {faMicroscope, faNotesMedical, faThLarge, faUser} from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-root',
@@ -16,6 +17,12 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'web-client'
   authSubscription: Subscription
   userFullName: String
+
+  // icon variables
+  microscope = faMicroscope
+  visit = faNotesMedical
+  menu = faThLarge
+  login = faUser
 
   constructor(private router: Router, private userService: UserService) {
   }
@@ -41,6 +48,21 @@ export class AppComponent implements OnInit, OnDestroy {
     this.router.navigate(['user-details'])
   }
 
+  navigateToLab() {
+    if(this.getRole() == 'LABW' || this.getRole() == 'LABS') {
+      this.router.navigate(['/exam-list/'])
+    }
+  }
+
+  navigateToVisit() {
+    if(this.getRole() == 'REC') {
+      this.router.navigate(['/receptionist-visit-list/'])
+    }
+    else if(this.getRole() == 'DOC') {
+      this.router.navigate(['/doctor-visit-list/'])
+    }    
+  }
+
   signOut() {
     this.userService.signOut()
     this.navigateToLoginPage()
@@ -48,6 +70,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     if (this.authSubscription != null) this.authSubscription.unsubscribe()
+  }
+
+  getRole(): string {
+    return this.userService.getUserRole()
   }
 
 }
