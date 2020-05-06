@@ -13,7 +13,7 @@
     <div class="row justify-content-md-center rounded-top" style="background-color: #cce4ff">
       <div class="col align-self-center text-left"><b>Pacjent: {{visit.patientFirstName}} {{visit.patientLastName}}</b></div>
       <div class="col align-self-center text-center"><b>PESEL: {{visit.peselNumber}}</b></div>
-      <div class="col align-self-center text-right"><b>Data rejestracji: {{visit.registrationDate}}</b></div>
+      <div class="col align-self-center text-right"><b>Data rejestracji: {{visit.registrationDate | date:'dd.MM.yyyy'}}</b></div>
     </div> <!-- niebieski pasek z nazwiskiem pacjenta, nr PESEL i data rejestracji-->
 
     <div class="row border-top">
@@ -37,7 +37,7 @@
         <div class="row">
           <div class="col-8 text-right" *ngIf="visit.state.name=='cancelled'">Data anulowania:</div>
           <div class="col-8 text-right" *ngIf="visit.state.name=='finished'">Data zakończenia:</div>
-          <div class="col" *ngIf="visit.state.name=='finished' || visit.state.name=='cancelled'">{{visit.finalizationCancellationDate}}</div>
+          <div class="col" *ngIf="visit.state.name=='finished' || visit.state.name=='cancelled'">{{visit.finalizationCancellationDate | date:'dd.MM.yyyy'}}</div>
         </div>
       </div>
     </div>
