@@ -1,0 +1,24 @@
+<div class="container login-container">
+  <div class="row justify-content-center">
+    <div class="col-md-10 login-form-2 justify-content-center">
+      <h3>Logowanie</h3>
+      <h5>Podaj nazwę użytkownika i hasło</h5>
+      <form [formGroup]="credentialsForm" class="form-signin mt-3">
+        <div class="form-group">
+          <input formControlName="username" type="username" class="form-control" id="inputEmail"
+                 placeholder="Nazwa użytkownika" required="" autofocus="">
+        </div>
+        <div class="form-group">
+          <input formControlName="password" type="password" class="form-control" placeholder="Hasło"
+                 value=""/>
+        </div>
+        <div class="form-group">
+          <input (click)="signIn()" type="submit" class="btnSubmit" value="Logowanie"/>
+        </div>
+      </form>
+      <ngb-alert type="danger" [dismissible]="false" [style.visibility]="recentLoginFailed ? 'visible' : 'hidden'">
+        Nieprawidłowy login lub hasło
+      </ngb-alert>
+    </div>
+  </div>
+</div>

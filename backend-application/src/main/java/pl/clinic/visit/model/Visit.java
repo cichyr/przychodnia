@@ -9,7 +9,7 @@ import pl.clinic.receptionist.model.Receptionist;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Entity
@@ -21,36 +21,41 @@ public class Visit {
     @Column(name = "id", nullable = false)
     protected Long id;
 
+    @NotBlank
     @ManyToOne
-    @JoinColumn(name = "receptionist_id", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "receptionist_id", referencedColumnName = "id", nullable = false)
     protected Receptionist receptionist;
 
+    @NotBlank
     @ManyToOne
-    @JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = false)
     protected Doctor doctor;
 
+    @NotBlank
     @ManyToOne
-    @JoinColumn(name = "patient_id", referencedColumnName = "id", nullable = true)
+    @JoinColumn(name = "patient_id", referencedColumnName = "id", nullable = false)
     protected Patient patient;
 
+    @NotBlank
     @ManyToOne
     @JoinColumn(name = "state_id", referencedColumnName = "id", nullable = false)
     protected VisitState state;
 
+    @NotBlank
     @Size(max = 1024)
-    @Column(name = "description", nullable = true)
+    @Column(name = "description", nullable = false)
     protected String description;
 
     @Size(max = 1024)
-    @Column(name = "diagnose", nullable = true)
+    @Column(name = "diagnose")
     protected String diagnose;
 
     @NotBlank
     @Column(name = "registration_date", nullable = false)
-    protected Date registrationDate;
+    protected LocalDateTime registrationDate;
 
-    @Column(name = "finalization_cancellation_date", nullable = true)
-    protected Date finalizationCancellationDate;
+    @Column(name = "finalization_cancellation_date")
+    protected LocalDateTime finalizationCancellationDate;
 
     @OneToMany(mappedBy = "id")
     protected Set<LabolatoryExamination> labolatoryExaminations;
@@ -114,35 +119,25 @@ public class Visit {
         this.diagnose = diagnose;
     }
 
-    public Date getRegistrationDate() {
+    public LocalDateTime getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Date registrationDate) {
-        this.registrationDate = registrationDate;
-    }
+    public void setRegistrationDate(LocalDateTime registrationDate) { this.registrationDate = registrationDate; }
 
-    public Date getFinalizationCancellationDate() {
-        return finalizationCancellationDate;
-    }
+    public LocalDateTime getFinalizationCancellationDate() { return finalizationCancellationDate; }
 
-    public void setFinalizationCancellationDate(Date finalizationCancellationDate) {
-        this.finalizationCancellationDate = finalizationCancellationDate;
-    }
+    public void setFinalizationCancellationDate(LocalDateTime finalizationCancellationDate) { this.finalizationCancellationDate = finalizationCancellationDate; }
 
     public Set<LabolatoryExamination> getLabolatoryExaminations() {
         return labolatoryExaminations;
     }
 
-    public void setLabolatoryExaminations(Set<LabolatoryExamination> labolatoryExaminations) {
-        this.labolatoryExaminations = labolatoryExaminations;
-    }
+    public void setLabolatoryExaminations(Set<LabolatoryExamination> labolatoryExaminations) { this.labolatoryExaminations = labolatoryExaminations; }
 
     public Set<PhysicalExamination> getPhysicalExaminations() {
         return physicalExaminations;
     }
 
-    public void setPhysicalExaminations(Set<PhysicalExamination> physicalExaminations) {
-        this.physicalExaminations = physicalExaminations;
-    }
+    public void setPhysicalExaminations(Set<PhysicalExamination> physicalExaminations) { this.physicalExaminations = physicalExaminations; }
 }

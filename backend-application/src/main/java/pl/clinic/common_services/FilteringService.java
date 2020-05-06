@@ -1,6 +1,6 @@
 package pl.clinic.common_services;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -73,7 +73,7 @@ public class FilteringService<T> {
     /**
      * Filtruje według daty match. Daty muszą być równe co do dnia.
      */
-    public FilteringService<T> contains(Date match, DateGetter<T> getter) {
+    public FilteringService<T> contains(LocalDateTime match, DateGetter<T> getter) {
         if (match == null) return this;
 
         filteredList = filteredList
@@ -99,7 +99,7 @@ public class FilteringService<T> {
 
     @FunctionalInterface
     public interface DateGetter<T> {
-        Date getDate(T obj);
+        LocalDateTime getDate(T obj);
     }
 
 }
