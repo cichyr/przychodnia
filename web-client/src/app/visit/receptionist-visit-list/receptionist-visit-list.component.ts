@@ -4,6 +4,7 @@ import {ReceptionistVisitListService} from '../../service/receptionist-visit-lis
 import {User} from "../../data/user/user";
 import {UserService} from "../../service/user.service";
 import {Subscription} from "rxjs";
+import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 
 @Component({
@@ -17,6 +18,7 @@ export class ReceptionistVisitListComponent implements OnInit, OnDestroy {
   user: User
   userSub: Subscription
   visitSub: Subscription
+  cancelButtonPressed = false
 
   constructor(private visitService: ReceptionistVisitListService, private userService: UserService) {
   }
@@ -29,8 +31,12 @@ export class ReceptionistVisitListComponent implements OnInit, OnDestroy {
             this.visitSub = this.visitService.getVisits(user.id).subscribe(visits => this.visitList = visits);
         }
       );
+  }
 
+  cancelVisit(id: number): void {
+    this.cancelButtonPressed = true;
 
+    this.visitService.cancelVisit(1).subscribe();
   }
 
   ngOnDestroy(): void {
@@ -40,6 +46,4 @@ export class ReceptionistVisitListComponent implements OnInit, OnDestroy {
     if(this.visitSub != null)
       this.visitSub.unsubscribe()
   }
-
-
 }
