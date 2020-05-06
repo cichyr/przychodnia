@@ -11,12 +11,12 @@ import {ReceptionistVisitListComponent} from "./visit/receptionist-visit-list/re
 
 const routes: Routes = [
   {path: 'login-page', component: LoginPageComponent},
-  {path: 'receptionist-visit-list', component: ReceptionistVisitListComponent},
   {
     path: '', canActivate: [AuthGuardService], children: [
       {path: 'home', component: HomePageComponent},
       {path: 'user-details', component: UserDetailsComponent},
-      {path: 'exam-list/:id', component: LabExamDetailsComponent}
+      {path: 'exam-list/:id', component: LabExamDetailsComponent},
+      {path: 'receptionist-visit-list', component: ReceptionistVisitListComponent}
     ]
   }
 ]

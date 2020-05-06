@@ -54,13 +54,19 @@ export class AppComponent implements OnInit, OnDestroy {
     }
   }
 
+  navigateToRecVisitList() {
+    if(this.getRole() == 'REC'){
+      this.router.navigate(['/receptionist-visit-list/'])
+    }
+  }
+
   navigateToVisit() {
     if(this.getRole() == 'REC') {
       this.router.navigate(['/receptionist-visit-list/'])
     }
     else if(this.getRole() == 'DOC') {
       this.router.navigate(['/doctor-visit-list/'])
-    }    
+    }
   }
 
   signOut() {

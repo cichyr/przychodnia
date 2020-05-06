@@ -21,7 +21,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
     HttpClientModule,
     NgbModule,
     LabExamModule,
-    MainModule
+    MainModule,
+    FontAwesomeModule
   ],
   providers: [
     {
