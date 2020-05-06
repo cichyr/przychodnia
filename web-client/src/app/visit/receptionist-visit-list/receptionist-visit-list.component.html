@@ -28,16 +28,16 @@
           <div class="col-8 text-danger" *ngIf="visit.state.name=='cancelled'">Anulowana</div>
           <div class="col-8 text-success" *ngIf="visit.state.name=='finished'">Zakończona</div>
         </div>
-        <div class="row">
-          <div class="col " *ngIf="visit.state.name=='cancelled'">Data anulowania:</div>
-          <div class="col" *ngIf="visit.state.name=='finished'">Data zakończenia:</div>
-          <div class="col-8 text-left" *ngIf="visit.state.name=='finished' || visit.state.name=='cancelled'">{{visit.finalizationCancellationDate}}</div>
-        </div>
       </div>
 
       <div class="col align-self-center my-2">
         <div class="col text-right">
           <button class="btn btn-danger" *ngIf="visit.state.name=='appointed'">Anuluj</button>
+        </div>
+        <div class="row">
+          <div class="col-8 text-right" *ngIf="visit.state.name=='cancelled'">Data anulowania:</div>
+          <div class="col-8 text-right" *ngIf="visit.state.name=='finished'">Data zakończenia:</div>
+          <div class="col" *ngIf="visit.state.name=='finished' || visit.state.name=='cancelled'">{{visit.finalizationCancellationDate}}</div>
         </div>
       </div>
     </div>
