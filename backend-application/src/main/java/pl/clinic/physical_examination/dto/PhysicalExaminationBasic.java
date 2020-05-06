@@ -7,13 +7,13 @@ public class PhysicalExaminationBasic {
     // from examination
     protected Long id;
     protected String name;
-    protected Long visitId;
+
 
 
     public PhysicalExaminationBasic(PhysicalExamination examination) {
         this.id = examination.getId();
-        this.name = examination.getResult();
-        this.visitId=examination.getVisit().getId();
+        this.name = examination.getCategory().getName();
+
 
     }
 
@@ -25,7 +25,4 @@ public class PhysicalExaminationBasic {
         return name;
     }
 
-    public Long getVisitId() {
-        return visitId;
-    }
 }

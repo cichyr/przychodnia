@@ -9,11 +9,10 @@ import javax.validation.constraints.Size;
 public class VisitState {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     protected Long id;
 
-    @NotBlank
+
     @Size(max = 20)
     @Column(name = "name", nullable = false)
     protected String name;

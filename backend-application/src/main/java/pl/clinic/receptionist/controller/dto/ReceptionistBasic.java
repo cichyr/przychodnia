@@ -8,12 +8,14 @@ public class ReceptionistBasic {
         protected Long id;
         protected String firstName;
         protected String lastName;
+        protected  String licenseCode;
 
 
         public ReceptionistBasic(Receptionist receptionist) {
             this.id = receptionist.getId();
             this.firstName = receptionist.getFirstName();
             this.lastName = receptionist.getLastName();
+            this.licenseCode = receptionist.getLicenseCode();
 
         }
 
@@ -28,6 +30,8 @@ public class ReceptionistBasic {
         public String getLastName() {
             return lastName;
         }
+
+        public String getLicenseCode(){return licenseCode;}
 
 }
 

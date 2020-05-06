@@ -6,24 +6,23 @@ import pl.clinic.visit.model.VisitState;
 import java.time.LocalDateTime;
 
 public class VisitCreate {
-    protected Long receprionistId;
+    protected Long receptionistId;
     protected Long doctorId;
     protected Long patientId;
     // doctor
 
 
-    public VisitCreate(Visit visit) {
-     //   this.patientFirstName = visit.getPatient().getFirstName();
-      //  this.patientLastName = visit.getPatient().getLastName();
-       // this.peselNumber = visit.getPatient().getPeselNumber();
-
+    public VisitCreate(Long receptionistId,Long doctorId,Long patientId) {
+     this.receptionistId = receptionistId;
+     this.doctorId = doctorId;
+      this.patientId = patientId;
     }
 
- //   public String getPatientFirstName() { return patientFirstName; }
+public Long getReceptionistId() { return receptionistId; }
 
-   // public String getPatientLastName() { return patientLastName; }
+public Long getDoctorId() { return doctorId; }
 
-   // public String getDoctorFirstName() { return doctorFirstName; }
+public Long getPatientId() { return patientId; }
 
 
 

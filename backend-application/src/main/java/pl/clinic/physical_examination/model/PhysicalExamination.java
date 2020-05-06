@@ -16,17 +16,17 @@ public class PhysicalExamination {
     @Column(name = "id", nullable = false)
     protected Long id;
 
-    @NotBlank
+
     @ManyToOne
     @JoinColumn(name = "examination_category", referencedColumnName = "code", nullable = false)
     protected ExaminationCategory category;
 
-    @NotBlank
+
     @ManyToOne
     @JoinColumn(name = "visit_id", referencedColumnName = "id", nullable = false)
     protected Visit visit;
 
-    @NotBlank
+
     @Size(max = 1024)
     @Column(name = "result", nullable = false)
     protected String result;

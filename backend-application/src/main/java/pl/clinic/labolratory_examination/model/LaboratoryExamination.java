@@ -19,17 +19,17 @@ public class LaboratoryExamination {
     @Column(name = "id", nullable = false)
     protected Long id;
 
-    @NotBlank
+
     @ManyToOne
     @JoinColumn(name = "examination_category", referencedColumnName = "code", nullable = false)
     protected ExaminationCategory category;
 
-    @NotBlank
+
     @ManyToOne
     @JoinColumn(name = "visit_id", referencedColumnName = "id", nullable = false)
     protected Visit visit;
 
-    @NotBlank
+
     @ManyToOne
     @JoinColumn(name = "state_id", referencedColumnName = "id", nullable = false)
     protected ExaminationState state;
@@ -46,7 +46,7 @@ public class LaboratoryExamination {
     @Column(name = "result")
     protected String result;
 
-    @NotBlank
+
     @Size(max = 1024)
     @Column(name = "doctor_note", nullable = false)
     protected String doctorNote;

@@ -10,7 +10,7 @@ public class LaboratoryExaminationBasic {
 
     public LaboratoryExaminationBasic(LaboratoryExamination examination) {
         this.id = examination.getId();
-        this.name = examination.getDoctorNote();
+        this.name = examination.getCategory().getName();
 
     }
 

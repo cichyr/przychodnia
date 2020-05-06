@@ -14,7 +14,7 @@ import javax.validation.constraints.Size;
 @JsonIgnoreProperties(value = {"personDetails"})
 public class Patient extends Person {
 
-    @NotBlank
+
     @Size(max = 20)
     @Column(name = "pesel_number", nullable = false)
     protected String peselNumber;

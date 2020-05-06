@@ -22,46 +22,46 @@ public class Visit {
     @Column(name = "id", nullable = false)
     protected Long id;
 
-    @NotBlank
+
     @ManyToOne
     @JoinColumn(name = "receptionist_id", referencedColumnName = "id", nullable = false)
     protected Receptionist receptionist;
 
-    @NotBlank
+
     @ManyToOne
     @JoinColumn(name = "doctor_id", referencedColumnName = "id", nullable = false)
     protected Doctor doctor;
 
-    @NotBlank
+
     @ManyToOne
     @JoinColumn(name = "patient_id", referencedColumnName = "id", nullable = false)
     protected Patient patient;
 
-    @NotBlank
+
     @ManyToOne
     @JoinColumn(name = "state_id", referencedColumnName = "id", nullable = false)
     protected VisitState state;
 
-    @NotBlank
+
     @Size(max = 1024)
-    @Column(name = "description", nullable = false)
+    @Column(name = "description")
     protected String description;
 
     @Size(max = 1024)
     @Column(name = "diagnose")
     protected String diagnose;
 
-    @NotBlank
+
     @Column(name = "registration_date", nullable = false)
     protected LocalDateTime registrationDate;
 
     @Column(name = "finalization_cancellation_date")
     protected LocalDateTime finalizationCancellationDate;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "visit")
     protected Set<LaboratoryExamination> laboratoryExaminations;
 
-    @OneToMany(mappedBy = "id")
+    @OneToMany(mappedBy = "visit")
     protected Set<PhysicalExamination> physicalExaminations;
 
     public Long getId() {
@@ -76,7 +76,7 @@ public class Visit {
         return receptionist;
     }
 
-    public void setReceptionist(Optional<Receptionist> receptionist) {
+    public void setReceptionist(Receptionist receptionist) {
         this.receptionist = receptionist;
     }
 
@@ -84,7 +84,7 @@ public class Visit {
         return doctor;
     }
 
-    public void setDoctor(Optional<Doctor> doctor) {
+    public void setDoctor(Doctor doctor) {
         this.doctor = doctor;
     }
 
@@ -92,7 +92,7 @@ public class Visit {
         return patient;
     }
 
-    public void setPatient(Optional<Patient> patient) {
+    public void setPatient(Patient patient) {
         this.patient = patient;
     }
 
