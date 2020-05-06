@@ -1,6 +1,6 @@
 package pl.clinic.lab_supervisor.model;
 
-import pl.clinic.labolatory_examination.model.LabolatoryExamination;
+import pl.clinic.labolratory_examination.model.LaboratoryExamination;
 import pl.clinic.user.model.User;
 
 import javax.persistence.Entity;
@@ -13,13 +13,13 @@ import java.util.Set;
 public class LabSupervisor extends User {
 
     @OneToMany(mappedBy = "labSupervisor")
-    private Set<LabolatoryExamination> examinations;
+    private Set<LaboratoryExamination> examinations;
 
-    public Set<LabolatoryExamination> getExaminations() {
+    public Set<LaboratoryExamination> getExaminations() {
         return examinations;
     }
 
-    public void setExaminations(Set<LabolatoryExamination> examinations) {
+    public void setExaminations(Set<LaboratoryExamination> examinations) {
         this.examinations = examinations;
     }
 }

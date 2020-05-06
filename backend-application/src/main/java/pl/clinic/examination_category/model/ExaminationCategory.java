@@ -13,12 +13,12 @@ public class ExaminationCategory {
     @Column(name = "code", nullable = false, unique = true)
     protected Long code;
 
-    @NotBlank
+
     @Size(max = 128)
     @Column(name = "name", nullable = false)
     protected String name;
 
-    @NotNull
+
     @Column(name = "type", nullable = false)
     @Enumerated(value = EnumType.STRING)
     protected ExaminationType type;

@@ -1,4 +1,4 @@
-package pl.clinic.labolatory_examination.model;
+package pl.clinic.labolratory_examination.model;
 
 import pl.clinic.examination_category.model.ExaminationCategory;
 import pl.clinic.lab_supervisor.model.LabSupervisor;
@@ -12,24 +12,24 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "laboratory_examination")
-public class LabolatoryExamination {
+public class LaboratoryExamination {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     protected Long id;
 
-    @NotBlank
+
     @ManyToOne
     @JoinColumn(name = "examination_category", referencedColumnName = "code", nullable = false)
     protected ExaminationCategory category;
 
-    @NotBlank
+
     @ManyToOne
     @JoinColumn(name = "visit_id", referencedColumnName = "id", nullable = false)
     protected Visit visit;
 
-    @NotBlank
+
     @ManyToOne
     @JoinColumn(name = "state_id", referencedColumnName = "id", nullable = false)
     protected ExaminationState state;
@@ -46,7 +46,7 @@ public class LabolatoryExamination {
     @Column(name = "result")
     protected String result;
 
-    @NotBlank
+
     @Size(max = 1024)
     @Column(name = "doctor_note", nullable = false)
     protected String doctorNote;
