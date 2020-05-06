@@ -16,12 +16,12 @@ public abstract class Person {
     @JoinColumn(name = "person_details_id", referencedColumnName = "id")
     protected PersonDetails personDetails;
 
-    @NotBlank
+
     @Size(max = 20)
     @Column(name = "first_name", nullable = false)
     protected String firstName;
 
-    @NotBlank
+
     @Size(max = 20)
     @Column(name = "last_name", nullable = false)
     protected String lastName;

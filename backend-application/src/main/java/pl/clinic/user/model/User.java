@@ -8,7 +8,7 @@ import javax.validation.constraints.Size;
 @MappedSuperclass
 public abstract class User extends Person {
 
-    @NotBlank
+
     @Size(max = 20)
     @Column(name = "license_code", nullable = false)
     protected String licenseCode;

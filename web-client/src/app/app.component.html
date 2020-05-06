@@ -1,44 +1,56 @@
-<nav class="navbar navbar-expand navbar-light bg-primary">
-  <ul class="navbar-nav">
-    <li class="nav-item text-xl-center font-weight-bold cursor-ptr" ngbDropdown>
-      <a class="nav-link cursor-ptr text-white" ngbDropdownToggle id="menuDropdown" role="button">
-        <span class="fa fa-3x fa-bars mr-2 text-black-50 cursor-ptr" style="vertical-align: middle;"></span>
-        <span>MENU</span>
-      </a>
-      <div ngbDropdownMenu aria-labelledby="menuDropdown" class="dropdown-menu">
-        <a ngbDropdownItem (click)="navigateToLab()" *ngIf="this.getRole() == 'LABW' || this.getRole() == 'LABS'" class="cursor-ptr">
-          <fa-icon [icon]="microscope"></fa-icon>&nbsp;
-          Laboratorium
+<nav class="navbar navbar-expand navbar-light bg-primary no-padding">
+  <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item text-xl-center font-weight-bold cursor-ptr" ngbDropdown>
+        <a class="nav-link cursor-ptr text-white" ngbDropdownToggle id="menuDropdown" role="button">
+          <span class="fa fa-2x fa-bars mr-2 text-black-50 cursor-ptr" style="vertical-align: middle;"></span>
+          <span>MENU</span>
         </a>
-        <a ngbDropdownItem (click)="navigateToVisit()" *ngIf="this.getRole() == 'DOC' || this.getRole() == 'LABS'" class="cursor-ptr">
-          <fa-icon [icon]="visit"></fa-icon>&nbsp;&nbsp;
-          Wizyty
-        </a>
-        <a ngbDropdownItem (click)="navigateToRecVisitList()" *ngIf="this.getRole() == 'REC'" class="cursor_ptr">
-          Wizyty
-        </a>
-        <a ngbDropdownItem *ngIf="this.getRole() == 'NONE'" class="cursor-default">
-          Zaloguj się aby móc korzystać menu
-        </a>
-      </div>
-    </li>
-  </ul>
+        <div ngbDropdownMenu aria-labelledby="menuDropdown" class="dropdown-menu no-border">
+          <a ngbDropdownItem (click)="navigateToLab()" *ngIf="this.getRole() == 'LABW' || this.getRole() == 'LABS'"
+             class="cursor-ptr">
+            <fa-icon [icon]="microscope"></fa-icon>&nbsp;
+            Laboratorium
+          </a>
+          <a ngbDropdownItem (click)="navigateToVisit()" *ngIf="this.getRole() == 'DOC' || this.getRole() == 'LABS'"
+             class="cursor-ptr">
+            <fa-icon [icon]="visit"></fa-icon>&nbsp;&nbsp;
+            Wizyty
+          </a>
+          <a ngbDropdownItem *ngIf="this.getRole() == 'NONE'" class="cursor-default">
+            Zaloguj się aby móc korzystać menu
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
 
-  <ul (click)="navigateToHomePage()" class="navbar-nav mx-auto">
-    <li class="fa fa-3x fa-medkit mr-2 text-black-50 my-auto cursor-ptr"></li>
+  <ul (click)="navigateToHomePage()" class="navbar-nav order-0 mx-auto">
+    <li class="fa fa-2x fa-medkit mr-2 text-black-50 my-auto cursor-ptr"></li>
     <li class="text-white my-auto ml-2 font-weight-bold cursor-ptr">E-PRZYCHODNIA</li>
   </ul>
 
-  <div *ngIf="!userFullName; else userPresent">
-    <button (click)="navigateToLoginPage()" class="btn btn-sm btn-outline-light mr-2">Logowanie</button>
+  <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item" *ngIf="!userFullName; else userPresent">
+        <button (click)="navigateToLoginPage()" class="btn btn-sm btn-outline-light mr-2">Logowanie</button>
+      </li>
+      <li (click)="navigateToUserDetails()" class="nav-item text-black-50 cursor-ptr">
+        <i class="fa fa-2x fa-user"></i>
+      </li>
+    </ul>
   </div>
 
-  <span (click)="navigateToUserDetails()" class="text-black-50 cursor-ptr"><i class="fa fa-3x fa-user"></i></span>
 </nav>
 
 <ng-template #userPresent>
-  <div class="mr-2 text-white cursor-default">{{userFullName}}</div>
-  <button (click)="signOut()" class="btn btn-sm btn-outline-light mr-2">Wyloguj</button>
+  <li class="text-white cursor-default mr-2 my-auto">
+    {{userFullName}}
+  </li>
+  <li class="text-white cursor-default">
+    <button (click)="signOut()" class="btn btn-sm btn-outline-light mr-2">Wyloguj</button>
+  </li>
+
 </ng-template>
 
 <router-outlet></router-outlet>
