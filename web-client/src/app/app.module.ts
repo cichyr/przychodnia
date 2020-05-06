@@ -9,11 +9,6 @@ import {BasicAuthHeaderInterceptor} from './interceptor/basic-auth-header-interc
 import {MainModule} from './main/main.module'
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
-import {AppRoutingModule} from './app-routing.module';
-import {AppComponent} from './app.component';
-import {HttpClientModule} from '@angular/common/http';
-import {PanelMainComponent} from './my-panel/panel-main/panel-main.component';
-import {MyPanelModule} from './my-panel/my-panel.module';
 import {VisitModule} from './visit/visit.module'
 
 @NgModule({
@@ -24,7 +19,7 @@ import {VisitModule} from './visit/visit.module'
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    VisitModule
+    VisitModule,
     NgbModule,
     LabExamModule,
     MainModule,

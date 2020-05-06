@@ -19,6 +19,6 @@ export class DoctorVisitListComponent implements OnInit {
 
   ngOnInit(): void {
     this.visitService.getVisits().subscribe(visits => this.visitList = visits);
-    this.visitList.sort((a, b) => (a.registrationDate.getDate() > b.registrationDate.getDate() ? 1 : -1))
+    //this.visitList.sort((a, b) => (a.registrationDate.getDate() > b.registrationDate.getDate() ? 1 : -1))
   }
 }

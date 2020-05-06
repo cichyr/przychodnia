@@ -12,7 +12,7 @@
   <div class="container border rounded-lg mt-4"  *ngFor="let visit of visitList"> <!--ramka do okola z zaokraglonymi brzegami + odstepy 4 linii -->
     <div class="row justify-content-md-center rounded-top" style="background-color: #cce4ff">
       <div class="col align-self-center text-left"><b>Pacjent: {{visit.patientFirstName}} {{visit.patientLastName}}</b></div>
-      <div class="col align-self-center text-center"><b>PESEL: {{visit.PESELNumber}}</b></div>
+      <div class="col align-self-center text-center"><b>PESEL: {{visit.peselNumber}}</b></div>
       <div class="col align-self-center text-right"><b>Data rejestracji: {{visit.registrationDate | date:'dd.MM.yyyy'}}</b></div>
     </div> <!-- niebieski pasek z nazwiskiem pacjenta, nr PESEL i data rejestracji-->
 

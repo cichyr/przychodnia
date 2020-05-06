@@ -5,7 +5,7 @@ export class DoctorVisit {
   id: number
   patientFirstName: String
   patientLastName: String
-  PESELNumber: String
+  peselNumber: String
   state: VisitState
   receptionistFirstName: String
   receptionistLastName: String
