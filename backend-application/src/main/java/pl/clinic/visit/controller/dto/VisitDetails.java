@@ -1,9 +1,8 @@
 package pl.clinic.visit.controller.dto;
 
 import pl.clinic.doctor.model.Doctor;
-import pl.clinic.labolratory_examination.dto.LaboratoryExaminationBasic;
+import pl.clinic.examination_category.controller.ExaminationBasic;
 import pl.clinic.patient.model.Patient;
-import pl.clinic.physical_examination.dto.PhysicalExaminationBasic;
 import pl.clinic.receptionist.controller.dto.ReceptionistBasic;
 import pl.clinic.visit.model.Visit;
 import pl.clinic.visit.model.VisitState;
@@ -27,8 +26,8 @@ public class VisitDetails {
     protected String diagnose;
     protected LocalDateTime registrationDate;
     protected LocalDateTime finalizationCancellationDate;
-    protected List<LaboratoryExaminationBasic> laboratoryExaminations;
-    protected List<PhysicalExaminationBasic> physicalExaminations;
+    protected List<ExaminationBasic> laboratoryExaminations;
+    protected List<ExaminationBasic> physicalExaminations;
 
     public VisitDetails(Visit visit) {
         this.visitId = visit.getId();
@@ -40,13 +39,13 @@ public class VisitDetails {
         this.diagnose = visit.getDiagnose();
         this.registrationDate = visit.getRegistrationDate();
         this.finalizationCancellationDate = visit.getFinalizationCancellationDate();
-        this.laboratoryExaminations = new ArrayList<LaboratoryExaminationBasic>();
-        this.physicalExaminations = new ArrayList<PhysicalExaminationBasic>();
+        this.laboratoryExaminations = new ArrayList<ExaminationBasic>();
+        this.physicalExaminations = new ArrayList<ExaminationBasic>();
         if(visit.getLabolatoryExaminations()!=null){
-            visit.getLabolatoryExaminations().forEach(value->this.laboratoryExaminations.add(new LaboratoryExaminationBasic(value)));
+            visit.getLabolatoryExaminations().forEach(value->this.laboratoryExaminations.add(new ExaminationBasic(value)));
         }
         if(visit.getPhysicalExaminations()!=null) {
-            visit.getPhysicalExaminations().forEach(value -> this.physicalExaminations.add(new PhysicalExaminationBasic(value)));
+            visit.getPhysicalExaminations().forEach(value -> this.physicalExaminations.add(new ExaminationBasic(value)));
         }
     }
     public Long getVisitId() { return visitId; };
@@ -67,7 +66,7 @@ public class VisitDetails {
 
     public LocalDateTime getFinalizationCancellationDate() { return finalizationCancellationDate; }
 
-    public List<LaboratoryExaminationBasic> getLaboratoryExaminations() { return laboratoryExaminations; }
+    public List<ExaminationBasic> getLaboratoryExaminations() { return laboratoryExaminations; }
 
-    public List<PhysicalExaminationBasic> getPhysicalExaminations() { return physicalExaminations; }
+    public List<ExaminationBasic> getPhysicalExaminations() { return physicalExaminations; }
 }
