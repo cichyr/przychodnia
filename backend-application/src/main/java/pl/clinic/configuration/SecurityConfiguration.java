@@ -16,8 +16,8 @@ import pl.clinic.util.FakePasswordEncoder;
 
 import javax.servlet.http.HttpServletResponse;
 
-@Configuration
-@EnableWebSecurity
+//@Configuration
+//@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override

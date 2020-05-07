@@ -1,6 +1,4 @@
-package pl.clinic.physical_examination.dto;
-
-import pl.clinic.physical_examination.model.PhysicalExamination;
+package pl.clinic.physical_examination.controller.dto;
 
 public class PhysicalExaminationAdd {
     // from examination

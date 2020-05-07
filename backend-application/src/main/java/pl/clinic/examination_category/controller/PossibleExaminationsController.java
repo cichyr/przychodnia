@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import pl.clinic.common_services.FilteringService;
+import pl.clinic.examination_category.model.ExaminationCategory;
 import pl.clinic.examination_category.model.ExaminationCategoryRepository;
+import pl.clinic.examination_category.model.ExaminationType;
 import pl.clinic.labolratory_examination.model.LaboratoryExamination;
 import pl.clinic.labolratory_examination.model.LaboratoryExaminationRepository;
 import pl.clinic.patient.model.Patient;
@@ -20,37 +22,39 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-
-
 @RestController
 @RequestMapping("/possible_examinations")
 public class PossibleExaminationsController {
     @Autowired
     ExaminationCategoryRepository examinationCategoryRepository;
-    @Autowired
-    LaboratoryExaminationRepository laboratoryExaminationRepository;
-    @Autowired
-    PhysicalExaminationRepository physicalExaminationRepository;
-
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ExaminationBasic>> getPossibleExaminations(
             @RequestParam(value = "examination_type", required = false) String examination_type) {
-        List<ExaminationBasic> examinations = new ArrayList<ExaminationBasic>();
-            if(examination_type!=null){
-                if(examination_type.equals("laboratory")){
-                    laboratoryExaminationRepository.findAll().forEach(value->examinations.add(new ExaminationBasic(value)));
-                    return ResponseEntity.ok(examinations);
-                }else if(examination_type.equals("physical")) {
-                    physicalExaminationRepository.findAll().forEach(value -> examinations.add(new ExaminationBasic(value)));
-                    return ResponseEntity.ok(examinations);
+        List<ExaminationBasic> examinationsList = new ArrayList<ExaminationBasic>();
+        if (examination_type != null) {
+            if (examination_type.equals("laboratory")) {
+                examination_type = ExaminationType.L.toString();
+                for (ExaminationCategory value : examinationCategoryRepository.findAll()) {
+                    if (value.getType().toString().equals(examination_type)) {
+                        examinationsList.add(new ExaminationBasic((value)));
+                    }
                 }
+                return ResponseEntity.ok(examinationsList);
+            } else if (examination_type.equals("physical")) {
+                examination_type = ExaminationType.P.toString();
+                for (ExaminationCategory value : examinationCategoryRepository.findAll()) {
+                    if (value.getType().toString().equals(examination_type)) {
+                        examinationsList.add(new ExaminationBasic((value)));
+                    }
+                }
+                return ResponseEntity.ok(examinationsList);
             }
-                laboratoryExaminationRepository.findAll().forEach(value->examinations.add(new ExaminationBasic(value)));
-                physicalExaminationRepository.findAll().forEach(value->examinations.add(new ExaminationBasic(value)));
-                return ResponseEntity.ok(examinations);
-
-
+        }
+        for (ExaminationCategory value : examinationCategoryRepository.findAll()) {
+            examinationsList.add(new ExaminationBasic((value)));
+        }
+        return ResponseEntity.ok(examinationsList);
     }
 
 }
