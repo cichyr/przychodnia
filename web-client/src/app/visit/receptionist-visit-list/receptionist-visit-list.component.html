@@ -1,6 +1,6 @@
 <div class="container-fluid" >
 
-  <ngb-alert class="mt-3" type="danger" [dismissible]="true" [style.visibility]="cancelButtonPressed ? 'visible' : 'hidden'">
+  <ngb-alert class="mt-3" type="danger" (close)="closeAlert()" [dismissible]="true" [style.visibility]="cancelButtonPressed ? 'visible' : 'hidden'">
     Anulowano wizytę.
   </ngb-alert>
 

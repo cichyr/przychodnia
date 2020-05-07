@@ -15,9 +15,9 @@ export class ReceptionistVisitListService {
     return this.http.get<ReceptionistVisit[]>(`http://localhost:8080/api/receptionists/${id}/visits`)
   }
 
-  cancelVisit(id: number): Observable<Visit> {
+  cancelVisit(id: number): Observable<ReceptionistVisit> {
 
     console.log('Visit cancelled, id: ' + id);
-    return this.http.put<Visit>(`http://localhost:8080/api/visits/${id}/cancel`, null);
+    return this.http.put<ReceptionistVisit>(`http://localhost:8080/api/visits/${id}/cancel`, null);
   }
 }

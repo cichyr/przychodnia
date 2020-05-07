@@ -4,6 +4,7 @@ import {ReceptionistVisitListService} from '../../service/receptionist-visit-lis
 import {User} from "../../data/user/user";
 import {UserService} from "../../service/user.service";
 import {Subscription} from "rxjs";
+import {interval} from "rxjs";
 import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
 
 
@@ -18,9 +19,11 @@ export class ReceptionistVisitListComponent implements OnInit, OnDestroy {
   user: User
   userSub: Subscription
   visitSub: Subscription
+  cancelVisitSub: Subscription
   cancelButtonPressed = false
 
   constructor(private visitService: ReceptionistVisitListService, private userService: UserService) {
+    setInterval(() => this.closeAlert(), 5000);
   }
 
   ngOnInit(): void {
@@ -33,17 +36,27 @@ export class ReceptionistVisitListComponent implements OnInit, OnDestroy {
       );
   }
 
+
+  //TODO
   cancelVisit(id: number): void {
     this.cancelButtonPressed = true;
 
-    this.visitService.cancelVisit(1).subscribe();
+    this.cancelVisitSub = this.visitService.cancelVisit(id).subscribe();
   }
+
+  closeAlert(): void {
+    this.cancelButtonPressed = false;
+  }
+
 
   ngOnDestroy(): void {
     if (this.userSub != null)
       this.userSub.unsubscribe()
 
     if(this.visitSub != null)
+      this.visitSub.unsubscribe()
+
+    if(this.cancelVisitSub != null)
       this.visitSub.unsubscribe()
   }
 }

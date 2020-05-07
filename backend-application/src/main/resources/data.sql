@@ -269,6 +269,7 @@ insert into visit (id, receptionist_id, doctor_id, patient_id, state_id, descrip
 insert into visit (id, receptionist_id, doctor_id, patient_id, state_id, description, diagnose, registration_date, finalization_cancellation_date) values (23, 1, 1, 1, 2, 'Leg pain', 'T123', '2019-09-02', '2018-04-02');
 insert into visit (id, receptionist_id, doctor_id, patient_id, state_id, description, diagnose, registration_date, finalization_cancellation_date) values (24, 1, 1, 2, 3, 'Fever', 'G123', '2017-12-12', '2019-07-03');
 
+
 insert into examination_category (code, name, type) values (1, 'Replacement of R Ext Carotid with Synth Sub, Open Approach', 'P');
 insert into examination_category (code, name, type) values (2, 'Transfusion of Nonaut WBC into Central Vein, Perc Approach', 'P');
 insert into examination_category (code, name, type) values (3, 'Destruction of Transverse Colon, Open Approach', 'P');
