@@ -9,6 +9,7 @@ import {HomePageComponent} from './main/home-page/home-page.component'
 import {LoginPageComponent} from './main/login-page/login-page.component'
 import {UserDetailsComponent} from './main/user-details/user-details.component'
 import {AuthGuardService} from './service/auth-guard.service'
+import {VisitDetailsComponent} from "./visit/visit-details/visit-details.component";
 
 const routes: Routes = [
   {path: 'login-page', component: LoginPageComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
       {path: 'user-details', component: UserDetailsComponent},
       {path: 'exam-list', component: LabExamListComponent},
       {path: 'exam-list/:id', component: LabExamDetailsComponent},
-      {path: 'doctor-visit-list', component: DoctorVisitListComponent}
+      {path: 'doctor-visit-list', component: DoctorVisitListComponent},
+      {path: 'visit-details/:id', component: VisitDetailsComponent}
     ]
   }
 ]
