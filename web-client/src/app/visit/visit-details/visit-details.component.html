@@ -1,0 +1,110 @@
+<div class="">
+
+  <!-- Header title and buttons -->
+  <div class="container">
+    <div class="row mt-4 align-self-center">
+
+      <!-- Back button -->
+      <div class="col align-self-center">
+        <button class="btn btn-primary" (click)="navigateToDoctorVisitList()">Wróć</button>
+      </div>
+
+      <!-- Title -->
+      <div class="row">
+        <h1 class="container text-center">
+          <b>Szczegóły wizyty numer {{visit.visitId}}</b>
+        </h1>
+      </div>
+
+      <!-- Placeholder -->
+      <div class="col">
+      </div>
+    </div>
+  </div>
+
+  <!-- Basic information -->
+  <div class="container border rounded-lg mt-4">
+    <!-- Examination title bar -->
+    <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+      <h3><b>Informacje podstawowe</b></h3>
+    </div>
+
+    <!-- Examination basic info -->
+    <div class="row border-top border-bottom">
+
+      <!-- Status -->
+      <div class="col text-center">
+        <h5 class="mt-2 text-center text-primary" *ngIf="visit.state.name=='appointed'"><b>Zarejestrowana</b><br></h5>
+        <h5 class="mt-2 text-center text-danger" *ngIf="visit.state.name=='cancelled'"><b>Anulowana</b><br>
+        </h5>
+        <h5 class="mt-2 text-center text-success" *ngIf="visit.state.name=='finished'"><b>Zakończona</b><br></h5>
+      </div>
+    </div>
+
+    <!-- Examination basic info -->
+    <div class="row">
+
+      <!-- Patient info -->
+      <div class="col ml-1 border-right">
+        <b>Pacjent:</b><br>
+        {{visit.patient.firstName}}<br>
+        {{visit.patient.lastName}}<br>
+        {{visit.patient.peselNumber}}<br>
+      </div>
+
+      <div class="col my-1 ml-1 border-right">
+        <b>Rejestrator:</b><br>
+        {{visit.receptionist.firstName}}<br>
+        {{visit.receptionist.lastName}}<br>
+        {{visit.receptionist.licenseCode}}<br>
+      </div>
+
+      <!-- Doctor info -->
+      <div class="col my-1 ml-1 border-right">
+        <b>Lekarz:</b><br>
+        {{visit.doctor.firstName}}<br>
+        {{visit.doctor.lastName}}<br>
+        {{visit.doctor.licenseCode}}<br>
+      </div>
+
+      <!-- Dates and accept/cancel for supervisor -->
+      <div class="col-4 my-1">
+
+        <!-- Dates -->
+
+        <!-- Order date -->
+        <div class="row">
+          <div class="col-sm-8">Data zlecenia:</div>
+          <div class="col-sm-4 text-right">{{visit.registrationDate | date:'dd.MM.yyyy' }}</div>
+        </div>
+
+        <!-- Worker cancel date -->
+        <div class="row" *ngIf="visit.state.name=='cancelled'">
+          <div class="col-sm-8">Data anulowania</div>
+          <div class="col-sm-4 text-right">{{visit.finalizationCancellationDate | date:'dd.MM.yyyy'}}</div>
+        </div>
+
+        <!-- Execution date and buttons for supervisor -->
+        <div *ngIf="visit.state.name=='finished'">
+          <div class="row">
+            <div class="col-sm-8">Data zakończenia:</div>
+            <div class="col-sm-4 text-right">{{visit.finalizationCancellationDate | date:'dd.MM.yyyy'}}</div>
+          </div>
+        </div>
+
+        <div *ngIf="visit.state.name=='appointed'">
+          <div class="row mt-2 justify-content-center" *ngIf="true">
+            <!-- TODO check logged in user -->
+            <button class="btn btn-success mx-2">Zatwierdź</button> <!-- TODO add (click) -->
+            <button class="btn btn-danger mx-2">Anuluj</button> <!-- TODO add (click) -->
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
