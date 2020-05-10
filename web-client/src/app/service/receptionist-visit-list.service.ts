@@ -15,9 +15,13 @@ export class ReceptionistVisitListService {
     return this.http.get<ReceptionistVisit[]>(`http://localhost:8080/api/receptionists/${id}/visits`)
   }
 
-  cancelVisit(id: number): Observable<ReceptionistVisit> {
+  cancelVisit(id: number): Observable<Visit> {
+    return this.http.put<Visit>(`http://localhost:8080/api/visits/${id}/cancel`, null);
+  }
 
-    console.log('Visit cancelled, id: ' + id);
-    return this.http.put<ReceptionistVisit>(`http://localhost:8080/api/visits/${id}/cancel`, null);
+  mapVisitToReceptionistVisit(visit: Visit): ReceptionistVisit{
+   return new ReceptionistVisit(visit.id, visit.patient.firstName, visit.patient.lastName, visit.patient.peselNumber,
+      visit.doctor.firstName, visit.doctor.lastName, visit.state, new Date(visit.registrationDate.toString()),
+      visit.finalizationCancellationDate);
   }
 }

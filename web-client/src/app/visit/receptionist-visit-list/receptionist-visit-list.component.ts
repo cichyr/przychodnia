@@ -23,7 +23,7 @@ export class ReceptionistVisitListComponent implements OnInit, OnDestroy {
   cancelButtonPressed = false
 
   constructor(private visitService: ReceptionistVisitListService, private userService: UserService) {
-    setInterval(() => this.closeAlert(), 5000);
+    setInterval(() => this.closeAlert(), 8000);
   }
 
   ngOnInit(): void {
@@ -36,12 +36,20 @@ export class ReceptionistVisitListComponent implements OnInit, OnDestroy {
       );
   }
 
-
-  //TODO
   cancelVisit(id: number): void {
-    this.cancelButtonPressed = true;
+    let index: number;
 
-    this.cancelVisitSub = this.visitService.cancelVisit(id).subscribe();
+    for(let i = 0; i < this.visitList.length; i++) {
+      if(this.visitList[i].id == id)
+        index = i;
+    }
+
+    this.cancelVisitSub = this.visitService.cancelVisit(id).subscribe(visit => {
+      let receptionistVisit : ReceptionistVisit = this.visitService.mapVisitToReceptionistVisit(visit);
+      this.visitList[index] = receptionistVisit;
+     });
+
+    this.cancelButtonPressed = true;
   }
 
   closeAlert(): void {
