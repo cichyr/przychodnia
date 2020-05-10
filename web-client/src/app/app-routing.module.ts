@@ -1,5 +1,7 @@
-import {NgModule} from '@angular/core'
-import {RouterModule, Routes} from '@angular/router'
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import {CommonModule} from '@angular/common';
+import {DoctorVisitListComponent} from "./visit/doctor-visit-list/doctor-visit-list.component";
 
 import {LabExamListComponent} from './lab-exam/lab-exam-list/lab-exam-list.component'
 import {LabExamDetailsComponent} from './lab-exam/lab-exam-details/lab-exam-details.component'
@@ -15,7 +17,8 @@ const routes: Routes = [
       {path: 'home', component: HomePageComponent},
       {path: 'user-details', component: UserDetailsComponent},
       {path: 'exam-list', component: LabExamListComponent},
-      {path: 'exam-list/:id', component: LabExamDetailsComponent}
+      {path: 'exam-list/:id', component: LabExamDetailsComponent},
+      {path: 'doctor-visit-list', component: DoctorVisitListComponent}
     ]
   }
 ]

@@ -9,6 +9,7 @@ import {BasicAuthHeaderInterceptor} from './interceptor/basic-auth-header-interc
 import {MainModule} from './main/main.module'
 import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
+import {VisitModule} from './visit/visit.module'
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    VisitModule,
     NgbModule,
     LabExamModule,
     MainModule,

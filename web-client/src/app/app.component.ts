@@ -60,7 +60,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
     else if(this.getRole() == 'DOC') {
       this.router.navigate(['/doctor-visit-list/'])
-    }    
+    }
   }
 
   signOut() {
