@@ -15,8 +15,9 @@ const routes: Routes = [
     path: '', canActivate: [AuthGuardService], children: [
       {path: 'home', component: HomePageComponent},
       {path: 'user-details', component: UserDetailsComponent},
+      {path: 'receptionist-visit-list', component: ReceptionistVisitListComponent},
       {path: 'exam-list/:id', component: LabExamDetailsComponent},
-      {path: 'receptionist-visit-list', component: ReceptionistVisitListComponent}
+      {path: 'exam-list', component: LabExamListComponent},
     ]
   }
 ]
