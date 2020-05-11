@@ -186,13 +186,27 @@
               </div>
               <div class="col">
                 <div class="row">
-                  <div class="col text-left">
-                    {{examination.name}}
+                  <div class="col text-primary  mt-2" *ngIf="examination.status=='in_progress'">
+                    <b class="text-center">W realizacji</b>
+                  </div>
+                  <div class="col text-danger mt-2" *ngIf="examination.status=='cancelled'">
+                    <b class="text-center">Anulowane</b>
+                  </div>
+                  <div class="col text-success  mt-2" *ngIf="examination.status=='executed'">
+                    <b class="text-center">Zrealizowane</b>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="row text-left">
+                      {{examination.name}}
+                    </div>
                   </div>
                   <div class="col text-right">
                     <button class="btn btn-primary my-3">Szczegóły</button>
                   </div>
                 </div>
+
               </div>
             </div>
 
