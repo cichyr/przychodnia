@@ -2,8 +2,8 @@ import {Patient} from "../patient/patient";
 import {Doctor} from "../doctor/doctor";
 import {Receptionist} from "../receptionist/receptionist";
 import {VisitState} from "./visit-state";
-import {LaboratoryExamination} from "../examination/laboratory-examination";
 import {ShortPhysicalExamination} from "../examination/short-physical-examination";
+import {ShortLaboratoryExamination} from "../examination/short-laboratory-examination";
 
 export class VisitDetails {
 
@@ -16,6 +16,6 @@ export class VisitDetails {
   diagnose: String
   registrationDate: Date
   finalizationCancellationDate: Date
-  laboratoryExaminations: LaboratoryExamination[]
+  laboratoryExaminations: ShortLaboratoryExamination[]
   physicalExaminations: ShortPhysicalExamination[]
 }
