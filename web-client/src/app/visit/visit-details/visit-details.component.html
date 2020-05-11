@@ -85,18 +85,22 @@
         </div>
 
         <!-- Execution date and buttons for supervisor -->
-        <div *ngIf="visit.state.name=='finished'">
-          <div class="row">
+        <div class="row" *ngIf="visit.state.name=='finished'">
+
             <div class="col-sm-8">Data zakończenia:</div>
             <div class="col-sm-4 text-right">{{visit.finalizationCancellationDate | date:'dd.MM.yyyy'}}</div>
-          </div>
+
+        </div>
+
+        <div class="row" *ngIf="visit.state.name=='appointed'">
+            <div class="col-sm-8">Zarejestrowana na:</div>
+            <div class="col-sm-4 text-right">{{visit.finalizationCancellationDate | date:'dd.MM.yyyy'}}</div>
         </div>
 
         <div *ngIf="visit.state.name=='appointed'">
           <div class="row mt-2 justify-content-center" *ngIf="true">
-            <!-- TODO check logged in user -->
-            <button class="btn btn-success mx-2">Zatwierdź</button> <!-- TODO add (click) -->
-            <button class="btn btn-danger mx-2">Anuluj</button> <!-- TODO add (click) -->
+            <button class="btn btn-success mx-2" *ngIf="visit.state.name=='appointed'" (click)="finalizeVisit()">Zatwierdź</button>
+            <button class="btn btn-danger mx-2" *ngIf="visit.state.name=='appointed'" (click)="cancelVisit()">Anuluj</button>
           </div>
         </div>
 
@@ -153,12 +157,13 @@
     </div>
 
     <div class="row">
-      <div class="col text-center border-right">
-        <button class="btn btn-primary align-self-center my-2" *ngIf="visit.state.name=='appointed'"> +</button>
+      <div class="col text-center border-right mb-3">
+        <button class="btn btn-info align-self-center my-2" *ngIf="visit.state.name=='appointed'"> +</button>
         <div class="row">
           <div class="col">
             <div class="container border rounded-lg mt-4 mb-2" *ngFor="let examination of visit.physicalExaminations">
-              <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+              <div class="row justify-content-center rounded-top" style="background-color: #339933
+">
                 <h3><b>Badanie nr {{examination.id}}</b></h3>
               </div>
               <div class="col">
@@ -167,32 +172,32 @@
                     {{examination.name}}
                   </div>
                   <div class="col text-right">
-                    <button class="btn btn-primary my-3">Szczegóły</button>
+                    <button class="btn btn-success my-3">Szczegóły</button>
                   </div>
                 </div>
               </div>
             </div>
-
           </div>
         </div>
       </div>
-      <div class="col text-center">
-        <button class="btn btn-primary align-self-center my-2" *ngIf="visit.state.name=='appointed'"> +</button>
+      <div class="col text-center mb-3">
+        <button class="btn btn-info align-self-center my-2" *ngIf="visit.state.name=='appointed'"> +</button>
         <div class="row">
           <div class="col">
             <div class="container border rounded-lg mt-4 mb-2" *ngFor="let examination of visit.laboratoryExaminations">
-              <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+              <div class="row justify-content-center rounded-top" style="background-color: #FF9900
+">
                 <h3><b>Badanie nr {{examination.id}}</b></h3>
               </div>
               <div class="col">
                 <div class="row">
-                  <div class="col text-primary  mt-2" *ngIf="examination.status=='in_progress'">
+                  <div class="col text-primary  mt-2 mb-2" *ngIf="examination.status=='in_progress'">
                     <b class="text-center">W realizacji</b>
                   </div>
-                  <div class="col text-danger mt-2" *ngIf="examination.status=='cancelled'">
+                  <div class="col text-danger mt-2 mb-2" *ngIf="examination.status=='cancelled'">
                     <b class="text-center">Anulowane</b>
                   </div>
-                  <div class="col text-success  mt-2" *ngIf="examination.status=='executed'">
+                  <div class="col text-success  mt-2 mb-2" *ngIf="examination.status=='executed'">
                     <b class="text-center">Zrealizowane</b>
                   </div>
                 </div>
@@ -203,13 +208,11 @@
                     </div>
                   </div>
                   <div class="col text-right">
-                    <button class="btn btn-primary my-3">Szczegóły</button>
+                    <button class="btn btn-warning my-3">Szczegóły</button>
                   </div>
                 </div>
-
               </div>
             </div>
-
           </div>
         </div>
       </div>

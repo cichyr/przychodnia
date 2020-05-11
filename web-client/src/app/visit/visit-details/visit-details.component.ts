@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {VisitDetailsService} from "../../service/visit-details.service";
 import {User} from "../../data/user/user";
@@ -21,8 +21,6 @@ export class VisitDetailsComponent implements OnInit {
 
   constructor(private router: Router, private visitService: VisitDetailsService, private userService: UserService, private route: ActivatedRoute) { }
 
-
-
   ngOnInit(): void {
     this.visitId = Number(this.route.snapshot.paramMap.get('id'));
     this.userSub =
@@ -34,8 +32,24 @@ export class VisitDetailsComponent implements OnInit {
       );
   }
 
+  finalizeVisit(): void{
+    this.visitSub = this.visitService.finalizeVisit(this.visit.visitId).subscribe(visit => this.visit = visit);
+  }
+
+  cancelVisit(): void{
+    this.visitSub = this.visitService.cancelVisit(this.visit.visitId).subscribe(visit => this.visit = visit);
+  }
+
   navigateToDoctorVisitList(): void {
     this.router.navigate(['doctor-visit-list']);
   }
 
+  ngOnDestroy(): void
+  {
+    if (this.userSub != null)
+      this.userSub.unsubscribe()
+
+    if(this.visitSub != null)
+      this.visitSub.unsubscribe()
+  }
 }

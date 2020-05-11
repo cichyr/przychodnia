@@ -5,6 +5,7 @@ import {Patient} from '../patient/patient'
 
 
 export class Visit {
+
     id: number
     receptionistId: Receptionist
     doctorId: Doctor

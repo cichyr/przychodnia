@@ -14,5 +14,13 @@ export class VisitDetailsService {
     return this.http.get<VisitDetails>(`http://localhost:8080/api/visits/${id}`);
   }
 
+  finalizeVisit(id: number): Observable<VisitDetails> {
+    return this.http.put<VisitDetails>(`http://localhost:8080/api/visits/${id}/finalize`, null);
+  }
+
+  cancelVisit(id: number): Observable<VisitDetails> {
+    return this.http.put<VisitDetails>(`http://localhost:8080/api/visits/${id}/cancel`, null);
+  }
+
 
 }
