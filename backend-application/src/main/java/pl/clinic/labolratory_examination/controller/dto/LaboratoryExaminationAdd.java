@@ -1,4 +1,4 @@
-package pl.clinic.labolratory_examination.dto;
+package pl.clinic.labolratory_examination.controller.dto;
 
 public class LaboratoryExaminationAdd {
     // from examination
