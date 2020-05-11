@@ -265,10 +265,10 @@ insert into visit (id, receptionist_id, doctor_id, patient_id, state_id, descrip
 insert into visit (id, receptionist_id, doctor_id, patient_id, state_id, description, diagnose, registration_date, finalization_cancellation_date) values (19, 9, 19, 19, 1, 'Laceration with foreign body, left knee', 'S81022', '2020-05-16', '2020-05-28');
 insert into visit (id, receptionist_id, doctor_id, patient_id, state_id, description, diagnose, registration_date, finalization_cancellation_date) values (20, 10, 20, 20, 2, 'Crohn''s disease of both small and large intestine', 'K508', '2019-05-30', '2021-03-21');
 insert into visit (id, receptionist_id, doctor_id, patient_id, state_id, description, diagnose, registration_date) values (21, 10, 1, 20, 2, 'Crohn''s disease of both small and large intestine', 'K508', '2019-05-30');
-insert into visit (id, receptionist_id, doctor_id, patient_id, state_id, registration_date, finalization_cancellation_date) values (22, 1, 1, 1, 1, '2017-05-06', '2020-10-04');
-insert into visit (id, receptionist_id, doctor_id, patient_id, state_id, registration_date, finalization_cancellation_date) values (23, 1, 1, 5, 1, '2019-09-02', '2018-04-02');
-insert into visit (id, receptionist_id, doctor_id, patient_id, state_id, registration_date, finalization_cancellation_date) values (24, 1, 1, 2, 1, '2017-12-12', '2019-07-03');
-
+insert into visit (id, receptionist_id, doctor_id, patient_id, state_id, description, diagnose, registration_date, finalization_cancellation_date) values (22, 1, 1, 1, 1, 'Stomach pain', 'C123', '2017-05-06', '2020-10-04');
+insert into visit (id, receptionist_id, doctor_id, patient_id, state_id, description, diagnose, registration_date, finalization_cancellation_date) values (23, 1, 1, 5, 1, 'Leg pain', 'T123', '2019-09-02', '2018-04-02');
+insert into visit (id, receptionist_id, doctor_id, patient_id, state_id, description, diagnose, registration_date, finalization_cancellation_date) values (24, 1, 1, 2, 1, 'Fever', 'G123', '2017-12-12', '2019-07-03');
+insert into visit (id, receptionist_id, doctor_id, patient_id, state_id, registration_date, finalization_cancellation_date) values (25, 5, 1, 8, 1, '2017-12-12', '2019-07-03');
 
 insert into examination_category (code, name, type) values (1, 'Replacement of R Ext Carotid with Synth Sub, Open Approach', 'P');
 insert into examination_category (code, name, type) values (2, 'Transfusion of Nonaut WBC into Central Vein, Perc Approach', 'P');
