@@ -30,7 +30,6 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.authSubscription = this.userService.getAuthenticationEvent().subscribe(
       user => {
-        console.log(user)
         if (user != null) this.userFullName = user.firstName + ' ' + user.lastName
         else this.userFullName = null
       })

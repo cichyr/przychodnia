@@ -24,12 +24,12 @@
 
   <!-- Basic information -->
   <div class="container border rounded-lg mt-4">
-    <!-- Examination title bar -->
+    <!-- Visit title bar -->
     <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
       <h3><b>Informacje podstawowe</b></h3>
     </div>
 
-    <!-- Examination basic info -->
+    <!-- Visit basic info -->
     <div class="row border-top border-bottom">
 
       <!-- Status -->
@@ -103,6 +103,92 @@
       </div>
     </div>
   </div>
+
+
+  <div class="container border rounded-lg mt-4">
+    <!-- Title bar -->
+    <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+      <h3><b>Opis</b></h3>
+    </div>
+
+    <!-- Doctors note read-only -->
+    <div class="row border-top">
+      <div class="col">
+        {{visit.description}}
+      </div>
+      <div class="col-1" *ngIf="visit.state.name=='appointed'">
+        <button class="btn btn-primary align-self-center my-2">Edytuj</button>
+        <!-- TODO add (click) -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Result -->
+  <div class="container border rounded-lg mt-4">
+    <!-- Title bar -->
+    <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+      <h3><b>Diagnoza</b></h3>
+    </div>
+
+    <!-- Examination result -->
+    <div class="row border-top">
+      <div class="col">
+        {{visit.diagnose}}
+      </div>
+      <div class="col-1" *ngIf="visit.state.name=='appointed'">
+        <button class="btn btn-primary align-self-center my-2">Edytuj</button>
+        <!-- TODO add (click) -->
+      </div>
+    </div>
+  </div>
+
+  <div class="container border rounded-lg mt-4">
+    <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+      <div class="col text-center border-right">
+        <h3><b>Badania fizykalne</b></h3>
+      </div>
+      <div class="col text-center">
+        <h3><b>Badania laboratoryjne</b></h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col text-center border-right">
+        <button class="btn btn-primary align-self-center my-2" *ngIf="visit.state.name=='appointed'">  +  </button>
+        <div class="row">
+            <div class="col">
+              <div class="container border rounded-lg mt-4 mb-2" *ngFor="let examination of visit.physicalExaminations">
+            <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+              <h3><b>Badanie nr {{examination.id}}</b></h3>
+            </div>
+            <div class="col">
+              <div class="row">
+                <div class="col text-left">
+                  {{examination.name}}
+                </div>
+                <div class="col text-right">
+                  <button class="btn btn-primary my-2">Szczegóły</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+            <div class="col">
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <div class="col text-center">
+        <button class="btn btn-primary align-self-center my-2" *ngIf="visit.state.name=='appointed'">  +  </button>
+      </div>
+    </div>
+  </div>
+
+
+
 
 </div>
 
