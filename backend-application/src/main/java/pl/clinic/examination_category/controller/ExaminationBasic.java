@@ -11,9 +11,11 @@ public class ExaminationBasic {
     protected String name;
 
 
+
     public ExaminationBasic(PhysicalExamination examination) {
         this.id = examination.getId();
         this.name = examination.getCategory().getName();
+
     }
 
     public ExaminationBasic(LaboratoryExamination examination) {

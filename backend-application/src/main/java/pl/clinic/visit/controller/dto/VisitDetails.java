@@ -2,6 +2,7 @@ package pl.clinic.visit.controller.dto;
 
 import pl.clinic.doctor.model.Doctor;
 import pl.clinic.examination_category.controller.ExaminationBasic;
+import pl.clinic.labolratory_examination.controller.dto.LaboratoryExaminationVisitDetails;
 import pl.clinic.patient.model.Patient;
 import pl.clinic.receptionist.controller.dto.ReceptionistBasic;
 import pl.clinic.visit.model.Visit;
@@ -26,7 +27,7 @@ public class VisitDetails {
     protected String diagnose;
     protected LocalDateTime registrationDate;
     protected LocalDateTime finalizationCancellationDate;
-    protected List<ExaminationBasic> laboratoryExaminations;
+    protected List<LaboratoryExaminationVisitDetails> laboratoryExaminations;
     protected List<ExaminationBasic> physicalExaminations;
 
     public VisitDetails(Visit visit) {
@@ -39,10 +40,10 @@ public class VisitDetails {
         this.diagnose = visit.getDiagnose();
         this.registrationDate = visit.getRegistrationDate();
         this.finalizationCancellationDate = visit.getFinalizationCancellationDate();
-        this.laboratoryExaminations = new ArrayList<ExaminationBasic>();
+        this.laboratoryExaminations = new ArrayList<LaboratoryExaminationVisitDetails>();
         this.physicalExaminations = new ArrayList<ExaminationBasic>();
         if(visit.getLabolatoryExaminations()!=null){
-            visit.getLabolatoryExaminations().forEach(value->this.laboratoryExaminations.add(new ExaminationBasic(value)));
+            visit.getLabolatoryExaminations().forEach(value->this.laboratoryExaminations.add(new LaboratoryExaminationVisitDetails(value)));
         }
         if(visit.getPhysicalExaminations()!=null) {
             visit.getPhysicalExaminations().forEach(value -> this.physicalExaminations.add(new ExaminationBasic(value)));
@@ -66,7 +67,7 @@ public class VisitDetails {
 
     public LocalDateTime getFinalizationCancellationDate() { return finalizationCancellationDate; }
 
-    public List<ExaminationBasic> getLaboratoryExaminations() { return laboratoryExaminations; }
+    public List<LaboratoryExaminationVisitDetails> getLaboratoryExaminations() { return laboratoryExaminations; }
 
     public List<ExaminationBasic> getPhysicalExaminations() { return physicalExaminations; }
 }
