@@ -4,14 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pl.clinic.common_services.FilteringService;
-import pl.clinic.examination_category.controller.ExaminationBasic;
-import pl.clinic.examination_category.model.ExaminationCategoryRepository;
-import pl.clinic.patient.model.Patient;
+import pl.clinic.examination_category.controller.dto.ExaminationBasic;
 import pl.clinic.physical_examination.controller.dto.PhysicalExaminationDetails;
-import pl.clinic.physical_examination.model.PhysicalExamination;
 import pl.clinic.physical_examination.model.PhysicalExaminationRepository;
-import pl.clinic.visit.controller.dto.VisitDetails;
 
 import java.util.LinkedList;
 import java.util.List;

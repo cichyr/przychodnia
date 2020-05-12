@@ -7,18 +7,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import pl.clinic.common_services.FilteringService;
+import pl.clinic.examination_category.controller.dto.ExaminationBasic;
 import pl.clinic.examination_category.model.ExaminationCategory;
 import pl.clinic.examination_category.model.ExaminationCategoryRepository;
 import pl.clinic.examination_category.model.ExaminationType;
-import pl.clinic.labolratory_examination.model.LaboratoryExamination;
-import pl.clinic.labolratory_examination.model.LaboratoryExaminationRepository;
-import pl.clinic.patient.model.Patient;
-import pl.clinic.physical_examination.model.PhysicalExamination;
-import pl.clinic.physical_examination.model.PhysicalExaminationRepository;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 
