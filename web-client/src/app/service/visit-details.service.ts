@@ -22,5 +22,13 @@ export class VisitDetailsService {
     return this.http.put<VisitDetails>(`http://localhost:8080/api/visits/${id}/cancel`, null);
   }
 
+  setInterview(id: number, description: String, diagnose: String): Observable<VisitDetails> {
+    return this.http.put<VisitDetails>(`http://localhost:8080/api/visits/${id}/interview`,
+      {
+              "description": description,
+              "diagnose": diagnose
+            }
+      );
+  }
 
 }
