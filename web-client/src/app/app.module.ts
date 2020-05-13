@@ -7,7 +7,8 @@ import {AppComponent} from './app.component'
 import {LabExamModule} from './lab-exam/lab-exam.module'
 import {BasicAuthHeaderInterceptor} from './interceptor/basic-auth-header-interceptor'
 import {MainModule} from './main/main.module'
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http'
+import {CommonModule} from "@angular/common";
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome'
 import {VisitModule} from './visit/visit.module'
 

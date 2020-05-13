@@ -72,10 +72,10 @@ export class LaboratoryExaminationService {
 
   visit: Visit = {
     id: 0,
-    receptionistId: this.rec,
-    doctorId: this.doc,
-    patientId: this.pat,
-    stateId: this.state,
+    receptionist: this.rec,
+    doctor: this.doc,
+    patient: this.pat,
+    state: this.state,
     description: "Desc",
     diagnose: "Diag",
     registrationDate: "registration",
