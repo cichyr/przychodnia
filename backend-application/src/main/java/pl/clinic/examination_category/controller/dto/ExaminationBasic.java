@@ -1,4 +1,4 @@
-package pl.clinic.examination_category.controller;
+package pl.clinic.examination_category.controller.dto;
 
 import pl.clinic.examination_category.model.ExaminationCategory;
 import pl.clinic.labolratory_examination.model.LaboratoryExamination;
