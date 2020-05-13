@@ -8,15 +8,16 @@ import {BrowserModule} from "@angular/platform-browser";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
-  declarations: [DoctorVisitListComponent, VisitDetailsComponent],
+  declarations: [DoctorVisitListComponent, VisitDetailsComponent, ReceptionistVisitListComponent],
     imports: [
         CommonModule,
         NgbDropdownModule,
         BrowserModule,
-        NgbModule
+        NgbModule,
     ],
   exports: [
-    DoctorVisitListComponent
+    DoctorVisitListComponent,
+    ReceptionistVisitListComponent
     ]
 })
 export class VisitModule { }
