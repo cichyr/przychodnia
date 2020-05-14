@@ -4,6 +4,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { LaboratoryExamination } from 'src/app/data/examination/laboratory-examination';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { TextInputComponent } from 'src/app/modals/text-input/text-input.component';
+import { UserService } from 'src/app/service/user.service';
+import { Subscription } from 'rxjs';
+import { User } from 'src/app/data/user/user';
 
 @Component({
   selector: 'app-lab-exam-details',
@@ -13,13 +16,27 @@ import { TextInputComponent } from 'src/app/modals/text-input/text-input.compone
 export class LabExamDetailsComponent implements OnInit {
 
   examination: LaboratoryExamination
+  userSub: Subscription
+  labSub: Subscription
+  user: User
   exam_id: number
 
-  constructor(private laboratoryService: LaboratoryExaminationService, private router: Router, private route: ActivatedRoute, private modalService: NgbModal) { }
+  constructor(private laboratoryService: LaboratoryExaminationService, private userService: UserService, private router: Router, private route: ActivatedRoute, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.exam_id = Number(this.route.snapshot.paramMap.get('id'))
-    //this.examination = this.laboratoryService.getLaboratoryExam(this.exam_id)
+    
+    this.userSub = this.userService.getAuthenticationEvent().subscribe(user => {
+      this.user = user
+      if(this.user != null)
+        this.labSub = this.laboratoryService.getLaboratoryExam(this.exam_id).subscribe(lab => this.examination = lab)
+    })
+
+    this.userService.getAuthenticationEvent().subscribe(user => {
+      this.user = user
+      if(this.user != null)
+        this.labSub = this.laboratoryService.getLaboratoryExam(this.exam_id).subscribe(lab => this.examination = lab)
+    })
   }
 
   // Change status

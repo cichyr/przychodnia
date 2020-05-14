@@ -40,7 +40,6 @@
                         <button (click)="sort(3)" ngbDropdownItem>Data zakończenia: Od najstarszych</button>
                         <button (click)="sort(4)" ngbDropdownItem>ID: rosnąco</button>
                         <button (click)="sort(5)" ngbDropdownItem>ID: malejąco</button>
-                        <button (click)="sort(6)" ngbDropdownItem>Domyślnie</button>
                     </div>
                 </div>
             </div>
@@ -70,11 +69,11 @@
                         <div class="col">Data zlecenia:</div>
                         <div class="col-8">{{lab.formatDate('visit')}}</div>
                     </div>
-                    <div class="row" *ngIf="lab.status=='cancelled'">
+                    <div class="row" *ngIf="lab.status=='cancelled' && lab.approvalCancellationDate == null">
                         <div class="col">Data anulowania:</div>
                         <div class="col-8">{{lab.formatDate('execution')}}</div>
                     </div>
-                    <div class="row" *ngIf="lab.status=='executed' || lab.status=='approved'">
+                    <div class="row" *ngIf="lab.status=='executed' || lab.status=='approved' || (lab.status=='cancelled' && lab.approvalCancellationDate != null)">
                         <div class="col">Data wykonania:</div>
                         <div class="col-8">{{lab.formatDate('execution')}}</div>
                     </div>

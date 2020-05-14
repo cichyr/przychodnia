@@ -1,21 +1,21 @@
-import { Visit } from '../visit/visit'
-import { ExaminationDictionary } from './examination-dictionary'
-import { ExaminationState } from './examination-state'
 import { LabWorker } from '../labWorker/lab-worker'
 import { LabSupervisor } from '../labSupervisor/lab-supervisor'
+import { Patient } from '../patient/patient'
+import { Doctor } from '../doctor/doctor'
 
 
 export class LaboratoryExamination {
     id: number
-    examinationId: ExaminationDictionary
-    visitId: Visit
-    stateId: ExaminationState
-    labWorkerId: LabWorker
-    labSupervisorId: LabSupervisor
-    result: String
-    doctorNote: String
-    supervisorNote: String
+    name: string
+    status: string
+    labWorker: LabWorker
+    labSupervisor: LabSupervisor
+    result: string
+    doctorNote: string
+    supervisorNote: string
     creationDate: Date
+    patient: Patient
+    doctor: Doctor
     executionCancellationDate: Date   // Dates are passed through HTML as Strings, change if You use different type
     approvalCancellationDate: Date    // Dates are passed through HTML as Strings, change if You use different type
 
@@ -23,7 +23,7 @@ export class LaboratoryExamination {
     formatDate(date: string): string {
         switch (date) {
             case 'visit':
-                var d = new Date(this.visitId.finalizationCancellationDate)
+                var d = new Date(this.creationDate)
                 break;
 
             case 'execution':
@@ -45,5 +45,22 @@ export class LaboratoryExamination {
             day = '0' + day;
 
         return [year, month, day].join('-');
+    }
+
+    // Constructor
+    constructor(id: number, name: string, status: string, labWorker: LabWorker, labSupervisor: LabSupervisor, result: string, doctorNote: string, supervisorNote: string, creationDate: Date, patient: Patient, doctor: Doctor, executionCancellationDate: Date, approvalCancellationDate: Date, ) {
+        this.id = id
+        this.name = name
+        this.labWorker = labWorker
+        this.labSupervisor = labSupervisor
+        this.result = result
+        this.doctorNote = doctorNote
+        this.supervisorNote = supervisorNote
+        this.patient = patient
+        this.doctor = doctor
+        this.creationDate =  creationDate
+        this.executionCancellationDate = executionCancellationDate
+        this.approvalCancellationDate = approvalCancellationDate
+        this.status = status
     }
 }

@@ -30,13 +30,7 @@ export class LabExamListComponent implements OnInit {
     this.userSub = this.userService.getAuthenticationEvent().subscribe(user => {
       this.user = user
       if(this.user != null)
-        this.labSub = this.laboratoryService.getAllLaboratoryExams().subscribe(labs => this.__laboratoryList = labs)
-    })
-
-    this.userService.getAuthenticationEvent().subscribe(user => {
-      this.user = user
-      if(this.user != null)
-        this.labSub = this.laboratoryService.getAllLaboratoryExams().subscribe(labs => this.__laboratoryList = labs)
+        this.labSub = this.laboratoryService.getAllLaboratoryExams().subscribe(labs => this.laboratoryList = labs)
     })
 
     this.userService.getAuthenticationEvent().subscribe(user => {

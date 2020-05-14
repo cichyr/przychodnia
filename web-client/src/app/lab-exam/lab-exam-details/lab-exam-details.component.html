@@ -34,19 +34,19 @@
 
             <!-- Examination code and name -->
             <div class="col-8 text-center border-right">
-                <h5 class="mt-2"><b>{{examination.examinationId.id}}: {{examination.examinationId.name}}</b></h5>
+                <h5 class="mt-2"><b>{{examination.name}}</b></h5>
             </div>
 
             <!-- Status -->
             <div class="col-4">
-                <h5 class="mt-2 text-center" *ngIf="examination.stateId.name=='ZLE'"><b>Zlecone</b><br></h5>
-                <h5 class="mt-2 text-center text-warning" *ngIf="examination.stateId.name=='WYK'"><b>Wykonane</b><br>
+                <h5 class="mt-2 text-center" *ngIf="examination.status=='in_progress'"><b>Zlecone</b><br></h5>
+                <h5 class="mt-2 text-center text-warning" *ngIf="examination.status=='executed'"><b>Wykonane</b><br>
                 </h5>
-                <h5 class="mt-2 text-center text-danger" *ngIf="examination.stateId.name=='ANUL_LAB'"><b>Anulowane przez
+                <h5 class="mt-2 text-center text-danger" *ngIf="examination.status=='cancelled'"><b>Anulowane przez
                         laboranta</b><br></h5>
-                <h5 class="mt-2 text-center text-success" *ngIf="examination.stateId.name=='ZATW'">
+                <h5 class="mt-2 text-center text-success" *ngIf="examination.status=='approved'">
                     <b>Zatwierdzone</b><br></h5>
-                <h5 class="mt-2 text-center text-danger" *ngIf="examination.stateId.name=='ANUL_KLAB'"><b>Anulowane
+                <h5 class="mt-2 text-center text-danger" *ngIf="examination.status=='cancelled'"><b>Anulowane
                         przez kierownika</b><br></h5>
             </div>
         </div>
@@ -57,25 +57,25 @@
             <!-- Patient info -->
             <div class="col ml-1 border-right">
                 <b>Pacjent:</b><br>
-                {{examination.visitId.patientId.firstName}}<br>
-                {{examination.visitId.patientId.lastName}}<br>
-                {{examination.visitId.patientId.peselNumber}}<br>
+                {{examination.patient.firstName}}<br>
+                {{examination.patient.lastName}}<br>
+                {{examination.patient.peselNumber}}<br>
             </div>
 
             <!-- Doctor info -->
             <div class="col ml-1 border-right">
                 <b>Lekarz:</b><br>
-                {{examination.visitId.doctorId.firstName}}<br>
-                {{examination.visitId.doctorId.lastName}}<br>
-                {{examination.visitId.doctorId.licenseCode}}<br>
+                {{examination.doctor.firstName}}<br>
+                {{examination.doctor.lastName}}<br>
+                {{examination.doctor.licenseCode}}<br>
             </div>
 
             <!-- Lab worker info -->
             <div class="col ml-1 border-right">
                 <b>Laborant:</b><br>
-                {{examination.labWorkerId.firstName}}<br>
-                {{examination.labWorkerId.lastName}}<br>
-                {{examination.labWorkerId.licenseCode}}<br>
+                {{examination.labWorker.firstName}}<br>
+                {{examination.labWorker.lastName}}<br>
+                {{examination.labWorker.licenseCode}}<br>
             </div>
 
             <!-- Dates and accept/cancel for supervisor -->
@@ -88,22 +88,20 @@
                     <div class="col-sm-8">Data zlecenia:</div>
                     <div class="col-sm-4 text-right">{{examination.formatDate('visit')}}</div>
                 </div>
-                <div class="row mt-4 justify-content-center align-middle" *ngIf="examination.stateId.name=='ZLE'">
+                <div class="row mt-4 justify-content-center align-middle" *ngIf="examination.status=='in_progress'">
                     <!-- TODO check logged in user -->
                     <button class="btn btn-success mx-2" (click)="changeStatus('Done')">Wykonaj</button>
-                    <!-- TODO add (click) -->
                     <button class="btn btn-danger mx-2" (click)="changeStatus('CanWork')">Anuluj</button>
-                    <!-- TODO add (click) -->
                 </div>
 
                 <!-- Worker cancel date -->
-                <div class="row" *ngIf="examination.stateId.name=='ANUL_LAB'">
+                <div class="row" *ngIf="examination.status=='cancelled'">
                     <div class="col-sm-8">Data anulowania</div>
                     <div class="col-sm-4 text-right">{{examination.formatDate('execution')}}</div>
                 </div>
 
                 <!-- Execution date and buttons for supervisor -->
-                <div *ngIf="examination.stateId.name=='WYK'">
+                <div *ngIf="examination.status=='executed'">
                     <div class="row">
                         <div class="col-sm-8">Data wykonania:</div>
                         <div class="col-sm-4 text-right">{{examination.formatDate('execution')}}</div>
@@ -118,7 +116,7 @@
                 </div>
 
                 <!-- Execution and approval date -->
-                <div *ngIf="examination.stateId.name=='ZATW'">
+                <div *ngIf="examination.status=='approved'">
                     <div class="row">
                         <div class="col-sm-8">Data wykonania:</div>
                         <div class="col-sm-4 text-right">{{examination.formatDate('execution')}}</div>
@@ -130,7 +128,7 @@
                 </div>
 
                 <!-- Execution and disapproval date -->
-                <div *ngIf="examination.stateId.name=='ANUL_KLAB'">
+                <div *ngIf="examination.status=='cancelled'">
                     <div class="row">
                         <div class="col-sm-8">Data wykonania:</div>
                         <div class="col-sm-4 text-right">{{examination.formatDate('execution')}}</div>
@@ -171,7 +169,7 @@
             <div class="col">
                 {{examination.result}}
             </div>
-            <div class="col-1" *ngIf="examination.stateId.name=='ZLE'">
+            <div class="col-1" *ngIf="examination.status=='in_progress'">
                 <!-- TODO check logged in user -->
                 <button class="btn btn-primary align-self-center my-2" (click)="openPopup('result')">Edytuj</button>
                 <!-- TODO add (click) -->
@@ -181,7 +179,7 @@
 
     <!-- Supervisor note -->
     <div class="container border rounded-lg mt-4"
-        *ngIf="examination.stateId.name=='WYK' || examination.stateId.name=='ZATW' || examination.stateId.name=='ANUL_KLAB'">
+        *ngIf="examination.status=='executed' || examination.status=='approved' || examination.status=='cancelled'">
         <!-- Title bar -->
         <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
             <h3><b>Uwagi kierownika</b></h3>
@@ -192,7 +190,7 @@
             <div class="col">
                 {{examination.supervisorNote}}
             </div>
-            <div class="col-1" *ngIf="examination.stateId.name=='WYK'">
+            <div class="col-1" *ngIf="examination.status=='executed'">
                 <!-- TODO check logged in user -->
                 <button class="btn btn-primary align-self-center my-2" (click)="openPopup('note')">Edytuj</button>
                 <!-- TODO add (click) -->

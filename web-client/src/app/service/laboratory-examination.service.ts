@@ -41,13 +41,23 @@ export class LaboratoryExaminationService {
   }
 
   getLaboratoryExam(id: number): Observable<LaboratoryExamination> {
-    //const labs = this.getAllLaboratoryExams()
-    //for (let lab of labs) {
-    //  if (lab.id == id) {
-    //    return lab
-    //  }
-    //}
-    return this.http.get<LaboratoryExamination>(`http://localhost:8080/api/laboratory_examinations/${id}/`)
+    return this.http.get<LaboratoryExamination>(`http://localhost:8080/api/laboratory_examinations/${id}/`).pipe(
+      map(labJson => new LaboratoryExamination(
+        labJson.id,
+        labJson.name,
+        labJson.status,
+        labJson.labWorker,
+        labJson.labSupervisor,
+        labJson.result,
+        labJson.doctorNote,
+        labJson.supervisorNote,
+        labJson.creationDate,
+        labJson.patient,
+        labJson.doctor,
+        labJson.executionCancellationDate,
+        labJson.approvalCancellationDate
+      ))
+    )
   }
 
   // Changing status of examination. No backend means mockup function
