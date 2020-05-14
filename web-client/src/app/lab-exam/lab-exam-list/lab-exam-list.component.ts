@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { LaboratoryExamination } from '../../data/examination/laboratory-examination'
+import { LaboratoryExaminationGeneral } from '../../data/examination/laboratory-examination-general'
 // Mock imports
 import { LaboratoryExaminationService } from '../../service/laboratory-examination.service'
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/service/user.service';
+import { User } from 'src/app/data/user/user';
 
 
 @Component({
@@ -11,18 +14,36 @@ import { Router } from '@angular/router';
 })
 export class LabExamListComponent implements OnInit {
 
-  __laboratoryList: LaboratoryExamination[]
-  laboratoryList: LaboratoryExamination[]
+  __laboratoryList: LaboratoryExaminationGeneral[]
+  laboratoryList: LaboratoryExaminationGeneral[]
+  userSub: Subscription
+  labSub: Subscription
+  user: User
 
-  filters = { 'ZLE': true, 'WYK': true, 'ANUL_LAB': true, 'ZATW': true, 'ANUL_KLAB': true }
+  filters = { 'in_progress': true, 'executed': true, 'cancelled': true, 'approved': true }
 
   // Constructor
-  constructor(private laboratoryService: LaboratoryExaminationService, private router: Router) { }
+  constructor(private laboratoryService: LaboratoryExaminationService, private userService: UserService, private router: Router) { }
 
   // Initialize values
   ngOnInit(): void {
-    this.__laboratoryList = this.laboratoryService.getAllLaboratoryExams()
-    this.laboratoryList = this.laboratoryService.getAllLaboratoryExams()
+    this.userSub = this.userService.getAuthenticationEvent().subscribe(user => {
+      this.user = user
+      if(this.user != null)
+        this.labSub = this.laboratoryService.getAllLaboratoryExams().subscribe(labs => this.__laboratoryList = labs)
+    })
+
+    this.userService.getAuthenticationEvent().subscribe(user => {
+      this.user = user
+      if(this.user != null)
+        this.labSub = this.laboratoryService.getAllLaboratoryExams().subscribe(labs => this.__laboratoryList = labs)
+    })
+
+    this.userService.getAuthenticationEvent().subscribe(user => {
+      this.user = user
+      if(this.user != null)
+        this.labSub = this.laboratoryService.getAllLaboratoryExams().subscribe(labs => this.laboratoryList = labs)
+    })
   }
 
   // Sorting function
@@ -30,10 +51,10 @@ export class LabExamListComponent implements OnInit {
     switch (option) {
       case 0:   // commision date newest first
         this.laboratoryList = this.__laboratoryList.sort((l1, l2) => {
-          if (l1.visitId.finalizationCancellationDate < l2.visitId.finalizationCancellationDate) {
+          if (l1.creationDate < l2.creationDate) {
             return 1
           }
-          if (l1.visitId.finalizationCancellationDate > l2.visitId.finalizationCancellationDate) {
+          if (l1.creationDate > l2.creationDate) {
             return -1
           }
           return 0
@@ -42,10 +63,10 @@ export class LabExamListComponent implements OnInit {
 
       case 1:   // commision date oldest first
         this.laboratoryList = this.__laboratoryList.sort((l1, l2) => {
-          if (l1.visitId.finalizationCancellationDate > l2.visitId.finalizationCancellationDate) {
+          if (l1.creationDate > l2.creationDate) {
             return 1
           }
-          if (l1.visitId.finalizationCancellationDate < l2.visitId.finalizationCancellationDate) {
+          if (l1.creationDate < l2.creationDate) {
             return -1
           }
           return 0
@@ -93,6 +114,17 @@ export class LabExamListComponent implements OnInit {
   // navigate to Examination details view
   navigateToDetails(id: number) {
     this.router.navigate(['/exam-list/' + id])
+  }
+
+  // deconstructor
+  ngOnDestroy(): void {
+    if(this.userSub != null) {
+      this.userSub.unsubscribe()
+    }
+
+    if(this.labSub != null) {
+      this.labSub.unsubscribe()
+    }
   }
 
 }

@@ -20,20 +20,14 @@
                 <div ngbDropdown class="d-inline-block" [autoClose]="false">
                     <button class="btn btn-outline-primary" ngbDropdownToggle>Filtruj</button>
                     <div ngbDropdownMenu>
-                        <label ngbDropdownItem><input type="checkbox" [checked]="filters['ZLE']"
-                                (change)="filters['ZLE'] = !filters['ZLE']">&ensp;Zlecone</label>
-                        <label ngbDropdownItem class="text-warning"><input type="checkbox" [checked]="filters['WYK']"
-                                (change)="filters['WYK'] = !filters['WYK']">&ensp;Wykonane</label>
-                        <label ngbDropdownItem class="text-success"><input type="checkbox" [checked]="filters['ZATW']"
-                                (change)="filters['ZATW'] = !filters['ZATW']">&ensp;Zatwierdzone</label>
-                        <label ngbDropdownItem class="text-danger"><input type="checkbox"
-                                [checked]="filters['ANUL_LAB']"
-                                (change)="filters['ANUL_LAB'] = !filters['ANUL_LAB']">&ensp;Anulowane przez
-                            laboranta</label>
-                        <label ngbDropdownItem class="text-danger"><input type="checkbox"
-                                [checked]="filters['ANUL_KLAB']"
-                                (change)="filters['ANUL_KLAB'] = !filters['ANUL_KLAB']">&ensp;Anulowane przez
-                            kierownika</label>
+                        <label ngbDropdownItem><input type="checkbox" [checked]="filters['in_progress']"
+                                (change)="filters['in_progress'] = !filters['in_progress']">&ensp;Zlecone</label>
+                        <label ngbDropdownItem class="text-warning"><input type="checkbox" [checked]="filters['executed']"
+                                (change)="filters['executed'] = !filters['executed']">&ensp;Wykonane</label>
+                        <label ngbDropdownItem class="text-success"><input type="checkbox" [checked]="filters['approved']"
+                                (change)="filters['approved'] = !filters['approved']">&ensp;Zatwierdzone</label>
+                        <label ngbDropdownItem class="text-danger"><input type="checkbox" [checked]="filters['cancelled']"
+                                (change)="filters['cancelled'] = !filters['cancelled']">&ensp;Anulowane</label>
                     </div>
                 </div>
 
@@ -55,17 +49,17 @@
 
     <!-- Examination list -->
     <div *ngFor="let lab of laboratoryList">
-        <div *ngIf="filters[lab.stateId.name]" class="container border rounded-lg mt-4">
+        <div *ngIf="true" class="container border rounded-lg mt-4">
             <!-- Examination title bar (id, title, status) -->
             <div class="row justify-content-md-center rounded-top" style="background-color: #cce4ff">
                 <div class="col align-self-center text-center"><b>{{lab.id}}</b></div>
-                <div class="col-6 align-self-center text-center"><b>{{lab.examinationId.name}}</b></div>
-                <div class="col-4 text-center" *ngIf="lab.stateId.name=='ZLE'"><b>Zlecone</b></div>
-                <div class="col-4 text-center text-warning" *ngIf="lab.stateId.name=='WYK'"><b>Wykonane</b></div>
-                <div class="col-4 text-center text-danger" *ngIf="lab.stateId.name=='ANUL_LAB'"><b>Anulowane przez
+                <div class="col-6 align-self-center text-center"><b>{{lab.name}}</b></div>
+                <div class="col-4 text-center" *ngIf="lab.status=='in_progress'"><b>Zlecone</b></div>
+                <div class="col-4 text-center text-warning" *ngIf="lab.status=='executed'"><b>Wykonane</b></div>
+                <div class="col-4 text-center text-danger" *ngIf="lab.status=='cancelled' && lab.approvalCancellationDate == null"><b>Anulowane przez
                         laboranta</b></div>
-                <div class="col-4 text-center text-success" *ngIf="lab.stateId.name=='ZATW'"><b>Zatwierdzone</b></div>
-                <div class="col-4 text-center text-danger" *ngIf="lab.stateId.name=='ANUL_KLAB'"><b>Anulowane przez
+                <div class="col-4 text-center text-success" *ngIf="lab.status=='approved'"><b>Zatwierdzone</b></div>
+                <div class="col-4 text-center text-danger" *ngIf="lab.status=='cancelled' && lab.approvalCancellationDate != null"><b>Anulowane przez
                         kierownika</b></div>
             </div>
 
@@ -76,19 +70,19 @@
                         <div class="col">Data zlecenia:</div>
                         <div class="col-8">{{lab.formatDate('visit')}}</div>
                     </div>
-                    <div class="row" *ngIf="lab.stateId.name=='ANUL_LAB' || lab.stateId.name=='ANUL_KLAB'">
+                    <div class="row" *ngIf="lab.status=='cancelled'">
                         <div class="col">Data anulowania:</div>
                         <div class="col-8">{{lab.formatDate('execution')}}</div>
                     </div>
-                    <div class="row" *ngIf="lab.stateId.name=='WYK' || lab.stateId.name=='ZATW'">
+                    <div class="row" *ngIf="lab.status=='executed' || lab.status=='approved'">
                         <div class="col">Data wykonania:</div>
                         <div class="col-8">{{lab.formatDate('execution')}}</div>
                     </div>
-                    <div class="row" *ngIf="lab.stateId.name=='ZATW'">
+                    <div class="row" *ngIf="lab.status=='approved'">
                         <div class="col">Data zatwierdzenia:</div>
                         <div class="col-8">{{lab.formatDate('approval')}}</div>
                     </div>
-                    <div class="row" *ngIf="lab.stateId.name=='ANUL_KLAB'">
+                    <div class="row" *ngIf="lab.status=='cancelled'">
                         <div class="col">Data odrzucenia:</div>
                         <div class="col-8">{{lab.formatDate('approval')}}</div>
                     </div>
@@ -101,5 +95,4 @@
             </div>
         </div>
     </div>
-
 </div>

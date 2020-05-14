@@ -19,7 +19,7 @@ export class LabExamDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.exam_id = Number(this.route.snapshot.paramMap.get('id'))
-    this.examination = this.laboratoryService.getLaboratoryExam(this.exam_id)
+    //this.examination = this.laboratoryService.getLaboratoryExam(this.exam_id)
   }
 
   // Change status

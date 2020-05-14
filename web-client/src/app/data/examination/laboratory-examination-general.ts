@@ -1,20 +1,9 @@
-import { Visit } from '../visit/visit'
-import { ExaminationDictionary } from './examination-dictionary'
 import { ExaminationState } from './examination-state'
-import { LabWorker } from '../labWorker/lab-worker'
-import { LabSupervisor } from '../labSupervisor/lab-supervisor'
 
-
-export class LaboratoryExamination {
+export class LaboratoryExaminationGeneral {
     id: number
-    examinationId: ExaminationDictionary
-    visitId: Visit
-    stateId: ExaminationState
-    labWorkerId: LabWorker
-    labSupervisorId: LabSupervisor
-    result: String
-    doctorNote: String
-    supervisorNote: String
+    name: string
+    status: string
     creationDate: Date
     executionCancellationDate: Date   // Dates are passed through HTML as Strings, change if You use different type
     approvalCancellationDate: Date    // Dates are passed through HTML as Strings, change if You use different type
@@ -23,7 +12,7 @@ export class LaboratoryExamination {
     formatDate(date: string): string {
         switch (date) {
             case 'visit':
-                var d = new Date(this.visitId.finalizationCancellationDate)
+                var d = new Date(this.creationDate)
                 break;
 
             case 'execution':
@@ -45,5 +34,15 @@ export class LaboratoryExamination {
             day = '0' + day;
 
         return [year, month, day].join('-');
+    }
+
+    // Constructor
+    constructor(id: number, name: string, creationDate: Date, executionCancellationDate: Date, approvalCancellationDate: Date, status: string) {
+        this.id = id
+        this.name = name
+        this.creationDate =  creationDate
+        this.executionCancellationDate = executionCancellationDate
+        this.approvalCancellationDate = approvalCancellationDate
+        this.status = status
     }
 }
