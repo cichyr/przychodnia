@@ -1,16 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 
-import { Doctor } from "../data/doctor/doctor";
-import { UserDetails } from '../data/userDetails/user-details';
-import { Patient } from '../data/patient/patient';
-import { Receptionist } from '../data/receptionist/receptionist';
-import { VisitState } from '../data/visit/visit-state';
-import { Visit } from '../data/visit/visit';
-import { LabSupervisor } from '../data/labSupervisor/lab-supervisor';
-import { LabWorker } from '../data/labWorker/lab-worker';
-import { ExaminationDictionary, examinationType } from '../data/examination/examination-dictionary';
-import { ExaminationState } from '../data/examination/examination-state';
 import { LaboratoryExamination } from '../data/examination/laboratory-examination';
 import { LaboratoryExaminationGeneral } from '../data/examination/laboratory-examination-general';
 import { Extractor } from '@angular/compiler';
@@ -25,8 +15,7 @@ export class LaboratoryExaminationService {
 
   constructor(private http: HttpClient) { }
 
-  // Service functions
-  //    TODO: Remake to db connections when backend is ready
+  // Getting Laboratory Examinations list
   getAllLaboratoryExams(): Observable<LaboratoryExaminationGeneral[]> {
     return this.http.get<LaboratoryExaminationGeneral[]>(`http://localhost:8080/api/laboratory_examinations`).pipe(
       map(labs => labs.map(labJson => new LaboratoryExaminationGeneral(
@@ -40,6 +29,7 @@ export class LaboratoryExaminationService {
     )
   }
 
+  // Getting Laboratory Examination details
   getLaboratoryExam(id: number): Observable<LaboratoryExamination> {
     return this.http.get<LaboratoryExamination>(`http://localhost:8080/api/laboratory_examinations/${id}/`).pipe(
       map(labJson => new LaboratoryExamination(
@@ -60,24 +50,42 @@ export class LaboratoryExaminationService {
     )
   }
 
-  // Changing status of examination. No backend means mockup function
-  changeExaminationStatus(status: string, examination: LaboratoryExamination): void {
-    
+  // Changing status of examination
+  changeExaminationStatus(status: string, id: number): Observable<LaboratoryExamination> {
+    switch(status)
+    {
+      case 'Done':
+        return this.http.put<LaboratoryExamination>(`http://localhost:8080/api/laboratory_examinations/${id}/approve_laborant`, null)
+        break
 
-    // put to DataBase
+      case 'CanWork':
+        return this.http.put<LaboratoryExamination>(`http://localhost:8080/api/laboratory_examinations/${id}/cancel_laborant`, null)
+        break
+
+      case 'Approve':
+        return this.http.put<LaboratoryExamination>(`http://localhost:8080/api/laboratory_examinations/${id}/approve_supervisor`, null)
+        break
+
+      case 'CanSup':
+        return this.http.put<LaboratoryExamination>(`http://localhost:8080/api/laboratory_examinations/${id}/cancel_supervisor`, null)
+        break
+    }
   }
 
-  changeExaminationResultNote(type: string, input: string, examination: LaboratoryExamination): void {
+  // Changing examination Result/SupervisorNote
+  changeExaminationResultNote(type: string, input: string, id: number): Observable<LaboratoryExamination> {
     switch (type) {
       case 'result':
-        examination.result = input
+        return this.http.put<LaboratoryExamination>(`http://localhost:8080/api/laboratory_examinations/${id}/result`,{
+          "result": input
+        })
         break
 
       case 'note':
-        examination.supervisorNote = input
+        return this.http.put<LaboratoryExamination>(`http://localhost:8080/api/laboratory_examinations/${id}/supervisor_note`,{
+          "doctorNote": input
+        })
         break
     }
-
-    // put to DataBase
   }
 }
