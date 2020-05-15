@@ -25,23 +25,23 @@ export class LabExamDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.exam_id = Number(this.route.snapshot.paramMap.get('id'))
-    
+
     this.userSub = this.userService.getAuthenticationEvent().subscribe(user => {
       this.user = user
-      if(this.user != null)
+      if (this.user != null)
         this.labSub = this.laboratoryService.getLaboratoryExam(this.exam_id).subscribe(lab => this.examination = lab)
     })
 
     this.userService.getAuthenticationEvent().subscribe(user => {
       this.user = user
-      if(this.user != null)
+      if (this.user != null)
         this.labSub = this.laboratoryService.getLaboratoryExam(this.exam_id).subscribe(lab => this.examination = lab)
     })
   }
 
   // Change status
   changeStatus(status: string): void {
-    this.laboratoryService.changeExaminationStatus(status, this.examination)
+    this.labSub = this.laboratoryService.changeExaminationStatus(status, this.exam_id).subscribe(exam => this.examination = exam)
   }
 
   // Navigate to Examination list view
@@ -74,9 +74,40 @@ export class LabExamDetailsComponent implements OnInit {
 
   // Set text retrieved from Modal
   setText(type: string, input: string): void {
-    this.laboratoryService.changeExaminationResultNote(type, input, this.examination)
+    this.labSub = this.laboratoryService.changeExaminationResultNote(type, input, this.exam_id).subscribe(exam => this.examination = exam)
   }
 
+  // Date formating function
+  public formatDate(date: string): string {
+    switch (date) {
+      case 'visit':
+        var d = new Date(this.examination.creationDate)
+        break;
+
+      case 'execution':
+        var d = new Date(this.examination.executionCancellationDate)
+        break;
+
+      case 'approval':
+        var d = new Date(this.examination.approvalCancellationDate)
+        break;
+    }
+
+    var month = '' + (d.getMonth() + 1)
+    var day = '' + d.getDate()
+    var year = d.getFullYear()
+
+    if (month.length < 2)
+      month = '0' + month;
+    if (day.length < 2)
+      day = '0' + day;
+
+    return [year, month, day].join('-');
+  }
+
+  getRole(): string {
+    return this.userService.getUserRole()
+  }
 }
 
 

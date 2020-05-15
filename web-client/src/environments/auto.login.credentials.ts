@@ -1,4 +1,4 @@
 export const dev_only_credentials = {
-  username: 'cquenby1',
-  password: 'e2cc485cab35f1272cdf880c7bb3902b'
+  username: 'vwaldrum0',
+  password: '5e586bf6c9dfac3337a6e0b0c290fab9'
 };

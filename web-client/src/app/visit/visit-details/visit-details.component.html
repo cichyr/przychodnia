@@ -1,0 +1,248 @@
+<div class="">
+
+  <!-- Header title and buttons -->
+  <div class="container">
+    <div class="row mt-4 align-self-center">
+
+      <!-- Back button -->
+      <div class="col align-self-center">
+        <button class="btn btn-primary" (click)="navigateToDoctorVisitList()">Wróć</button>
+      </div>
+
+      <!-- Title -->
+      <div class="row">
+        <h1 class="container text-center">
+          <b>Szczegóły wizyty numer {{visit.visitId}}</b>
+        </h1>
+      </div>
+
+      <!-- Placeholder -->
+      <div class="col">
+      </div>
+    </div>
+  </div>
+
+  <!-- Basic information -->
+  <div class="container border rounded-lg mt-4">
+    <!-- Visit title bar -->
+    <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+      <h3><b>Informacje podstawowe</b></h3>
+    </div>
+
+    <!-- Visit basic info -->
+    <div class="row border-top border-bottom">
+
+      <!-- Status -->
+      <div class="col text-center">
+        <h5 class="mt-2 text-center text-primary" *ngIf="visit.state.name=='appointed'"><b>Zarejestrowana</b><br></h5>
+        <h5 class="mt-2 text-center text-danger" *ngIf="visit.state.name=='cancelled'"><b>Anulowana</b><br>
+        </h5>
+        <h5 class="mt-2 text-center text-success" *ngIf="visit.state.name=='finished'"><b>Zakończona</b><br></h5>
+      </div>
+    </div>
+
+    <!-- Visit basic info -->
+    <div class="row">
+
+      <!-- Patient info -->
+      <div class="col ml-1 border-right">
+        <b>Pacjent:</b><br>
+        <div class="row">
+          <div class="col text-left">
+            Imię:<br>
+            Nazwisko:<br>
+            PESEL:<br>
+          </div>
+          <div class="col text-left">
+            {{visit.patient.firstName}}<br>
+            {{visit.patient.lastName}}<br>
+            {{visit.patient.peselNumber}}<br>
+          </div>
+        </div>
+      </div>
+
+      <div class="col my-1 ml-1 border-right">
+        <b>Rejestrator:</b><br>
+        <div class="row">
+          <div class="col text-left">
+            Imię:<br>
+            Nazwisko:<br>
+            Nr licencji:<br>
+          </div>
+          <div class="col text-left">
+            {{visit.receptionist.firstName}}<br>
+            {{visit.receptionist.lastName}}<br>
+            {{visit.receptionist.licenseCode}}<br>
+          </div>
+        </div>
+      </div>
+
+      <!-- Doctor info -->
+      <div class="col my-1 ml-1 border-right">
+        <b>Lekarz:</b><br>
+        <div class="row">
+          <div class="col text-left">
+            Imię:<br>
+            Nazwisko:<br>
+            Nr licencji:<br>
+          </div>
+          <div class="col text-left">
+            {{visit.doctor.firstName}}<br>
+            {{visit.doctor.lastName}}<br>
+            {{visit.doctor.licenseCode}}<br>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dates and accept/cancel for doctor -->
+      <div class="col-4 my-1">
+
+        <!-- Dates -->
+        <div class="row">
+          <div class="col-sm-8">Data zlecenia:</div>
+          <div class="col-sm-4 text-right">{{visit.registrationDate | date:'dd.MM.yyyy' }}</div>
+        </div>
+
+        <div class="row" *ngIf="visit.state.name=='cancelled'">
+          <div class="col-sm-8">Data anulowania</div>
+          <div class="col-sm-4 text-right">{{visit.finalizationCancellationDate | date:'dd.MM.yyyy'}}</div>
+        </div>
+
+        <div class="row" *ngIf="visit.state.name=='finished'">
+            <div class="col-sm-8">Data zakończenia:</div>
+            <div class="col-sm-4 text-right">{{visit.finalizationCancellationDate | date:'dd.MM.yyyy'}}</div>
+        </div>
+
+        <div class="row" *ngIf="visit.state.name=='appointed'">
+            <div class="col-sm-8">Zarejestrowana na:</div>
+            <div class="col-sm-4 text-right">{{visit.finalizationCancellationDate | date:'dd.MM.yyyy'}}</div>
+        </div>
+
+        <div *ngIf="visit.state.name=='appointed'">
+          <div class="row mt-2 justify-content-center" *ngIf="true">
+            <button class="btn btn-success btn-sm mx-2" *ngIf="visit.state.name=='appointed' && visit.description!=null &&
+            visit.description!='' && visit.diagnose!=null && visit.diagnose!='' && visit.registrationDate!=null" (click)="finalizeVisit()">Zakończ</button>
+            <button class="btn btn-danger mx-2 btn-sm" *ngIf="visit.state.name=='appointed'" (click)="cancelVisit()">Anuluj</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="container border rounded-lg mt-4">
+    <!-- Title bar -->
+    <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+      <h3><b>Opis</b></h3>
+    </div>
+
+    <!-- Description -->
+    <div class="row border-top">
+      <div class="col">
+        {{visit.description}}
+      </div>
+      <div class="col-1" *ngIf="visit.state.name=='appointed'">
+        <button class="btn btn-primary btn-sm align-self-center my-2" (click)="openPopup('description')">Edytuj</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Diagnose -->
+  <div class="container border rounded-lg mt-4">
+    <!-- Title bar -->
+    <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+      <h3><b>Diagnoza</b></h3>
+    </div>
+
+    <div class="row border-top">
+      <div class="col">
+        {{visit.diagnose}}
+      </div>
+      <div class="col-1" *ngIf="visit.state.name=='appointed'">
+        <button class="btn btn-primary btn-sm align-self-center my-2" (click)="openPopup('diagnose')">Edytuj</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="container border rounded-lg mt-4">
+    <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+      <div class="col text-center border-right">
+        <h3><b>Badania fizykalne</b></h3>
+      </div>
+      <div class="col text-center">
+        <h3><b>Badania laboratoryjne</b></h3>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col text-center border-right mb-3">
+        <button class="btn btn-primary align-self-center font-weight-bold my-2 add-button" *ngIf="visit.state.name=='appointed'">+</button>
+        <!-- TODO add click -->
+        <div class="row">
+          <div class="col">
+            <div class="container border rounded-lg mt-4 mb-2" *ngFor="let examination of visit.physicalExaminations">
+              <div class="row justify-content-center rounded-top" style="background-color: #a7fb83">
+                <h3><b>Badanie nr {{examination.id}}</b></h3>
+              </div>
+              <div class="col">
+                <div class="row">
+                  <div class="col text-left">
+                    {{examination.name}}
+                  </div>
+                  <div class="col text-right">
+                    <button class="btn btn-success btn-sm my-3">Szczegóły</button>
+                    <!-- TODO add click -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col text-center mb-3">
+        <button class="btn btn-primary btn align-self-center add-button font-weight-bold my-2" *ngIf="visit.state.name=='appointed'"> + </button>
+        <!-- TODO add click -->
+        <div class="row">
+          <div class="col">
+            <div class="container border rounded-lg mt-4 mb-2" *ngFor="let examination of visit.laboratoryExaminations">
+              <div class="row justify-content-center rounded-top" style="background-color: #fcfbb5
+">
+                <h3><b>Badanie nr {{examination.id}}</b></h3>
+              </div>
+              <div class="col">
+                <div class="row">
+                  <div class="col text-primary  mt-2 mb-2" *ngIf="examination.status=='in_progress'">
+                    <b class="text-center">W realizacji</b>
+                  </div>
+                  <div class="col text-danger mt-2 mb-2" *ngIf="examination.status=='cancelled'">
+                    <b class="text-center">Anulowane</b>
+                  </div>
+                  <div class="col text-success  mt-2 mb-2" *ngIf="examination.status=='executed'">
+                    <b class="text-center">Zrealizowane</b>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col">
+                    <div class="row text-left">
+                      {{examination.name}}
+                    </div>
+                  </div>
+                  <div class="col text-right">
+                    <button class="btn btn-warning my-3 btn-sm">Szczegóły</button>
+                    <!-- TODO add click -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+
+

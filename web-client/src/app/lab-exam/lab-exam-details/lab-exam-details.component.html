@@ -12,7 +12,7 @@
             <!-- Title -->
             <div class="row">
                 <h1 class="container text-center">
-                    <b>Szczegóły badania numer {{examination.id}}</b>
+                    <b>Szczegóły badania numer {{this.exam_id}}</b>
                 </h1>
             </div>
 
@@ -86,10 +86,9 @@
                 <!-- Order date -->
                 <div class="row">
                     <div class="col-sm-8">Data zlecenia:</div>
-                    <div class="col-sm-4 text-right">{{examination.formatDate('visit')}}</div>
+                    <div class="col-sm-4 text-right">{{this.formatDate('visit')}}</div>
                 </div>
-                <div class="row mt-4 justify-content-center align-middle" *ngIf="examination.status=='in_progress'">
-                    <!-- TODO check logged in user -->
+                <div class="row mt-4 justify-content-center align-middle" *ngIf="examination.status=='in_progress' && getRole() == 'LABW'">
                     <button class="btn btn-success mx-2" (click)="changeStatus('Done')">Wykonaj</button>
                     <button class="btn btn-danger mx-2" (click)="changeStatus('CanWork')">Anuluj</button>
                 </div>
@@ -97,21 +96,18 @@
                 <!-- Worker cancel date -->
                 <div class="row" *ngIf="examination.status=='cancelled'">
                     <div class="col-sm-8">Data anulowania</div>
-                    <div class="col-sm-4 text-right">{{examination.formatDate('execution')}}</div>
+                    <div class="col-sm-4 text-right">{{this.formatDate('execution')}}</div>
                 </div>
 
                 <!-- Execution date and buttons for supervisor -->
                 <div *ngIf="examination.status=='executed'">
                     <div class="row">
                         <div class="col-sm-8">Data wykonania:</div>
-                        <div class="col-sm-4 text-right">{{examination.formatDate('execution')}}</div>
+                        <div class="col-sm-4 text-right">{{this.formatDate('execution')}}</div>
                     </div>
-                    <div class="row mt-2 justify-content-center" *ngIf="true">
-                        <!-- TODO check logged in user -->
+                    <div class="row mt-2 justify-content-center" *ngIf="getRole() == 'LABS'">
                         <button class="btn btn-success mx-2" (click)="changeStatus('Approve')">Zatwierdź</button>
-                        <!-- TODO add (click) -->
                         <button class="btn btn-danger mx-2" (click)="changeStatus('CanSup')">Anuluj</button>
-                        <!-- TODO add (click) -->
                     </div>
                 </div>
 
@@ -119,11 +115,11 @@
                 <div *ngIf="examination.status=='approved'">
                     <div class="row">
                         <div class="col-sm-8">Data wykonania:</div>
-                        <div class="col-sm-4 text-right">{{examination.formatDate('execution')}}</div>
+                        <div class="col-sm-4 text-right">{{this.formatDate('execution')}}</div>
                     </div>
                     <div class="row">
                         <div class="col-sm-8">Data zatwierdzenia:</div>
-                        <div class="col-sm-4 text-right">{{examination.formatDate('approval')}}</div>
+                        <div class="col-sm-4 text-right">{{this.formatDate('approval')}}</div>
                     </div>
                 </div>
 
@@ -131,11 +127,11 @@
                 <div *ngIf="examination.status=='cancelled'">
                     <div class="row">
                         <div class="col-sm-8">Data wykonania:</div>
-                        <div class="col-sm-4 text-right">{{examination.formatDate('execution')}}</div>
+                        <div class="col-sm-4 text-right">{{this.formatDate('execution')}}</div>
                     </div>
                     <div class="row">
                         <div class="col-sm-8">Data odrzucenia:</div>
-                        <div class="col-sm-4 text-right">{{examination.formatDate('approval')}}</div>
+                        <div class="col-sm-4 text-right">{{this.formatDate('approval')}}</div>
                     </div>
                 </div>
             </div>
@@ -169,10 +165,8 @@
             <div class="col">
                 {{examination.result}}
             </div>
-            <div class="col-1" *ngIf="examination.status=='in_progress'">
-                <!-- TODO check logged in user -->
+            <div class="col-1" *ngIf="examination.status=='in_progress' && getRole() == 'LABW'">
                 <button class="btn btn-primary align-self-center my-2" (click)="openPopup('result')">Edytuj</button>
-                <!-- TODO add (click) -->
             </div>
         </div>
     </div>
@@ -190,10 +184,8 @@
             <div class="col">
                 {{examination.supervisorNote}}
             </div>
-            <div class="col-1" *ngIf="examination.status=='executed'">
-                <!-- TODO check logged in user -->
+            <div class="col-1" *ngIf="examination.status=='executed' && getRole() == 'LABS'">
                 <button class="btn btn-primary align-self-center my-2" (click)="openPopup('note')">Edytuj</button>
-                <!-- TODO add (click) -->
             </div>
         </div>
     </div>

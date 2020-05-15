@@ -56,19 +56,15 @@ export class LaboratoryExaminationService {
     {
       case 'Done':
         return this.http.put<LaboratoryExamination>(`http://localhost:8080/api/laboratory_examinations/${id}/approve_laborant`, null)
-        break
 
       case 'CanWork':
         return this.http.put<LaboratoryExamination>(`http://localhost:8080/api/laboratory_examinations/${id}/cancel_laborant`, null)
-        break
 
       case 'Approve':
         return this.http.put<LaboratoryExamination>(`http://localhost:8080/api/laboratory_examinations/${id}/approve_supervisor`, null)
-        break
 
       case 'CanSup':
         return this.http.put<LaboratoryExamination>(`http://localhost:8080/api/laboratory_examinations/${id}/cancel_supervisor`, null)
-        break
     }
   }
 

@@ -5,11 +5,12 @@ import {Patient} from '../patient/patient'
 
 
 export class Visit {
+
     id: number
-    receptionistId: Receptionist
-    doctorId: Doctor
-    patientId: Patient
-    stateId: VisitState
+    receptionist: Receptionist
+    doctor: Doctor
+    patient: Patient
+    state: VisitState
     description: String
     diagnose: String
     registrationDate: String                // Dates are passed through HTML as Strings, change if You use different type

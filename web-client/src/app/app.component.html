@@ -12,7 +12,7 @@
             <fa-icon [icon]="microscope"></fa-icon>&nbsp;
             Laboratorium
           </a>
-          <a ngbDropdownItem (click)="navigateToVisit()" *ngIf="this.getRole() == 'DOC' || this.getRole() == 'LABS'"
+          <a ngbDropdownItem (click)="navigateToVisit()" *ngIf="this.getRole() == 'DOC' || this.getRole() == 'REC'"
              class="cursor-ptr">
             <fa-icon [icon]="visit"></fa-icon>&nbsp;&nbsp;
             Wizyty

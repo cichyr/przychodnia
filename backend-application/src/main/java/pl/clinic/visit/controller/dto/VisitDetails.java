@@ -1,7 +1,7 @@
 package pl.clinic.visit.controller.dto;
 
 import pl.clinic.doctor.model.Doctor;
-import pl.clinic.examination_category.controller.ExaminationBasic;
+import pl.clinic.examination_category.controller.dto.ExaminationBasic;
 import pl.clinic.labolratory_examination.controller.dto.LaboratoryExaminationVisitDetails;
 import pl.clinic.patient.model.Patient;
 import pl.clinic.receptionist.controller.dto.ReceptionistBasic;
