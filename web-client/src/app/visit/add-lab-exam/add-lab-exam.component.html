@@ -1,0 +1,80 @@
+<div *ngIf="stage==1">
+    <!-- Nagłówek -->
+    <div class="container">
+        <div class="row mt-4 align-self-center">
+            <!-- Przycisk wróć -->
+            <div class="col text-center">
+                <button (click)="navigateToVisitDetails()" class="btn btn-primary btn-sm" >Wróć</button>
+            </div>
+            <!-- Tytuł -->
+            <div class="row">
+                <h1 class="container text-center">
+                    <b>Wybierz typ badania laboratoryjnego</b>
+                </h1>
+            </div>
+            <!-- Placeholder-->
+            <div class="col"></div>
+        </div>
+    </div>
+
+    <!-- TODO Panel wyszukiwania typu badania -->
+    
+    
+    <!-- Wyświetlanie listy typów badań laboratoryjnych -->
+    <div *ngFor="let examinationDictionary of examinationDictionaryList">
+        <div class="container border rounded-lg mt-4"><!-- ramka do okola z zaokraglonymi brzegami + odstepy 4 linii -->
+            <div class="row justify-content-md-center rounded-top" style="background-color: #cce4ff">
+                <div class="col align-self-center text-left">
+                    <b>
+                        Kod: {{examinationDictionary.id}}
+                    </b>
+                </div>
+                <div class="col align-self-center text-center">
+                    <b>
+                        Nazwa: {{examinationDictionary.name}}
+                    </b>
+                </div>
+
+                <!-- Przycisk wybierz Typ badania-->
+                <div class="col text-right">
+                    <button (click)="selectExaminationDictionary(examinationDictionary)" class="btn btn-primary btn-sm" >Wybierz</button>
+                </div>
+            </div>
+        </div> <!-- niebieski pasek z imieniem, nazwiskiem i peselem pacjenta oraz przyciskiem wybierz-->
+    </div>
+</div>
+
+<div *ngIf="stage==2">
+    <!-- Nagłówek -->
+    <div class="container">
+        <div class="row mt-4">
+            <!-- Przycisk wróć -->
+            <div class="col text-center">
+                <button (click)="stage=1" class="btn btn-primary btn-sm" >Wróć</button>
+            </div>
+            <!-- Tytuł -->
+            <div class="row">
+                <h1 class="container text-center">
+                    <b>Uwagi lekarza</b>
+                </h1>
+            </div>
+            <!-- Przycisk zatwierdź-->
+            <div class="col text-right">
+                <button (click)="selectExaminationDictionary(examinationDictionary)" class="btn btn-primary btn-sm" >Zatwierdź</button>
+            </div>
+        </div>
+    </div>
+
+    <form>
+        <div class="container">
+            <div class="row mt-4 align-self-center">
+                <div class="col-auto align-self-center">
+                    <div class="form-group">
+                        <label for="result">Uwagi lekarza</label>
+                        <input #box1 (keyup)="result=box1.value" type="text" class="form-control" placeholder="Wpisz uwagi lekarza">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

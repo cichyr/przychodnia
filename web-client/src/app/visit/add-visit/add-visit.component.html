@@ -1,0 +1,172 @@
+<!-- Etap 1 - wybór pacjenta -->
+<div *ngIf="stage==1">
+    <!-- Nagłówek -->
+    <div class="container">
+        <div class="row mt-4 align-self-center">
+            <!-- Przycisk wróć -->
+            <div class="col align-self-center">
+                <button (click)="navigateToRecVisitList()" class="btn btn-primary" >Wróć</button>
+            </div>
+            <!-- Tytuł -->
+            <div class="row">
+                <h1 class="container text-center">
+                    <b>Wybierz pacjenta</b>
+                </h1>
+            </div>
+            <!-- Placeholder-->
+            <div class="col"></div>
+        </div>
+    </div>
+    <!-- Panel wyszukiwania pacjenta -->
+    <form>
+        <div class="row mt-4 align-self-center">
+            <div class="col-auto">
+                <div class="form-group">
+                    <label for="patientSought.firstName">Imię</label>
+                    <input #box1 (keyup)="patientSought.firstName=box1.value" type="text" class="form-control" placeholder="Wpisz imię">
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="form-group">
+                    <label for="patientSought.lastName">Nazwisko</label>
+                    <input #box2 (keyup)="patientSought.lastName=box2.value"type="text" class="form-control" placeholder="Wpisz nazwisko">
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="form-group">
+                    <label for="patientSought.peselNumber">Numer PESEL</label>
+                    <input #box3 (keyup)="patientSought.peselNumber=box3.value"type="text" class="form-control" placeholder="Wpisz numer PESEL">
+                </div>
+            </div>
+
+            <div class="col-auto align-self-center">
+                <li (click)="searchPatients()" class="fa fa-2x fa-search mr-2 text-black-50 my-auto cursor-ptr"></li>
+            </div>
+        </div>
+    </form>
+    
+    <!-- Wyświetlanie listy pacjentów. -->
+    <div *ngFor="let patient of patientList">
+        <div class="container border rounded-lg mt-4"><!-- ramka do okola z zaokraglonymi brzegami + odstepy 4 linii -->
+            <div class="row justify-content-md-center rounded-top" style="background-color: #cce4ff">
+                <div class="col align-self-center text-left">
+                    <b>
+                        Imię: {{patient.firstName}}
+                    </b>
+                </div>
+                <div class="col align-self-center text-center">
+                    <b>
+                        Nazwisko: {{patient.lastName}}
+                    </b>
+                </div>
+                <div class="col align-self-center text-center">
+                    <b>
+                        PESEL: {{patient.peselNumber}}
+                    </b>
+                </div>
+                <!-- Przycisk wybierz pacjenta-->
+                <div class="col text-right">
+                    <button (click)="selectPatient(patient)" class="btn btn-primary btn-sm" >Wybierz</button>
+                </div>
+            </div>
+        </div> <!-- niebieski pasek z imieniem, nazwiskiem i peselem pacjenta oraz przyciskiem wybierz-->
+    </div>
+</div>
+
+<!-- Etap 2 - wybór lekarza-->
+<div *ngIf="stage==2">
+    <!-- Nagłówek -->
+    <div class="container">
+        <div class="row mt-4 align-self-center">
+            <!-- Przycisk wróć -->
+            <div class="col align-self-center">
+                <button (click)="this.stage=1" class="btn btn-primary" >Wróć</button>
+            </div>
+            <!-- Tytuł -->
+            <div class="row">
+                <h1 class="container text-center">
+                    <b>Wybierz lekarza</b>
+                </h1>
+            </div>
+            <!-- Placeholder-->
+            <div class="col"></div>
+        </div>
+    </div>
+    <!-- Panel wyszukiwania lekarza-->
+    <form>
+        <div class="row mt-4 align-self-center">
+            <div class="col-auto">
+                <div class="form-group">
+                    <label for="doctorSought.firstName">Imię</label>
+                    <input #box4 (keyup)="doctorSought.firstName=box4.value" type="text" class="form-control" placeholder="Wpisz imię">
+                  </div>
+            </div>
+            <div class="col-auto">
+                <div class="form-group">
+                    <label for="doctorSought.lastName">Nazwisko</label>
+                    <input #box5 (keyup)="doctorSought.lastName=box5.value" type="text" class="form-control" placeholder="Wpisz nazwisko">
+                  </div>
+            </div>
+            <div class="col-auto">
+                <div class="form-group">
+                    <label for="doctorSought.licenseCode">Numer licencji</label>
+                    <input #box6 (keyup)="doctorSought.licenseCode=box6.value" type="text" class="form-control" placeholder="Wpisz numer licencji">
+                  </div>
+            </div>
+            <div class="col-auto align-self-center">
+                <li (click)="searchDoctors()" class="fa fa-2x fa-search mr-2 text-black-50 my-auto cursor-ptr"></li>
+            </div>
+        </div>
+    </form>
+    <!-- Wyświetlanie listy lekarzy. -->
+    <div *ngFor="let doctor of doctorList">
+        <div class="container border rounded-lg mt-4"><!-- ramka do okola z zaokraglonymi brzegami + odstepy 4 linii -->
+            <div class="row justify-content-md-center rounded-top" style="background-color: #cce4ff">
+                <div class="col align-self-center text-left">
+                    <b>
+                        Imię: {{doctor.firstName}}
+                    </b>
+                </div>
+                <div class="col align-self-center text-center">
+                    <b>
+                        Nazwisko: {{doctor.lastName}}
+                    </b>
+                </div>
+                <div class="col align-self-center text-center">
+                    <b>
+                        Numer licencji: {{doctor.licenseCode}}
+                    </b>
+                </div>
+                <!-- Przycisk wybierz lekarza -->
+                <div class="col text-right">
+                    <button (click)="selectDoctor(doctor)" class="btn btn-primary btn-sm" >Wybierz</button>
+                </div>
+            </div>
+        </div> <!-- niebieski pasek z imieniem, nazwiskiem i peselem lekarza oraz przyciskiem wybierz -->
+    </div>
+</div>
+
+
+<!-- Etap 3 - TODO Alert Potwierdzenie -->
+<div *ngIf="stage==3">
+    <!-- Nagłówek -->
+    <div class="container">
+        <div class="row mt-4 align-self-center">
+            <!-- Przycisk wróć -->
+            <div class="col align-self-center">
+                <button (click)="this.stage=2" class="btn btn-primary" >Wróć</button>
+            </div>
+            <!-- Tytuł -->
+            <div class="row">
+                <h1 class="container text-center">
+                    <b>Zatwierdź wizytę</b>
+                </h1>
+            </div>
+            <!-- Zatwierdź wizytę TODO -->
+            <div class="col align-self-center">
+                <button (click)="confirmAddVisit()" class="btn btn-primary" >Zatwierdź</button>
+            </div>
+        </div>
+    </div>
+    {{visitToAdd.patientId}}
+</div>

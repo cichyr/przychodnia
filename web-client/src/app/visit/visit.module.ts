@@ -6,9 +6,12 @@ import {NgbDropdownModule} from "@ng-bootstrap/ng-bootstrap";
 import { ReceptionistVisitListComponent } from './receptionist-visit-list/receptionist-visit-list.component';
 import {BrowserModule} from "@angular/platform-browser";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { AddVisitComponent } from './add-visit/add-visit.component';
+import { AddPhysicalExamComponent } from './add-physical-exam/add-physical-exam.component';
+import { AddLabExamComponent } from './add-lab-exam/add-lab-exam.component';
 
 @NgModule({
-  declarations: [DoctorVisitListComponent, VisitDetailsComponent, ReceptionistVisitListComponent],
+  declarations: [DoctorVisitListComponent, VisitDetailsComponent, ReceptionistVisitListComponent, AddVisitComponent, AddPhysicalExamComponent, AddLabExamComponent],
     imports: [
         CommonModule,
         NgbDropdownModule,
