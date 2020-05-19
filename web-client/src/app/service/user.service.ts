@@ -63,5 +63,13 @@ export class UserService {
       return "NONE"
     }
   }
+
+  getId(): number{
+    if(this.hasUser()){
+      return this.user.id
+    } else{
+      return 0
+    }
+  }
  
 }

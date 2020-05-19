@@ -11,6 +11,9 @@ import {UserDetailsComponent} from './main/user-details/user-details.component'
 import {AuthGuardService} from './service/auth-guard.service'
 import {ReceptionistVisitListComponent} from "./visit/receptionist-visit-list/receptionist-visit-list.component";
 import {VisitDetailsComponent} from "./visit/visit-details/visit-details.component";
+import { AddVisitComponent } from './visit/add-visit/add-visit.component';
+import { AddPhysicalExamComponent } from './visit/add-physical-exam/add-physical-exam.component';
+import { AddLabExamComponent } from './visit/add-lab-exam/add-lab-exam.component';
 
 const routes: Routes = [
   {path: 'login-page', component: LoginPageComponent},
@@ -22,7 +25,10 @@ const routes: Routes = [
       {path: 'exam-list/:id', component: LabExamDetailsComponent},
       {path: 'exam-list', component: LabExamListComponent},
       {path: 'doctor-visit-list', component: DoctorVisitListComponent},
-      {path: 'visit-details/:id', component: VisitDetailsComponent}
+      {path: 'visit-details/:id', component: VisitDetailsComponent},
+      {path: 'add-visit', component: AddVisitComponent},
+      {path: 'add-physical-exam', component: AddPhysicalExamComponent},
+      {path: 'add-lab-exam', component: AddLabExamComponent}
     ]
   }
 ]

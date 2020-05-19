@@ -1,4 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Router} from '@angular/router'
 import {ReceptionistVisit} from "../../data/visit/receptionist-visit";
 import {ReceptionistVisitListService} from '../../service/receptionist-visit-list.service'
 import {User} from "../../data/user/user";
@@ -23,7 +24,7 @@ export class ReceptionistVisitListComponent implements OnInit, OnDestroy {
   cancelVisitSub: Subscription
   cancelButtonPressed = false
 
-  constructor(private visitService: ReceptionistVisitListService, private userService: UserService) {
+  constructor(private router: Router, private visitService: ReceptionistVisitListService, private userService: UserService) {
     setInterval(() => this.closeAlert(), 8000);
   }
 
@@ -120,6 +121,9 @@ export class ReceptionistVisitListComponent implements OnInit, OnDestroy {
     this.cancelButtonPressed = false;
   }
 
+  navigateToAddVisit() {
+      this.router.navigate(['/add-visit'])
+  }
 
   ngOnDestroy(): void {
     if (this.userSub != null)

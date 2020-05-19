@@ -7,6 +7,7 @@ import {UserService} from "../../service/user.service";
 import {VisitDetails} from "../../data/visit/visit-details";
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {TextInputComponent} from "../../modals/text-input/text-input.component";
+import { DataExchangeService } from 'src/app/service/data-exchange.service';
 
 @Component({
   selector: 'app-visit-details',
@@ -21,10 +22,11 @@ export class VisitDetailsComponent implements OnInit {
   userSub: Subscription
   visitSub: Subscription
 
-  constructor(private router: Router, private visitService: VisitDetailsService, private userService: UserService, private route: ActivatedRoute, private modalService: NgbModal) { }
+  constructor(private router: Router, private dataExchange: DataExchangeService, private visitService: VisitDetailsService, private userService: UserService, private route: ActivatedRoute, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.visitId = Number(this.route.snapshot.paramMap.get('id'));
+    this.dataExchange.setCurrentVisit(this.visitId)
     this.userSub =
       this.userService.getAuthenticationEvent().subscribe(user => {
           this.user = user;
@@ -44,6 +46,14 @@ export class VisitDetailsComponent implements OnInit {
 
   navigateToDoctorVisitList(): void {
     this.router.navigate(['doctor-visit-list']);
+  }
+
+  navigateToAddPhysicalExam() {
+    this.router.navigate(['/add-physical-exam'])
+  }
+
+  navigateToAddLabExam() {
+    this.router.navigate(['/add-lab-exam'])
   }
 
   // Open modal
