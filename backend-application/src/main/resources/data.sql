@@ -270,16 +270,16 @@ insert into visit ( receptionist_id, doctor_id, patient_id, state_id, descriptio
 insert into visit ( receptionist_id, doctor_id, patient_id, state_id, description, diagnose, registration_date, finalization_cancellation_date) values ( 1, 1, 2, 1, 'Fever', 'G123', '2017-12-12', '2019-07-03');
 insert into visit ( receptionist_id, doctor_id, patient_id, state_id, registration_date, finalization_cancellation_date) values ( 5, 1, 8, 1, '2017-12-12', '2019-07-03');
 
-insert into examination_category ( name, type) values ('Replacement of R Ext Carotid with Synth Sub, Open Approach', 'P');
-insert into examination_category ( name, type) values ('Transfusion of Nonaut WBC into Central Vein, Perc Approach', 'P');
-insert into examination_category ( name, type) values ('Destruction of Transverse Colon, Open Approach', 'P');
-insert into examination_category ( name, type) values ('Drain of R Lacrimal Bone with Drain Dev, Perc Endo Approach', 'L');
-insert into examination_category ( name, type) values ('Insertion of Other Device into Mediastinum, Perc Approach', 'P');
-insert into examination_category ( name, type) values ('Removal of Monitoring Device from Stomach, Open Approach', 'L');
-insert into examination_category ( name, type) values ('Extirpate matter from 1 Temporal Art, Bifurc, Perc Endo', 'L');
-insert into examination_category ( name, type) values ('Insertion of Stimulator Lead into Up Muscle, Perc Approach', 'L');
-insert into examination_category ( name, type) values ('Resection of Soft Palate, Open Approach', 'L');
-insert into examination_category ( name, type) values ( 'Bypass Azygos Vein to Upper Vein, Perc Endo Approach', 'P');
+insert into examination_category (code, name, type) values (1, 'Replacement of R Ext Carotid with Synth Sub, Open Approach', 'P');
+insert into examination_category (code, name, type) values (2, 'Transfusion of Nonaut WBC into Central Vein, Perc Approach', 'P');
+insert into examination_category (code, name, type) values (3,'Destruction of Transverse Colon, Open Approach', 'P');
+insert into examination_category (code, name, type) values (4,'Drain of R Lacrimal Bone with Drain Dev, Perc Endo Approach', 'L');
+insert into examination_category (code, name, type) values (5,'Insertion of Other Device into Mediastinum, Perc Approach', 'P');
+insert into examination_category (code, name, type) values (6,'Removal of Monitoring Device from Stomach, Open Approach', 'L');
+insert into examination_category (code, name, type) values (7,'Extirpate matter from 1 Temporal Art, Bifurc, Perc Endo', 'L');
+insert into examination_category (code, name, type) values (8,'Insertion of Stimulator Lead into Up Muscle, Perc Approach', 'L');
+insert into examination_category (code, name, type) values (9,'Resection of Soft Palate, Open Approach', 'L');
+insert into examination_category (code, name, type) values (10, 'Bypass Azygos Vein to Upper Vein, Perc Endo Approach', 'P');
 
 insert into laboratory_examination (examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (1, 2, 1, 1, 1, '37853', 'Fourth or trochlear nerve palsy', 'Replacement of any type of pacemaker device with single-chamber device, rate responsive', '2021-03-19', '2020-05-28');
 insert into laboratory_examination (examination_category, visit_id, state_id, lab_worker_id, lab_supervisor_id, result, doctor_note, supervisor_note, execution_cancellation_date, approval_cancellation_date) values (2, 2, 2, 2, 2, '7760', 'Hemorrhagic disease of newborn', 'Other operations on cul-de-sac', '2020-04-20', '2019-12-06');
