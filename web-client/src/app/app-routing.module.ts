@@ -14,6 +14,7 @@ import {VisitDetailsComponent} from "./visit/visit-details/visit-details.compone
 import { AddVisitComponent } from './visit/add-visit/add-visit.component';
 import { AddPhysicalExamComponent } from './visit/add-physical-exam/add-physical-exam.component';
 import { AddLabExamComponent } from './visit/add-lab-exam/add-lab-exam.component';
+import { PhysicalExamDetailsComponent } from './visit/physical-exam-details/physical-exam-details.component';
 
 const routes: Routes = [
   {path: 'login-page', component: LoginPageComponent},
@@ -28,7 +29,8 @@ const routes: Routes = [
       {path: 'visit-details/:id', component: VisitDetailsComponent},
       {path: 'add-visit', component: AddVisitComponent},
       {path: 'add-physical-exam', component: AddPhysicalExamComponent},
-      {path: 'add-lab-exam', component: AddLabExamComponent}
+      {path: 'add-lab-exam', component: AddLabExamComponent},
+      {path: 'physical-exam-details/:id', component: PhysicalExamDetailsComponent}
     ]
   }
 ]

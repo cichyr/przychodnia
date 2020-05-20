@@ -1,0 +1,47 @@
+<!-- Nagłówek -->
+<div class="container">
+    <div class="row mt-4 align-self-center">
+        <!-- Przycisk wróć -->
+        <div class="col text-center">
+            <button (click)="navigateToVisitDetails()" class="btn btn-primary btn-sm" >Wróć</button>
+        </div>
+        <!-- Tytuł -->
+        <div class="row">
+            <h1 class="container text-center">
+                <b>Szczegóły badania fizykalnego</b>
+            </h1>
+        </div>
+        <!-- Placeholder-->
+        <div class="col"></div>
+    </div>
+</div>
+
+<!-- Kod badania -->
+<div class="container border rounded-lg mt-4">
+    <!-- Title bar -->
+    <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+      <h3><b>Kod</b></h3>
+    </div>
+
+    <!-- Description -->
+    <div class="row border-top">
+      <div class="col">
+        {{physicalExamination.code}}
+      </div>
+    </div>
+</div>
+
+<!-- Rezultat badania -->
+<div class="container border rounded-lg mt-4">
+    <!-- Title bar -->
+    <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+      <h3><b>Rezultat</b></h3>
+    </div>
+
+    <!-- Description -->
+    <div class="row border-top">
+      <div class="col">
+        {{physicalExamination.result}}
+      </div>
+    </div>
+</div>

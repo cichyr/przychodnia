@@ -52,6 +52,11 @@ export class VisitDetailsComponent implements OnInit {
     this.router.navigate(['/add-physical-exam'])
   }
 
+  navigateToPhysicalExamDetails(physicalExamId: number) {
+    this.dataExchange.setCurrentVisit(this.visitId)
+    this.router.navigate(['/physical-exam-details/'+ physicalExamId])
+  }
+
   navigateToAddLabExam() {
     this.router.navigate(['/add-lab-exam'])
   }

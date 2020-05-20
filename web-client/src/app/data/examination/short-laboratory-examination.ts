@@ -1,6 +1,12 @@
+// export class ShortLaboratoryExamination {
+
+//   id: number
+//   name: String
+//   status: String
+// }
+
 export class ShortLaboratoryExamination {
 
-  id: number
-  name: String
-  status: String
+  code: number
+  doctorNotes: String
 }

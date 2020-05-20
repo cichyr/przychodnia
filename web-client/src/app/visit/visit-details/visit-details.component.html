@@ -190,8 +190,7 @@
                     {{examination.name}}
                   </div>
                   <div class="col text-right">
-                    <button class="btn btn-success btn-sm my-3">Szczegóły</button>
-                    <!-- TODO add click -->
+                    <button (click)="navigateToPhysicalExamDetails(examination.id)" class="btn btn-success btn-sm my-3">Szczegóły</button>
                   </div>
                 </div>
               </div>

@@ -60,7 +60,7 @@
             </div>
             <!-- Przycisk zatwierdź-->
             <div class="col text-right">
-                <button (click)="selectExaminationDictionary(examinationDictionary)" class="btn btn-primary btn-sm" >Zatwierdź</button>
+                <button (click)="confirmAddLaboratoryExamination()" class="btn btn-primary btn-sm" >Zatwierdź</button>
             </div>
         </div>
     </div>
@@ -70,8 +70,8 @@
             <div class="row mt-4 align-self-center">
                 <div class="col-auto align-self-center">
                     <div class="form-group">
-                        <label for="result">Uwagi lekarza</label>
-                        <input #box1 (keyup)="result=box1.value" type="text" class="form-control" placeholder="Wpisz uwagi lekarza">
+                        <label for="shortLaboratoryExamination.doctorNotes">Uwagi lekarza</label>
+                        <input #box1 (keyup)="shortLaboratoryExamination.doctorNotes=box1.value" type="text" class="form-control" placeholder="Wpisz uwagi lekarza">
                     </div>
                 </div>
             </div>

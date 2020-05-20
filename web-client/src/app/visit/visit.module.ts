@@ -9,9 +9,10 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { AddVisitComponent } from './add-visit/add-visit.component';
 import { AddPhysicalExamComponent } from './add-physical-exam/add-physical-exam.component';
 import { AddLabExamComponent } from './add-lab-exam/add-lab-exam.component';
+import { PhysicalExamDetailsComponent } from './physical-exam-details/physical-exam-details.component';
 
 @NgModule({
-  declarations: [DoctorVisitListComponent, VisitDetailsComponent, ReceptionistVisitListComponent, AddVisitComponent, AddPhysicalExamComponent, AddLabExamComponent],
+  declarations: [DoctorVisitListComponent, VisitDetailsComponent, ReceptionistVisitListComponent, AddVisitComponent, AddPhysicalExamComponent, AddLabExamComponent, PhysicalExamDetailsComponent],
     imports: [
         CommonModule,
         NgbDropdownModule,
