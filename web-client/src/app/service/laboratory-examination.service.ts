@@ -79,7 +79,7 @@ export class LaboratoryExaminationService {
 
       case 'note':
         return this.http.put<LaboratoryExamination>(`http://localhost:8080/api/laboratory_examinations/${id}/supervisor_note`,{
-          "doctorNote": input
+          "result": input
         })
         break
     }
