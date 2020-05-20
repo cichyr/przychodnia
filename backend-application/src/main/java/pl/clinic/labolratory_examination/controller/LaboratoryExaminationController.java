@@ -124,7 +124,7 @@ public class LaboratoryExaminationController {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) principal;
         Optional<AccountDetails> optionalAccountDetails = Optional.of((AccountDetails) token.getPrincipal());
         accountDetails = optionalAccountDetails.get();
-        if(!accountDetails.getRole().getName().equals("LABW"))
+        if(!accountDetails.getRole().getName().equals("LABW") && !accountDetails.getRole().getName().equals("LABS"))
             throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "Must be LabWorker to proceed");
         //znalezienie badania
         Optional<LaboratoryExamination> optionalLaboratoryExamination = laboratoryExaminationRepository.findById(id);

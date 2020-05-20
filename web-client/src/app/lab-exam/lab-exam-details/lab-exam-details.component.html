@@ -22,6 +22,26 @@
         </div>
     </div>
 
+    <div class="container mt-4" *ngIf="this.alertResult">
+        <div class="row align-self-center">
+            <div class="col">
+                <p>
+                    <ngb-alert [type]="'danger'" (close)="close('result')"><b>Pole wyniku badania nie może być puste!</b></ngb-alert>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container mt-4" *ngIf="this.alertNote">
+        <div class="row align-self-center">
+            <div class="col">
+                <p>
+                    <ngb-alert [type]="'danger'" (close)="close('note')"><b>Pole uwag kierownika nie może być puste!</b></ngb-alert>
+                </p>
+            </div>
+        </div>
+    </div>
+
     <!-- Basic information -->
     <div class="container border rounded-lg mt-4">
         <!-- Examination title bar -->
@@ -88,7 +108,7 @@
                     <div class="col-sm-8">Data zlecenia:</div>
                     <div class="col-sm-4 text-right">{{this.formatDate('visit')}}</div>
                 </div>
-                <div class="row mt-4 justify-content-center align-middle" *ngIf="examination.status=='in_progress' && getRole() == 'LABW'">
+                <div class="row mt-4 justify-content-center align-middle" *ngIf="examination.status=='in_progress' && (getRole() == 'LABW' || getRole() == 'LABS')">
                     <button class="btn btn-success mx-2" (click)="changeStatus('Done')">Wykonaj</button>
                     <button class="btn btn-danger mx-2" (click)="changeStatus('CanWork')">Anuluj</button>
                 </div>
@@ -165,7 +185,7 @@
             <div class="col">
                 {{examination.result}}
             </div>
-            <div class="col-1" *ngIf="examination.status=='in_progress' && getRole() == 'LABW'">
+            <div class="col-1" *ngIf="examination.status=='in_progress' && (getRole() == 'LABW'|| getRole() == 'LABS')">
                 <button class="btn btn-primary align-self-center my-2" (click)="openPopup('result')">Edytuj</button>
             </div>
         </div>
