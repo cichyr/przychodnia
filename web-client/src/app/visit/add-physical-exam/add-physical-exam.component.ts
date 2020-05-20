@@ -6,6 +6,8 @@ import { User } from 'src/app/data/user/user';
 import { ExaminationDictionary } from 'src/app/data/examination/examination-dictionary';
 import { UserService } from 'src/app/service/user.service';
 import { AddVisitService } from 'src/app/service/add-visit.service';
+import { ShortPhysicalExamination } from 'src/app/data/examination/short-physical-examination';
+import { VisitDetails } from 'src/app/data/visit/visit-details';
 
 @Component({
   selector: 'app-add-physical-exam',
@@ -24,7 +26,9 @@ export class AddPhysicalExamComponent implements OnInit, OnDestroy {
   examinationDictionarySought: ExaminationDictionary = new ExaminationDictionary()
   examinationDictionarySub: Subscription
 
-  result = ''
+  shortPhysicalExamination: ShortPhysicalExamination = new ShortPhysicalExamination()
+  visitDetails: VisitDetails
+  visitDetailsSub: Subscription
 
   constructor(private router: Router, private userService: UserService, private addVisitService: AddVisitService, private dataExchange: DataExchangeService, private route: ActivatedRoute) { }
   stage = 1;
@@ -49,8 +53,19 @@ export class AddPhysicalExamComponent implements OnInit, OnDestroy {
 
   //TODO wysłać post do api
   selectExaminationDictionary(examinationDictionary: ExaminationDictionary): void{
-    this.examinationDictionary=examinationDictionary
+    this.shortPhysicalExamination.code=examinationDictionary.id
     this.stage = 2
+  }
+
+  confirmAddPhysicalExamination(){
+    // this.userSub =
+    //   this.userService.getAuthenticationEvent().subscribe(user => {
+    //       this.user = user;
+    //       if (this.user != null)
+            this.visitDetailsSub = this.addVisitService.postPhysicalExamination(this.visitId, this.shortPhysicalExamination).subscribe(_visit => this.visitDetails = _visit)
+      //   }
+      // );
+    this.navigateToVisitDetails()
   }
 
   //Powrót do szczegółów wizyty

@@ -1,6 +1,4 @@
 export class ShortPhysicalExamination {
-
-  id: number
-  name: String
-
+  code: number
+  result: String
 }

@@ -6,6 +6,7 @@ import { Doctor } from '../data/doctor/doctor';
 import { ExaminationDictionary } from '../data/examination/examination-dictionary';
 import { VisitDetails } from '../data/visit/visit-details';
 import { VisitToAdd } from '../data/visit/visit-to-add';
+import { ShortPhysicalExamination } from '../data/examination/short-physical-examination';
 
 @Injectable({
   providedIn: 'root'
@@ -90,5 +91,9 @@ export class AddVisitService {
 
   postVisit(newVisit: VisitToAdd): Observable<VisitDetails>{
     return this.http.post<VisitDetails>(`http://localhost:8080/api/visits`,newVisit)
+  }
+
+  postPhysicalExamination(visitId: number, newPhysicalExamination: ShortPhysicalExamination): Observable<VisitDetails>{
+    return this.http.post<VisitDetails>(`http://localhost:8080/api/visits/${visitId}/physical_examinations`,newPhysicalExamination)
   }
 }

@@ -60,7 +60,7 @@
             </div>
             <!-- Przycisk zatwierdź-->
             <div class="col text-right">
-                <button (click)="selectExaminationDictionary(examinationDictionary)" class="btn btn-primary btn-sm" >Zatwierdź</button>
+                <button (click)="confirmAddPhysicalExamination()" class="btn btn-primary btn-sm" >Zatwierdź</button>
             </div>
         </div>
     </div>
@@ -70,11 +70,16 @@
             <div class="row mt-4 align-self-center">
                 <div class="col-auto align-self-center">
                     <div class="form-group">
-                        <label for="result">Wynik badania fizykalnego</label>
-                        <input #box1 (keyup)="result=box1.value" type="text" class="form-control" placeholder="Wpisz wynik badania fizykalnego">
+                        <label for="shortPhysicalExamination.result">Wynik badania fizykalnego</label>
+                        <input #box1 (keyup)="shortPhysicalExamination.result=box1.value" type="text" class="form-control" placeholder="Wpisz wynik badania fizykalnego">
                     </div>
                 </div>
             </div>
         </div>
     </form>
+
+    <!--Test-->
+    {{visitId}}
+    {{shortPhysicalExamination.code}}
+    {{shortPhysicalExamination.result}}
 </div>
