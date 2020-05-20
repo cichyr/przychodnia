@@ -32,13 +32,6 @@ export class DoctorVisitListComponent implements OnInit {
         }
       );
 
-    this.userService.getAuthenticationEvent().subscribe(user => {
-        this.user = user;
-        if (this.user != null)
-          this.visitSub = this.visitService.getVisits(user.id).subscribe(visits => this.__visitList = visits);
-      }
-    );
-
     this.visitList = this.__visitList.sort((v1, v2) => {
       if (v1.state.id < v2.state.id) {
         return 1
