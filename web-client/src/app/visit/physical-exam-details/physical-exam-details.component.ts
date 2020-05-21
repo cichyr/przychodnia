@@ -13,17 +13,14 @@ import { PhysicalExaminationDetailsService } from 'src/app/service/physical-exam
   styleUrls: ['./physical-exam-details.component.css']
 })
 export class PhysicalExamDetailsComponent implements OnInit {
-
   visitId: number
   physicalExaminationId: number
   subscription: Subscription
 
   physicalExamination: PhysicalExamination
-  userSub: Subscription
-  user: User
   physicalExamSub: Subscription
 
-  constructor(private router: Router, private dataExchange: DataExchangeService, private userService: UserService, private physicalExaminationDetailsService: PhysicalExaminationDetailsService, private route: ActivatedRoute) { }
+  constructor(private router: Router, private dataExchange: DataExchangeService, private physicalExaminationDetailsService: PhysicalExaminationDetailsService, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.physicalExaminationId = Number(this.route.snapshot.paramMap.get('id'));
@@ -31,14 +28,7 @@ export class PhysicalExamDetailsComponent implements OnInit {
     this.subscription = this.dataExchange.getCurrentVisit().subscribe(
       visitId => { this.visitId = visitId}
     )
-
-    this.userSub =
-      this.userService.getAuthenticationEvent().subscribe(user => {
-          this.user = user;
-          if (this.user != null)
-            this.physicalExamSub = this.physicalExaminationDetailsService.getPhysicalExamination(this.physicalExaminationId).subscribe(_physicalExamination => this.physicalExamination = _physicalExamination);
-        }
-      );
+    this.physicalExamSub = this.physicalExaminationDetailsService.getPhysicalExamination(this.physicalExaminationId).subscribe(_physicalExamination => this.physicalExamination = _physicalExamination);
   }
 
   //Powrót do szczegółów wizyty

@@ -15,9 +15,6 @@ import { VisitDetails } from 'src/app/data/visit/visit-details';
   styleUrls: ['./add-lab-exam.component.css']
 })
 export class AddLabExamComponent implements OnInit, OnDestroy {
-  user: User
-  userSub: Subscription
-
   visitId: number;
   subscription: Subscription
 
@@ -30,7 +27,7 @@ export class AddLabExamComponent implements OnInit, OnDestroy {
   visitDetails: VisitDetails
   visitDetailsSub: Subscription
 
-  constructor(private router: Router, private userService: UserService, private addVisitService: AddVisitService, private dataExchange: DataExchangeService, private route: ActivatedRoute) { }
+  constructor(private router: Router, private addVisitService: AddVisitService, private dataExchange: DataExchangeService) { }
   stage = 1;
 
   ngOnInit(): void {
@@ -38,13 +35,7 @@ export class AddLabExamComponent implements OnInit, OnDestroy {
       visitId => { this.visitId = visitId}
     )
 
-    this.userSub =
-      this.userService.getAuthenticationEvent().subscribe(user => {
-          this.user = user;
-          if (this.user != null)
-            this.examinationDictionarySub = this.addVisitService.getPossibleLabExamination().subscribe(examinationDictionarys => this.examinationDictionaryList = examinationDictionarys);
-        }
-      );
+    this.examinationDictionarySub = this.addVisitService.getPossibleLabExamination().subscribe(examinationDictionarys => this.examinationDictionaryList = examinationDictionarys);
   }
 
   // Wybiera typ badania laboratoryjnego
@@ -55,14 +46,8 @@ export class AddLabExamComponent implements OnInit, OnDestroy {
 
   // Wysyła POST do API
   confirmAddLaboratoryExamination(){
-    if(this.shortLaboratoryExamination.doctorNotes!==""){
-      this.userSub =
-        this.userService.getAuthenticationEvent().subscribe(user => {
-            this.user = user;
-            if (this.user != null)
-              this.visitDetailsSub = this.addVisitService.postLaboratoryExamination(this.visitId, this.shortLaboratoryExamination).subscribe(_visit => this.visitDetails = _visit)
-          }
-        );
+    if(this.shortLaboratoryExamination.doctorNotes!=""){
+      this.visitDetailsSub = this.addVisitService.postLaboratoryExamination(this.visitId, this.shortLaboratoryExamination).subscribe(_visit => this.visitDetails = _visit)
       this.navigateToVisitDetails()
     }
   }

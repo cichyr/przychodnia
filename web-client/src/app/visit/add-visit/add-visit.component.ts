@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Patient } from 'src/app/data/patient/patient';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Doctor } from 'src/app/data/doctor/doctor';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddVisitService } from 'src/app/service/add-visit.service';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/data/user/user';
@@ -17,9 +16,6 @@ import { VisitDetails } from 'src/app/data/visit/visit-details';
   styleUrls: ['./add-visit.component.css'],
 })
 export class AddVisitComponent implements OnInit {
-  user: User
-  userSub: Subscription
-
   patientList: Patient[]
   selectedPatient: Patient = new Patient()
   patientSought: Patient = new Patient()
@@ -39,51 +35,23 @@ export class AddVisitComponent implements OnInit {
 
   ngOnInit(): void {
     //Ustawienie numeru recepcjonisty
-    this.userSub =
-    this.userService.getAuthenticationEvent().subscribe(user => {
-        this.user = user;
-        if (this.user != null)
-          this.visitToAdd.receptionistId = this.userService.getId();
-      }
-    );
+    this.visitToAdd.receptionistId = this.userService.getId();
+
     //Wczytanie listy pacjentów
-    this.userSub =
-      this.userService.getAuthenticationEvent().subscribe(user => {
-          this.user = user;
-          if (this.user != null)
-            this.patientSub = this.addVisitService.getPatients().subscribe(patients => this.patientList = patients);
-        }
-      );
+    this.patientSub = this.addVisitService.getPatients().subscribe(patients => this.patientList = patients);
+    
     //Wczytanie listy lekarzy
-    this.userSub =
-      this.userService.getAuthenticationEvent().subscribe(user => {
-          this.user = user;
-          if (this.user != null)
-            this.doctorSub = this.addVisitService.getDoctors().subscribe(doctors => this.doctorList = doctors);
-        }
-      );
+    this.doctorSub = this.addVisitService.getDoctors().subscribe(doctors => this.doctorList = doctors);
   }
 
   //Wyszukiwanie pacjenta za pomocą imienia nazwiska i numeru PESEL
   searchPatients(): void {
-    this.userSub =
-      this.userService.getAuthenticationEvent().subscribe(user => {
-          this.user = user;
-          if (this.user != null)
-            this.patientSub = this.addVisitService.getPatients(this.patientSought).subscribe(patients => this.patientList = patients);
-        }
-      );
+    this.patientSub = this.addVisitService.getPatients(this.patientSought).subscribe(patients => this.patientList = patients);
   }
 
   //Wyszukiwanie lekarza za pomocą imienia nazwiska i numeru licencji
   searchDoctors(): void {
-    this.userSub =
-      this.userService.getAuthenticationEvent().subscribe(user => {
-          this.user = user;
-          if (this.user != null)
-            this.doctorSub = this.addVisitService.getDoctors(this.doctorSought).subscribe(doctors => this.doctorList = doctors);
-        }
-      );
+    this.doctorSub = this.addVisitService.getDoctors(this.doctorSought).subscribe(doctors => this.doctorList = doctors);
   }
 
   //wybór pacjenta
@@ -102,13 +70,7 @@ export class AddVisitComponent implements OnInit {
 
   // wysyła POST do API
   confirmAddVisit(){
-    this.userSub =
-      this.userService.getAuthenticationEvent().subscribe(user => {
-        this.user = user;
-        if (this.user != null)
-          this.visitDetailsSub = this.addVisitService.postVisit(this.visitToAdd).subscribe(_visit => this.visitDetails = _visit)
-        }
-      );
+    this.visitDetailsSub = this.addVisitService.postVisit(this.visitToAdd).subscribe(_visit => this.visitDetails = _visit)
     this.navigateToRecVisitList()
   }
 
