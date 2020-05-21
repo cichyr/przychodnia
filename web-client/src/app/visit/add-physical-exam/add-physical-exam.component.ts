@@ -47,25 +47,24 @@ export class AddPhysicalExamComponent implements OnInit, OnDestroy {
       );
   }
   
-  //TODO wyszukiwanie typu badania fizykalnego
-  searchExaminationDictionary(): void {
-  }
-
-  //TODO wysłać post do api
+  //Ustawia typ badania fizykalnego
   selectExaminationDictionary(examinationDictionary: ExaminationDictionary): void{
     this.shortPhysicalExamination.code=examinationDictionary.id
     this.stage = 2
   }
 
+  //Wysyła POST do API
   confirmAddPhysicalExamination(){
-    // this.userSub =
-    //   this.userService.getAuthenticationEvent().subscribe(user => {
-    //       this.user = user;
-    //       if (this.user != null)
-            this.visitDetailsSub = this.addVisitService.postPhysicalExamination(this.visitId, this.shortPhysicalExamination).subscribe(_visit => this.visitDetails = _visit)
-      //   }
-      // );
-    this.navigateToVisitDetails()
+    if(this.shortPhysicalExamination.result!==""){
+      this.userSub =
+        this.userService.getAuthenticationEvent().subscribe(user => {
+            this.user = user;
+            if (this.user != null)
+              this.visitDetailsSub = this.addVisitService.postPhysicalExamination(this.visitId, this.shortPhysicalExamination).subscribe(_visit => this.visitDetails = _visit)
+          }
+        );
+      this.navigateToVisitDetails()
+    }
   }
 
   //Powrót do szczegółów wizyty

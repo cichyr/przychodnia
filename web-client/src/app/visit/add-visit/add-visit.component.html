@@ -168,5 +168,38 @@
             </div>
         </div>
     </div>
-    {{visitToAdd.patientId}}
+
+    <div class="container border rounded-lg mt-4"><!-- ramka do okola z zaokraglonymi brzegami + odstepy 4 linii -->
+        <div class="row justify-content-md-center rounded-top" style="background-color: #cce4ff">
+            <div class="col align-self-center text-center">
+                <b>Dane wizyty do zatwierdzenia</b>
+            </div>
+        </div>
+        <div class="row border-top">
+            <div class="col align-self-start my-2"> <!-- przerwa od gory i dolu kazdej wizyty-->
+                <div class="row">
+                    <div class="col">
+                        Pacjent:
+                    </div>
+                    <div class="col">
+                        {{selectedPatient.firstName}}  {{selectedPatient.lastName}}
+                    </div>
+                    <div class="col">
+                        Nr PESEL: {{selectedPatient.peselNumber}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        Lekarz:
+                    </div>
+                    <div class="col">
+                        {{selectedDoctor.firstName}}  {{selectedDoctor.lastName}}
+                    </div>
+                    <div class="col">
+                        Nr licencji: {{selectedDoctor.licenseCode}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> <!-- niebieski pasek z imieniem, nazwiskiem i peselem pacjenta oraz przyciskiem wybierz-->
 </div>
