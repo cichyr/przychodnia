@@ -46,26 +46,25 @@ export class AddLabExamComponent implements OnInit, OnDestroy {
         }
       );
   }
-  
-  //TODO wyszukiwanie typu badania laboratoryjnego?
-  searchExaminationDictionary(): void {
-  }
 
-  //TODO wysłać post do api
+  // Wybiera typ badania laboratoryjnego
   selectExaminationDictionary(examinationDictionary: ExaminationDictionary): void{
     this.shortLaboratoryExamination.code=examinationDictionary.id
     this.stage = 2
   }
 
+  // Wysyła POST do API
   confirmAddLaboratoryExamination(){
-    // this.userSub =
-    //   this.userService.getAuthenticationEvent().subscribe(user => {
-    //       this.user = user;
-    //       if (this.user != null)
-            this.visitDetailsSub = this.addVisitService.postLaboratoryExamination(this.visitId, this.shortLaboratoryExamination).subscribe(_visit => this.visitDetails = _visit)
-      //   }
-      // );
-    this.navigateToVisitDetails()
+    if(this.shortLaboratoryExamination.doctorNotes!==""){
+      this.userSub =
+        this.userService.getAuthenticationEvent().subscribe(user => {
+            this.user = user;
+            if (this.user != null)
+              this.visitDetailsSub = this.addVisitService.postLaboratoryExamination(this.visitId, this.shortLaboratoryExamination).subscribe(_visit => this.visitDetails = _visit)
+          }
+        );
+      this.navigateToVisitDetails()
+    }
   }
 
   //Powrót do szczegółów wizyty

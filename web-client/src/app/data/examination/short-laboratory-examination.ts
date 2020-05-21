@@ -9,4 +9,9 @@ export class ShortLaboratoryExamination {
 
   code: number
   doctorNotes: String
+
+  constructor()
+  {
+    this.doctorNotes=""
+  }
 }

@@ -7,4 +7,10 @@ export class Doctor {
     firstName: String
     lastName: String
     licenseCode: String
+
+    constructor(){
+        this.firstName=""
+        this.lastName=""
+        this.licenseCode=""
+    }
 }

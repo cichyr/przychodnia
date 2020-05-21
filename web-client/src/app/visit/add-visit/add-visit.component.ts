@@ -21,19 +21,18 @@ export class AddVisitComponent implements OnInit {
   userSub: Subscription
 
   patientList: Patient[]
+  selectedPatient: Patient = new Patient()
   patientSought: Patient = new Patient()
   patientSub: Subscription
   
   doctorList: Doctor[]
+  selectedDoctor: Doctor = new Doctor()
   doctorSought: Doctor = new Doctor()
   doctorSub: Subscription
 
   visitToAdd: VisitToAdd = new VisitToAdd()
   visitDetails: VisitDetails
   visitDetailsSub: Subscription
-
-  date: string
-  modalService: NgbModal
 
   constructor(private router: Router, private userService: UserService, private addVisitService: AddVisitService, private route: ActivatedRoute) { }
   stage = 1;
@@ -89,26 +88,28 @@ export class AddVisitComponent implements OnInit {
 
   //wybór pacjenta
   selectPatient(patient: Patient): void {
+    this.selectedPatient=patient
     this.visitToAdd.patientId=patient.id;
     this.stage = 2;
   }
 
   //wybór lekarza
   selectDoctor(doctor: Doctor): void {
+    this.selectedDoctor=doctor
     this.visitToAdd.doctorId=doctor.id;
     this.stage = 3;
   }
 
-  //DONT WORK TODO wysłanie POST do API
+  // wysyła POST do API
   confirmAddVisit(){
-    // this.userSub =
-    //   this.userService.getAuthenticationEvent().subscribe(user => {
-    //       this.user = user;
-    //       if (this.user != null)
-            this.visitDetailsSub = this.addVisitService.postVisit(this.visitToAdd).subscribe(_visit => this.visitDetails = _visit)
-      //   }
-      // );
-      //this.navigateToRecVisitList()
+    this.userSub =
+      this.userService.getAuthenticationEvent().subscribe(user => {
+        this.user = user;
+        if (this.user != null)
+          this.visitDetailsSub = this.addVisitService.postVisit(this.visitToAdd).subscribe(_visit => this.visitDetails = _visit)
+        }
+      );
+    this.navigateToRecVisitList()
   }
 
   //powrót to listy wizyt recepcjonisty
