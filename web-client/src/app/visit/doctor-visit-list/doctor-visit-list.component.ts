@@ -49,7 +49,7 @@ export class DoctorVisitListComponent implements OnInit {
   sort(option: number): void {
 
       if(option == 0) {
-        this.visitList = this.__visitList.sort((v1, v2) => {
+        this.visitList .sort((v1, v2) => {
           if (v1.registrationDate > v2.registrationDate) {
             return 1
           } else if (v1.registrationDate < v2.registrationDate) {
@@ -59,7 +59,7 @@ export class DoctorVisitListComponent implements OnInit {
         })
       }
     else if(option == 1) {
-      this.visitList = this.__visitList.sort((v1, v2) => {
+      this.visitList.sort((v1, v2) => {
         if (v1.registrationDate < v2.registrationDate) {
           return 1
         } else if (v1.registrationDate > v2.registrationDate) {
@@ -69,7 +69,7 @@ export class DoctorVisitListComponent implements OnInit {
       })
     }
     else if(option == 2) {
-      this.visitList = this.__visitList.sort((v1, v2) => {
+      this.visitList.sort((v1, v2) => {
         if (v1.state.id < v2.state.id) {
           return 1
         }
@@ -80,7 +80,7 @@ export class DoctorVisitListComponent implements OnInit {
       })
     }
       else if(option == 3) {
-        this.visitList = this.__visitList.sort((v1, v2) => {
+        this.visitList.sort((v1, v2) => {
           if (v1.state.id > v2.state.id) {
             return 1
           } else if (v1.state.id < v2.state.id) {
@@ -91,10 +91,10 @@ export class DoctorVisitListComponent implements OnInit {
       }
 
     else if(option == 4) {
-      this.visitList = this.__visitList.sort((v1, v2) => v1.id - v2.id)
+      this.visitList.sort((v1, v2) => v1.id - v2.id)
     }
     else if(option == 5){
-        this.visitList = this.__visitList.sort((v1, v2) => v2.id - v1.id)
+        this.visitList.sort((v1, v2) => v2.id - v1.id)
       }
   }
 
