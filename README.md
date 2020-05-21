@@ -14,14 +14,18 @@ Web application for an outpatient clinic.
 - Spring Boot 2.2.5
 - Angular 9
 
-## Run Backend
+## Run
+
+**Clone repository:** `git clone https://github.com/Rzohfa/przychodnia.git`
+
+### Run Backend
 
 **Requirements**
 
 - JDK 1.8 or later
 - Maven 3.2 or later
 - PostgreSQL 10
-- Clone repository: `git clone https://github.com/Rzohfa/przychodnia.git`
+
 
 **Create database**
 
@@ -53,7 +57,7 @@ spring.datasource.password=<your_postgres_password>
 2. Spring should now be running at `localhost:8080`
 3. Checkout the `documentation` directory for the REST API reference.
 
-## Run Frontend
+### Run Frontend
 
 **Requirements**
 
