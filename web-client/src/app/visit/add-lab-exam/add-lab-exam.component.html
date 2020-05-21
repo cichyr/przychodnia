@@ -1,10 +1,10 @@
 <div *ngIf="stage==1">
     <!-- Nagłówek -->
     <div class="container">
-        <div class="row mt-4 align-self-center">
+        <div class="row justify-content-md-center mt-4 align-self-center">
             <!-- Przycisk wróć -->
-            <div class="col text-center">
-                <button (click)="navigateToVisitDetails()" class="btn btn-primary btn-sm" >Wróć</button>
+            <div class="col align-self-center text-center">
+                <button (click)="navigateToVisitDetails()" class="btn btn-primary" >Wróć</button>
             </div>
             <!-- Tytuł -->
             <div class="row">
@@ -36,7 +36,7 @@
                 </div>
 
                 <!-- Przycisk wybierz Typ badania-->
-                <div class="col text-right">
+                <div class="col align-self-center text-right">
                     <button (click)="selectExaminationDictionary(examinationDictionary)" class="btn btn-primary btn-sm" >Wybierz</button>
                 </div>
             </div>
@@ -47,27 +47,27 @@
 <div *ngIf="stage==2">
     <!-- Nagłówek -->
     <div class="container">
-        <div class="row mt-4">
+        <div class="row justify-content-md-center mt-4 align-self-center">
             <!-- Przycisk wróć -->
-            <div class="col text-center">
-                <button (click)="stage=1" class="btn btn-primary btn-sm" >Wróć</button>
+            <div class="col align-self-center text-center">
+                <button (click)="stage=1" class="btn btn-primary" >Wróć</button>
             </div>
             <!-- Tytuł -->
-            <div class="row">
+            <div class="row ">
                 <h1 class="container text-center">
                     <b>Uwagi lekarza</b>
                 </h1>
             </div>
             <!-- Przycisk zatwierdź-->
-            <div class="col text-right">
-                <button (click)="confirmAddLaboratoryExamination()" [disabled]="this.buttonConfirm" class="btn btn-primary btn-sm" >Zatwierdź</button>
+            <div class="col align-self-center text-center">
+                <button (click)="confirmAddLaboratoryExamination()" [disabled]="this.buttonConfirm" class="btn btn-primary" >Zatwierdź</button>
             </div>
         </div>
     </div>
 
     <form>
         <div class="container">
-            <div class="row mt-4 align-self-center">
+            <div class="row justify-content-md-center mt-4 align-self-center">
                 <div class="col-auto align-self-center">
                     <div class="form-group">
                         <label for="shortLaboratoryExamination.doctorNotes">Uwagi lekarza</label>
