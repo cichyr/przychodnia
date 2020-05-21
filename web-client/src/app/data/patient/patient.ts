@@ -7,4 +7,10 @@ export class Patient {
     firstName: String
     lastName: String
     peselNumber: String
+
+    constructor(){
+        this.firstName=""
+        this.lastName=""
+        this.peselNumber=""
+    }
 }
