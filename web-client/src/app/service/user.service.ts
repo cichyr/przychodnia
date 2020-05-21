@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core'
 import {HttpClient} from '@angular/common/http'
 import {User} from '../data/user/user'
-import {Observable, ReplaySubject} from 'rxjs'
+import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs'
 import {Credentials} from '../data/user/credentials'
 import {tap} from 'rxjs/operators'
 
@@ -11,7 +11,7 @@ import {tap} from 'rxjs/operators'
 export class UserService {
 
   private user: User = null
-  private readonly subject = new ReplaySubject<any>()
+  private readonly subject = new BehaviorSubject<any>(null)
   private credentials: Credentials = null
 
   constructor(private http: HttpClient) {
@@ -71,5 +71,5 @@ export class UserService {
       return 0
     }
   }
- 
+
 }
