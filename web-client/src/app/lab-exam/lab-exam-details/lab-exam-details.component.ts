@@ -7,6 +7,7 @@ import { TextInputComponent } from 'src/app/modals/text-input/text-input.compone
 import { UserService } from 'src/app/service/user.service';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/data/user/user';
+import {DataExchangeService} from "../../service/data-exchange.service";
 
 @Component({
   selector: 'app-lab-exam-details',
@@ -15,18 +16,24 @@ import { User } from 'src/app/data/user/user';
 })
 export class LabExamDetailsComponent implements OnInit {
 
+  visitId: number
   examination: LaboratoryExamination
   userSub: Subscription
   labSub: Subscription
+  visitSub: Subscription
   user: User
   exam_id: number
   alertResult: boolean
   alertNote: boolean
 
-  constructor(private laboratoryService: LaboratoryExaminationService, private userService: UserService, private router: Router, private route: ActivatedRoute, private modalService: NgbModal) { }
+  constructor(private laboratoryService: LaboratoryExaminationService, private userService: UserService, private dataExchange: DataExchangeService, private router: Router, private route: ActivatedRoute, private modalService: NgbModal) { }
 
   ngOnInit(): void {
     this.exam_id = Number(this.route.snapshot.paramMap.get('id'))
+
+    this.visitSub = this.dataExchange.getCurrentVisit().subscribe(
+      visitId => { this.visitId = visitId}
+    )
 
     this.userSub = this.userService.getAuthenticationEvent().subscribe(user => {
       this.user = user
@@ -62,6 +69,10 @@ export class LabExamDetailsComponent implements OnInit {
   // Navigate to Examination list view
   navigateToList() {
     this.router.navigate(['exam-list'])
+  }
+
+  navigateToVisitDetails() {
+    this.router.navigate(['/visit-details/' + this.visitId]);
   }
 
   // Open modal

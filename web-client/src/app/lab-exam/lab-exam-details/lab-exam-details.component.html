@@ -6,7 +6,8 @@
 
             <!-- Back button -->
             <div class="col align-self-center">
-                <button class="btn btn-primary" (click)="navigateToList()">Wróć</button>
+                <button class="btn btn-primary" *ngIf="this.getRole()=='LABW' || this.getRole() == 'LABS'" (click)="navigateToList()">Wróć</button>
+                <button class ="btn btn-primary" *ngIf="this.getRole()=='DOC'" (click)="navigateToVisitDetails()">Wróć</button>
             </div>
 
             <!-- Title -->
