@@ -34,7 +34,7 @@ export class AddVisitComponent implements OnInit {
   visitDetails: VisitDetails
   visitDetailsSub: Subscription
 
-  constructor(private router: Router, private userService: UserService, private addVisitService: AddVisitService, private route: ActivatedRoute) { }
+  constructor(private router: Router, private userService: UserService, private addVisitService: AddVisitService) { }
   stage = 1;
 
   ngOnInit(): void {

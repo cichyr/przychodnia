@@ -67,11 +67,6 @@ export class VisitDetailsComponent implements OnInit {
     this.router.navigate(['/add-lab-exam'])
   }
 
-  navigateToLaboratoryExamDetails(laboratoryExamId: number) {
-    this.dataExchange.setCurrentVisit(this.visitId)
-    this.router.navigate(['/laboratory-exam-details/'+ laboratoryExamId])
-  }
-
   // Open modal
   openPopup(type: string): void {
     // Opening modal
