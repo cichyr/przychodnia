@@ -2,7 +2,7 @@
 
 Web application for an outpatient clinic. 
 
-## Features:
+## Features
 
 - creation, prosecution and digital maintenance of the patients' appointments
 - prosecution and digital maintenance of examinations
