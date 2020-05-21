@@ -14,7 +14,6 @@ import { User } from 'src/app/data/user/user';
 })
 export class LabExamListComponent implements OnInit {
 
-  __laboratoryList: LaboratoryExaminationGeneral[]
   laboratoryList: LaboratoryExaminationGeneral[]
   userSub: Subscription
   labSub: Subscription
@@ -44,7 +43,7 @@ export class LabExamListComponent implements OnInit {
   sort(option: number): void {
     switch (option) {
       case 0:   // commision date newest first
-        this.laboratoryList = this.__laboratoryList.sort((l1, l2) => {
+        this.laboratoryList = this.laboratoryList.sort((l1, l2) => {
           if (l1.creationDate < l2.creationDate) {
             return 1
           }
@@ -56,7 +55,7 @@ export class LabExamListComponent implements OnInit {
         break
 
       case 1:   // commision date oldest first
-        this.laboratoryList = this.__laboratoryList.sort((l1, l2) => {
+        this.laboratoryList = this.laboratoryList.sort((l1, l2) => {
           if (l1.creationDate > l2.creationDate) {
             return 1
           }
@@ -68,7 +67,7 @@ export class LabExamListComponent implements OnInit {
         break
 
       case 2:   // finish date newest first
-        this.laboratoryList = this.__laboratoryList.sort((l1, l2) => {
+        this.laboratoryList = this.laboratoryList.sort((l1, l2) => {
           if (l1.approvalCancellationDate < l2.approvalCancellationDate) {
             return 1
           }
@@ -80,7 +79,7 @@ export class LabExamListComponent implements OnInit {
         break
 
       case 3:   // finish date oldest first
-        this.laboratoryList = this.__laboratoryList.sort((l1, l2) => {
+        this.laboratoryList = this.laboratoryList.sort((l1, l2) => {
           if (l1.approvalCancellationDate > l2.approvalCancellationDate) {
             return 1
           }
@@ -92,15 +91,15 @@ export class LabExamListComponent implements OnInit {
         break
 
       case 4:   // id lowest first
-        this.laboratoryList = this.__laboratoryList.sort((l1, l2) => l1.id - l2.id)
+        this.laboratoryList = this.laboratoryList.sort((l1, l2) => l1.id - l2.id)
         break
 
       case 5:   // id highest first
-        this.laboratoryList = this.__laboratoryList.sort((l1, l2) => l2.id - l1.id)
+        this.laboratoryList = this.laboratoryList.sort((l1, l2) => l2.id - l1.id)
         break
 
       case 6:   // default
-        this.laboratoryList = this.__laboratoryList
+        this.laboratoryList = this.laboratoryList
         break
     }
   }

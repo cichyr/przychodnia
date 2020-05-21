@@ -27,7 +27,8 @@
         <div class="row align-self-center">
             <div class="col">
                 <p>
-                    <ngb-alert [type]="'danger'" (close)="close('result')"><b>Pole wyniku badania nie może być puste!</b></ngb-alert>
+                    <ngb-alert [type]="'danger'" (close)="close('result')"><b>Pole wyniku badania nie może być
+                            puste!</b></ngb-alert>
                 </p>
             </div>
         </div>
@@ -37,7 +38,8 @@
         <div class="row align-self-center">
             <div class="col">
                 <p>
-                    <ngb-alert [type]="'danger'" (close)="close('note')"><b>Pole uwag kierownika nie może być puste!</b></ngb-alert>
+                    <ngb-alert [type]="'danger'" (close)="close('note')"><b>Pole uwag kierownika nie może być puste!</b>
+                    </ngb-alert>
                 </p>
             </div>
         </div>
@@ -63,11 +65,13 @@
                 <h5 class="mt-2 text-center" *ngIf="examination.status=='in_progress'"><b>Zlecone</b><br></h5>
                 <h5 class="mt-2 text-center text-warning" *ngIf="examination.status=='executed'"><b>Wykonane</b><br>
                 </h5>
-                <h5 class="mt-2 text-center text-danger" *ngIf="examination.status=='cancelled'"><b>Anulowane przez
-                        laboranta</b><br></h5>
+                <h5 class="mt-2 text-center text-danger"
+                    *ngIf="examination.status=='cancelled' && examination.approvalCancellationDate == null"><b>Anulowane
+                        przez laboranta</b><br></h5>
                 <h5 class="mt-2 text-center text-success" *ngIf="examination.status=='approved'">
                     <b>Zatwierdzone</b><br></h5>
-                <h5 class="mt-2 text-center text-danger" *ngIf="examination.status=='cancelled'"><b>Anulowane
+                <h5 class="mt-2 text-center text-danger"
+                    *ngIf="examination.status=='cancelled' && examination.approvalCancellationDate != null"><b>Anulowane
                         przez kierownika</b><br></h5>
             </div>
         </div>
@@ -94,9 +98,11 @@
             <!-- Lab worker info -->
             <div class="col ml-1 border-right">
                 <b>Laborant:</b><br>
-                {{examination.labWorker.firstName}}<br>
-                {{examination.labWorker.lastName}}<br>
-                {{examination.labWorker.licenseCode}}<br>
+                <div *ngIf="examination.labWorker != null">
+                    {{examination.labWorker.firstName}}<br>
+                    {{examination.labWorker.lastName}}<br>
+                    {{examination.labWorker.licenseCode}}<br>
+                </div>
             </div>
 
             <!-- Dates and accept/cancel for supervisor -->
@@ -109,7 +115,8 @@
                     <div class="col-sm-8">Data zlecenia:</div>
                     <div class="col-sm-4 text-right">{{this.formatDate('visit')}}</div>
                 </div>
-                <div class="row mt-4 justify-content-center align-middle" *ngIf="examination.status=='in_progress' && (getRole() == 'LABW' || getRole() == 'LABS')">
+                <div class="row mt-4 justify-content-center align-middle"
+                    *ngIf="examination.status=='in_progress' && getRole() == 'LABW'">
                     <button class="btn btn-success mx-2" (click)="changeStatus('Done')">Wykonaj</button>
                     <button class="btn btn-danger mx-2" (click)="changeStatus('CanWork')">Anuluj</button>
                 </div>
@@ -186,7 +193,7 @@
             <div class="col">
                 {{examination.result}}
             </div>
-            <div class="col-1" *ngIf="examination.status=='in_progress' && (getRole() == 'LABW'|| getRole() == 'LABS')">
+            <div class="col-1" *ngIf="examination.status=='in_progress' && getRole() == 'LABW'">
                 <button class="btn btn-primary align-self-center my-2" (click)="openPopup('result')">Edytuj</button>
             </div>
         </div>
