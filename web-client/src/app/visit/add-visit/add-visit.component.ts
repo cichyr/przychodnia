@@ -4,7 +4,6 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Doctor } from 'src/app/data/doctor/doctor';
 import { AddVisitService } from 'src/app/service/add-visit.service';
 import { Subscription } from 'rxjs';
-import { User } from 'src/app/data/user/user';
 import { UserService } from 'src/app/service/user.service';
 import { VisitToAdd } from 'src/app/data/visit/visit-to-add';
 import { VisitDetails } from 'src/app/data/visit/visit-details';
@@ -29,6 +28,8 @@ export class AddVisitComponent implements OnInit {
   visitToAdd: VisitToAdd = new VisitToAdd()
   visitDetails: VisitDetails
   visitDetailsSub: Subscription
+
+  buttonConfirm = false
 
   constructor(private router: Router, private userService: UserService, private addVisitService: AddVisitService) { }
   stage = 1;
@@ -70,8 +71,11 @@ export class AddVisitComponent implements OnInit {
 
   // wysyła POST do API
   confirmAddVisit(){
-    this.visitDetailsSub = this.addVisitService.postVisit(this.visitToAdd).subscribe(_visit => this.visitDetails = _visit)
-    this.navigateToRecVisitList()
+    this.buttonConfirm=true;
+    this.visitDetailsSub = this.addVisitService.postVisit(this.visitToAdd).subscribe(_visit => {
+      this.visitDetails = _visit
+      this.navigateToRecVisitList()
+    })
   }
 
   //powrót to listy wizyt recepcjonisty

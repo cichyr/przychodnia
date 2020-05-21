@@ -60,7 +60,7 @@
             </div>
             <!-- Przycisk zatwierdź-->
             <div class="col text-right">
-                <button (click)="confirmAddPhysicalExamination()" class="btn btn-primary btn-sm" >Zatwierdź</button>
+                <button (click)="confirmAddPhysicalExamination()" [disabled]="this.buttonConfirm" class="btn btn-primary btn-sm" >Zatwierdź</button>
             </div>
         </div>
     </div>

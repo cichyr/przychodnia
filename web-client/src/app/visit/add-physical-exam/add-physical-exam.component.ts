@@ -27,6 +27,8 @@ export class AddPhysicalExamComponent implements OnInit, OnDestroy {
   visitDetails: VisitDetails
   visitDetailsSub: Subscription
 
+  buttonConfirm = false;
+
   constructor(private router: Router, private addVisitService: AddVisitService, private dataExchange: DataExchangeService) { }
   stage = 1;
 
@@ -46,8 +48,11 @@ export class AddPhysicalExamComponent implements OnInit, OnDestroy {
   //Wysyła POST do API
   confirmAddPhysicalExamination(){
     if(this.shortPhysicalExamination.result!=""){
-      this.visitDetailsSub = this.addVisitService.postPhysicalExamination(this.visitId, this.shortPhysicalExamination).subscribe(_visit => this.visitDetails = _visit)
-      this.navigateToVisitDetails()
+      this.buttonConfirm = true;
+      this.visitDetailsSub = this.addVisitService.postPhysicalExamination(this.visitId, this.shortPhysicalExamination).subscribe(_visit => {
+        this.visitDetails = _visit
+        this.navigateToVisitDetails()
+      })
     }
   }
 

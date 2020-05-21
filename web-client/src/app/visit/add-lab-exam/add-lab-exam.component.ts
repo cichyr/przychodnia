@@ -27,6 +27,8 @@ export class AddLabExamComponent implements OnInit, OnDestroy {
   visitDetails: VisitDetails
   visitDetailsSub: Subscription
 
+  buttonConfirm=false
+
   constructor(private router: Router, private addVisitService: AddVisitService, private dataExchange: DataExchangeService) { }
   stage = 1;
 
@@ -47,8 +49,10 @@ export class AddLabExamComponent implements OnInit, OnDestroy {
   // Wysyła POST do API
   confirmAddLaboratoryExamination(){
     if(this.shortLaboratoryExamination.doctorNotes!=""){
-      this.visitDetailsSub = this.addVisitService.postLaboratoryExamination(this.visitId, this.shortLaboratoryExamination).subscribe(_visit => this.visitDetails = _visit)
-      this.navigateToVisitDetails()
+      this.visitDetailsSub = this.addVisitService.postLaboratoryExamination(this.visitId, this.shortLaboratoryExamination).subscribe(_visit =>{
+        this.visitDetails = _visit
+        this.navigateToVisitDetails() 
+      })
     }
   }
 

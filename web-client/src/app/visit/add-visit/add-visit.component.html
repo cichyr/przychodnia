@@ -164,7 +164,7 @@
             </div>
             <!-- Zatwierdź wizytę TODO -->
             <div class="col align-self-center">
-                <button (click)="confirmAddVisit()" class="btn btn-primary" >Zatwierdź</button>
+                <button (click)="confirmAddVisit()" [disabled]="this.buttonConfirm" class="btn btn-primary" >Zatwierdź</button>
             </div>
         </div>
     </div>
