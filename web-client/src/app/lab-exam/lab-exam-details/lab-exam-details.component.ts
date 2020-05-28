@@ -46,6 +46,14 @@ export class LabExamDetailsComponent implements OnInit {
       if (this.user != null)
         this.labSub = this.laboratoryService.getLaboratoryExam(this.exam_id).subscribe(lab => this.examination = lab)
     })
+
+    if(this.examination.result.length == null || this.examination.result.length == 0) {
+      this.alertResult = true
+    }
+
+    if(this.examination.supervisorNote.length == null || this.examination.result.length == 0) {
+      this.alertNote = true
+    }
   }
 
   // Change status
