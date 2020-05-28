@@ -49,7 +49,7 @@ public class AccountController {
                 .city(foundUser.getPersonDetails().getCity())
                 .region(foundUser.getPersonDetails().getRegion())
                 .zipCode(foundUser.getPersonDetails().getZipCode())
-                .contactNumber(foundUser.getPersonDetails().getZipCode())
+                .contactNumber(foundUser.getPersonDetails().getContactNumber())
                 .build();
 
         return ResponseEntity.ok(accountDetailsDto);
