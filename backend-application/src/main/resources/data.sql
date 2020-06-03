@@ -2,6 +2,10 @@ insert into role (role, name) values (1, 'DOC');
 insert into role (role, name) values (2, 'REC');
 insert into role (role, name) values (3, 'LABS');
 insert into role (role, name) values (4, 'LABW');
+insert into role (role, name) values (5, 'ADMIN');
+
+insert into account (employee_id, role_id, user_name, user_hash, status) values (1, 5, 'admin1', 'passwd1', 'ENABLED');
+insert into account (employee_id, role_id, user_name, user_hash, status) values (2, 5, 'admin2', 'passwd2', 'ENABLED');
 
 insert into account (employee_id, role_id, user_name, user_hash, status) values (1, 1, 'lubee0', 'ea9d95dfb710e99b8781b7f40239a990', 'ENABLED');
 insert into account (employee_id, role_id, user_name, user_hash, status) values (2, 1, 'tboddington1', '362259343257af738bfca694b14fbf15', 'ENABLED');
@@ -23,6 +27,7 @@ insert into account (employee_id, role_id, user_name, user_hash, status) values 
 insert into account (employee_id, role_id, user_name, user_hash, status) values (18, 1, 'lclowh', '4769af00e6eecd303ee8a9006687a112', 'ENABLED');
 insert into account (employee_id, role_id, user_name, user_hash, status) values (19, 1, 'hplimmeri', '127f1fe7d18c98f3ff253b7106086580', 'ENABLED');
 insert into account (employee_id, role_id, user_name, user_hash, status) values (20, 1, 'gjellymanj', '0d5666e1602b212e66cc724fed6df47a', 'ENABLED');
+
 insert into account (employee_id, role_id, user_name, user_hash, status) values (1, 2, 'vwaldrum0', '5e586bf6c9dfac3337a6e0b0c290fab9', 'ENABLED');
 insert into account (employee_id, role_id, user_name, user_hash, status) values (2, 2, 'gtoffalo1', '636705f8b81728af019f18e45f179a39', 'ENABLED');
 insert into account (employee_id, role_id, user_name, user_hash, status) values (3, 2, 'tstede2', '09573160e863d61a4eb5de0e03ea472f', 'ENABLED');
@@ -33,11 +38,13 @@ insert into account (employee_id, role_id, user_name, user_hash, status) values 
 insert into account (employee_id, role_id, user_name, user_hash, status) values (8, 2, 'lshelf7', '955e5f2761438b9a3a4761fb268a483e', 'ENABLED');
 insert into account (employee_id, role_id, user_name, user_hash, status) values (9, 2, 'tbyrde8', '83b6af86748c82e20ba664f122e2ad15', 'ENABLED');
 insert into account (employee_id, role_id, user_name, user_hash, status) values (10, 2, 'dburgisi9', 'b4a9aa4d3a07fd1a6878023f9ce79a51', 'ENABLED');
+
 insert into account (employee_id, role_id, user_name, user_hash, status) values (1, 3, 'dsibbald0', 'fa40a02af94cc1bf7355c65fd53e4a32', 'ENABLED');
 insert into account (employee_id, role_id, user_name, user_hash, status) values (2, 3, 'kmably1', 'c2741b9cf9bd8d845791f055e3ed9512', 'ENABLED');
 insert into account (employee_id, role_id, user_name, user_hash, status) values (3, 3, 'gdent2', 'ac2d050765fed3925691bdc8d32f6a07', 'ENABLED');
 insert into account (employee_id, role_id, user_name, user_hash, status) values (4, 3, 'apennazzi3', 'eed9b94205170618455db1b44ba6f6c7', 'ENABLED');
 insert into account (employee_id, role_id, user_name, user_hash, status) values (5, 3, 'fmattheus4', '4e95e869c636c640caac0f41f858532e', 'ENABLED');
+
 insert into account (employee_id, role_id, user_name, user_hash, status) values (1, 4, 'ejakubski0', '4b16c39960c773df1904527ea06ace76', 'ENABLED');
 insert into account (employee_id, role_id, user_name, user_hash, status) values (2, 4, 'cquenby1', 'e2cc485cab35f1272cdf880c7bb3902b', 'ENABLED');
 insert into account (employee_id, role_id, user_name, user_hash, status) values (3, 4, 'alepage2', '12063673815966c88129c8d4b93b9129', 'ENABLED');
@@ -144,6 +151,9 @@ insert into person_details ( city, street_address1, street_address2, zip_code, r
 insert into person_details ( city, street_address1, street_address2, zip_code, region, contact_number) values ( 'Indianapolis', '84877 Iowa Road', null, '46239', 'Indiana', '388970117');
 insert into person_details ( city, street_address1, street_address2, zip_code, region, contact_number) values ( 'Clearwater', '056 Pearson Junction', '84414 Burrows Court', '33763', 'Florida', '559641865');
 insert into person_details ( city, street_address1, street_address2, zip_code, region, contact_number) values ( 'Santa Fe', '4591 Hintze Trail', null, '87592', 'New Mexico', '366870675');
+insert into person_details ( city, street_address1, street_address2, zip_code, region, contact_number) values ( 'Gliwice', 'Akademicka 16', null, '44-164', 'Slaskie', '000111222');
+insert into person_details ( city, street_address1, street_address2, zip_code, region, contact_number) values ( 'Katowice', 'Uniwersytecka 15', null, '46-203', 'Slaskie', '222111000');
+
 
 insert into receptionist ( person_details_id, first_name, last_name, license_code) values (1, 'Melany', 'Hawley', 'REC433596');
 insert into receptionist ( person_details_id, first_name, last_name, license_code) values (2, 'Carree', 'Constantine', 'REC293855');
@@ -234,6 +244,9 @@ insert into patient ( person_details_id, first_name, last_name, pesel_number) va
 insert into patient ( person_details_id, first_name, last_name, pesel_number) values ( 83, 'Mommy', 'Scotting', '91473256598');
 insert into patient ( person_details_id, first_name, last_name, pesel_number) values ( 84, 'Tatiania', 'Lehrer', '09835020800');
 insert into patient ( person_details_id, first_name, last_name, pesel_number) values ( 85, 'Richmond', 'Normand', '12057541213');
+
+insert into admin ( person_details_id, first_name, last_name, license_code) values ( 86, 'Lineusz', 'Torwald', 'none');
+insert into admin ( person_details_id, first_name, last_name, license_code) values ( 87, 'Ryszard', 'Stalman', 'none');
 
 insert into examination_state (id, name) values (1, 'in_progress');
 insert into examination_state (id, name) values (2, 'executed');

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pl.clinic.account.model.AccountId;
 import pl.clinic.account.model.Roles;
+import pl.clinic.admin.AdminRepository;
 import pl.clinic.doctor.model.DoctorRepository;
 import pl.clinic.lab_supervisor.model.LabSupervisorRepository;
 import pl.clinic.lab_worker.model.LabWorkerRepository;
@@ -30,6 +31,9 @@ public class UserService {
     @Autowired
     private LabSupervisorRepository labSupervisorRepository;
 
+    @Autowired
+    private AdminRepository adminRepository;
+
     public Optional<? extends User> findByAccountId(AccountId id) {
         switch (id.getRole().getName()) {
             case Roles.DOCTOR:
@@ -40,6 +44,8 @@ public class UserService {
                 return labWorkerRepository.findById(id.getEmployeeId());
             case Roles.LAB_SUPERVISOR:
                 return labSupervisorRepository.findById(id.getEmployeeId());
+            case Roles.ADMINISTRATOR:
+                return adminRepository.findById(id.getEmployeeId());
             default:
                 return Optional.empty();
         }
