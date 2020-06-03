@@ -38,7 +38,7 @@ public class DoctorController {
             @RequestParam(value = "last_name", required = false) String lastName) {
 
         List<Doctor> doctors = new LinkedList<>();
-        doctorRepository.findAll().forEach(doctors::add);
+        doctorRepository.findAllWhereAccountEnabled().forEach(doctors::add);
 
         doctors = new FilteringService<>(doctors)
                 .contains(firstName, Doctor::getFirstName)
