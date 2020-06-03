@@ -6,5 +6,6 @@ public class Roles {
     public static final String RECEPTIONIST = "REC";
     public static final String LAB_WORKER = "LABW";
     public static final String LAB_SUPERVISOR = "LABS";
+    public static final String ADMINISTRATOR = "ADMIN";
 
 }

@@ -1,6 +1,7 @@
 package pl.clinic.common_services;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -9,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import pl.clinic.account.model.Account;
 import pl.clinic.account.model.AccountDetails;
 import pl.clinic.account.model.AccountRepository;
+import pl.clinic.account.model.AccountStatus;
 
 import java.util.logging.Logger;
 
@@ -30,6 +32,9 @@ public class AppUserDetailsService implements UserDetailsService {
             throw new UsernameNotFoundException(username);
 
         log.info("Found user: " + username);
+
+        if(user.getStatus() == AccountStatus.DISABLED)
+            throw new AccessDeniedException("Account is disabled");
 
         return new AccountDetails(user);
     }

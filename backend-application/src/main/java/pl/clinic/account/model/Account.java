@@ -32,6 +32,11 @@ public class Account implements Serializable {
     @Column(name = "user_hash", nullable = false)
     protected String hash;
 
+    @NotNull
+    @Column(name = "status", nullable = false)
+    @Enumerated(EnumType.STRING)
+    protected AccountStatus status;
+
     public Long getEmployeeId() {
         return employeeId;
     }
@@ -62,5 +67,13 @@ public class Account implements Serializable {
 
     public void setHash(String userHash) {
         this.hash = userHash;
+    }
+
+    public AccountStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(AccountStatus status) {
+        this.status = status;
     }
 }
