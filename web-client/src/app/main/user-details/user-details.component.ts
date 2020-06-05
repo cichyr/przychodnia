@@ -3,6 +3,7 @@ import {Subscription} from 'rxjs'
 import {UserService} from '../../service/user.service'
 import {User} from '../../data/user/user'
 import {Role} from '../../data/user/role.enum'
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-user-details',
@@ -14,7 +15,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
   authSubscription: Subscription
   user: User
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.authSubscription = this.userService.getAuthenticationEvent().subscribe(
@@ -30,6 +31,10 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
       case Role.LAB_SUPERVISOR: return 'Kierownik Laboratorium'
       case Role.ADMINISTRATOR: return 'Administrator'
     }
+  }
+
+  navigateToAddUser(): void {
+    this.router.navigate(['add-user'])
   }
 
   ngOnDestroy(): void {
