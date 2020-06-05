@@ -6,22 +6,30 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.HttpClientErrorException;
+import pl.clinic.account.controller.dto.AccountBasicsDto;
 import pl.clinic.account.controller.dto.AccountDetailsDto;
+import pl.clinic.account.model.Account;
 import pl.clinic.account.model.AccountDetails;
 import pl.clinic.account.model.AccountId;
+import pl.clinic.account.model.AccountRepository;
+import pl.clinic.common_services.FilteringService;
 import pl.clinic.common_services.UserService;
 import pl.clinic.user.model.User;
 
 import java.security.Principal;
-import java.util.Optional;
+import java.util.*;
 
 @RestController
 public class AccountController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    AccountRepository accountRepository;
 
     @GetMapping(value = "/userinfo", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<AccountDetailsDto> getUserInfo(Principal principal) {
@@ -72,4 +80,36 @@ public class AccountController {
     }
 
 
+    @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<AccountBasicsDto>> getUsers(
+            @RequestParam(value = "id", required = false) Long userId,
+            @RequestParam(value = "username", required = false) String userName,
+            @RequestParam(value = "first_name", required = false) String firstName,
+            @RequestParam(value = "last_name", required = false) String lastName) {
+
+        List<AccountBasicsDto> accountBasicsDtos = new LinkedList<>();
+
+        for (Account account : accountRepository.findAll()) {
+            accountBasicsDtos.add(new AccountBasicsDto(account));
+        }
+
+        Optional<? extends User> user;
+        for (AccountBasicsDto account : accountBasicsDtos) {
+            user = userService.findByAccountId(new AccountId(account.getId(), account.getRole()));
+
+            if (user.isPresent()){
+                account.setFirstName(user.get().getFirstName());
+                account.setLastName(user.get().getLastName());
+            }
+        }
+
+        accountBasicsDtos = new FilteringService<>(accountBasicsDtos)
+                .contains(userId, AccountBasicsDto::getId)
+                .contains(firstName, AccountBasicsDto::getFirstName)
+                .contains(lastName, AccountBasicsDto::getLastName)
+                .contains(userId, AccountBasicsDto::getId)
+                .getFiltered();
+
+        return ResponseEntity.ok(accountBasicsDtos);
+    }
 }
