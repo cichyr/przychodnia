@@ -24,7 +24,7 @@
             <fa-icon [icon]="admin"></fa-icon>&nbsp;&nbsp;
             Użytkownicy
           </a>
-          <a ngbDropdownItem (click)="navigateToUserList()" *ngIf="this.getRole() == 'ADMIN'" class="cursor-ptr">
+          <a ngbDropdownItem (click)="navigateToEditUserDEBUG_FUN()" *ngIf="this.getRole() == 'ADMIN'" class="cursor-ptr">
             Edit user [DEBUG]
           </a>
         </div>
