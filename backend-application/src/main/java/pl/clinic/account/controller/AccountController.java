@@ -1,6 +1,7 @@
 package pl.clinic.account.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -10,12 +11,22 @@ import org.springframework.web.client.HttpClientErrorException;
 import pl.clinic.account.controller.dto.AccountBasicsDto;
 import pl.clinic.account.controller.dto.AccountDetailsDto;
 import pl.clinic.account.model.*;
+import pl.clinic.admin.Admin;
+import pl.clinic.admin.AdminRepository;
 import pl.clinic.common_services.FilteringService;
 import pl.clinic.common_services.UserService;
+import pl.clinic.doctor.model.Doctor;
+import pl.clinic.doctor.model.DoctorRepository;
+import pl.clinic.lab_supervisor.model.LabSupervisor;
+import pl.clinic.lab_supervisor.model.LabSupervisorRepository;
+import pl.clinic.lab_worker.model.LabWorker;
+import pl.clinic.lab_worker.model.LabWorkerRepository;
+import pl.clinic.patient.model.PatientRepository;
+import pl.clinic.receptionist.model.Receptionist;
+import pl.clinic.receptionist.model.ReceptionistRepository;
+import pl.clinic.user.model.PersonDetails;
+import pl.clinic.user.model.PersonDetailsRepository;
 import pl.clinic.user.model.User;
-import pl.clinic.visit.controller.dto.Interview;
-import pl.clinic.visit.controller.dto.VisitDetails;
-import pl.clinic.visit.model.Visit;
 
 import java.security.Principal;
 import java.util.*;
@@ -31,6 +42,21 @@ public class AccountController {
 
     @Autowired
     RoleRepository roleRepository;
+
+    @Autowired
+    DoctorRepository doctorRepository;
+
+    @Autowired
+    ReceptionistRepository receptionistRepository;
+
+    @Autowired
+    LabWorkerRepository labWorkerRepository;
+
+    @Autowired
+    LabSupervisorRepository labSupervisorRepository;
+
+    @Autowired
+    AdminRepository adminRepository;
 
     @GetMapping(value = "/userinfo", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<AccountDetailsDto> getUserInfo(Principal principal) {
@@ -81,7 +107,6 @@ public class AccountController {
 
     }
 
-
     @GetMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<AccountBasicsDto>> getUsers(
             @RequestParam(value = "id", required = false) Long userId,
@@ -99,7 +124,7 @@ public class AccountController {
         for (AccountBasicsDto account : accountBasicsDtos) {
             user = userService.findByAccountId(new AccountId(account.getId(), account.getRole()));
 
-            if (user.isPresent()){
+            if (user.isPresent()) {
                 account.setFirstName(user.get().getFirstName());
                 account.setLastName(user.get().getLastName());
             }
@@ -155,20 +180,78 @@ public class AccountController {
         return ResponseEntity.ok(accountDetailsDto);
     }
 
-//    //dodaj wywiad
-//    @PutMapping(value = "/{visit_id}/interview", produces = MediaType.APPLICATION_JSON_VALUE)
-//    public ResponseEntity<VisitDetails> putInterview(
-//            @PathVariable Long visit_id,
-//            @RequestBody Interview interview
-//    ) {
-//        Optional<Visit> optionalVisit = visitRepository.findById(visit_id);
-//        if (!optionalVisit.isPresent()) {
-//            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-//        }
-//        optionalVisit.get().setDescription(interview.getDescription());
-//        optionalVisit.get().setDiagnose(interview.getDiagnose());
-//        visitRepository.save(optionalVisit.get());
-//
-//        return ResponseEntity.ok(new VisitDetails(optionalVisit.get()));
-//    }
+    @PutMapping(value = "/user_details", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AccountDetailsDto> updateUser(
+            @RequestParam(value = "employee_id") Long accountId,
+            @RequestParam(value = "role_id") Long roleId,
+            @RequestBody AccountDetailsDto updatedAccount) {
+
+        Optional<Role> role = roleRepository.findById(roleId);
+
+        if (!role.isPresent()) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Role not exist.");
+        }
+
+        Optional<? extends User> optionalUser = userService.findByAccountId(new AccountId(accountId, role.get()));
+
+        if (!optionalUser.isPresent()) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Account not exist.");
+        }
+
+        Optional<Account> account = accountRepository.findById(new AccountId(accountId, role.get()));
+
+        if (!account.isPresent())
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "User not exist.");
+
+        // update user
+        User user = optionalUser.get();
+        user.setFirstName(updatedAccount.getFirstName());
+        user.setLastName(updatedAccount.getLastName());
+        user.setLicenseCode(updatedAccount.getLicenseCode());
+
+        //update personal details
+        user.getPersonDetails().setCity(updatedAccount.getCity());
+        user.getPersonDetails().setStreetAddress1(updatedAccount.getStreetAddress1());
+        user.getPersonDetails().setStreetAddress2(updatedAccount.getStreetAddress2());
+        user.getPersonDetails().setZipCode(updatedAccount.getZipCode());
+        user.getPersonDetails().setRegion(updatedAccount.getRegion());
+        user.getPersonDetails().setContactNumber(updatedAccount.getContactNumber());
+
+        switch (role.get().getName()) {
+            case Roles.DOCTOR:
+                doctorRepository.save((Doctor)user);
+                break;
+            case Roles.RECEPTIONIST:
+                receptionistRepository.save((Receptionist)user);
+                break;
+            case Roles.LAB_WORKER:
+                labWorkerRepository.save((LabWorker) user);
+                break;
+            case Roles.LAB_SUPERVISOR:
+                labSupervisorRepository.save((LabSupervisor)user);
+                break;
+            case Roles.ADMINISTRATOR:
+                adminRepository.save((Admin)user);
+                break;
+        }
+
+        // update account status
+        account.get().setStatus((updatedAccount.getStatus() == "ENABLED") ? AccountStatus.ENABLED : AccountStatus.DISABLED);
+        accountRepository.save(account.get()); // TODO: To powoduje blad
+
+        AccountDetails accountDetails = new AccountDetails(account.get());
+        AccountDetailsDto accountDetailsDto = new AccountDetailsDto.Builder(accountDetails)
+                .licenseCode(user.getLicenseCode())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .streetAddress1(user.getPersonDetails().getStreetAddress1())
+                .streetAddress2(user.getPersonDetails().getStreetAddress2())
+                .city(user.getPersonDetails().getCity())
+                .region(user.getPersonDetails().getRegion())
+                .zipCode(user.getPersonDetails().getZipCode())
+                .contactNumber(user.getPersonDetails().getContactNumber())
+                .build();
+
+        return ResponseEntity.ok(accountDetailsDto);
+    }
 }
