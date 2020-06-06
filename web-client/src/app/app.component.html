@@ -20,6 +20,10 @@
           <a ngbDropdownItem *ngIf="this.getRole() == 'NONE'" class="cursor-default">
             Zaloguj się aby móc korzystać menu
           </a>
+          <a ngbDropdownItem (click)="navigateToUserList()" *ngIf="this.getRole() == 'ADMIN'" class="cursor-ptr">
+            <fa-icon [icon]="admin"></fa-icon>&nbsp;&nbsp;
+            Użytkownicy
+          </a>
         </div>
       </li>
     </ul>
