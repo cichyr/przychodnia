@@ -1,12 +1,15 @@
 package pl.clinic.account.controller.dto;
 
 import pl.clinic.account.model.AccountDetails;
+import pl.clinic.account.model.AccountStatus;
 
 public class AccountDetailsDto {
 
     private final Long id;
     private final String role;
     private final String username;
+    private final String status;
+    private final String licenseCode;
     private final String firstName;
     private final String lastName;
     private final String city;
@@ -20,6 +23,8 @@ public class AccountDetailsDto {
         this.id = builder.userId;
         this.role = builder.role;
         this.username = builder.username;
+        this.status = builder.status;
+        this.licenseCode = builder.licenseCode;
         this.firstName = builder.firstName;
         this.lastName = builder.lastName;
         this.city = builder.city;
@@ -80,6 +85,8 @@ public class AccountDetailsDto {
         private final Long userId;
         private final String role;
         private final String username;
+        private String status;
+        private String licenseCode;
         private String firstName;
         private String lastName;
         private String city;
@@ -132,6 +139,16 @@ public class AccountDetailsDto {
 
         public AccountDetailsDto.Builder contactNumber(String contactNumber) {
             this.contactNumber = contactNumber;
+            return this;
+        }
+
+        public AccountDetailsDto.Builder status(String status) {
+            this.status = status;
+            return this;
+        }
+
+        public AccountDetailsDto.Builder licenseCode(String licenseCode) {
+            this.licenseCode = licenseCode;
             return this;
         }
 
