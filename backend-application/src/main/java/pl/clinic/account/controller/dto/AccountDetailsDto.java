@@ -85,7 +85,7 @@ public class AccountDetailsDto {
         private final Long userId;
         private final String role;
         private final String username;
-        private String status;
+        private final String status;
         private String licenseCode;
         private String firstName;
         private String lastName;
@@ -100,6 +100,7 @@ public class AccountDetailsDto {
             this.userId = accountDetails.getId();
             this.role = accountDetails.getRole().getName();
             this.username = accountDetails.getUsername();
+            this.status = accountDetails.getStatus().name();
         }
 
         public AccountDetailsDto.Builder firstName(String firstName) {
@@ -139,11 +140,6 @@ public class AccountDetailsDto {
 
         public AccountDetailsDto.Builder contactNumber(String contactNumber) {
             this.contactNumber = contactNumber;
-            return this;
-        }
-
-        public AccountDetailsDto.Builder status(String status) {
-            this.status = status;
             return this;
         }
 

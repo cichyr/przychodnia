@@ -52,6 +52,8 @@ public class AccountDetails implements UserDetails {
         return true;
     }
 
+    public AccountStatus getStatus() { return user.getStatus(); }
+
     public Role getRole() {
         return user.getRole();
     }
