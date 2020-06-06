@@ -1,7 +1,6 @@
 package pl.clinic.account.controller.dto;
 
 import pl.clinic.account.model.AccountDetails;
-import pl.clinic.account.model.AccountStatus;
 
 public class AccountDetailsDto {
 
@@ -79,6 +78,9 @@ public class AccountDetailsDto {
         return contactNumber;
     }
 
+    public String getStatus() { return status; }
+
+    public String getLicenseCode() { return licenseCode; }
 
     public static class Builder {
 
