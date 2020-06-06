@@ -72,4 +72,8 @@ export class UserService {
     }
   }
 
+  getUserList():void{ //Observable<User[]> {
+
+  }
+
 }
