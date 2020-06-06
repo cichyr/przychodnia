@@ -18,7 +18,6 @@ import pl.clinic.receptionist.model.Receptionist;
 import pl.clinic.receptionist.model.ReceptionistRepository;
 import pl.clinic.user.model.User;
 
-import javax.persistence.EntityNotFoundException;
 import java.util.Optional;
 
 /**
@@ -69,18 +68,23 @@ public class UserService {
             case Roles.DOCTOR:
                 assert user instanceof Doctor;
                 doctorRepository.save((Doctor) user);
+                break;
             case Roles.RECEPTIONIST:
                 assert user instanceof Receptionist;
                 receptionistRepository.save((Receptionist) user);
+                break;
             case Roles.LAB_WORKER:
                 assert user instanceof LabWorker;
                 labWorkerRepository.save((LabWorker) user);
+                break;
             case Roles.LAB_SUPERVISOR:
                 assert user instanceof LabSupervisor;
                 labSupervisorRepository.save((LabSupervisor) user);
+                break;
             case Roles.ADMINISTRATOR:
                 assert user instanceof Admin;
                 adminRepository.save((Admin) user);
+                break;
         }
     }
 }
