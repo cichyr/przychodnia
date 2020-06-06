@@ -51,6 +51,7 @@ public class AccountController {
 
         User foundUser = user.get();
         AccountDetailsDto accountDetailsDto = new AccountDetailsDto.Builder(accountDetails)
+                .licenseCode(foundUser.getLicenseCode())
                 .firstName(foundUser.getFirstName())
                 .lastName(foundUser.getLastName())
                 .streetAddress1(foundUser.getPersonDetails().getStreetAddress1())
@@ -114,9 +115,9 @@ public class AccountController {
         return ResponseEntity.ok(accountBasicsDtos);
     }
 
-    @GetMapping(value = "/account_details", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/user_details", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AccountDetailsDto> getAccountDetails(
-            @RequestParam(value = "account_id") Long accountId,
+            @RequestParam(value = "employee_id") Long accountId,
             @RequestParam(value = "role_id") Long roleId) {
 
         Optional<Role> role = roleRepository.findById(roleId);
@@ -140,6 +141,7 @@ public class AccountController {
         User user = optionalUser.get();
 
         AccountDetailsDto accountDetailsDto = new AccountDetailsDto.Builder(accountDetails)
+                .licenseCode(user.getLicenseCode())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
                 .streetAddress1(user.getPersonDetails().getStreetAddress1())
