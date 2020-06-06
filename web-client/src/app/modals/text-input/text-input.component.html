@@ -6,12 +6,12 @@
         </button>
     </div>
     <div class="modal-body">
-        <form>
+        <form [formGroup]>
             <textarea class="form-control" placeholder={{preInput}} rows="3" #box
                 (keyup)="enterText(box.value)">{{preInput}}</textarea>
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-success" (click)="activeModal.close(this.text)">Save</button>
+        <button type="button" class="btn btn-success" (click)="activeModal.close(this.text)">Zapisz</button>
     </div>
 </div>
