@@ -1,5 +1,6 @@
 package pl.clinic.account.controller.dto;
 
+import pl.clinic.account.model.AccountDetails;
 import pl.clinic.account.model.AccountStatus;
 import pl.clinic.account.model.Role;
 import pl.clinic.account.model.Account;
@@ -12,8 +13,8 @@ public class AccountBasicsDto {
     private String lastName;
     private AccountStatus status;
 
-    public AccountBasicsDto(Account account) {
-        this.id = account.getEmployeeId();
+    public AccountBasicsDto(AccountDetails account) {
+        this.id = account.getId();
         this.username = account.getUsername();
         this.role = account.getRole();
         this.status = account.getStatus();

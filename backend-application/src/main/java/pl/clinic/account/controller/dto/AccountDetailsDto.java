@@ -4,19 +4,22 @@ import pl.clinic.account.model.AccountDetails;
 
 public class AccountDetailsDto {
 
-    private final Long id;
-    private final String role;
-    private final String username;
-    private final String status;
-    private final String licenseCode;
-    private final String firstName;
-    private final String lastName;
-    private final String city;
-    private final String streetAddress1;
-    private final String streetAddress2;
-    private final String zipCode;
-    private final String region;
-    private final String contactNumber;
+    private Long id;
+    private String role;
+    private String username;
+    private String status;
+    private String licenseCode;
+    private String firstName;
+    private String lastName;
+    private String city;
+    private String streetAddress1;
+    private String streetAddress2;
+    private String zipCode;
+    private String region;
+    private String contactNumber;
+
+    public AccountDetailsDto() {
+    }
 
     private AccountDetailsDto(AccountDetailsDto.Builder builder) {
         this.id = builder.userId;
@@ -78,9 +81,65 @@ public class AccountDetailsDto {
         return contactNumber;
     }
 
-    public String getStatus() { return status; }
+    public String getStatus() {
+        return status;
+    }
 
-    public String getLicenseCode() { return licenseCode; }
+    public String getLicenseCode() {
+        return licenseCode;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setLicenseCode(String licenseCode) {
+        this.licenseCode = licenseCode;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setStreetAddress1(String streetAddress1) {
+        this.streetAddress1 = streetAddress1;
+    }
+
+    public void setStreetAddress2(String streetAddress2) {
+        this.streetAddress2 = streetAddress2;
+    }
+
+    public void setZipCode(String zipCode) {
+        this.zipCode = zipCode;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public void setContactNumber(String contactNumber) {
+        this.contactNumber = contactNumber;
+    }
 
     public static class Builder {
 

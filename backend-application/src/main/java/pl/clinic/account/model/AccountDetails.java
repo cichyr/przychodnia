@@ -9,27 +9,29 @@ import java.util.stream.Stream;
 
 public class AccountDetails implements UserDetails {
 
-    private Account user;
+    private final Account account;
+    private final Role role;
 
-    public AccountDetails(Account user) {
-        this.user = user;
+    private AccountDetails(AccountDetails.Builder builder) {
+        this.account = builder.account;
+        this.role = builder.role;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return Stream
-                .of((GrantedAuthority) () -> user.getRole().toString())
+                .of((GrantedAuthority) () -> role.name)
                 .collect(Collectors.toList());
     }
 
     @Override
     public String getPassword() {
-        return user.getHash();
+        return account.getHash();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return account.getUsername();
     }
 
     @Override
@@ -52,13 +54,34 @@ public class AccountDetails implements UserDetails {
         return true;
     }
 
-    public AccountStatus getStatus() { return user.getStatus(); }
-
-    public Role getRole() {
-        return user.getRole();
+    public Long getId() {
+        return account.getEmployeeId();
     }
 
-    public Long getId(){
-        return user.getEmployeeId();
+    public Role getRole() {
+        return role;
+    }
+
+    public AccountStatus getStatus() {
+        return account.getStatus();
+    }
+
+    public static class Builder {
+        private Account account;
+        private Role role;
+
+        public AccountDetails.Builder account(Account account) {
+            this.account = account;
+            return this;
+        }
+
+        public AccountDetails.Builder role(Role role) {
+            this.role = role;
+            return this;
+        }
+
+        public AccountDetails build() {
+            return new AccountDetails(this);
+        }
     }
 }

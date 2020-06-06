@@ -1,35 +1,32 @@
 package pl.clinic.account.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.server.ResponseStatusException;
 import pl.clinic.account.controller.dto.AccountBasicsDto;
 import pl.clinic.account.controller.dto.AccountDetailsDto;
 import pl.clinic.account.model.*;
-import pl.clinic.admin.Admin;
 import pl.clinic.admin.AdminRepository;
 import pl.clinic.common_services.FilteringService;
 import pl.clinic.common_services.UserService;
-import pl.clinic.doctor.model.Doctor;
 import pl.clinic.doctor.model.DoctorRepository;
-import pl.clinic.lab_supervisor.model.LabSupervisor;
 import pl.clinic.lab_supervisor.model.LabSupervisorRepository;
-import pl.clinic.lab_worker.model.LabWorker;
 import pl.clinic.lab_worker.model.LabWorkerRepository;
-import pl.clinic.patient.model.PatientRepository;
-import pl.clinic.receptionist.model.Receptionist;
 import pl.clinic.receptionist.model.ReceptionistRepository;
-import pl.clinic.user.model.PersonDetails;
-import pl.clinic.user.model.PersonDetailsRepository;
 import pl.clinic.user.model.User;
 
 import java.security.Principal;
-import java.util.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
 @RestController
 public class AccountController {
@@ -60,36 +57,14 @@ public class AccountController {
 
     @GetMapping(value = "/userinfo", produces = MediaType.APPLICATION_JSON_VALUE)
     ResponseEntity<AccountDetailsDto> getUserInfo(Principal principal) {
+        AccountDetails accountDetails = resolveAccountDetails(principal)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User not authenticated"));
 
-        AccountDetails accountDetails;
-        Optional<AccountDetails> optionalAccountDetails = resolveAccountDetails(principal);
+        User user = userService
+                .findByAccountId(new AccountId(accountDetails.getId(), accountDetails.getRole().getId()))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "User entity not found"));
 
-        if (optionalAccountDetails.isPresent())
-            accountDetails = optionalAccountDetails.get();
-        else
-            throw new HttpClientErrorException(HttpStatus.UNAUTHORIZED, "User not authenticated.");
-
-        Optional<? extends User> user =
-                userService.findByAccountId(new AccountId(accountDetails.getId(), accountDetails.getRole()));
-
-        if (!user.isPresent())
-            return ResponseEntity.ok().build();
-
-        User foundUser = user.get();
-        AccountDetailsDto accountDetailsDto = new AccountDetailsDto.Builder(accountDetails)
-                .licenseCode(foundUser.getLicenseCode())
-                .firstName(foundUser.getFirstName())
-                .lastName(foundUser.getLastName())
-                .streetAddress1(foundUser.getPersonDetails().getStreetAddress1())
-                .streetAddress2(foundUser.getPersonDetails().getStreetAddress2())
-                .city(foundUser.getPersonDetails().getCity())
-                .region(foundUser.getPersonDetails().getRegion())
-                .zipCode(foundUser.getPersonDetails().getZipCode())
-                .contactNumber(foundUser.getPersonDetails().getContactNumber())
-                .build();
-
-        return ResponseEntity.ok(accountDetailsDto);
-
+        return ResponseEntity.ok(buildResponseAccountDetailsDto(accountDetails, user));
     }
 
     private Optional<AccountDetails> resolveAccountDetails(Principal principal) {
@@ -114,15 +89,25 @@ public class AccountController {
             @RequestParam(value = "first_name", required = false) String firstName,
             @RequestParam(value = "last_name", required = false) String lastName) {
 
-        List<AccountBasicsDto> accountBasicsDtos = new LinkedList<>();
+        final List<AccountBasicsDto> accountBasicsDtos = new LinkedList<>();
+        List<Role> roles = StreamSupport.stream(roleRepository.findAll().spliterator(), false).collect(Collectors.toList());
 
-        for (Account account : accountRepository.findAll()) {
-            accountBasicsDtos.add(new AccountBasicsDto(account));
-        }
+        accountRepository.findAll().forEach(account -> {
+            Role role = roles.stream()
+                    .filter(r -> r.getId().equals(account.getRoleId()))
+                    .findAny()
+                    .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Role id not found."));
+
+            accountBasicsDtos.add(new AccountBasicsDto(new AccountDetails.Builder()
+                    .account(account)
+                    .role(role)
+                    .build()));
+        });
+
 
         Optional<? extends User> user;
         for (AccountBasicsDto account : accountBasicsDtos) {
-            user = userService.findByAccountId(new AccountId(account.getId(), account.getRole()));
+            user = userService.findByAccountId(new AccountId(account.getId(), account.getRole().getId()));
 
             if (user.isPresent()) {
                 account.setFirstName(user.get().getFirstName());
@@ -130,14 +115,15 @@ public class AccountController {
             }
         }
 
-        accountBasicsDtos = new FilteringService<>(accountBasicsDtos)
+
+        return ResponseEntity.ok(
+                new FilteringService<>(accountBasicsDtos)
                 .contains(userId, AccountBasicsDto::getId)
                 .contains(firstName, AccountBasicsDto::getFirstName)
                 .contains(lastName, AccountBasicsDto::getLastName)
                 .contains(userName, AccountBasicsDto::getUsername)
-                .getFiltered();
-
-        return ResponseEntity.ok(accountBasicsDtos);
+                .getFiltered()
+        );
     }
 
     @GetMapping(value = "/user_details", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -151,60 +137,44 @@ public class AccountController {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Role not exist.");
         }
 
-        Optional<? extends User> optionalUser = userService.findByAccountId(new AccountId(accountId, role.get()));
+        Optional<? extends User> optionalUser = userService.findByAccountId(new AccountId(accountId, role.get().getId()));
 
         if (!optionalUser.isPresent()) {
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Account not exist.");
         }
 
-        Optional<Account> account = accountRepository.findById(new AccountId(accountId, role.get()));
+        Optional<Account> account = accountRepository.findById(new AccountId(accountId, role.get().getId()));
 
         if (!account.isPresent())
             throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "User not exist.");
 
-        AccountDetails accountDetails = new AccountDetails(account.get());
-        User user = optionalUser.get();
-
-        AccountDetailsDto accountDetailsDto = new AccountDetailsDto.Builder(accountDetails)
-                .licenseCode(user.getLicenseCode())
-                .firstName(user.getFirstName())
-                .lastName(user.getLastName())
-                .streetAddress1(user.getPersonDetails().getStreetAddress1())
-                .streetAddress2(user.getPersonDetails().getStreetAddress2())
-                .city(user.getPersonDetails().getCity())
-                .region(user.getPersonDetails().getRegion())
-                .zipCode(user.getPersonDetails().getZipCode())
-                .contactNumber(user.getPersonDetails().getContactNumber())
+        AccountDetails accountDetails = new AccountDetails.Builder()
+                .account(account.get())
+                .role(role.get())
                 .build();
 
-        return ResponseEntity.ok(accountDetailsDto);
+        return ResponseEntity.ok(buildResponseAccountDetailsDto(accountDetails, optionalUser.get()));
     }
 
     @PutMapping(value = "/user_details", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AccountDetailsDto> updateUser(
-            @RequestParam(value = "employee_id") Long accountId,
+            @RequestParam(value = "employee_id") Long employee_id,
             @RequestParam(value = "role_id") Long roleId,
             @RequestBody AccountDetailsDto updatedAccount) {
 
-        Optional<Role> role = roleRepository.findById(roleId);
+        Role role = roleRepository
+                .findById(roleId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "The provided role does not exist."));
 
-        if (!role.isPresent()) {
-            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Role not exist.");
-        }
+        Account account = accountRepository
+                .findById(new AccountId(employee_id, role.getId()))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no account for the provided employee_id and role."));
 
-        Optional<? extends User> optionalUser = userService.findByAccountId(new AccountId(accountId, role.get()));
-
-        if (!optionalUser.isPresent()) {
-            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Account not exist.");
-        }
-
-        Optional<Account> account = accountRepository.findById(new AccountId(accountId, role.get()));
-
-        if (!account.isPresent())
-            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "User not exist.");
+        User user = userService
+                .findByAccountId(new AccountId(employee_id, role.getId()))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "No user with the given id exists."));
 
         // update user
-        User user = optionalUser.get();
         user.setFirstName(updatedAccount.getFirstName());
         user.setLastName(updatedAccount.getLastName());
         user.setLicenseCode(updatedAccount.getLicenseCode());
@@ -217,30 +187,24 @@ public class AccountController {
         user.getPersonDetails().setRegion(updatedAccount.getRegion());
         user.getPersonDetails().setContactNumber(updatedAccount.getContactNumber());
 
-        switch (role.get().getName()) {
-            case Roles.DOCTOR:
-                doctorRepository.save((Doctor)user);
-                break;
-            case Roles.RECEPTIONIST:
-                receptionistRepository.save((Receptionist)user);
-                break;
-            case Roles.LAB_WORKER:
-                labWorkerRepository.save((LabWorker) user);
-                break;
-            case Roles.LAB_SUPERVISOR:
-                labSupervisorRepository.save((LabSupervisor)user);
-                break;
-            case Roles.ADMINISTRATOR:
-                adminRepository.save((Admin)user);
-                break;
-        }
+        userService.save(user, role);
 
         // update account status
-        account.get().setStatus((updatedAccount.getStatus() == "ENABLED") ? AccountStatus.ENABLED : AccountStatus.DISABLED);
-        accountRepository.save(account.get()); // TODO: To powoduje blad
+        account.setStatus(AccountStatus.ENABLED.name().equals(updatedAccount.getStatus()) ? AccountStatus.ENABLED : AccountStatus.DISABLED);
+        accountRepository.save(account);
 
-        AccountDetails accountDetails = new AccountDetails(account.get());
-        AccountDetailsDto accountDetailsDto = new AccountDetailsDto.Builder(accountDetails)
+        AccountDetails accountDetails = new AccountDetails.Builder()
+                .account(account)
+                .role(role)
+                .build();
+
+        AccountDetailsDto accountDetailsDto = buildResponseAccountDetailsDto(accountDetails, user);
+
+        return ResponseEntity.ok(accountDetailsDto);
+    }
+
+    private AccountDetailsDto buildResponseAccountDetailsDto(AccountDetails accountDetails, User user) {
+        return new AccountDetailsDto.Builder(accountDetails)
                 .licenseCode(user.getLicenseCode())
                 .firstName(user.getFirstName())
                 .lastName(user.getLastName())
@@ -251,7 +215,5 @@ public class AccountController {
                 .zipCode(user.getPersonDetails().getZipCode())
                 .contactNumber(user.getPersonDetails().getContactNumber())
                 .build();
-
-        return ResponseEntity.ok(accountDetailsDto);
     }
 }
