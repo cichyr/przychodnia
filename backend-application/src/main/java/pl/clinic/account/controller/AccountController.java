@@ -10,6 +10,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
 import pl.clinic.account.controller.dto.AccountBasicsDto;
 import pl.clinic.account.controller.dto.AccountDetailsDto;
+import pl.clinic.account.controller.dto.NewPasswordDto;
 import pl.clinic.account.model.*;
 import pl.clinic.admin.AdminRepository;
 import pl.clinic.common_services.FilteringService;
@@ -25,7 +26,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @RestController
@@ -201,6 +201,24 @@ public class AccountController {
         AccountDetailsDto accountDetailsDto = buildResponseAccountDetailsDto(accountDetails, user);
 
         return ResponseEntity.ok(accountDetailsDto);
+    }
+
+    @PutMapping(value = "/user_details/password")
+    public void updatePassword(
+            @RequestParam(value = "employee_id") Long employee_id,
+            @RequestParam(value = "role_id") Long roleId,
+            @RequestBody NewPasswordDto newPassword) {
+
+        Role role = roleRepository
+                .findById(roleId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "The provided role does not exist."));
+
+        Account account = accountRepository
+                .findById(new AccountId(employee_id, role.getId()))
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "There is no account for the provided employee_id and role."));
+
+        account.setHash(newPassword.getPassword());
+        accountRepository.save(account);
     }
 
     private AccountDetailsDto buildResponseAccountDetailsDto(AccountDetails accountDetails, User user) {
