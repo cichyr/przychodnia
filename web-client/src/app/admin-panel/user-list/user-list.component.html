@@ -28,6 +28,35 @@
                 </div>
             </div>
         </div>
+
+        <!-- Search bar -->
+        <div class="row mt-4 align-self-center" style="display:flex;align-items:center;">
+
+            <!-- ID -->
+            <div class="col">
+                <input type="number" #id placeholder="ID użytkownika" (keyup)="seekedUser.id = id.value">
+            </div>
+
+            <!-- Username -->
+            <div class="col">
+                <input type="text" #username placeholder="Nazwa użytkownika" (keyup)="seekedUser.username = username.value">
+            </div>
+
+            <!-- First name -->
+            <div class="col">
+                <input type="text" #firstName placeholder="Imię" (keyup)="seekedUser.firstName = firstName.value">
+            </div>
+
+            <!-- Last name -->
+            <div class="col">
+                <input type="text" #lastName placeholder="Nazwisko" (keyup)="seekedUser.lastName = lastName.value">
+            </div>
+
+            <!-- Search button -->
+            <div class="col" style="display:flex;align-items:center;">
+                <button class="btn btn-primary" (click)="searchUser()"><fa-icon [icon]="search"></fa-icon></button>
+            </div>
+        </div>
     </div>
 
     <!-- User list -->

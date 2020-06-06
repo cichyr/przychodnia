@@ -4,6 +4,7 @@ import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/service/user.service';
 import { Router } from '@angular/router';
 import { Role } from 'src/app/data/user/role.enum';
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-user-list',
@@ -16,6 +17,8 @@ export class UserListComponent implements OnInit {
   userList: User[]
   user: User
   userSub: Subscription
+  search = faSearch
+  seekedUser: User = new User()
 
   constructor(private userService: UserService, private router: Router) { }
 
@@ -33,6 +36,14 @@ export class UserListComponent implements OnInit {
   navigateToDetails(id: number, role: Role) {
     console.log('Navigate to details: ' + id.toString())
     console.log('Navigate to details: ' + role.toString())
+  }
+
+  log(input: string) {
+    console.log(input)
+  }
+
+  searchUser(): void {
+    return
   }
 
 }
