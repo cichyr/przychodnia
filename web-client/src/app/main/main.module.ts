@@ -5,12 +5,11 @@ import { LoginPageComponent } from './login-page/login-page.component';
 import {ReactiveFormsModule} from '@angular/forms'
 import {NgbAlertModule} from '@ng-bootstrap/ng-bootstrap';
 import { UserDetailsComponent } from './user-details/user-details.component';
-import { EditUserComponent } from './edit-user/edit-user.component';
 
 
 
 @NgModule({
-  declarations: [HomePageComponent, LoginPageComponent, UserDetailsComponent, EditUserComponent],
+  declarations: [HomePageComponent, LoginPageComponent, UserDetailsComponent],
   imports: [
     CommonModule,
     ReactiveFormsModule,
