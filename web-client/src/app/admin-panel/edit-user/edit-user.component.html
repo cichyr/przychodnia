@@ -13,8 +13,7 @@
         <!-- Title -->
         <div class="col-8">
           <h1 class="container text-center">
-            <!-- TODO: dodac nazwe uzytkownika -->
-            <b>Edycja danych użytkownika lubee0</b>
+            <b>Edycja danych użytkownika {{user.username}}</b>
           </h1>
         </div>
 
@@ -35,34 +34,34 @@
       <div class="row mt-4">
         <div class="col">
           <div class="row mt-2">
-            <div class="col justify-content-start">
+            <div class="col justify-content-start align-self-center">
               Imię:
             </div>
             <div class="col-8 text-left">
-              <input #box1="" type="text" class="form-control" value="Jerzy">
+              <input #box1="" (keyup)="user.firstName=box1.value" type="text" class="form-control" value="{{user.firstName}}">
             </div>
           </div>
           <div class="row mt-2">
-            <div class="col justify-content-start">
+            <div *ngIf="user.role.toString()!='ADMIN'" class="col justify-content-start align-self-center">
               Kod licencji:
             </div>
             <div class="col-8 text-left">
-              <input #box1="" type="text" class="form-control" value="CCC951064">
+              <input *ngIf="user.role.toString()!='ADMIN'" #box2="" (keyup)="user.licenseCode=box2.value" type="text" class="form-control" value="{{user.licenseCode}}">
             </div>
           </div>
         </div>
 
         <div class="col">
           <div class="row my-2">
-            <div class="col justify-content-start">
+            <div class="col justify-content-start align-self-center">
               Nazwisko:
             </div>
             <div class="col-8 text-left">
-              <input #box1="" type="text" class="form-control" value="Czornik">
+              <input #box3="" (keyup)="user.lastName=box3.value" type="text" class="form-control" value="{{user.lastName}}">
             </div>
           </div>
           <div class="row mt-2">
-            <div class="col">
+            <div class="col align-self-center">
               Status:
             </div>
             <div class="col-8">
@@ -88,11 +87,11 @@
       <div class="row mt-4">
         <div class="col">
          <div class="row">
-           <div class="col">
+           <div class="col align-self-center">
             Adres:
            </div>
            <div class="col-8 text-left">
-             <input #box1="" type="text" class="form-control" value="Sezamkowa 14/9">
+             <input #box4="" (keyup)="user.streetAddress1=box4.value" type="text" class="form-control" value="{{user.streetAddress1}}">
            </div>
          </div>
         </div>
@@ -102,11 +101,11 @@
       <div class="row mt-2">
         <div class="col">
           <div class="row">
-            <div class="col">
+            <div class="col align-self-center">
               Kod pocztowy:
             </div>
             <div class="col-8 text-left">
-              <input #box1="" type="text" class="form-control" value="96-052">
+              <input #box5="" (keyup)="user.zipCode=box5.value" type="text" class="form-control" value="{{user.zipCode}}">
             </div>
           </div>
         </div>
@@ -116,11 +115,11 @@
       <div class="row mt-2">
         <div class="col">
           <div class="row">
-            <div class="col">
+            <div class="col align-self-center">
               Miasto:
             </div>
             <div class="col-8 text-left">
-              <input #box1="" type="text" class="form-control" value="Czeladź">
+              <input #box6="" (keyup)="user.city=box6.value" type="text" class="form-control" value="{{user.city}}">
             </div>
           </div>
         </div>
@@ -130,11 +129,11 @@
       <div class="row mt-2">
         <div class="col">
           <div class="row">
-            <div class="col">
+            <div class="col align-self-center">
               Województwo:
             </div>
             <div class="col-8 text-left">
-              <input #box1="" type="text" class="form-control" value="śląskie">
+              <input #box7="" (keyup)="user.region=box7.value" type="text" class="form-control" value="{{user.region}}">
             </div>
           </div>
         </div>
@@ -144,18 +143,17 @@
       <div class="row my-2">
         <div class="col">
           <div class="row">
-            <div class="col">
+            <div class="col align-self-center">
               Nr telefonu:
             </div>
             <div class="col-8 text-left">
-              <input #box1="" type="text" class="form-control" value="111222333">
+              <input #box8="" (keyup)="user.contactNumber=box8.value" type="text" class="form-control" value="{{user.contactNumber}}">
             </div>
           </div>
         </div>
         <div class="col text-right">
         </div>
       </div>
-
 
     </div>
 
