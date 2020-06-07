@@ -32,8 +32,9 @@
         <div class="row mt-4 align-self-center align-content-center">
             <div class="col">
                 <div class="col text-center">
-                    <button class="btn btn-primary font-weight-bold add-button" (click)="navigateToAddUser()"> + </button>
-                  </div>
+                    <button class="btn btn-primary font-weight-bold add-button" (click)="navigateToAddUser()"> +
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -47,7 +48,8 @@
 
             <!-- Username -->
             <div class="col">
-                <input type="text" #username placeholder="Nazwa użytkownika" (keyup)="seekedUser.username = username.value">
+                <input type="text" #username placeholder="Nazwa użytkownika"
+                    (keyup)="seekedUser.username = username.value">
             </div>
 
             <!-- First name -->
@@ -62,7 +64,9 @@
 
             <!-- Search button -->
             <div class="col" style="display:flex;align-items:center;">
-                <button class="btn btn-primary" (click)="searchUser()"><fa-icon [icon]="search"></fa-icon></button>
+                <button class="btn btn-primary" (click)="searchUser()">
+                    <fa-icon [icon]="search"></fa-icon>
+                </button>
             </div>
         </div>
     </div>
@@ -70,7 +74,7 @@
     <!-- User list -->
     <div *ngFor="let user of userList">
         <div *ngIf="this.filters[user.status]" class="container border rounded-lg mt-4">
-            
+
             <!-- User basic info -->
             <div class="row">
                 <div class="col my-1">
@@ -100,7 +104,8 @@
 
                 <!-- Details button -->
                 <div class="col align-self-center text-center my-2">
-                    <button class="btn btn-primary btn-sm" (click)="navigateToDetails(user.id, user.role.name)">Szczegóły</button>
+                    <button class="btn btn-primary btn-sm"
+                        (click)="navigateToDetails(user.id, user.role.id)">Szczegóły</button>
                 </div>
             </div>
         </div>

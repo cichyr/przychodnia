@@ -28,7 +28,7 @@
 
             <!-- Title -->
             <div class="col align-content-center">
-                <button class="btn btn-primary mx-2" (click)="changePassword()">Zmień hasło</button>
+                <button class="btn btn-primary mx-2" (click)="openPopup()">Zmień hasło</button>
                 <button class="btn btn-primary mx-2" (click)="editUser()">Edytuj dane</button>
             </div>
 
@@ -58,12 +58,17 @@
                 </div>
                 <div class="row">
                     <div class="col">
-                        <b>Rola: </b> {{this.user.role}}
+                        <b>Rola: </b> {{translateRole(this.user.role)}}
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col">
+                    <div class="col"
+                        *ngIf="this.user.licenseCode != null && this.user.licenseCode != '' && this.user.licenseCode != 'none'">
                         <b>Kod licencji: </b> {{this.user.licenseCode}}
+                    </div>
+                    <div class="col"
+                        *ngIf="this.user.licenseCode == null || this.user.licenseCode == '' || this.user.licenseCode == 'none'">
+                        <b>Kod licencji: </b> Brak
                     </div>
                 </div>
                 <div class="row">
@@ -103,10 +108,10 @@
             <!-- Left column -->
             <div class="col">
                 <div class="row">
-                    <div class="col" *ngIf="this.user.streetAddress2 != null || this.user.streetAddress2 != ''; else short">
+                    <div class="col" *ngIf="this.user.streetAddress2 != null && this.user.streetAddress2 != ''">
                         <b>Adres: </b> {{this.user.streetAddress1}}, {{this.user.streetAddress2}}
                     </div>
-                    <div class="col" #short>
+                    <div class="col" *ngIf="this.user.streetAddress2 == null || this.user.streetAddress2 == ''">
                         <b>Adres: </b> {{this.user.streetAddress1}}
                     </div>
                 </div>

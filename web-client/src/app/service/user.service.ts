@@ -103,4 +103,14 @@ export class UserService {
     }
   }
 
+  getUser(id: number, role_id: number): Observable<User> {
+    return this.http.get<User>(`http://localhost:8080/api/user_details?employee_id=${id}&role_id=${role_id}`)
+  }
+
+  updatePassword(id: number, role_id: number, new_hash: string): Observable<User> {
+    return this.http.put<User>(`http://localhost:8080/api/user_details/password?employee_id=${id}&role_id=${role_id}`, {
+      "password": new_hash
+    }) 
+  }
+
 }

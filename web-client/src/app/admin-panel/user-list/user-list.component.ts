@@ -44,8 +44,8 @@ export class UserListComponent implements OnInit {
     this.router.navigate(['/admin/add-user'])
   }
 
-  navigateToDetails(id: number, role: string) {
-    this.router.navigate([`/admin/user-details/${id}/${role}`])
+  navigateToDetails(id: number, role_id: number) {
+    this.router.navigate(['/admin/user-list', id, role_id])
   }
 
   translateRole(role: string): string {
