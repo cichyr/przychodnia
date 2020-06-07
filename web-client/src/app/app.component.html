@@ -7,7 +7,7 @@
           <span>MENU</span>
         </a>
         <div ngbDropdownMenu aria-labelledby="menuDropdown" class="dropdown-menu no-border">
-          <a ngbDropdownItem (click)="navigateToLab()" *ngIf="this.getRole() == 'LABW' || this.getRole() == 'LABS' || this.getRole() ==='ADMIN'"
+          <a ngbDropdownItem (click)="navigateToLab()" *ngIf="this.getRole() == 'LABW' || this.getRole() == 'LABS'"
              class="cursor-ptr">
             <fa-icon [icon]="microscope"></fa-icon>&nbsp;
             Laboratorium

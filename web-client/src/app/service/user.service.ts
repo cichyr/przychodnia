@@ -4,6 +4,7 @@ import {User} from '../data/user/user'
 import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs'
 import {Credentials} from '../data/user/credentials'
 import {tap} from 'rxjs/operators'
+import { UserBasic } from '../data/user/user-basic'
 
 @Injectable({
   providedIn: 'root'
@@ -72,8 +73,34 @@ export class UserService {
     }
   }
 
-  getUserList():void{ //Observable<User[]> {
-
+  getUserList(user?: User): Observable<UserBasic[]> {
+    if (user !== undefined) {
+      let useAnd = false
+      let query = ''
+      if (user.id != null) {
+        query += 'id=' + user.id
+        useAnd = true
+      }
+      if (user.username) {
+        if (useAnd) { query += '&' }
+        query += 'username=' + user.username
+        useAnd = true
+      }
+      if (user.firstName) {
+        if (useAnd) { query += '&' }
+        query += 'first_name=' + user.firstName
+        useAnd = true
+      }
+      if (user.lastName) {
+        if (useAnd) { query += '&' }
+        query += 'last_name=' + user.lastName
+        useAnd = true
+      }
+      console.log(query)
+      return this.http.get<UserBasic[]>(`http://localhost:8080/api/users?${query}`)
+    } else {
+      return this.http.get<UserBasic[]>(`http://localhost:8080/api/users`)
+    }
   }
 
 }

@@ -5,6 +5,7 @@ import { UserService } from 'src/app/service/user.service';
 import { Router } from '@angular/router';
 import { Role } from 'src/app/data/user/role.enum';
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { UserBasic } from 'src/app/data/user/user-basic';
 
 @Component({
   selector: 'app-user-list',
@@ -13,8 +14,8 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 })
 export class UserListComponent implements OnInit {
 
-  filters = {'active': true, 'inactive': true}
-  userList: User[]
+  filters = {'ENABLED': true, 'DISABLED': true}
+  userList: UserBasic[]
   user: User
   userSub: Subscription
   search = faSearch
@@ -26,24 +27,44 @@ export class UserListComponent implements OnInit {
     // Subscription
     this.userSub = this.userService.getAuthenticationEvent().subscribe(user => {
       this.user = user
-      if(this.user != null) {
-        console.log("User != null")
-        //this.userSub
+      if (this.user != null) {
+        this.userSub = this.userService.getUserList().subscribe(users => this.userList = users)
+      }
+    })
+
+    this.userService.getAuthenticationEvent().subscribe(user => {
+      this.user = user
+      if (this.user != null) {
+        this.userSub = this.userService.getUserList().subscribe(users => this.userList = users)
       }
     })
   }
 
-  navigateToDetails(id: number, role: Role) {
-    console.log('Navigate to details: ' + id.toString())
-    console.log('Navigate to details: ' + role.toString())
+  navigateToAddUser() {
+    this.router.navigate(['/admin/add-user'])
   }
 
-  log(input: string) {
-    console.log(input)
+  navigateToDetails(id: number, role: string) {
+    this.router.navigate([`/admin/user-details/${id}/${role}`])
+  }
+
+  translateRole(role: string): string {
+    switch (role) {
+      case 'DOC':
+        return 'Doktor'
+      case 'LABS':
+        return 'Kierownik laboratorium'
+      case 'LABW':
+        return 'Pracownik laboratorium'
+      case 'REC':
+        return 'Recepcjonista'
+      case 'ADMIN':
+        return 'Administrator'
+    }
   }
 
   searchUser(): void {
-    return
+    this.userSub = this.userService.getUserList(this.seekedUser).subscribe(users => this.userList = users)
   }
 
 }

@@ -32,7 +32,7 @@ const routes: Routes = [
       {path: 'add-physical-exam', component: AddPhysicalExamComponent},
       {path: 'add-lab-exam', component: AddLabExamComponent},
       {path: 'physical-exam-details/:id', component: PhysicalExamDetailsComponent},
-      {path: 'admin/user-list', component: UserListComponent}
+      {path: 'admin/user-list', component: UserListComponent},
     ]
   }
 ]

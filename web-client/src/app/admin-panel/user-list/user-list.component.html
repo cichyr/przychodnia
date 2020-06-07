@@ -20,12 +20,20 @@
                 <div ngbDropdown class="d-inline-block">
                     <button class="btn btn-outline-primary" ngbDropdownToggle>Filtruj</button>
                     <div ngbDropdownMenu>
-                        <label ngbDropdownItem><input type="checkbox" [checked]="filters['active']"
-                                (change)="filters['active'] = !filters['active']">&ensp;Aktywny</label>
-                        <label ngbDropdownItem><input type="checkbox" [checked]="filters['inactive']"
-                                (change)="filters['inactive'] = !filters['inactive']">&ensp;Nieaktywny</label>
+                        <label ngbDropdownItem><input type="checkbox" [checked]="filters['ENABLED']"
+                                (change)="filters['ENABLED'] = !filters['ENABLED']">&ensp;Aktywny</label>
+                        <label ngbDropdownItem><input type="checkbox" [checked]="filters['DISABLED']"
+                                (change)="filters['DISABLED'] = !filters['DISABLED']">&ensp;Nieaktywny</label>
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="row mt-4 align-self-center align-content-center">
+            <div class="col">
+                <div class="col text-center">
+                    <button class="btn btn-primary font-weight-bold add-button" (click)="navigateToAddUser()"> + </button>
+                  </div>
             </div>
         </div>
 
@@ -65,39 +73,34 @@
             
             <!-- User basic info -->
             <div class="row">
-                <div class="col-4 align-self-center my-1">
+                <div class="col my-1">
                     <div class="row">
-                        <div class="col"><b>ID:</b></div>
-                        <div class="col-8">{{user.id}}</div>
+                        <div class="col"><b>ID:</b> {{user.id}}</div>
                     </div>
                     <div class="row">
-                        <div class="col"><b>Imię:</b></div>
-                        <div class="col-8">{{user.firstName}}</div>
+                        <div class="col"><b>Imię:</b> {{user.firstName}}</div>
                     </div>
                     <div class="row">
-                        <div class="col"><b>Nazwisko:</b></div>
-                        <div class="col-8">{{user.lastName}}</div>
+                        <div class="col"><b>Nazwisko:</b> {{user.lastName}}</div>
                     </div>
                 </div>
 
-                <div class="col-4 align-self-center my-1">
+                <div class="col my-1">
                     <div class="row">
-                        <div class="col"><b>Nazwa użytkownika:</b></div>
-                        <div class="col-8">{{user.username}}</div>
+                        <div class="col"><b>Nazwa użytkownika:</b> {{user.username}}</div>
                     </div>
                     <div class="row">
-                        <div class="col"><b>Rola:</b></div>
-                        <div class="col-8">{{user.role}}</div>
+                        <div class="col"><b>Rola:</b> {{translateRole(user.role.name)}}</div>
                     </div>
                     <div class="row">
-                        <div class="col"><b>Status konta:</b></div>
-                        <div class="col-8">{{user.status}}</div>
+                        <div class="col" *ngIf="user.status == 'ENABLED'"><b>Status konta:</b> Aktywne</div>
+                        <div class="col" *ngIf="user.status == 'DISABLED'"><b>Status konta:</b> Nieaktywne</div>
                     </div>
                 </div>
 
                 <!-- Details button -->
-                <div class="col-4 align-self-center text-center my-2">
-                    <button class="btn btn-primary btn-sm" (click)="navigateToDetails(user.id, user.role)">Szczegóły</button>
+                <div class="col align-self-center text-center my-2">
+                    <button class="btn btn-primary btn-sm" (click)="navigateToDetails(user.id, user.role.name)">Szczegóły</button>
                 </div>
             </div>
         </div>
