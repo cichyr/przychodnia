@@ -5,13 +5,13 @@ import java.io.Serializable;
 public class AccountId implements Serializable {
 
     protected Long employeeId;
-    protected Role role;
+    protected Long roleId;
 
     public AccountId() { }
 
-    public AccountId(Long employeeId, Role role) {
+    public AccountId(Long employeeId, Long roleId) {
         this.employeeId = employeeId;
-        this.role = role;
+        this.roleId = roleId;
     }
 
     public Long getEmployeeId() {
@@ -22,11 +22,11 @@ public class AccountId implements Serializable {
         this.employeeId = employeeId;
     }
 
-    public Role getRole() {
-        return role;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 }
