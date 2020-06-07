@@ -7,6 +7,8 @@ export class User {
   role: Role
   firstName: String
   lastName: String
+  status: string
+  licenseCode: string
   city: String
   streetAddress1: String
   streetAddress2: String

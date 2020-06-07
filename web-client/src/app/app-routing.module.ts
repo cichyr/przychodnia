@@ -16,6 +16,7 @@ import { AddPhysicalExamComponent } from './visit/add-physical-exam/add-physical
 import { AddLabExamComponent } from './visit/add-lab-exam/add-lab-exam.component';
 import { PhysicalExamDetailsComponent } from './visit/physical-exam-details/physical-exam-details.component';
 import { UserListComponent } from './admin-panel/user-list/user-list.component';
+import { AccountDetailsComponent } from './admin-panel/account-details/account-details.component';
 
 const routes: Routes = [
   {path: 'login-page', component: LoginPageComponent},
@@ -32,7 +33,8 @@ const routes: Routes = [
       {path: 'add-physical-exam', component: AddPhysicalExamComponent},
       {path: 'add-lab-exam', component: AddLabExamComponent},
       {path: 'physical-exam-details/:id', component: PhysicalExamDetailsComponent},
-      {path: 'admin/user-list', component: UserListComponent}
+      {path: 'admin/user-list', component: UserListComponent},
+      {path: 'admin/user-details-DEBUG', component: AccountDetailsComponent},
     ]
   }
 ]
