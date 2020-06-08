@@ -208,7 +208,7 @@ public class AccountController {
     public void updatePassword(
             @RequestParam(value = "employee_id") Long employee_id,
             @RequestParam(value = "role_id") Long roleId,
-            @RequestBody NewPasswordDto newPassword) {
+            @Valid @RequestBody NewPasswordDto newPassword) {
 
         Role role = roleRepository
                 .findById(roleId)
