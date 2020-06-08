@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class AddUserComponent implements OnInit {
 
-  userSub :Subscription
+  komunikat: String = new String()
   user: User = new User()
   confirmPassword: String = new String()
   role: String
@@ -67,23 +67,29 @@ export class AddUserComponent implements OnInit {
         this.user = user;
       });
 
-      let roleNumber: number;
+      console.log(this.user)
 
-      if (this.user.role == "DOC")
-        roleNumber = 1;
-      else if (this.user.role == "REC")
-        roleNumber = 2;
-      else if (this.user.role == "LABS")
-        roleNumber = 3;
-      else if (this.user.role == "LABW")
-        roleNumber = 4;
-      else if (this.user.role == 'ADMIN')
-        roleNumber = 5;
-
-      this.router.navigate([`user-de`])
+      // let roleNumber: number;
+      //
+      // if (this.user.role == "DOC")
+      //   roleNumber = 1;
+      // else if (this.user.role == "REC")
+      //   roleNumber = 2;
+      // else if (this.user.role == "LABS")
+      //   roleNumber = 3;
+      // else if (this.user.role == "LABW")
+      //   roleNumber = 4;
+      // else if (this.user.role == 'ADMIN')
+      //   roleNumber = 5;
+      //
+      // this.router.navigate([`admin/user-list`, this.user.id, roleNumber])
     }
     else
+    {
+      this.komunikat = "dupa!"
       this.displayAlert()
+    }
+
   }
 
   displayAlert(): void {

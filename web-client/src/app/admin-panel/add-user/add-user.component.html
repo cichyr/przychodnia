@@ -20,7 +20,7 @@
       <!-- Confirm button -->
       <div class="col align-self-center justify-content-end text-right">
         <button *ngIf="!checkFields()" class="btn btn-primary" disabled>Zatwierdź</button>
-        <button *ngIf="checkFields()" class="btn btn-primary">Zatwierdź</button>
+        <button *ngIf="checkFields()" class="btn btn-primary" (click)="confirmNewUser()">Zatwierdź</button>
       </div>
     </div>
   </div>
@@ -67,7 +67,7 @@
         </div>
         <div class="col">
           <div class="form-group">
-            <select #select1 (mouseleave)="user.status=select1.value" class="custom-select" id="inputGroupSelect0">
+            <select #select1 (mouseleave)="user.role=select1.value" class="custom-select" id="inputGroupSelect0">
               <option value="ADMIN" selected>Admin</option>
               <option value="DOC">Doktor</option>
               <option value="REC">Recepcjonista</option>
@@ -166,6 +166,9 @@
             <input #box12="" (keyup)="user.contactNumber=box12.value" type="text" class="form-control">
           </div>
         </div>
+      </div>
+      <div class="row">
+        {{komunikat}}
       </div>
     </div>
   </div>

@@ -113,7 +113,24 @@ export class UserService {
   }
 
   postNewUser(user: User): Observable<User> {
-    return this.http.post<User>(`http://localhost:8080/api/users`, user)
+
+    console.log(user)
+
+    return this.http.post<User>(`http://localhost:8080/api/users`,{
+      "licenseCode": user.licenseCode,
+      "role": user.role,
+      "username": user.username,
+      "password": user.password,
+      "status": "ENABLED",
+      "firstName": user.firstName,
+      "lastName": user.lastName,
+      "city": user.city,
+      "streetAddress1": user.streetAddress1,
+      "streetAddress2": null,
+      "zipCode": user.zipCode,
+      "region": user.region,
+      "contactNumber": user.contactNumber
+    })
   }
 
   editUser(user: User, role: number): Observable<User> {

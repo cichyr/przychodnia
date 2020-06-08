@@ -26,7 +26,7 @@ export class User {
     this.licenseCode = new String()
     this.city = new String()
     this.streetAddress1 = new String()
-    this.streetAddress2 = new String()
+    this.streetAddress2 = null
     this.zipCode = new String()
     this.region = new String()
     this.contactNumber = new String()
