@@ -5,7 +5,7 @@ import {UserService} from './service/user.service'
 import {environment} from '../environments/environment.dev'
 import {Credentials} from './data/user/credentials'
 import {map, tap} from 'rxjs/operators'
-import {faMicroscope, faNotesMedical, faThLarge, faUser} from '@fortawesome/free-solid-svg-icons'
+import {faMicroscope, faNotesMedical, faThLarge, faUser, faUsersCog} from '@fortawesome/free-solid-svg-icons'
 
 @Component({
   selector: 'app-root',
@@ -23,6 +23,7 @@ export class AppComponent implements OnInit, OnDestroy {
   visit = faNotesMedical
   menu = faThLarge
   login = faUser
+  admin = faUsersCog
 
   constructor(private router: Router, private userService: UserService) {
   }
@@ -48,7 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   navigateToLab() {
-    if(this.getRole() == 'LABW' || this.getRole() == 'LABS') {
+    if(this.getRole() == 'LABW' || this.getRole() == 'LABS' || this.getRole() === 'ADMIN') {
       this.router.navigate(['/exam-list/'])
     }
   }
@@ -66,6 +67,10 @@ export class AppComponent implements OnInit, OnDestroy {
     else if(this.getRole() == 'DOC') {
       this.router.navigate(['/doctor-visit-list/'])
     }
+  }
+
+  navigateToUserList() {
+    this.router.navigate(['/admin/user-list'])
   }
 
   signOut() {

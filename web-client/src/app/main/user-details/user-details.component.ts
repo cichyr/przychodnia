@@ -28,6 +28,7 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
       case Role.RECEPTIONIST: return 'Recepcjonista'
       case Role.LAB_WORKER: return 'Laborant'
       case Role.LAB_SUPERVISOR: return 'Kierownik Laboratorium'
+      case Role.ADMINISTRATOR: return 'Administrator'
     }
   }
 

@@ -1,0 +1,142 @@
+<div class="align-content-center">
+
+    <!-- Header title and buttons -->
+    <div class="container">
+        <div class="row mt-4 align-self-center">
+
+            <!-- Back button -->
+            <div class="col align-self-center">
+                <button class="btn btn-primary" (click)="navigateToList()">Wróć</button>
+            </div>
+
+            <!-- Title -->
+            <div class="row">
+                <h1 class="text-center">
+                    <b>Szczegóły użytkownika {{this.user.username}}</b>
+                </h1>
+            </div>
+
+            <!-- Placeholder -->
+            <div class="col">
+            </div>
+        </div>
+        <div class="row mt-4 align-self-center align-content-center text-center">
+
+            <!-- Back button -->
+            <div class="col">
+            </div>
+
+            <!-- Title -->
+            <div class="col align-content-center">
+                <button class="btn btn-primary mx-2" (click)="openPopup()">Zmień hasło</button>
+                <button class="btn btn-primary mx-2" (click)="editUser()">Edytuj dane</button>
+            </div>
+
+            <!-- Placeholder -->
+            <div class="col">
+            </div>
+        </div>
+    </div>
+
+    <br><br><br>
+    <!-- Basic information -->
+    <div class="container mt-4 align-self-center align-content-center">
+        <!-- Title bar -->
+        <div class="row justify-content-center">
+            <h3><b>Informacje podstawowe</b></h3>
+        </div>
+
+        <!-- User basic info -->
+        <div class="row border-top border-bottom">
+
+            <!-- Left column -->
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <b>ID: </b> {{this.user.id}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <b>Rola: </b> {{translateRole(this.user.role)}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col"
+                        *ngIf="this.user.licenseCode != null && this.user.licenseCode != '' && this.user.licenseCode != 'none'">
+                        <b>Kod licencji: </b> {{this.user.licenseCode}}
+                    </div>
+                    <div class="col"
+                        *ngIf="this.user.licenseCode == null || this.user.licenseCode == '' || this.user.licenseCode == 'none'">
+                        <b>Kod licencji: </b> Brak
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col" *ngIf="this.user.status == 'ENABLED'">
+                        <b>Status konta: </b> Aktywne
+                    </div>
+                    <div class="col" *ngIf="this.user.status == 'DISABLED'">
+                        <b>Status konta: </b> Nieaktywne
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right column -->
+            <div class="col">
+                <div class="row">
+                    <div class="col">
+                        <b>Imię: </b> {{this.user.firstName}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <b>Nazwisko: </b> {{this.user.lastName}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br><br><br>
+
+        <!-- Title bar -->
+        <div class="row justify-content-center">
+            <h3><b>Informacje szczegółowe</b></h3>
+        </div>
+
+        <!-- User basic info -->
+        <div class="row border-top border-bottom">
+
+            <!-- Left column -->
+            <div class="col">
+                <div class="row">
+                    <div class="col" *ngIf="this.user.streetAddress2 != null && this.user.streetAddress2 != ''">
+                        <b>Adres: </b> {{this.user.streetAddress1}}, {{this.user.streetAddress2}}
+                    </div>
+                    <div class="col" *ngIf="this.user.streetAddress2 == null || this.user.streetAddress2 == ''">
+                        <b>Adres: </b> {{this.user.streetAddress1}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <b>Kod pocztowy: </b> {{this.user.zipCode}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <b>Miasto: </b> {{this.user.city}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <b>Województwo: </b> {{this.user.region}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <b>Numer telefonu: </b> {{this.user.contactNumber}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
