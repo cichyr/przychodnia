@@ -58,6 +58,9 @@ public class Visit {
     @Column(name = "finalization_cancellation_date")
     protected LocalDateTime finalizationCancellationDate;
 
+    @Column(name = "appointment_date_time")
+    protected  LocalDateTime appointmentDateTime;
+
     @OneToMany(mappedBy = "visit")
     protected Set<LaboratoryExamination> laboratoryExaminations;
 
@@ -129,6 +132,10 @@ public class Visit {
     public LocalDateTime getFinalizationCancellationDate() { return finalizationCancellationDate; }
 
     public void setFinalizationCancellationDate(LocalDateTime finalizationCancellationDate) { this.finalizationCancellationDate = finalizationCancellationDate; }
+
+    public LocalDateTime getAppointmentDateTime(){return appointmentDateTime;}
+
+    public void setAppointmentDateTime(LocalDateTime appointmentDateTime) {this.appointmentDateTime = appointmentDateTime;}
 
     public Set<LaboratoryExamination> getLabolatoryExaminations() {
         return laboratoryExaminations;
