@@ -204,14 +204,17 @@
               </div>
               <div class="col">
                 <div class="row">
-                  <div class="col text-primary  mt-2 mb-2" *ngIf="examination.status=='in_progress'">
+                  <div class="col text-primary  mt-2 mb-2" *ngIf="examination.status==='in_progress'">
                     <b class="text-center">W realizacji</b>
                   </div>
-                  <div class="col text-danger mt-2 mb-2" *ngIf="examination.status=='cancelled'">
+                  <div class="col text-danger mt-2 mb-2" *ngIf="examination.status==='cancelled'">
                     <b class="text-center">Anulowane</b>
                   </div>
-                  <div class="col text-success  mt-2 mb-2" *ngIf="examination.status=='executed'">
-                    <b class="text-center">Zrealizowane</b>
+                  <div class="col text-success  mt-2 mb-2" *ngIf="examination.status==='executed'">
+                    <b class="text-center">Wykonane</b>
+                  </div>
+                  <div class="col text-success  mt-2 mb-2" *ngIf="examination.status==='approved'">
+                    <b class="text-center">Zatwierdzone</b>
                   </div>
                 </div>
                 <div class="row">
