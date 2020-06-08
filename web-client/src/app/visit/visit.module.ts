@@ -10,9 +10,10 @@ import { AddVisitComponent } from './add-visit/add-visit.component';
 import { AddPhysicalExamComponent } from './add-physical-exam/add-physical-exam.component';
 import { AddLabExamComponent } from './add-lab-exam/add-lab-exam.component';
 import { PhysicalExamDetailsComponent } from './physical-exam-details/physical-exam-details.component';
+import { AddPatientComponent } from '../modals/add-patient/add-patient.component';
 
 @NgModule({
-  declarations: [DoctorVisitListComponent, VisitDetailsComponent, ReceptionistVisitListComponent, AddVisitComponent, AddPhysicalExamComponent, AddLabExamComponent, PhysicalExamDetailsComponent],
+  declarations: [DoctorVisitListComponent, VisitDetailsComponent, ReceptionistVisitListComponent, AddVisitComponent, AddPhysicalExamComponent, AddLabExamComponent, PhysicalExamDetailsComponent, AddPatientComponent],
     imports: [
         CommonModule,
         NgbDropdownModule,
@@ -20,6 +21,7 @@ import { PhysicalExamDetailsComponent } from './physical-exam-details/physical-e
         NgbModule,
     ],
   exports: [
+    AddPatientComponent,
     DoctorVisitListComponent,
     ReceptionistVisitListComponent
     ]

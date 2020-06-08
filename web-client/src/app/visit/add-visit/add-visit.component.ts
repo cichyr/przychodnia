@@ -7,6 +7,8 @@ import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/service/user.service';
 import { VisitToAdd } from 'src/app/data/visit/visit-to-add';
 import { VisitDetails } from 'src/app/data/visit/visit-details';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AddPatientComponent } from 'src/app/modals/add-patient/add-patient.component';
 
 
 @Component({
@@ -31,7 +33,7 @@ export class AddVisitComponent implements OnInit {
 
   buttonConfirm = false
 
-  constructor(private router: Router, private userService: UserService, private addVisitService: AddVisitService) { }
+  constructor(private router: Router, private userService: UserService, private addVisitService: AddVisitService,private modalService: NgbModal) { }
   stage = 1;
 
   ngOnInit(): void {
@@ -78,7 +80,20 @@ export class AddVisitComponent implements OnInit {
     })
   }
 
-  //powrót to listy wizyt recepcjonisty
+  //dodawanie nowego pacjenta i przypisanie go
+  addNewPatient() {
+    const addPatientModal = this.modalService.open(AddPatientComponent)
+    addPatientModal.result.then((result) => {
+      this.visitToAdd.patientId = result.id
+      this.selectedPatient.firstName = result.firstName
+      this.selectedPatient.lastName = result.lastName
+      this.selectedPatient.peselNumber = result.peselNumber
+      this.stage = 2;
+      }, (reason) => { })
+
+  }
+
+  //powrót do listy wizyt recepcjonisty
   navigateToRecVisitList() {
     this.router.navigate(['/receptionist-visit-list/'])
   }
