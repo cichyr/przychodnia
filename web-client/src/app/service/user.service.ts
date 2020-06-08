@@ -113,8 +113,6 @@ export class UserService {
 
   postNewUser(user: User): Observable<User> {
 
-    console.log(user)
-
     return this.http.post<User>(`http://localhost:8080/api/users`,{
       "licenseCode": user.licenseCode,
       "role": user.role,

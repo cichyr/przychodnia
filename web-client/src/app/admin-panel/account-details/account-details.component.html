@@ -72,10 +72,10 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col" *ngIf="this.user.status == 'ENABLED'">
+                    <div class="col" *ngIf="this.user.status === 'ENABLED'">
                         <b>Status konta: </b> Aktywne
                     </div>
-                    <div class="col" *ngIf="this.user.status == 'DISABLED'">
+                    <div class="col" *ngIf="this.user.status === 'DISABLED'">
                         <b>Status konta: </b> Nieaktywne
                     </div>
                 </div>

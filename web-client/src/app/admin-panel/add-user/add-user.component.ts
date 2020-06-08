@@ -3,6 +3,8 @@ import {User} from "../../data/user/user";
 import {UserService} from "../../service/user.service";
 import {Subscription} from "rxjs";
 import {Router} from "@angular/router";
+import {ErrorNotificationService} from "../../service/error-notification.service";
+import {FieldError} from "../../data/error/field-error";
 
 @Component({
   selector: 'app-add-user',
@@ -12,14 +14,11 @@ import {Router} from "@angular/router";
 export class AddUserComponent implements OnInit {
 
   userSub: Subscription
-  logged_user: User
-  komunikat: String = new String()
   user: User = new User()
   confirmPassword: String = new String()
   role: String
-  IncorrectPassword: boolean
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private router: Router, private errorNotificationService: ErrorNotificationService) { }
 
   ngOnInit(): void {
   }
@@ -45,7 +44,6 @@ export class AddUserComponent implements OnInit {
         this.router.navigate([`admin/user-list`, this.user.id, roleNumber])
       });
 
-      console.log(this.user)
 
       let roleNumber: number;
 
@@ -62,14 +60,14 @@ export class AddUserComponent implements OnInit {
     }
     else
     {
-      this.displayAlert()
+      this.errorNotificationService.notifyFieldErrors([new FieldError("hasła", "muszą być takie same")])
+      // this.displayAlert()
     }
-
   }
 
-  displayAlert(): void {
-    this.IncorrectPassword = true;
-  }
+  // displayAlert(): void {
+  //   this.IncorrectPassword = true;
+  // }
 
   goBack(): void {
     this.router.navigate(['admin/user-list'])
