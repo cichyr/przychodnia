@@ -13,12 +13,12 @@ public class PersonDetails {
     @Column(name = "id", nullable = false)
     protected Long id;
 
-    @NotBlank
+  //  @NotBlank
     @Size(max = 20)
     @Column(name = "city", nullable = false)
     protected String city;
 
-    @NotBlank
+  //  @NotBlank
     @Size(max = 64)
     @Column(name = "street_address1", nullable = false)
     protected String streetAddress1;
@@ -27,17 +27,17 @@ public class PersonDetails {
     @Column(name = "street_address2")
     protected String streetAddress2;
 
-    @NotBlank
+    //@NotBlank
     @Size(max = 20)
     @Column(name = "zip_code", nullable = false)
     protected String zipCode;
 
-    @NotBlank
+   // @NotBlank
     @Size(max = 20)
     @Column(name = "region", nullable = false)
     protected String region;
 
-    @NotBlank
+   // @NotBlank
     @Size(max = 20)
     @Column(name = "contact_number", nullable = false)
     protected String contactNumber;

@@ -10,15 +10,23 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.server.ResponseStatusException;
 import pl.clinic.account.controller.dto.AccountBasicsDto;
 import pl.clinic.account.controller.dto.AccountDetailsDto;
+import pl.clinic.account.controller.dto.AccountNewDto;
 import pl.clinic.account.controller.dto.NewPasswordDto;
 import pl.clinic.account.model.*;
+import pl.clinic.admin.Admin;
 import pl.clinic.admin.AdminRepository;
 import pl.clinic.common_services.FilteringService;
 import pl.clinic.common_services.UserService;
+import pl.clinic.doctor.model.Doctor;
 import pl.clinic.doctor.model.DoctorRepository;
+import pl.clinic.lab_supervisor.model.LabSupervisor;
 import pl.clinic.lab_supervisor.model.LabSupervisorRepository;
+import pl.clinic.lab_worker.model.LabWorker;
 import pl.clinic.lab_worker.model.LabWorkerRepository;
+import pl.clinic.receptionist.model.Receptionist;
 import pl.clinic.receptionist.model.ReceptionistRepository;
+import pl.clinic.user.model.PersonDetails;
+import pl.clinic.user.model.PersonDetailsRepository;
 import pl.clinic.user.model.User;
 
 import javax.validation.Valid;
@@ -52,6 +60,9 @@ public class AccountController {
 
     @Autowired
     LabSupervisorRepository labSupervisorRepository;
+
+    @Autowired
+    PersonDetailsRepository personDetailsRepository;
 
     @Autowired
     AdminRepository adminRepository;
@@ -202,6 +213,112 @@ public class AccountController {
         AccountDetailsDto accountDetailsDto = buildResponseAccountDetailsDto(accountDetails, user);
 
         return ResponseEntity.ok(accountDetailsDto);
+    }
+
+    @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<AccountDetailsDto> addUser(
+            @RequestBody AccountNewDto newAccount) {
+
+        Account account = accountRepository
+                .findAppUserByUsername(newAccount.getUsername());
+        if(account!=null){
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "User already exists");
+        }
+        account = new Account();
+        PersonDetails details = new PersonDetails();
+
+
+        details.setCity(newAccount.getCity());
+        details.setContactNumber(newAccount.getContactNumber());
+        details.setRegion(newAccount.getRegion());
+        details.setStreetAddress1(newAccount.getStreetAddress1());
+        details.setStreetAddress2(newAccount.getStreetAddress2());
+        details.setZipCode(newAccount.getZipCode());
+        details = personDetailsRepository.save(details);
+       //konto pracownika
+        Doctor doctor = new Doctor();
+        Receptionist receptionist = new Receptionist();
+        LabSupervisor labSupervisor = new LabSupervisor();
+        LabWorker labWorker = new LabWorker();
+        Admin admin = new Admin();
+        switch(newAccount.getRole()){
+            case "DOC":
+                doctor.setLicenseCode(newAccount.getLicenseCode());
+                doctor.setFirstName(newAccount.getFirstName());
+                doctor.setLastName(newAccount.getLastName());
+                doctor.setPersonDetails(details);
+                doctor= doctorRepository.save(doctor);
+                account.setEmployeeId(doctor.getId());
+                account.setRoleId((long) 1);
+            break;
+            case "REC":
+                receptionist.setLicenseCode(newAccount.getLicenseCode());
+                receptionist.setFirstName(newAccount.getFirstName());
+                receptionist.setLastName(newAccount.getLastName());
+                receptionist.setPersonDetails(details);
+                receptionist = receptionistRepository.save(receptionist);
+                account.setEmployeeId(receptionist.getId());
+                account.setRoleId((long) 2);
+                break;
+            case "LABS":
+                labSupervisor.setLicenseCode(newAccount.getLicenseCode());
+                labSupervisor.setFirstName(newAccount.getFirstName());
+                labSupervisor.setLastName(newAccount.getLastName());
+                labSupervisor.setPersonDetails(details);
+                labSupervisor = labSupervisorRepository.save(labSupervisor);
+                account.setEmployeeId(labSupervisor.getId());
+                account.setRoleId((long) 3);
+                break;
+            case "LABW":
+                labWorker.setLicenseCode(newAccount.getLicenseCode());
+                labWorker.setFirstName(newAccount.getFirstName());
+                labWorker.setLastName(newAccount.getLastName());
+                labWorker.setPersonDetails(details);
+                labWorker = labWorkerRepository.save(labWorker);
+                account.setEmployeeId(labWorker.getId());
+                account.setRoleId((long) 4);
+                break;
+            case "ADMIN":
+                admin.setLicenseCode(newAccount.getLicenseCode());
+                admin.setFirstName(newAccount.getFirstName());
+                admin.setLastName(newAccount.getLastName());
+                admin.setPersonDetails(details);
+                admin = adminRepository.save(admin);
+                account.setEmployeeId(admin.getId());
+                account.setRoleId((long) 5);
+                break;
+        }
+
+        account.setUsername(newAccount.getUsername());
+        account.setHash(newAccount.getPassword());
+        account.setStatus(AccountStatus.ENABLED.name().equals(newAccount.getStatus()) ? AccountStatus.ENABLED : AccountStatus.DISABLED);
+        account = accountRepository.save(account);
+
+
+
+        Optional<Role> role = roleRepository.findById(account.getRoleId());
+
+        if (!role.isPresent()) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Role not exist.");
+        }
+
+        Optional<? extends User> optionalUser = userService.findByAccountId(new AccountId(account.getEmployeeId(), role.get().getId()));
+
+        if (!optionalUser.isPresent()) {
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "Account not exist.");
+        }
+
+        Optional<Account> accountOptional = accountRepository.findById(new AccountId(account.getEmployeeId(), role.get().getId()));
+
+        if (!accountOptional.isPresent())
+            throw new HttpClientErrorException(HttpStatus.BAD_REQUEST, "User not exist.");
+
+        AccountDetails accountDetails = new AccountDetails.Builder()
+                .account(accountOptional.get())
+                .role(role.get())
+                .build();
+
+        return ResponseEntity.ok(buildResponseAccountDetailsDto(accountDetails, optionalUser.get()));
     }
 
     @PutMapping(value = "/user_details/password")
