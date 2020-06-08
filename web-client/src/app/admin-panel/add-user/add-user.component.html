@@ -1,167 +1,172 @@
 <div class="">
 
-    <!-- Header title and buttons -->
-    <div class="container">
-      <div class="row mt-4 align-self-center">
+  <!-- Header title and buttons -->
+  <div class="container">
+    <div class="row mt-4 align-self-center">
 
-        <!-- Back button -->
-        <div class="col align-self-center justify-content-start">
-          <!-- TODO: dodac routing -->
-          <button class="btn btn-primary">Wróć</button>
-        </div>
+      <!-- Back button -->
+      <div class="col align-self-center justify-content-start">
+        <!-- TODO: dodac routing -->
+        <button class="btn btn-primary">Wróć</button>
+      </div>
 
-        <!-- Title -->
-        <div class="col-8">
-          <h1 class="container text-center">
-            <b>Wprowadź użytkownika</b>
-          </h1>
-        </div>
+      <!-- Title -->
+      <div class="col-8">
+        <h1 class="container text-center">
+          <b>Wprowadź użytkownika</b>
+        </h1>
+      </div>
 
-        <!-- Confirm button -->
-        <div class="col align-self-center justify-content-end text-right">
-          <button *ngIf="!checkFields()" class="btn btn-primary" disabled>Zatwierdź</button>
-          <button *ngIf="checkFields()" class="btn btn-primary">Zatwierdź</button>
-        </div>
+      <!-- Confirm button -->
+      <div class="col align-self-center justify-content-end text-right">
+        <button *ngIf="!checkFields()" class="btn btn-primary" disabled>Zatwierdź</button>
+        <button *ngIf="checkFields()" class="btn btn-primary">Zatwierdź</button>
       </div>
     </div>
+  </div>
 
-    <div class="container border rounded-lg my-4">
-      <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
-        <h3><b>Dane podstawowe</b></h3>
-      </div>
-
-
-      <div class="col">
-        <div class="row mt-4">
-          <div class="col justify-content-start">
-            Nazwa użytkownika:
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <input #box1="" (keyup)="user.username=box1.value" type="text" class="form-control">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col justify-content-start">
-            Hasło:
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <input #box2="" (keyup)="user.password=box2.value" type="text" class="form-control">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col justify-content-start">
-            Powtórz hasło:
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <input #box3="" (keyup)="this.confirmPassword=box3.value" type="text" class="form-control">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col justify-content-start">
-            Rola:
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <input #box4="" (keyup)="this.role=box4.value" type="text" class="form-control">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col justify-content-start">
-            Kod licencji:
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <input #box5="" (keyup)="user.licenseCode=box5.value" type="text" class="form-control">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col justify-content-start">
-            Imię:
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <input #box6="" (keyup)="user.firstName=box6.value" type="text" class="form-control">
-            </div>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col justify-content-start">
-            Nazwisko:
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <input #box7="" (keyup)="user.lastName=box7.value" type="text" class="form-control">
-            </div>
-          </div>
-        </div>
-      </div>
+  <div class="container border rounded-lg my-4">
+    <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+      <h3><b>Dane podstawowe</b></h3>
     </div>
 
-    <div class="container border rounded-lg my-4">
-      <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
-        <h3><b>Dane szczegółowe</b></h3>
+    <div class="col">
+      <div class="row mt-4">
+        <div class="col justify-content-start">
+          Nazwa użytkownika:
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <input #box1 (keyup)="user.username=box1.value" type="text" class="form-control">
+          </div>
+        </div>
       </div>
-
-
-      <div class="col">
-        <div class="row mt-4">
-          <div class="col justify-content-start">
-            Adres:
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <input #box8="" (keyup)="user.streetAddress1=box8.value" type="text" class="form-control">
-            </div>
+      <div class="row">
+        <div class="col justify-content-start">
+          Hasło:
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <input type="password" #box2="" (keyup)="user.password=box2.value"  class="form-control">
           </div>
         </div>
-        <div class="row">
-          <div class="col justify-content-start">
-            Kod pocztowy:
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <input #box9="" (keyup)="user.zipCode=box9.value" type="text" class="form-control">
-            </div>
+      </div>
+      <div class="row">
+        <div class="col justify-content-start">
+          Powtórz hasło:
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <input type="password" #box3="" (keyup)="this.confirmPassword=box3.value"  class="form-control">
           </div>
         </div>
-        <div class="row">
-          <div class="col justify-content-start">
-            Miasto:
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <input #box10="" (keyup)="user.city=box10.value" type="text" class="form-control">
-            </div>
+      </div>
+      <div class="row">
+        <div class="col justify-content-start">
+          Rola:
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <select #select1 (mouseleave)="user.status=select1.value" class="custom-select" id="inputGroupSelect0">
+              <option value="ADMIN" selected>Admin</option>
+              <option value="DOC">Doktor</option>
+              <option value="REC">Recepcjonista</option>
+              <option value="LABW">Laborant</option>
+              <option value="LABS">Kierownik laboratorium</option>
+            </select>
           </div>
         </div>
-        <div class="row">
-          <div class="col justify-content-start">
-            Województwo:
-          </div>
-          <div class="col">
-            <div class="form-group">
-              <input #box11="" (keyup)="user.region=box11.value" type="text" class="form-control">
-            </div>
+      </div>
+      <div class="row">
+        <div class="col justify-content-start">
+          Kod licencji:
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <input #box5="" (keyup)="user.licenseCode=box5.value" type="text" class="form-control">
           </div>
         </div>
-        <div class="row">
-          <div class="col justify-content-start">
-            Telefon kontaktowy:
+      </div>
+      <div class="row">
+        <div class="col justify-content-start">
+          Imię:
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <input #box6="" (keyup)="user.firstName=box6.value" type="text" class="form-control">
           </div>
-          <div class="col">
-            <div class="form-group">
-              <input #box12="" (keyup)="user.contactNumber=box12.value" type="text" class="form-control">
-            </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col justify-content-start">
+          Nazwisko:
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <input #box7="" (keyup)="user.lastName=box7.value" type="text" class="form-control">
           </div>
         </div>
       </div>
     </div>
   </div>
+
+  <div class="container border rounded-lg my-4">
+    <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
+      <h3><b>Dane szczegółowe</b></h3>
+    </div>
+
+
+    <div class="col">
+      <div class="row mt-4">
+        <div class="col justify-content-start">
+          Adres:
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <input #box8="" (keyup)="user.streetAddress1=box8.value" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col justify-content-start">
+          Kod pocztowy:
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <input #box9="" (keyup)="user.zipCode=box9.value" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col justify-content-start">
+          Miasto:
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <input #box10="" (keyup)="user.city=box10.value" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col justify-content-start">
+          Województwo:
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <input #box11="" (keyup)="user.region=box11.value" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col justify-content-start">
+          Telefon kontaktowy:
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <input #box12="" (keyup)="user.contactNumber=box12.value" type="text" class="form-control">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

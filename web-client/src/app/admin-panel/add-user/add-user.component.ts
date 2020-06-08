@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from "../../data/user/user";
+import {UserService} from "../../service/user.service";
+import {Subscription} from "rxjs";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-add-user',
@@ -8,13 +11,26 @@ import {User} from "../../data/user/user";
 })
 export class AddUserComponent implements OnInit {
 
-  user: User
-  confirmPassword: String
+  userSub :Subscription
+  user: User = new User()
+  confirmPassword: String = new String()
   role: String
 
-  constructor() { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
+  }
+
+  log(input: string) {
+    this.user.username = input
+    console.log(this.user.username)
+  }
+
+  checkPassword(): boolean {
+    if(this.user.password === this.confirmPassword)
+      return true;
+    else
+      return false;
   }
 
   checkFields(): boolean {
@@ -43,4 +59,34 @@ export class AddUserComponent implements OnInit {
       return true;
   }
 
+  confirmNewUser(): void {
+
+    if(this.checkPassword())
+    {
+      this.userService.postNewUser(this.user).subscribe(user => {
+        this.user = user;
+      });
+
+      let roleNumber: number;
+
+      if (this.user.role == "DOC")
+        roleNumber = 1;
+      else if (this.user.role == "REC")
+        roleNumber = 2;
+      else if (this.user.role == "LABS")
+        roleNumber = 3;
+      else if (this.user.role == "LABW")
+        roleNumber = 4;
+      else if (this.user.role == 'ADMIN')
+        roleNumber = 5;
+
+      this.router.navigate([`user-de`])
+    }
+    else
+      this.displayAlert()
+  }
+
+  displayAlert(): void {
+
+  }
 }
