@@ -1,5 +1,7 @@
 package pl.clinic.user.model;
 
+import pl.clinic.account.controller.dto.AccountDetailsDto;
+
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotBlank;
@@ -20,4 +22,9 @@ public abstract class User extends Person {
     public void setLicenseCode(String licenseCode) {
         this.licenseCode = licenseCode;
     }
+
+
+
 }
+
+
