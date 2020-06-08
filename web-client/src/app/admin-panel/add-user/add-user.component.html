@@ -7,7 +7,7 @@
       <!-- Back button -->
       <div class="col align-self-center justify-content-start">
         <!-- TODO: dodac routing -->
-        <button class="btn btn-primary">Wróć</button>
+        <button class="btn btn-primary" (click)="goBack()">Wróć</button>
       </div>
 
       <!-- Title -->
@@ -19,8 +19,7 @@
 
       <!-- Confirm button -->
       <div class="col align-self-center justify-content-end text-right">
-        <button *ngIf="!checkFields()" class="btn btn-primary" disabled>Zatwierdź</button>
-        <button *ngIf="checkFields()" class="btn btn-primary" (click)="confirmNewUser()">Zatwierdź</button>
+        <button class="btn btn-primary" (click)="confirmNewUser()">Zatwierdź</button>
       </div>
     </div>
   </div>
@@ -110,6 +109,10 @@
     </div>
   </div>
 
+  <ngb-alert type="danger alert-dismiz"[style.visibility]="IncorrectPassword ? 'visible' : 'hidden'">
+    Nieprawidłowy login lub hasło
+  </ngb-alert>
+
   <div class="container border rounded-lg my-4">
     <div class="row justify-content-center rounded-top" style="background-color: #cce4ff">
       <h3><b>Dane szczegółowe</b></h3>
@@ -167,9 +170,8 @@
           </div>
         </div>
       </div>
-      <div class="row">
-        {{komunikat}}
-      </div>
     </div>
   </div>
+
+
 </div>

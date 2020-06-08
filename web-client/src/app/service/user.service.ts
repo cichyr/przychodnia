@@ -3,7 +3,7 @@ import {HttpClient} from '@angular/common/http'
 import {User} from '../data/user/user'
 import {BehaviorSubject, Observable} from 'rxjs'
 import {Credentials} from '../data/user/credentials'
-import {tap} from 'rxjs/operators'
+import {map, tap} from 'rxjs/operators'
 import {UserBasic} from '../data/user/user-basic'
 
 @Injectable({
@@ -121,7 +121,6 @@ export class UserService {
       "role": user.role,
       "username": user.username,
       "password": user.password,
-      "status": "ENABLED",
       "firstName": user.firstName,
       "lastName": user.lastName,
       "city": user.city,
@@ -130,7 +129,26 @@ export class UserService {
       "zipCode": user.zipCode,
       "region": user.region,
       "contactNumber": user.contactNumber
-    })
+    }).pipe(map(
+      u => {
+        let usr = new User()
+        usr.id = u.id
+        usr.role = u.role
+        usr.username = u.username
+        usr.status = u.status
+        usr.licenseCode = u.licenseCode
+        usr.firstName = u.firstName
+        usr.lastName = u.lastName
+        usr.city = u.city
+        usr.streetAddress1 = u.streetAddress1
+        usr.streetAddress2 = u.streetAddress2
+        usr.zipCode = u.zipCode
+        usr.region = u.region
+        usr.contactNumber = u.contactNumber
+
+        return usr
+      }
+    ))
   }
 
   editUser(user: User, role: number): Observable<User> {

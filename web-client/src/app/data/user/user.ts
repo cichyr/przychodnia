@@ -22,7 +22,7 @@ export class User {
     this.password = new String()
     this.firstName = new String()
     this.lastName = new String()
-    this.status = new String()
+    this.status = null
     this.licenseCode = new String()
     this.city = new String()
     this.streetAddress1 = new String()
