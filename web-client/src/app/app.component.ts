@@ -49,7 +49,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   navigateToLab() {
-    if(this.getRole() == 'LABW' || this.getRole() == 'LABS') {
+    if(this.getRole() == 'LABW' || this.getRole() == 'LABS' || this.getRole() === 'ADMIN') {
       this.router.navigate(['/exam-list/'])
     }
   }

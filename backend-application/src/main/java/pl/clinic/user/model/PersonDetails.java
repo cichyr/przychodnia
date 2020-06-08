@@ -52,9 +52,7 @@ public class PersonDetails {
 
     public String getCity() { return city; }
 
-    public void setCity(String firstName) {
-        this.city = city;
-    }
+    public void setCity(String city) { this.city = city; }
 
     public String getStreetAddress1() {
         return streetAddress1;

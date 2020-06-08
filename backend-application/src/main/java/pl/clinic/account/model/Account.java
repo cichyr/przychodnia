@@ -18,9 +18,8 @@ public class Account implements Serializable {
 
     @Id
     @NotNull
-    @ManyToOne
-    @JoinColumn(name = "role_id", referencedColumnName = "role", nullable = false)
-    protected Role role;
+    @Column(name = "role_id", nullable = false)
+    protected Long roleId;
 
     @NotBlank
     @Size(max = 20)
@@ -45,12 +44,12 @@ public class Account implements Serializable {
         this.employeeId = employeeId;
     }
 
-    public Role getRole() {
-        return role;
+    public Long getRoleId() {
+        return roleId;
     }
 
-    public void setRole(Role role) {
-        this.role = role;
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
     }
 
     public String getUsername() {
@@ -76,4 +75,5 @@ public class Account implements Serializable {
     public void setStatus(AccountStatus status) {
         this.status = status;
     }
+
 }

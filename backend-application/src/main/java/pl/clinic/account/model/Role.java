@@ -11,19 +11,19 @@ public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role", nullable = false)
-    protected Long role;
+    protected Long id;
 
     @NotBlank
     @Size(max = 20)
     @Column(name = "name", nullable = false)
     protected String name;
 
-    public Long getRole() {
-        return role;
+    public Long getId() {
+        return id;
     }
 
-    public void setRole(Long role) {
-        this.role = role;
+    public void setId(Long role) {
+        this.id = role;
     }
 
     public String getName() {
