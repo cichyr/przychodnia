@@ -16,7 +16,7 @@ Web application for an outpatient clinic.
 
 ## Run
 
-**Clone repository:** `git clone https://github.com/Rzohfa/przychodnia.git`
+**Clone repository:** `git clone https://github.com/WolnyDominik/przychodnia.git`
 
 ### Run Backend
 
