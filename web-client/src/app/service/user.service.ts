@@ -95,7 +95,6 @@ export class UserService {
         query += 'last_name=' + user.lastName
         useAnd = true
       }
-      console.log(query)
       return this.http.get<UserBasic[]>(`http://localhost:8080/api/users?${query}`)
     } else {
       return this.http.get<UserBasic[]>(`http://localhost:8080/api/users`)
@@ -152,7 +151,6 @@ export class UserService {
   }
 
   editUser(user: User, role: number): Observable<User> {
-    console.log(user)
     return this.http.put<User>(`http://localhost:8080/api/user_details?employee_id=${user.id}&role_id=${role}`, user)
 
   }

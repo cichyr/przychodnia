@@ -291,7 +291,7 @@ public class AccountController {
 
         account.setUsername(newAccount.getUsername());
         account.setHash(newAccount.getPassword());
-        account.setStatus(AccountStatus.ENABLED.name().equals(newAccount.getStatus()) ? AccountStatus.ENABLED : AccountStatus.DISABLED);
+        account.setStatus(AccountStatus.ENABLED);
         account = accountRepository.save(account);
 
 

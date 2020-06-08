@@ -18,7 +18,6 @@ public class AccountNewDto {
     @NotBlank(message = ValidationMessages.NOT_BLANK)
     private String password;
 
-    private String status;
 
     @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String licenseCode;
@@ -99,10 +98,6 @@ public class AccountNewDto {
         return contactNumber;
     }
 
-    public String getStatus() {
-        return status;
-    }
-
     public String getLicenseCode() {
         return licenseCode;
     }
@@ -117,10 +112,6 @@ public class AccountNewDto {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     public void setLicenseCode(String licenseCode) {

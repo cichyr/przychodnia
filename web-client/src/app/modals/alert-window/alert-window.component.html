@@ -1,0 +1,16 @@
+<div class="modal-header">
+  <h4 class="modal-title">Nieprawidłowe dane</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body text-danger bg-danger-alert">
+    <div class="container">
+      <div *ngFor="let error of errors" class="row">
+        <div class="col">
+          <b>{{error.field}}</b> - {{error.message}}
+        </div>
+      </div>
+    </div>
+</div>
+
