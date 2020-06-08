@@ -65,6 +65,7 @@ export class AccountDetailsComponent implements OnInit {
     modalRef.result.then((result) => {
       this.changePassword(result)
     }, (reason) => {})
+    modalRef.componentInstance.title = 'Zmiana hasła'
   }
 
   changePassword(new_hash: string): void {
