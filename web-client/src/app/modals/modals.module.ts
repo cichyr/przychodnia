@@ -17,7 +17,8 @@ import { AlertWindowComponent } from './alert-window/alert-window.component';
   ],
   exports: [
     TextInputComponent,
-    PasswordInputComponent
+    PasswordInputComponent,
+    AlertWindowComponent
   ]
 })
 export class ModalsModule { }

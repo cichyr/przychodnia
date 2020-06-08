@@ -78,12 +78,11 @@ export class EditUserComponent implements OnInit {
 
     this.userService.editUser(this.user, roleNumber).subscribe(
       next => {
+        this.goBack()
       },
       error => {
       }
     )
-
-   this.goBack()
   }
 
 }

@@ -2,14 +2,13 @@ import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest}
 import {Observable} from 'rxjs'
 import {tap} from 'rxjs/operators'
 import {Injectable} from '@angular/core'
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {AlertWindowComponent} from "../modals/alert-window/alert-window.component";
 import {FieldError} from "../data/error/field-error";
+import {ErrorNotificationService} from "../service/error-notification.service";
 
 @Injectable()
 export class HttpBadRequestInterceptor implements HttpInterceptor {
 
-  constructor(private modalService: NgbModal) {
+  constructor(private errorNotificationService: ErrorNotificationService) {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -20,10 +19,7 @@ export class HttpBadRequestInterceptor implements HttpInterceptor {
         if (err instanceof HttpErrorResponse) {
           if (err.status !== 400)
             return
-
-          const modalRef = this.modalService.open(AlertWindowComponent)
-          modalRef.componentInstance.errors = err.error() as Array<FieldError>
-
+          this.errorNotificationService.notifyFieldErrors(err.error.errors.map(error => new FieldError(error.field, error.message)))
         }
       }))
   }

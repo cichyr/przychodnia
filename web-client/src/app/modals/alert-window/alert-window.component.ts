@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {FieldError} from "../../data/error/field-error";
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-alert-window',
@@ -8,9 +9,9 @@ import {FieldError} from "../../data/error/field-error";
 })
 export class AlertWindowComponent implements OnInit {
 
-  @Input() errors: Array<FieldError>
+  @Input() errors: FieldError[]
 
-  constructor() { }
+  constructor(public activeModal: NgbActiveModal) { }
 
   ngOnInit(): void {
   }
