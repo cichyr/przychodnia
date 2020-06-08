@@ -1,1 +1,113 @@
-<p>user-list works!</p>
+<div class="container-fluid">
+
+    <!-- Header title and buttons -->
+    <div class="container">
+        <div class="row mt-4 align-self-center">
+
+            <!-- Placeholder -->
+            <div class="col">
+            </div>
+
+            <!-- Title -->
+            <div class="row">
+                <h1 class="container text-center">
+                    <b>Lista użytkowników</b>
+                </h1>
+            </div>
+
+            <!-- Filtering menu -->
+            <div class="col text-right align-self-center">
+                <div ngbDropdown class="d-inline-block">
+                    <button class="btn btn-outline-primary" ngbDropdownToggle>Filtruj</button>
+                    <div ngbDropdownMenu>
+                        <label ngbDropdownItem><input type="checkbox" [checked]="filters['ENABLED']"
+                                (change)="filters['ENABLED'] = !filters['ENABLED']">&ensp;Aktywny</label>
+                        <label ngbDropdownItem><input type="checkbox" [checked]="filters['DISABLED']"
+                                (change)="filters['DISABLED'] = !filters['DISABLED']">&ensp;Nieaktywny</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-4 align-self-center align-content-center">
+            <div class="col">
+                <div class="col text-center">
+                    <button class="btn btn-primary font-weight-bold add-button" (click)="navigateToAddUser()"> +
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search bar -->
+        <div class="row mt-4 align-self-center" style="display:flex;align-items:center;">
+
+            <!-- ID -->
+            <div class="col">
+                <input type="number" #id placeholder="ID użytkownika" (keyup)="seekedUser.id = id.value">
+            </div>
+
+            <!-- Username -->
+            <div class="col">
+                <input type="text" #username placeholder="Nazwa użytkownika"
+                    (keyup)="seekedUser.username = username.value">
+            </div>
+
+            <!-- First name -->
+            <div class="col">
+                <input type="text" #firstName placeholder="Imię" (keyup)="seekedUser.firstName = firstName.value">
+            </div>
+
+            <!-- Last name -->
+            <div class="col">
+                <input type="text" #lastName placeholder="Nazwisko" (keyup)="seekedUser.lastName = lastName.value">
+            </div>
+
+            <!-- Search button -->
+            <div class="col" style="display:flex;align-items:center;">
+                <button class="btn btn-primary" (click)="searchUser()">
+                    <fa-icon [icon]="search"></fa-icon>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- User list -->
+    <div *ngFor="let user of userList">
+        <div *ngIf="this.filters[user.status]" class="container border rounded-lg mt-4">
+
+            <!-- User basic info -->
+            <div class="row">
+                <div class="col my-1">
+                    <div class="row">
+                        <div class="col"><b>ID:</b> {{user.id}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><b>Imię:</b> {{user.firstName}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><b>Nazwisko:</b> {{user.lastName}}</div>
+                    </div>
+                </div>
+
+                <div class="col my-1">
+                    <div class="row">
+                        <div class="col"><b>Nazwa użytkownika:</b> {{user.username}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col"><b>Rola:</b> {{translateRole(user.role.name)}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col" *ngIf="user.status == 'ENABLED'"><b>Status konta:</b> Aktywne</div>
+                        <div class="col" *ngIf="user.status == 'DISABLED'"><b>Status konta:</b> Nieaktywne</div>
+                    </div>
+                </div>
+
+                <!-- Details button -->
+                <div class="col align-self-center text-center my-2">
+                    <button class="btn btn-primary btn-sm"
+                        (click)="navigateToDetails(user.id, user.role.id)">Szczegóły</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

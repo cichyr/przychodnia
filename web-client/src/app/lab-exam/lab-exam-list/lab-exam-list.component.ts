@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { LaboratoryExaminationGeneral } from '../../data/examination/laboratory-examination-general'
-// Mock imports
 import { LaboratoryExaminationService } from '../../service/laboratory-examination.service'
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
