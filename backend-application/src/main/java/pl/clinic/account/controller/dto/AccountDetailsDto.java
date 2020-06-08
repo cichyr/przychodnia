@@ -1,6 +1,11 @@
 package pl.clinic.account.controller.dto;
 
 import pl.clinic.account.model.AccountDetails;
+import pl.clinic.error.model.ValidationMessages;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class AccountDetailsDto {
 
@@ -8,14 +13,35 @@ public class AccountDetailsDto {
     private String role;
     private String username;
     private String status;
+
+    @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String licenseCode;
+
+    @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String firstName;
+
+    @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String lastName;
+
+    @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String city;
+
+    @Size(min = 1, max = 60, message = ValidationMessages.SIZE_1_60)
     private String streetAddress1;
+
+    @Size(max = 60, message = ValidationMessages.SIZE_0_60)
     private String streetAddress2;
+
+    @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String zipCode;
+
+    @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String region;
+
+    @Pattern(
+            regexp = "[+]?[\\d ]{1,20}",
+            message = ValidationMessages.INVALID_PHONE
+    )
     private String contactNumber;
 
     public AccountDetailsDto() {
@@ -87,18 +113,6 @@ public class AccountDetailsDto {
 
     public String getLicenseCode() {
         return licenseCode;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public void setStatus(String status) {
