@@ -7,6 +7,7 @@ import { ReplaySubject, Observable } from 'rxjs';
 export class DataExchangeService {
 
   private subject=new ReplaySubject<any>()
+  private subject2=new ReplaySubject<any>()
 
   constructor() { }
 
@@ -17,5 +18,19 @@ export class DataExchangeService {
   setCurrentVisit(visitId :number){
     this.subject.next(visitId)
   }
+
+  getCurrentUserId() :Observable<number>{
+    return this.subject.asObservable()
+  }
+
+  getCurrentUserRoleId() :Observable<number>{
+    return this.subject2.asObservable()
+  }
+
+  setCurrentUser(userId :number, roleId: number){
+    this.subject.next(userId)
+    this.subject2.next(userId)
+  }
+
 
 }

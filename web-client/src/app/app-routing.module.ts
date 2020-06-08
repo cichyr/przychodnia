@@ -37,7 +37,7 @@ const routes: Routes = [
       {path: 'add-lab-exam', component: AddLabExamComponent},
       {path: 'physical-exam-details/:id', component: PhysicalExamDetailsComponent},
       {path: 'admin/user-list', component: UserListComponent},
-      {path: 'admin/edit-user', component: EditUserComponent},
+      {path: 'admin/edit-user/:id/:role_id', component: EditUserComponent},
       {path: 'admin/user-list/:id/:role_id', component: AccountDetailsComponent}
     ]
   }

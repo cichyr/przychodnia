@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {UserService} from "../../service/user.service";
 import {Subscription} from "rxjs";
 import {User} from "../../data/user/user";
+import {ActivatedRoute, Router} from "@angular/router";
+import {DataExchangeService} from "../../service/data-exchange.service";
 
 @Component({
   selector: 'app-edit-user',
@@ -14,12 +16,17 @@ export class EditUserComponent implements OnInit {
   EditUserSub: Subscription
   user: User
   errorCode: number
+  user_id: number
+  role_id: number
 
-  constructor(private userService: UserService) {
+  constructor(private userService: UserService, private router: Router,private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.userSub = this.userService.getAuthenticationEvent().subscribe(
+    this.user_id = Number(this.route.snapshot.paramMap.get('id'))
+    this.role_id = Number(this.route.snapshot.paramMap.get('role_id'))
+
+    this.userSub = this.userService.getUser(this.user_id, this.role_id).subscribe(
       user => {
         this.user = user
       }
@@ -50,6 +57,10 @@ export class EditUserComponent implements OnInit {
       return true;
   }
 
+  goBack(): void {
+    this.router.navigate(['admin/user-list', this.user_id, this.role_id])
+  }
+
   confirmData(): void {
 
     let roleNumber: number;
@@ -71,6 +82,8 @@ export class EditUserComponent implements OnInit {
       error => {
       }
     )
+
+   this.goBack()
   }
 
 }
