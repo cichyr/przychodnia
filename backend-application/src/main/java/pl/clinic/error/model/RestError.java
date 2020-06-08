@@ -4,13 +4,13 @@ import java.util.List;
 
 public class RestError {
 
-    private final List<String> messages;
+    private final List<RestFieldError> errors;
 
-    public RestError(List<String> messages) {
-        this.messages = messages;
+    public RestError(List<RestFieldError> errors) {
+        this.errors = errors;
     }
 
-    public List<String> getMessages() {
-        return messages;
+    public List<RestFieldError> getErrors() {
+        return errors;
     }
 }
