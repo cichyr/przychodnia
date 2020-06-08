@@ -27,6 +27,7 @@ public class VisitDetails {
     protected String diagnose;
     protected LocalDateTime registrationDate;
     protected LocalDateTime finalizationCancellationDate;
+    protected  LocalDateTime appointmentDateTime;
     protected List<LaboratoryExaminationVisitDetails> laboratoryExaminations;
     protected List<ExaminationBasic> physicalExaminations;
 
@@ -40,6 +41,7 @@ public class VisitDetails {
         this.diagnose = visit.getDiagnose();
         this.registrationDate = visit.getRegistrationDate();
         this.finalizationCancellationDate = visit.getFinalizationCancellationDate();
+        this.appointmentDateTime = visit.getAppointmentDateTime();
         this.laboratoryExaminations = new ArrayList<LaboratoryExaminationVisitDetails>();
         this.physicalExaminations = new ArrayList<ExaminationBasic>();
         if(visit.getLabolatoryExaminations()!=null){
@@ -66,6 +68,8 @@ public class VisitDetails {
     public LocalDateTime getRegistrationDate() { return registrationDate; }
 
     public LocalDateTime getFinalizationCancellationDate() { return finalizationCancellationDate; }
+
+    public LocalDateTime getAppointmentDateTime(){return appointmentDateTime; }
 
     public List<LaboratoryExaminationVisitDetails> getLaboratoryExaminations() { return laboratoryExaminations; }
 
