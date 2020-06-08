@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core'
 import {HttpClient} from '@angular/common/http'
 import {User} from '../data/user/user'
-import {BehaviorSubject, Observable, ReplaySubject} from 'rxjs'
+import {BehaviorSubject, Observable} from 'rxjs'
 import {Credentials} from '../data/user/credentials'
 import {tap} from 'rxjs/operators'
-import { UserBasic } from '../data/user/user-basic'
+import {UserBasic} from '../data/user/user-basic'
 
 @Injectable({
   providedIn: 'root'
@@ -50,25 +50,18 @@ export class UserService {
     return this.user != null
   }
 
-  private resolveBasicAuthToken(): string {
-
-    if (this.credentials == null) return ''
-
-    return 'Basic ' + btoa(`${this.credentials.username}:${this.credentials.password}`)
-  }
-
   getUserRole(): string {
-    if(this.hasUser()) {
+    if (this.hasUser()) {
       return this.user.role
     } else {
       return "NONE"
     }
   }
 
-  getId(): number{
-    if(this.hasUser()){
+  getId(): number {
+    if (this.hasUser()) {
       return this.user.id
-    } else{
+    } else {
       return 0
     }
   }
@@ -82,17 +75,23 @@ export class UserService {
         useAnd = true
       }
       if (user.username) {
-        if (useAnd) { query += '&' }
+        if (useAnd) {
+          query += '&'
+        }
         query += 'username=' + user.username
         useAnd = true
       }
       if (user.firstName) {
-        if (useAnd) { query += '&' }
+        if (useAnd) {
+          query += '&'
+        }
         query += 'first_name=' + user.firstName
         useAnd = true
       }
       if (user.lastName) {
-        if (useAnd) { query += '&' }
+        if (useAnd) {
+          query += '&'
+        }
         query += 'last_name=' + user.lastName
         useAnd = true
       }
@@ -114,21 +113,16 @@ export class UserService {
   }
 
   editUser(user: User, role: number): Observable<User> {
-    return this.http.put<User>(`http://localhost:8080/api/user_details?employee_id=${user.id}&role_id=${role}`, {
-      "id": user.id,
-      "role": user.role,
-      "username": user.username,
-      "status": user.status,
-      "licenseCode": user.licenseCode,
-      "firstName": user.firstName,
-      "lastName": user.lastName,
-      "city": user.city,
-      "streetAddress1": user.streetAddress1,
-      "streetAddress2": user.streetAddress2,
-      "zipCode": user.zipCode,
-      "region": user.region,
-      "contactNumber": user.contactNumber
-    })
-  };
+    console.log(user)
+    return this.http.put<User>(`http://localhost:8080/api/user_details?employee_id=${user.id}&role_id=${role}`, user)
 
-};
+  }
+
+  private resolveBasicAuthToken(): string {
+
+    if (this.credentials == null) return ''
+
+    return 'Basic ' + btoa(`${this.credentials.username}:${this.credentials.password}`)
+  }
+
+}
