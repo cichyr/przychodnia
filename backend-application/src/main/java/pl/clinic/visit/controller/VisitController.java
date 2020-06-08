@@ -88,6 +88,7 @@ public class VisitController {
         visitCreated.setDoctor(optionalDoctor.get());
         visitCreated.setPatient(optionalPatient.get());
         visitCreated.setRegistrationDate(LocalDateTime.now());
+        visitCreated.setAppointmentDateTime(visit.getAppointmentDateTime());
         Optional<VisitState> state = visitStateRepository.findById((long) 1);
         visitCreated.setState(state.get());
 

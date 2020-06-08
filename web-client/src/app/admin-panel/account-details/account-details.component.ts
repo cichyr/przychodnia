@@ -6,6 +6,7 @@ import { UserService } from 'src/app/service/user.service';
 import { Subscription } from 'rxjs';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { PasswordInputComponent } from 'src/app/modals/password-input/password-input.component';
+import {DataExchangeService} from "../../service/data-exchange.service";
 
 @Component({
   selector: 'app-account-details',
@@ -20,7 +21,7 @@ export class AccountDetailsComponent implements OnInit {
   logged_user: User
   userSub: Subscription
 
-  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute, private modalService: NgbModal) { }
+  constructor(private userService: UserService, private router: Router, private route: ActivatedRoute, private modalService: NgbModal, private dataExchange: DataExchangeService) { }
 
   ngOnInit(): void {
     this.user_id = Number(this.route.snapshot.paramMap.get('id'))
@@ -73,6 +74,8 @@ export class AccountDetailsComponent implements OnInit {
   }
 
   editUser(): void {
+    this.dataExchange.setCurrentUser(this.user_id, this.role_id)
+
     this.router.navigate(['/admin/edit-user', this.user_id, this.role_id])
   }
 

@@ -21,6 +21,7 @@ public class BasicVisit {
     protected VisitState state;
     protected LocalDateTime registrationDate;
     protected LocalDateTime finalizationCancellationDate;
+    protected  LocalDateTime appointmentDateTime;
 
     public BasicVisit(Visit visit) {
         this.patientFirstName = visit.getPatient().getFirstName();
@@ -34,6 +35,7 @@ public class BasicVisit {
         this.state = visit.getState();
         this.registrationDate = visit.getRegistrationDate();
         this.finalizationCancellationDate = visit.getFinalizationCancellationDate();
+        this.appointmentDateTime = visit.getAppointmentDateTime();
     }
 
     public String getPatientFirstName() { return patientFirstName; }
@@ -55,6 +57,8 @@ public class BasicVisit {
     public String getPeselNumber() { return peselNumber; }
 
     public LocalDateTime getFinalizationCancellationDate() { return finalizationCancellationDate; }
+
+    public LocalDateTime getAppointmentDateTime() {return  appointmentDateTime;}
 
     public Long getId() { return id; }
 }

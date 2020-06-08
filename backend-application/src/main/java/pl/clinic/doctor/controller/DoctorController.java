@@ -8,11 +8,10 @@ import pl.clinic.common_services.FilteringService;
 import pl.clinic.doctor.model.Doctor;
 import pl.clinic.doctor.model.DoctorRepository;
 import pl.clinic.visit.controller.dto.BasicVisit;
+import pl.clinic.visit.model.Visit;
 
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.time.LocalDate;
+import java.util.*;
 
 @RestController
 @RequestMapping("/doctors")
@@ -22,14 +21,28 @@ public class DoctorController {
     DoctorRepository doctorRepository;
 
     @GetMapping(value = "/{doctor_id}/visits", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Set<BasicVisit>> getDoctorsVisits(@PathVariable Long doctor_id) {
+    public ResponseEntity<Set<BasicVisit>> getDoctorsVisits(@PathVariable Long doctor_id,
+            @RequestParam(value = "date", required = false) String date) {
 
-        Set<BasicVisit> visits = new HashSet<>();
+        Set<Visit> visits = new HashSet<Visit>();
 
-        doctorRepository.findById(doctor_id).get().getVisits()
-                .forEach(value->visits.add(new BasicVisit(value)));
+        visits = doctorRepository.findById(doctor_id).get().getVisits();
 
-        return ResponseEntity.ok(visits);
+        Set<BasicVisit> filtered = new HashSet<>();
+        if(date!=null){
+            LocalDate date1 = LocalDate.parse(date);
+            for(Visit v:visits){
+                if(v.getAppointmentDateTime()!=null&&v.getAppointmentDateTime().toLocalDate().equals(date1)){
+                    filtered.add(new BasicVisit(v));
+                }
+            }
+        }else {
+            for (Visit v : visits) {
+                    filtered.add(new BasicVisit(v));
+            }
+        }
+
+        return ResponseEntity.ok(filtered);
     }
 
     @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
