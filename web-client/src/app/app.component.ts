@@ -73,6 +73,10 @@ export class AppComponent implements OnInit, OnDestroy {
     this.router.navigate(['/admin/user-list'])
   }
 
+  navigateToEditUserDEBUG_FUN() {
+    this.router.navigate(['admin/edit-user'])
+  }
+
   signOut() {
     this.userService.signOut()
     this.navigateToLoginPage()
