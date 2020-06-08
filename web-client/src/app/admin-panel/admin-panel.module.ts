@@ -5,11 +5,12 @@ import { ModalsModule } from '../modals/modals.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AccountDetailsComponent } from './account-details/account-details.component';
+import {EditUserComponent} from "./edit-user/edit-user.component";
 
 
 
 @NgModule({
-  declarations: [UserListComponent, AccountDetailsComponent],
+  declarations: [UserListComponent, AccountDetailsComponent, EditUserComponent],
   imports: [
     CommonModule,
     ModalsModule,

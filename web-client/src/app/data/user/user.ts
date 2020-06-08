@@ -3,12 +3,12 @@ import {Role} from './role.enum'
 export class User {
 
   id: number
-  role: Role
   username: String
+  role: Role
+  status: String
+  licenseCode: String
   firstName: String
   lastName: String
-  status: string
-  licenseCode: string
   city: String
   streetAddress1: String
   streetAddress2: String
