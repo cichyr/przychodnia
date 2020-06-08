@@ -1,6 +1,7 @@
 package pl.clinic.error;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,7 +18,7 @@ public class RestErrorHandler {
 
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public RestError handleValidationException(MethodArgumentNotValidException ex) {
+    public ResponseEntity<RestError> handleValidationException(MethodArgumentNotValidException ex) {
 
         List<RestFieldError> messages = new LinkedList<>();
         ex.getBindingResult().getAllErrors().forEach(error -> {
@@ -27,7 +28,9 @@ public class RestErrorHandler {
             messages.add(new RestFieldError(fieldName, errorMessage));
         });
 
-        return new RestError(messages);
+        return ResponseEntity
+                .badRequest()
+                .body(new RestError(messages));
 
     }
 }
