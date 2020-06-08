@@ -64,4 +64,6 @@ public class PatientAndDetails {
     public String getContactNumber() {
         return contactNumber;
     }
+
+
 }

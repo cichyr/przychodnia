@@ -21,12 +21,12 @@ public class Account implements Serializable {
     @Column(name = "role_id", nullable = false)
     protected Long roleId;
 
-    @NotBlank
+   // @NotBlank
     @Size(max = 20)
     @Column(name = "user_name", nullable = false)
     protected String username;
 
-    @NotBlank
+   // @NotBlank
     @Size(max = 1024)
     @Column(name = "user_hash", nullable = false)
     protected String hash;
