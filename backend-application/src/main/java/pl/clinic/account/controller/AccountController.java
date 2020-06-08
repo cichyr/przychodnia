@@ -29,6 +29,7 @@ import pl.clinic.user.model.PersonDetails;
 import pl.clinic.user.model.PersonDetailsRepository;
 import pl.clinic.user.model.User;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.LinkedList;
 import java.util.List;
@@ -171,7 +172,7 @@ public class AccountController {
     public ResponseEntity<AccountDetailsDto> updateUser(
             @RequestParam(value = "employee_id") Long employee_id,
             @RequestParam(value = "role_id") Long roleId,
-            @RequestBody AccountDetailsDto updatedAccount) {
+            @Valid @RequestBody AccountDetailsDto updatedAccount) {
 
         Role role = roleRepository
                 .findById(roleId)
@@ -216,7 +217,7 @@ public class AccountController {
 
     @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AccountDetailsDto> addUser(
-            @RequestBody AccountNewDto newAccount) {
+            @Valid @RequestBody AccountNewDto newAccount) {
 
         Account account = accountRepository
                 .findAppUserByUsername(newAccount.getUsername());
@@ -324,7 +325,7 @@ public class AccountController {
     public void updatePassword(
             @RequestParam(value = "employee_id") Long employee_id,
             @RequestParam(value = "role_id") Long roleId,
-            @RequestBody NewPasswordDto newPassword) {
+            @Valid @RequestBody NewPasswordDto newPassword) {
 
         Role role = roleRepository
                 .findById(roleId)
