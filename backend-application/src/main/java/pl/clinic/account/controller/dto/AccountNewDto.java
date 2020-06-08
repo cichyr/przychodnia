@@ -1,31 +1,58 @@
 package pl.clinic.account.controller.dto;
 
-import pl.clinic.account.model.AccountDetails;
+import pl.clinic.error.model.ValidationMessages;
+import pl.clinic.util.validator.UniqueUsername;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class AccountNewDto {
 
-    private Long id;
     private String role;
+
+    @NotBlank(message = ValidationMessages.NOT_BLANK)
+    @UniqueUsername(message = ValidationMessages.USERNAME_UNIQUE)
     private String username;
+
+    @NotBlank(message = ValidationMessages.NOT_BLANK)
     private String password;
+
     private String status;
+
+    @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String licenseCode;
+
+    @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String firstName;
+
+    @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String lastName;
+
+    @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String city;
+
+    @Size(min = 1, max = 60, message = ValidationMessages.SIZE_1_60)
     private String streetAddress1;
+
+    @Size(max = 60, message = ValidationMessages.SIZE_0_60)
     private String streetAddress2;
+
+    @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String zipCode;
+
+    @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String region;
+
+    @Pattern(
+            regexp = "[+]?[\\d ]{1,20}",
+            message = ValidationMessages.INVALID_PHONE
+    )
     private String contactNumber;
 
 
     private AccountNewDto() {
 
-    }
-
-    public Long getId() {
-        return id;
     }
 
     public String getRole() {
@@ -36,7 +63,9 @@ public class AccountNewDto {
         return username;
     }
 
-    public  String getPassword() { return password;}
+    public String getPassword() {
+        return password;
+    }
 
     public String getFirstName() {
         return firstName;
@@ -78,10 +107,6 @@ public class AccountNewDto {
         return licenseCode;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
-
     public void setRole(String role) {
         this.role = role;
     }
@@ -90,7 +115,9 @@ public class AccountNewDto {
         this.username = username;
     }
 
-    public void setPassword(String password){this.password = password;}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public void setStatus(String status) {
         this.status = status;

@@ -217,7 +217,7 @@ public class AccountController {
 
     @PostMapping(value = "/users", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<AccountDetailsDto> addUser(
-            @RequestBody AccountNewDto newAccount) {
+            @Valid @RequestBody AccountNewDto newAccount) {
 
         Account account = accountRepository
                 .findAppUserByUsername(newAccount.getUsername());
