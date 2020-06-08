@@ -25,6 +25,7 @@ import pl.clinic.user.model.PersonDetails;
 import pl.clinic.user.model.PersonDetailsRepository;
 import pl.clinic.user.model.User;
 
+import javax.validation.Valid;
 import java.util.*;
 
 @RestController
@@ -63,7 +64,7 @@ public class PatientController {
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<PatientAndDetails> addUser(
-            @RequestBody PatientNewDto newPatient) {
+            @Valid @RequestBody PatientNewDto newPatient) {
 
                 Patient patient = new Patient();
         PersonDetails details = new PersonDetails();
