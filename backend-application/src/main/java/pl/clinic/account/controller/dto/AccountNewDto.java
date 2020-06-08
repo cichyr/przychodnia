@@ -11,8 +11,10 @@ public class AccountNewDto {
 
     private String role;
 
+
     @NotBlank(message = ValidationMessages.NOT_BLANK)
     @UniqueUsername(message = ValidationMessages.USERNAME_UNIQUE)
+    @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String username;
 
     @NotBlank(message = ValidationMessages.NOT_BLANK)
