@@ -61,7 +61,7 @@
         <div class="col align-self-center text-center"><b>PESEL: {{visit.peselNumber}}</b></div>
         <div class="col align-self-center text-right">
           <b *ngIf="visit.appointmentDateTime != null">
-            Umówiona na: {{visit.appointmentDateTime | date:'dd.MM.yyyy H:m' }}
+            Umówiona na: {{visit.appointmentDateTime | date:'dd.MM.yyyy H:mm' }}
           </b>
           <b *ngIf="visit.appointmentDateTime == null">Umówiona na: Brak daty
           </b>

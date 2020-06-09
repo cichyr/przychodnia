@@ -280,7 +280,7 @@ insert into visit ( receptionist_id, doctor_id, patient_id, state_id, descriptio
 insert into visit ( receptionist_id, doctor_id, patient_id, state_id, description, diagnose, registration_date, finalization_cancellation_date, appointment_date_time) values ( 10, 1, 20, 2, 'Crohn''s disease of both small and large intestine', 'K508', '2019-05-30', '2020-06-02', '2020-06-09T12:12:00');
 insert into visit ( receptionist_id, doctor_id, patient_id, state_id, description, diagnose, registration_date, finalization_cancellation_date, appointment_date_time) values ( 1, 1, 1, 1, 'Stomach pain', 'C123', '2017-05-06', '2020-10-04', '2020-06-10T12:12:00');
 insert into visit ( receptionist_id, doctor_id, patient_id, state_id, description, diagnose, registration_date, finalization_cancellation_date, appointment_date_time) values ( 1, 1, 5, 1, 'Leg pain', 'T123', '2019-09-02', '2018-04-02', '2020-06-10T12:12:00');
-insert into visit ( receptionist_id, doctor_id, patient_id, state_id, description, diagnose, registration_date, finalization_cancellation_date, appointment_date_time) values ( 1, 1, 2, 1, 'Fever', 'G123', '2017-12-12', '2019-07-03', '2020-06-10T12:12:00');
+insert into visit ( receptionist_id, doctor_id, patient_id, state_id, description, diagnose, registration_date, finalization_cancellation_date, appointment_date_time) values ( 1, 1, 2, 1, 'Fever', 'G123', '2017-12-12', '2019-07-03', '2020-06-10T18:12:00');
 insert into visit ( receptionist_id, doctor_id, patient_id, state_id, registration_date, finalization_cancellation_date) values ( 5, 1, 8, 1, '2017-12-12', '2019-07-03');
 
 insert into examination_category (code, name, type) values (1, 'Replacement of R Ext Carotid with Synth Sub, Open Approach', 'P');
