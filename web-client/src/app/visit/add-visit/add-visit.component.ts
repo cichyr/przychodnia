@@ -21,7 +21,7 @@ export class AddVisitComponent implements OnInit {
   selectedPatient: Patient = new Patient()
   patientSought: Patient = new Patient()
   patientSub: Subscription
-  
+
   doctorList: Doctor[]
   selectedDoctor: Doctor = new Doctor()
   doctorSought: Doctor = new Doctor()
@@ -31,7 +31,7 @@ export class AddVisitComponent implements OnInit {
   time: NgbTimeStruct = {hour: 13, minute: 30, second: 0};
   fulldate: Date;
   appointmentDateTime: string
-  
+
 
   visitToAdd: VisitToAdd = new VisitToAdd()
   visitDetails: VisitDetails
@@ -48,7 +48,7 @@ export class AddVisitComponent implements OnInit {
 
     //Wczytanie listy pacjentów
     this.patientSub = this.addVisitService.getPatients().subscribe(patients => this.patientList = patients);
-    
+
     //Wczytanie listy lekarzy
     this.doctorSub = this.addVisitService.getDoctors().subscribe(doctors => this.doctorList = doctors);
     this.selectToday();
@@ -79,7 +79,7 @@ export class AddVisitComponent implements OnInit {
   }
 
   selectDate(): void {
-      this.fulldate=new Date(this.model.year,this.model.month-1,this.model.day,this.time.hour,this.time.minute);
+      this.fulldate=new Date(this.model.year,this.model.month-1,this.model.day,this.time.hour + 2,this.time.minute);
       this.appointmentDateTime= this.fulldate.toISOString()
       this.visitToAdd.appointmentDateTime=this.appointmentDateTime
       this.stage = 4;
