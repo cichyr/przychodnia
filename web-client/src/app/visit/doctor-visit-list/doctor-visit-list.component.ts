@@ -5,6 +5,7 @@ import {Subscription} from "rxjs";
 import {User} from "../../data/user/user";
 import {UserService} from "../../service/user.service";
 import {Router} from "@angular/router";
+import {DatePipe} from "@angular/common";
 
 @Component({
   selector: 'app-doctor-visit-list',
@@ -18,11 +19,25 @@ export class DoctorVisitListComponent implements OnInit {
   user: User
   userSub: Subscription
   visitSub: Subscription
+  todayDate: Date = new Date();
+  day: number
+  month: number
+  year: number
+  todayDateString: String
 
-  constructor(private visitService: DoctorVisitListService, private userService: UserService, private router: Router) {
+  constructor(private visitService: DoctorVisitListService, private userService: UserService, private router: Router, private datePipe: DatePipe) {
   }
 
   ngOnInit(): void {
+
+   this.todayDateString = this.datePipe.transform(this.todayDate, 'yyyy-MM-dd')
+    console.log(this.todayDateString)
+
+    this.day = this.todayDate.getDay();
+   this.month = this.todayDate.getMonth()
+    this.year = this.todayDate.getFullYear()
+
+
 
     this.userSub =
       this.userService.getAuthenticationEvent().subscribe(user => {
@@ -43,7 +58,18 @@ export class DoctorVisitListComponent implements OnInit {
     })
   }
 
-  filters = { 'finished': true, 'appointed': true, 'cancelled': true }
+  filters = { 'finished': false, 'appointed': false, 'cancelled': false, 'today': true }
+
+  checkDate(date: Date): boolean {
+    let date_ = new Date(date);
+
+    if(this.todayDate.getDay() == date_.getDay()
+        && this.todayDate.getMonth() == date_.getMonth()
+        && this.todayDate.getFullYear() == date_.getFullYear())
+      return true;
+    else
+      return false;
+  }
 
   // Sorting function
   sort(option: number): void {

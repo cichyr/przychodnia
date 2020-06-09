@@ -99,6 +99,10 @@
 
         <!-- Dates -->
         <div class="row">
+          <div *ngIf="visit.appointmentDateTime != null" class="col-sm-6">Umówiona na:</div>
+          <div class="col-sm-6 text-right">{{visit.appointmentDateTime | date:'dd.MM.yyyy hh:mm' }}</div>
+        </div>
+        <div class="row">
           <div class="col-sm-8">Data zlecenia:</div>
           <div class="col-sm-4 text-right">{{visit.registrationDate | date:'dd.MM.yyyy' }}</div>
         </div>

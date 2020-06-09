@@ -16,6 +16,8 @@ export class VisitDetails {
   diagnose: String
   registrationDate: Date
   finalizationCancellationDate: Date
+  appointmentDateTime: Date
   laboratoryExaminations: ShortLaboratoryExamination[]
   physicalExaminations: ShortPhysicalExamination[]
+
 }

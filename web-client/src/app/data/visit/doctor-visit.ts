@@ -11,4 +11,5 @@ export class DoctorVisit {
   receptionistLastName: String
   registrationDate: Date               // Dates are passed through HTML as Strings, change if You use different type
   finalizationCancellationDate: Date    // Dates are passed through HTML as Strings, change if You use different type
+  appointmentDateTime: Date
 }
