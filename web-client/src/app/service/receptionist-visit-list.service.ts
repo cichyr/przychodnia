@@ -21,8 +21,15 @@ export class ReceptionistVisitListService {
   }
 
   mapVisitToReceptionistVisit(visit: VisitDetails): ReceptionistVisit{
+    if(visit.appointmentDateTime != null)
    return new ReceptionistVisit(visit.visitId, visit.patient.firstName, visit.patient.lastName, visit.patient.peselNumber,
       visit.doctor.firstName, visit.doctor.lastName, visit.state, new Date(visit.registrationDate.toString()),
       new Date(visit.finalizationCancellationDate.toString()), new Date(visit.appointmentDateTime.toString()));
+    else
+    {
+      return new ReceptionistVisit(visit.visitId, visit.patient.firstName, visit.patient.lastName, visit.patient.peselNumber,
+        visit.doctor.firstName, visit.doctor.lastName, visit.state, new Date(visit.registrationDate.toString()),
+        new Date(visit.finalizationCancellationDate.toString()), null);
+    }
   }
 }

@@ -51,7 +51,7 @@ export class DoctorVisitListComponent implements OnInit {
     })
   }
 
-  filters = { 'finished': false, 'appointed': false, 'cancelled': false, 'today': true }
+  filters = { 'finished': true, 'appointed': true, 'cancelled': true, 'today': true }
 
   checkDate(date: Date): boolean {
     let date_ = new Date(date);
