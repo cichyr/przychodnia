@@ -9,5 +9,5 @@ export const dev_only_credentials = {
   // username: 'fmattheus4', password: '4e95e869c636c640caac0f41f858532e'
 
   //Admin
-  // username: 'admin1', password: 'passwd1'
+  //username: 'admin1', password: 'passwd1'
 };

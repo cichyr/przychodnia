@@ -79,7 +79,7 @@ export class AddVisitComponent implements OnInit {
   }
 
   selectDate(): void {
-      this.fulldate=new Date(this.model.year,this.model.month,this.model.day,this.time.hour,this.time.minute);
+      this.fulldate=new Date(this.model.year,this.model.month-1,this.model.day,this.time.hour,this.time.minute);
       this.appointmentDateTime= this.fulldate.toISOString()
       this.visitToAdd.appointmentDateTime=this.appointmentDateTime
       this.stage = 4;
