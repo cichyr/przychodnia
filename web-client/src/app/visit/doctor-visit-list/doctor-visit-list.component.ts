@@ -20,9 +20,6 @@ export class DoctorVisitListComponent implements OnInit {
   userSub: Subscription
   visitSub: Subscription
   todayDate: Date = new Date();
-  day: number
-  month: number
-  year: number
   todayDateString: String
 
   constructor(private visitService: DoctorVisitListService, private userService: UserService, private router: Router, private datePipe: DatePipe) {
@@ -32,10 +29,6 @@ export class DoctorVisitListComponent implements OnInit {
 
    this.todayDateString = this.datePipe.transform(this.todayDate, 'yyyy-MM-dd')
     console.log(this.todayDateString)
-
-    this.day = this.todayDate.getDay();
-   this.month = this.todayDate.getMonth()
-    this.year = this.todayDate.getFullYear()
 
 
 

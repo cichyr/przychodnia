@@ -11,9 +11,11 @@ export class ReceptionistVisit {
   state: VisitState
   registrationDate: Date
   finalizationCancellationDate: Date
+  appointmentDateTime: Date
 
 
-  constructor(id: number, patientFirstName: String, patientLastName: String, peselNumber: String, doctorFirstName: String, doctorLastName: String, state: VisitState, registrationDate: Date, finalizationCancellationDate: Date) {
+  constructor(id: number, patientFirstName: String, patientLastName: String, peselNumber: String, doctorFirstName: String, doctorLastName: String, state: VisitState, registrationDate: Date, finalizationCancellationDate: Date, appointmentDateTime: Date) {
+
     this.id = id;
     this.patientFirstName = patientFirstName;
     this.patientLastName = patientLastName;
@@ -23,5 +25,6 @@ export class ReceptionistVisit {
     this.state = state;
     this.registrationDate = registrationDate;
     this.finalizationCancellationDate = finalizationCancellationDate;
+    this.appointmentDateTime = appointmentDateTime;
   }
 }

@@ -5,9 +5,6 @@ import {ReceptionistVisitListService} from '../../service/receptionist-visit-lis
 import {User} from "../../data/user/user";
 import {UserService} from "../../service/user.service";
 import {Subscription} from "rxjs";
-import {interval} from "rxjs";
-import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from "@angular/core";
-
 
 @Component({
   selector: 'app-receptionist-visit-list',
@@ -22,10 +19,9 @@ export class ReceptionistVisitListComponent implements OnInit, OnDestroy {
   userSub: Subscription
   visitSub: Subscription
   cancelVisitSub: Subscription
-  cancelButtonPressed = false
+  todayDate: Date = new Date();
 
   constructor(private router: Router, private visitService: ReceptionistVisitListService, private userService: UserService) {
-    setInterval(() => this.closeAlert(), 8000);
   }
 
   ngOnInit(): void {
@@ -46,7 +42,18 @@ export class ReceptionistVisitListComponent implements OnInit, OnDestroy {
 
   }
 
-  filters = { 'finished': true, 'appointed': true, 'cancelled': true }
+  filters = { 'finished': true, 'appointed': true, 'cancelled': true, 'today': true}
+
+  checkDate(date: Date): boolean {
+    let date_ = new Date(date);
+
+    if(this.todayDate.getDay() == date_.getDay()
+      && this.todayDate.getMonth() == date_.getMonth()
+      && this.todayDate.getFullYear() == date_.getFullYear())
+      return true;
+    else
+      return false;
+  }
 
   // Sorting function
   sort(option: number): void {
@@ -113,12 +120,6 @@ export class ReceptionistVisitListComponent implements OnInit, OnDestroy {
       let receptionistVisit : ReceptionistVisit = this.visitService.mapVisitToReceptionistVisit(visit);
       this.visitList[index] = receptionistVisit;
      });
-
-    this.cancelButtonPressed = true;
-  }
-
-  closeAlert(): void {
-    this.cancelButtonPressed = false;
   }
 
   navigateToAddVisit() {
