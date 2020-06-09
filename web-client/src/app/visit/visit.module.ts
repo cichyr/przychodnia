@@ -11,10 +11,12 @@ import { AddPhysicalExamComponent } from './add-physical-exam/add-physical-exam.
 import { AddLabExamComponent } from './add-lab-exam/add-lab-exam.component';
 import { PhysicalExamDetailsComponent } from './physical-exam-details/physical-exam-details.component';
 import { AddPatientComponent } from '../modals/add-patient/add-patient.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [DoctorVisitListComponent, VisitDetailsComponent, ReceptionistVisitListComponent, AddVisitComponent, AddPhysicalExamComponent, AddLabExamComponent, PhysicalExamDetailsComponent, AddPatientComponent],
     imports: [
+        FormsModule,
         CommonModule,
         NgbDropdownModule,
         BrowserModule,

@@ -48,7 +48,7 @@
     <!-- Dodawanie nowego Pacjenta-->
     <div class="row mt-5">
         <div class="col text-center">
-            <button class="btn btn-primary font-weight-bold add-button" (click)="addNewPatient()"> + </button>
+            <button class="btn btn-primary font-weight-bold add-button" (click)="addNewPatient()"> Dodaj nowego pacjenta </button>
         </div>
     </div>
 
@@ -155,8 +155,7 @@
     </div>
 </div>
 
-
-<!-- Etap 3 - Zatwierdzenie -->
+<!-- Etap 3 - Wybór daty -->
 <div *ngIf="stage==3">
     <!-- Nagłówek -->
     <div class="container">
@@ -164,6 +163,43 @@
             <!-- Przycisk wróć -->
             <div class="col align-self-center text-center">
                 <button (click)="this.stage=2" class="btn btn-primary" >Wróć</button>
+            </div>
+            <!-- Tytuł -->
+            <div class="row">
+                <h1 class="container text-center">
+                    <b>Wybierz datę i godzinę</b>
+                </h1>
+            </div>
+            <!-- Wybierz Datę -->
+            <div class="col align-self-center text-center">
+                <button (click)="selectDate()" class="btn btn-primary" >Wybierz</button>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-md-center mt-4">
+            <div class ="col-md-12 align-self-center">
+                <ngb-datepicker [(ngModel)]="model" ></ngb-datepicker>
+            </div>
+        </div>
+        <div class="row justify-content-md-center mt-4">
+            <div class ="col align-self-center">
+                <ngb-timepicker [(ngModel)]="time"></ngb-timepicker>
+            </div>
+        </div>
+    </div>    
+</div>
+
+
+
+<!-- Etap 4 - Zatwierdzenie -->
+<div *ngIf="stage==4">
+    <!-- Nagłówek -->
+    <div class="container">
+        <div class="row justify-content-md-center mt-4 align-self-center">
+            <!-- Przycisk wróć -->
+            <div class="col align-self-center text-center">
+                <button (click)="this.stage=3" class="btn btn-primary" >Wróć</button>
             </div>
             <!-- Tytuł -->
             <div class="row">
@@ -206,6 +242,17 @@
                     </div>
                     <div class="col">
                         Nr licencji: {{selectedDoctor.licenseCode}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col">
+                        Data:
+                    </div>
+                    <div class="col">
+                        {{model.year}}-{{model.month}}-{{model.day}}
+                    </div>
+                    <div class="col">
+                        {{time.hour}}:{{time.minute}}
                     </div>
                 </div>
             </div>

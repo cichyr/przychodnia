@@ -7,7 +7,7 @@ import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/service/user.service';
 import { VisitToAdd } from 'src/app/data/visit/visit-to-add';
 import { VisitDetails } from 'src/app/data/visit/visit-details';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, NgbDatepicker, NgbDateStruct, NgbCalendar, NgbTimeStruct } from '@ng-bootstrap/ng-bootstrap';
 import { AddPatientComponent } from 'src/app/modals/add-patient/add-patient.component';
 
 
@@ -27,13 +27,19 @@ export class AddVisitComponent implements OnInit {
   doctorSought: Doctor = new Doctor()
   doctorSub: Subscription
 
+  model: NgbDateStruct
+  time: NgbTimeStruct = {hour: 13, minute: 30, second: 0};
+  fulldate: Date;
+  appointmentDateTime: string
+  
+
   visitToAdd: VisitToAdd = new VisitToAdd()
   visitDetails: VisitDetails
   visitDetailsSub: Subscription
 
   buttonConfirm = false
 
-  constructor(private router: Router, private userService: UserService, private addVisitService: AddVisitService,private modalService: NgbModal) { }
+  constructor(private router: Router, private userService: UserService, private addVisitService: AddVisitService,private modalService: NgbModal,private calendar: NgbCalendar) { }
   stage = 1;
 
   ngOnInit(): void {
@@ -45,6 +51,7 @@ export class AddVisitComponent implements OnInit {
     
     //Wczytanie listy lekarzy
     this.doctorSub = this.addVisitService.getDoctors().subscribe(doctors => this.doctorList = doctors);
+    this.selectToday();
   }
 
   //Wyszukiwanie pacjenta za pomocą imienia nazwiska i numeru PESEL
@@ -71,6 +78,17 @@ export class AddVisitComponent implements OnInit {
     this.stage = 3;
   }
 
+  selectDate(): void {
+      this.fulldate=new Date(this.model.year,this.model.month,this.model.day,this.time.hour,this.time.minute);
+      this.appointmentDateTime= this.fulldate.toISOString()
+      this.visitToAdd.appointmentDateTime=this.appointmentDateTime
+      this.stage = 4;
+  }
+
+  selectToday() {
+    this.model = this.calendar.getToday();
+  }
+
   // wysyła POST do API
   confirmAddVisit(){
     this.buttonConfirm=true;
@@ -82,7 +100,7 @@ export class AddVisitComponent implements OnInit {
 
   //dodawanie nowego pacjenta i przypisanie go
   addNewPatient() {
-    const addPatientModal = this.modalService.open(AddPatientComponent)
+    const addPatientModal = this.modalService.open(AddPatientComponent,{size: "lg"})
     addPatientModal.result.then((result) => {
       this.visitToAdd.patientId = result.id
       this.selectedPatient.firstName = result.firstName
