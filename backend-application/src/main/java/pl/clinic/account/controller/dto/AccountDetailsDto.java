@@ -14,30 +14,38 @@ public class AccountDetailsDto {
     private String username;
     private String status;
 
+    @NotBlank(message = ValidationMessages.NOT_BLANK)
     @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String licenseCode;
 
+    @NotBlank(message = ValidationMessages.NOT_BLANK)
     @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String firstName;
 
+    @NotBlank(message = ValidationMessages.NOT_BLANK)
     @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String lastName;
 
+    @NotBlank(message = ValidationMessages.NOT_BLANK)
     @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String city;
 
+    @NotBlank(message = ValidationMessages.NOT_BLANK)
     @Size(min = 1, max = 60, message = ValidationMessages.SIZE_1_60)
     private String streetAddress1;
 
     @Size(max = 60, message = ValidationMessages.SIZE_0_60)
     private String streetAddress2;
 
+    @NotBlank(message = ValidationMessages.NOT_BLANK)
     @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String zipCode;
 
+    @NotBlank(message = ValidationMessages.NOT_BLANK)
     @Size(min = 1, max = 20, message = ValidationMessages.SIZE_1_20)
     private String region;
 
+    @NotBlank(message = ValidationMessages.NOT_BLANK)
     @Pattern(
             regexp = "[+]?[\\d ]{1,20}",
             message = ValidationMessages.INVALID_PHONE
