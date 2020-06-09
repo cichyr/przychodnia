@@ -220,7 +220,7 @@ public class LaboratoryExaminationController {
         }
         LaboratoryExamination examination = optionalLaboratoryExamination.get();
         //sprawdzenie stanu
-        if ((examination.getState().getId() == 2 || examination.getState().getId() == 3) && !examination.getSupervisorNote().isEmpty()) {
+        if ((examination.getState().getId() == 2 || examination.getState().getId() == 3)) {
             //znalezienie kierownika laboratorium
             Optional<LabSupervisor> optionalLabSupervisor = labSupervisorRepository.findById(accountDetails.getId());
             if (!optionalLabSupervisor.isPresent()) {

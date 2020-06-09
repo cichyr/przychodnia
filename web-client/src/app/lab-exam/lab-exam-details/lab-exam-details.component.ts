@@ -52,7 +52,7 @@ export class LabExamDetailsComponent implements OnInit {
     }
 
     if(this.examination.supervisorNote.length == null || this.examination.result.length == 0) {
-      this.alertNote = true
+      //this.alertNote = true
     }
   }
 
@@ -65,12 +65,15 @@ export class LabExamDetailsComponent implements OnInit {
         this.alertResult = true
       }
     }
-    else if(status == 'Approve' || status == 'CanSup') {
+    else if(status == 'CanSup') {
       if(this.examination.supervisorNote.length != null && this.examination.supervisorNote.length > 0) {
         this.labSub = this.laboratoryService.changeExaminationStatus(status, this.exam_id).subscribe(exam => this.examination = exam)
       } else {
         this.alertNote = true
       }
+    }
+    else if(status == 'Approve') {
+      this.labSub = this.laboratoryService.changeExaminationStatus(status, this.exam_id).subscribe(exam => this.examination = exam)
     }
   }
 

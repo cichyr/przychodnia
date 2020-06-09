@@ -33,10 +33,6 @@ export class UserDetailsComponent implements OnInit, OnDestroy {
     }
   }
 
-  navigateToAddUser(): void {
-    this.router.navigate(['add-user'])
-  }
-
   ngOnDestroy(): void {
     if (this.authSubscription != null) this.authSubscription.unsubscribe()
   }

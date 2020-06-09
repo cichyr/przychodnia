@@ -45,6 +45,13 @@
         </div>
     </form>
     
+    <!-- Dodawanie nowego Pacjenta-->
+    <div class="row mt-5">
+        <div class="col text-center">
+            <button class="btn btn-primary font-weight-bold add-button" (click)="addNewPatient()"> + </button>
+        </div>
+    </div>
+
     <!-- Wyświetlanie listy pacjentów. -->
     <div *ngFor="let patient of patientList">
         <div class="container border rounded-lg mt-4"><!-- ramka do okola z zaokraglonymi brzegami + odstepy 4 linii -->
@@ -75,6 +82,7 @@
 
 <!-- Etap 2 - wybór lekarza-->
 <div *ngIf="stage==2">
+
     <!-- Nagłówek -->
     <div class="container">
         <div class="row justify-content-md-center mt-4 align-self-center">
